@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>GVA TRIP 2026.04.07</title>
+<title>GVA TRIP 2026.04.07 | 田舎の大鵬</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
@@ -18,232 +18,119 @@
   --gray:   #666;
 }
 html { scroll-behavior: smooth; }
-body {
-  background: var(--black);
-  color: var(--white);
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 300;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
+body { background: var(--black); color: var(--white); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
 /* ── HERO ── */
-.hero {
-  min-height: 100svh;
-  position: relative;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 80px 28px 100px;
-  text-align: center;
-  overflow: hidden;
-}
-/* 夕焼けグラデ背景 */
-.hero-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 80%, rgba(244,116,43,.55) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 40%, rgba(232,197,71,.2) 0%, transparent 50%),
-    var(--black);
-}
-/* 星屑エフェクト */
-.stars {
-  position: absolute; inset: 0; z-index: 1;
-  background-image:
-    radial-gradient(1px 1px at 20% 15%, rgba(255,255,255,.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 65% 8%, rgba(255,255,255,.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 40% 30%, rgba(255,255,255,.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 10% 50%, rgba(255,255,255,.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 90% 55%, rgba(255,255,255,.4) 0%, transparent 100%),
-    radial-gradient(2px 2px at 55% 18%, rgba(232,197,71,.7) 0%, transparent 100%);
-}
-
-.hero-logo {
-  position: absolute; top: 28px; left: 50%; transform: translateX(-50%);
-  z-index: 3;
-}
+.hero { min-height: 100svh; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 28px 120px; text-align: center; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 90% 55% at 50% 85%, rgba(244,116,43,.6) 0%, transparent 55%), radial-gradient(ellipse 60% 40% at 75% 35%, rgba(232,197,71,.18) 0%, transparent 50%), var(--black); }
+.stars { position: absolute; inset: 0; z-index: 1; background-image: radial-gradient(1px 1px at 18% 12%, rgba(255,255,255,.7) 0%,transparent 100%), radial-gradient(1px 1px at 63% 6%, rgba(255,255,255,.5) 0%,transparent 100%), radial-gradient(1px 1px at 38% 28%, rgba(255,255,255,.4) 0%,transparent 100%), radial-gradient(1px 1px at 82% 19%, rgba(255,255,255,.6) 0%,transparent 100%), radial-gradient(2px 2px at 52% 15%, rgba(232,197,71,.8) 0%,transparent 100%), radial-gradient(1px 1px at 12% 45%, rgba(255,255,255,.3) 0%,transparent 100%), radial-gradient(1px 1px at 88% 52%, rgba(255,255,255,.4) 0%,transparent 100%), radial-gradient(1px 1px at 28% 60%, rgba(255,255,255,.3) 0%,transparent 100%); }
+.hero-logo { position: absolute; top: 28px; left: 50%; transform: translateX(-50%); z-index: 3; }
 .hero-logo img { height: 18px; opacity: .5; filter: brightness(0) invert(1); }
-
 .hero-content { position: relative; z-index: 2; }
+.hero-eyebrow { font-size: 10px; letter-spacing: .4em; color: var(--orange); text-transform: uppercase; margin-bottom: 14px; animation: fadeUp .7s .2s both; }
+.hero-title { font-family: 'Unbounded', sans-serif; font-size: clamp(42px, 13vw, 60px); font-weight: 900; line-height: .95; letter-spacing: -.03em; margin-bottom: 6px; animation: fadeUp .7s .4s both; }
+.hero-title .accent { color: var(--orange); }
+.hero-sub { font-family: 'Unbounded', sans-serif; font-size: clamp(13px, 3.5vw, 16px); font-weight: 400; color: var(--gold); letter-spacing: .05em; margin-bottom: 24px; animation: fadeUp .7s .5s both; }
+.hero-date { font-size: 11px; color: rgba(245,240,232,.45); letter-spacing: .18em; margin-bottom: 28px; animation: fadeUp .7s .55s both; }
 
-.hero-eyebrow {
-  font-size: 10px; letter-spacing: .4em; color: var(--orange);
-  text-transform: uppercase; margin-bottom: 16px;
-  animation: fadeUp .7s .2s both;
-}
-.hero-title {
-  font-family: 'Unbounded', sans-serif;
-  font-size: clamp(44px, 14vw, 64px);
-  font-weight: 900;
-  line-height: .95; letter-spacing: -.03em;
-  margin-bottom: 6px;
-  animation: fadeUp .7s .4s both;
-}
-.hero-title .accent { color: var(--orange); display: block; }
-.hero-sub {
-  font-family: 'Unbounded', sans-serif;
-  font-size: clamp(14px, 4vw, 18px);
-  font-weight: 400; color: var(--gold);
-  letter-spacing: .05em; margin-bottom: 32px;
-  animation: fadeUp .7s .5s both;
-}
-.hero-date {
-  font-size: 11px; color: rgba(245,240,232,.5);
-  letter-spacing: .2em; margin-bottom: 40px;
-  animation: fadeUp .7s .6s both;
-}
-.hero-catch {
-  font-size: 15px; line-height: 2;
-  color: rgba(245,240,232,.8);
-  animation: fadeUp .7s .7s both;
-}
+/* カウントダウン */
+.countdown { display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; animation: fadeUp .7s .6s both; }
+.cd-item { display: flex; flex-direction: column; align-items: center; }
+.cd-n { font-family: 'Unbounded', sans-serif; font-size: 28px; font-weight: 900; color: var(--orange); line-height: 1; }
+.cd-l { font-size: 8px; letter-spacing: .2em; color: rgba(245,240,232,.4); text-transform: uppercase; margin-top: 2px; }
+.cd-sep { font-family: 'Unbounded', sans-serif; font-size: 24px; color: rgba(244,116,43,.3); align-self: flex-start; padding-top: 4px; }
+
+.hero-catch { font-size: 15px; line-height: 2.1; color: rgba(245,240,232,.8); animation: fadeUp .7s .7s both; }
 .hero-catch strong { color: var(--orange); }
 
-.scroll-hint {
-  position: absolute; bottom: 36px; left: 50%;
-  transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  z-index: 2;
-  animation: fadeUp .7s 1.2s both;
-}
+.scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 2; animation: fadeUp .7s 1.2s both; }
 .scroll-hint span { font-size: 8px; letter-spacing: .3em; color: rgba(255,255,255,.3); text-transform: uppercase; }
-.scroll-line {
-  width: 1px; height: 28px;
-  background: linear-gradient(var(--orange), transparent);
-  animation: scrollDown 1.6s 1.5s infinite;
-}
-@keyframes scrollDown {
-  0%{transform:scaleY(0);transform-origin:top}
-  50%{transform:scaleY(1);transform-origin:top}
-  51%{transform:scaleY(1);transform-origin:bottom}
-  100%{transform:scaleY(0);transform-origin:bottom}
-}
+.scroll-line { width: 1px; height: 28px; background: linear-gradient(var(--orange), transparent); animation: scrollDown 1.6s 1.5s infinite; }
+@keyframes scrollDown { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
+/* ── PHOTO GALLERY ── */
+.gallery { background: var(--dark); padding: 0; overflow: hidden; }
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.gallery-img { aspect-ratio: 1; overflow: hidden; background: var(--card); }
+.gallery-img:first-child { grid-column: 1 / -1; aspect-ratio: 16/9; }
+.gallery-img img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-caption { padding: 14px 24px; background: var(--dark); }
+.gallery-caption p { font-size: 11px; color: rgba(245,240,232,.4); letter-spacing: .1em; text-align: center; }
+.gallery-caption span { color: var(--orange); }
+
+/* ── QUOTE HERO ── */
+.quote-hero { background: var(--orange); padding: 48px 28px; text-align: center; }
+.quote-hero q { font-family: 'Unbounded', sans-serif; font-size: 18px; font-weight: 700; line-height: 1.5; color: var(--black); display: block; margin-bottom: 12px; }
+.quote-hero cite { font-size: 10px; letter-spacing: .2em; color: rgba(0,0,0,.5); text-transform: uppercase; }
+
 /* ── SECTION ── */
-.section { padding: 56px 24px; }
-.s-label {
-  font-size: 9px; letter-spacing: .4em; text-transform: uppercase;
-  color: var(--orange); border-bottom: 1px solid rgba(244,116,43,.3);
-  padding-bottom: 6px; margin-bottom: 28px; display: inline-block;
-}
-.s-title {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 22px; font-weight: 700;
-  line-height: 1.3; margin-bottom: 36px;
-}
+.section { padding: 52px 24px; }
+.s-label { font-size: 9px; letter-spacing: .4em; text-transform: uppercase; color: var(--orange); border-bottom: 1px solid rgba(244,116,43,.3); padding-bottom: 6px; margin-bottom: 24px; display: inline-block; }
+.s-title { font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 700; line-height: 1.3; margin-bottom: 32px; }
 
 /* ── ITINERARY ── */
 .itinerary { background: var(--dark); }
-.stop {
-  display: flex; gap: 16px; margin-bottom: 28px; align-items: flex-start;
-}
+.stop { display: flex; gap: 14px; margin-bottom: 24px; align-items: flex-start; }
 .stop:last-child { margin-bottom: 0; }
-.stop-left {
-  display: flex; flex-direction: column; align-items: center; gap: 0;
-  min-width: 52px;
-}
-.stop-emoji {
-  width: 44px; height: 44px;
-  background: var(--card); border: 1px solid rgba(255,255,255,.08);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
+.stop-left { display: flex; flex-direction: column; align-items: center; min-width: 44px; }
+.stop-emoji { width: 40px; height: 40px; background: var(--card); border: 1px solid rgba(255,255,255,.06); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; }
 .stop.hl .stop-emoji { background: var(--orange); border-color: var(--orange); }
-.stop-line { width: 1px; height: 32px; background: rgba(255,255,255,.1); margin: 4px 0; }
+.stop-line { width: 1px; height: 28px; background: rgba(255,255,255,.08); margin: 3px 0; }
 .stop:last-child .stop-line { display: none; }
-.stop-right { padding-top: 6px; }
-.stop-time {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 20px; font-weight: 700; color: var(--white);
-  line-height: 1; margin-bottom: 4px;
-}
+.stop-right { padding-top: 4px; }
+.stop-time { font-family: 'Unbounded', sans-serif; font-size: 18px; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 3px; }
 .stop.hl .stop-time { color: var(--orange); }
-.stop-place {
-  font-size: 15px; font-weight: 700; color: var(--white);
-  margin-bottom: 6px;
-}
-.stop-badge {
-  display: inline-block; font-size: 9px; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--gold);
-  border: 1px solid rgba(232,197,71,.3);
-  padding: 2px 8px; border-radius: 100px;
-  margin-bottom: 8px;
-}
-.stop-desc { font-size: 13px; line-height: 1.9; color: rgba(245,240,232,.5); }
+.stop-place { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.stop-badge { display: inline-block; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(232,197,71,.25); padding: 2px 8px; border-radius: 100px; margin-bottom: 6px; }
+.stop-desc { font-size: 12px; line-height: 1.8; color: rgba(245,240,232,.45); }
+
+/* ── MAP ── */
+.map-section { background: var(--black); padding: 0; }
+.map-section iframe { width: 100%; height: 280px; border: 0; filter: grayscale(30%) invert(1) hue-rotate(180deg) brightness(.6); }
+.map-caption { background: var(--dark); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+.map-caption p { font-size: 12px; color: rgba(245,240,232,.6); }
+.map-caption span { font-size: 10px; color: var(--orange); }
 
 /* ── ABOUT ── */
 .about { background: var(--black); }
-.about-quote {
-  border-left: 2px solid var(--orange);
-  padding: 16px 18px;
-  background: rgba(244,116,43,.05);
-  border-radius: 0 8px 8px 0;
-  margin-bottom: 24px;
-}
-.about-quote p {
-  font-size: 15px; font-style: italic; line-height: 1.9;
-  color: rgba(245,240,232,.85);
-}
-.about-quote cite {
-  display: block; margin-top: 8px;
-  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--orange); font-style: normal;
-}
-.about-body { font-size: 14px; line-height: 2; color: rgba(245,240,232,.55); }
+.about-body { font-size: 13px; line-height: 2.1; color: rgba(245,240,232,.55); }
 
 /* ── EXPERIENCE ── */
 .experience { background: var(--dark); }
-.exp-card {
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 12px;
-  display: flex; gap: 16px; align-items: flex-start;
-}
+.exp-card { background: var(--card); border: 1px solid rgba(255,255,255,.05); border-radius: 10px; padding: 18px; margin-bottom: 10px; display: flex; gap: 14px; align-items: flex-start; }
 .exp-card:last-child { margin-bottom: 0; }
-.exp-n {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 28px; font-weight: 900;
-  color: rgba(244,116,43,.2); min-width: 40px;
-  line-height: 1;
-}
-.exp-t { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--white); }
+.exp-n { font-family: 'Unbounded', sans-serif; font-size: 24px; font-weight: 900; color: rgba(244,116,43,.18); min-width: 36px; line-height: 1; }
+.exp-t { font-size: 13px; font-weight: 700; margin-bottom: 5px; }
 .exp-t em { font-style: normal; color: var(--orange); }
-.exp-d { font-size: 12px; line-height: 1.8; color: rgba(245,240,232,.45); }
+.exp-d { font-size: 12px; line-height: 1.8; color: rgba(245,240,232,.4); }
+
+/* ── PROMISE ── */
+.promise { background: var(--dark); padding: 48px 24px; }
+.promise-items { display: flex; flex-direction: column; gap: 12px; }
+.promise-item { display: flex; align-items: center; gap: 12px; background: var(--card); border-radius: 10px; padding: 16px; }
+.promise-icon { font-size: 22px; min-width: 36px; text-align: center; }
+.promise-t { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.promise-d { font-size: 11px; color: rgba(245,240,232,.4); }
 
 /* ── CTA ── */
-.cta {
-  background: var(--orange);
-  padding: 64px 28px;
-  text-align: center;
-}
-.cta h2 {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 22px; font-weight: 900;
-  color: var(--black); line-height: 1.3;
-  margin-bottom: 12px;
-}
-.cta p { font-size: 11px; color: rgba(0,0,0,.55); letter-spacing: .1em; margin-bottom: 36px; }
-.cta-logo img { height: 16px; opacity: .4; }
+.cta { background: var(--orange); padding: 60px 28px; text-align: center; }
+.cta h2 { font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 900; color: var(--black); line-height: 1.4; margin-bottom: 10px; }
+.cta p { font-size: 11px; color: rgba(0,0,0,.5); letter-spacing: .1em; margin-bottom: 32px; }
+.cta-logo img { height: 16px; opacity: .35; }
 
 /* ── FOOTER ── */
-footer {
-  background: #0A0A0A;
-  padding: 20px 24px;
-  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
-}
+footer { background: #0A0A0A; padding: 20px 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
 footer span { font-size: 10px; letter-spacing: .1em; color: #333; }
 
 /* ── REVEAL ── */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="stars"></div>
@@ -252,16 +139,21 @@ footer span { font-size: 10px; letter-spacing: .1em; color: #333; }
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">GVA All Hands Trip 2026</div>
-    <h1 class="hero-title">
-      GOOD<br>
-      <span class="accent">VIBES</span>
-      TRIP
-    </h1>
+    <h1 class="hero-title">GOOD<br><span class="accent">VIBES</span> TRIP</h1>
     <div class="hero-sub">田舎の大鵬へ</div>
     <div class="hero-date">2026.04.07 TUE — 京都府綾部市</div>
+    <!-- カウントダウン（JSで動的更新） -->
+    <div class="countdown">
+      <div class="cd-item"><div class="cd-n" id="cd-d">00</div><div class="cd-l">Days</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-item"><div class="cd-n" id="cd-h">00</div><div class="cd-l">Hours</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-item"><div class="cd-n" id="cd-m">00</div><div class="cd-l">Mins</div></div>
+    </div>
     <p class="hero-catch">
       東京から3時間。<br>
-      そこには、<strong>命をいただくことの意味</strong>がある。
+      そこには、<strong>命をいただくことの意味</strong>がある。<br>
+      そしてその夜空に輝く「青い夕日」が。
     </p>
   </div>
   <div class="scroll-hint">
@@ -270,100 +162,144 @@ footer span { font-size: 10px; letter-spacing: .1em; color: #333; }
   </div>
 </section>
 
+<!-- GALLERY -->
+<div class="gallery">
+  <div class="gallery-grid">
+    <!-- 外観イメージ（Unsplashのフリー画像） -->
+    <div class="gallery-img">
+      <img src="https://images.unsplash.com/photo-1607278374989-5f23c9b3a6a7?w=800&q=80&auto=format" alt="里山の風景" onerror="this.parentElement.style.background='#2a2a2a'">
+    </div>
+    <div class="gallery-img">
+      <img src="https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&q=80&auto=format" alt="鶏料理" onerror="this.parentElement.style.background='#2a2a2a'">
+    </div>
+    <div class="gallery-img">
+      <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=400&q=80&auto=format" alt="中華料理" onerror="this.parentElement.style.background='#2a2a2a'">
+    </div>
+  </div>
+  <div class="gallery-caption">
+    <p>📸 <span>田舎の大鵬</span> @inakanotaihou — 農場直結の青空レストラン</p>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote-hero">
+  <q>生き物は絞めないと食べられない。<br>でも、知らない人がたくさんいる。<br>だから見せたい。感謝してもらいたい。</q>
+  <cite>渡辺幸樹 — 田舎の大鵬 オーナーシェフ</cite>
+</div>
+
 <!-- ITINERARY -->
 <section class="section itinerary">
   <div class="s-label">Itinerary</div>
   <div class="s-title">今日の<br>ルート</div>
 
   <div class="stop reveal">
-    <div class="stop-left">
-      <div class="stop-emoji">🚅</div>
-      <div class="stop-line"></div>
-    </div>
+    <div class="stop-left"><div class="stop-emoji">🚅</div><div class="stop-line"></div></div>
     <div class="stop-right">
       <div class="stop-badge">新幹線のぞみ</div>
       <div class="stop-time">08:46</div>
       <div class="stop-place">品川駅 出発</div>
-      <div class="stop-desc">都市の景色が里山へ変わっていく。旅のはじまり。</div>
+      <div class="stop-desc">眠い目こすって集合。旅のはじまりはいつもここから。</div>
     </div>
   </div>
-
   <div class="stop reveal">
-    <div class="stop-left">
-      <div class="stop-emoji">🔁</div>
-      <div class="stop-line"></div>
-    </div>
+    <div class="stop-left"><div class="stop-emoji">🔁</div><div class="stop-line"></div></div>
     <div class="stop-right">
       <div class="stop-badge">乗り換え 13分</div>
       <div class="stop-time">10:05</div>
       <div class="stop-place">京都駅</div>
-      <div class="stop-desc">観光客でにぎわう京都を横目に、特急で北へ。</div>
+      <div class="stop-desc">観光客だらけの京都を横目に、特急で一気に北へ。</div>
     </div>
   </div>
-
   <div class="stop reveal">
-    <div class="stop-left">
-      <div class="stop-emoji">🚗</div>
-      <div class="stop-line"></div>
-    </div>
+    <div class="stop-left"><div class="stop-emoji">🚗</div><div class="stop-line"></div></div>
     <div class="stop-right">
-      <div class="stop-badge">レンタカー 約40分</div>
+      <div class="stop-badge">レンタカー ドライブ約40分</div>
       <div class="stop-time">11:07</div>
       <div class="stop-place">福知山駅</div>
-      <div class="stop-desc">7人でミニバンに乗り込み、山の奥へ。</div>
+      <div class="stop-desc">ミニバンに7人でギュッと乗り込んで山の中へ。「本当にこの道で合ってる…？」ってなる道を進む。</div>
     </div>
   </div>
-
   <div class="stop hl reveal">
-    <div class="stop-left">
-      <div class="stop-emoji">🏔️</div>
-    </div>
+    <div class="stop-left"><div class="stop-emoji">🏔️</div></div>
     <div class="stop-right">
-      <div class="stop-badge">GOAL — コーススタート</div>
+      <div class="stop-badge">★ GOAL</div>
       <div class="stop-time">12:00</div>
       <div class="stop-place">田舎の大鵬 到着！</div>
-      <div class="stop-desc">「遠いところ、わざわざどうも！」ここから5時間の特別な体験が始まる。</div>
+      <div class="stop-desc">「遠いところ、わざわざどうも！」ここから5時間、都市のすべてを忘れる。</div>
     </div>
   </div>
 </section>
 
+<!-- MAP -->
+<div class="map-section">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3254.7!2d135.3067!3d35.3134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6001b7e5c5a5a5a5%3A0x0!2z5Lqs6YO95puc57We5biC5YWs5rKi5ZCI5YmN5Yid5b2i!5e0!3m2!1sja!2sjp!4v1"
+    allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+  <div class="map-caption">
+    <p>📍 京都府綾部市八津合町 蓮ヶ峯農場</p>
+    <span>田舎の大鵬</span>
+  </div>
+</div>
+
 <!-- ABOUT -->
 <section class="section about">
-  <div class="s-label">About</div>
-  <div class="s-title">命を止める瞬間から、<br>コースは始まる。</div>
-  <div class="about-quote reveal">
-    <p>「生き物は絞めないと食べられない。でも、知らない人がたくさんいる。だから見せたい。感謝してもらいたい。」</p>
-    <cite>渡辺幸樹 — 田舎の大鵬 オーナーシェフ</cite>
-  </div>
+  <div class="s-label">About the Place</div>
+  <div class="s-title">なぜここに来るのか</div>
   <p class="about-body reveal">
-    京都・二条の名店「大鵬」の二代目が山奥に開いた農場直結の青空レストラン。中国の田舎料理と日本の里山が出会う、唯一無二の場所。
+    京都・二条の名店「大鵬」の二代目が、綾部の山奥に開いた農場直結の青空レストラン。席はウッドデッキ、屋根はあるが壁はなく、山の風と鳥の声の中で食べる。<br><br>
+    その日の朝に育てた鶏を絞め、捌き、5時間かけて中国料理として昇華する。<strong style="color:var(--orange)">スーパーのパック肉を見るたびに感じる「なんとなく」を、言語化してくれる場所</strong>がある。
   </p>
 </section>
 
 <!-- EXPERIENCE -->
 <section class="section experience">
-  <div class="s-label">Experiences</div>
-  <div class="s-title">ここでしか<br>できないこと</div>
+  <div class="s-label">5 Things to Expect</div>
+  <div class="s-title">今日、きっと<br>こう感じる</div>
 
   <div class="exp-card reveal">
     <div class="exp-n">01</div>
-    <div><div class="exp-t">鶏の解体を<em>「見る」</em></div><div class="exp-d">命を止める瞬間からコースが始まる。「感謝」が生まれる瞬間。</div></div>
+    <div><div class="exp-t">「かわいそう」より先に<em>「感謝」</em>が来る</div><div class="exp-d">命を止める瞬間を見て、最初は戸惑う。でもそのあとに来るのは感謝だった。</div></div>
   </div>
   <div class="exp-card reveal">
     <div class="exp-n">02</div>
-    <div><div class="exp-t">農場を<em>「歩く」</em></div><div class="exp-d">畑と養鶏場をシェフが案内。食材の出所を目で知る。</div></div>
+    <div><div class="exp-t">「ここどこ？」ってなる<em>ロケーション</em></div><div class="exp-d">カーナビが不安になる山道の先に突然現れる。「本当にここで合ってる？」が正解。</div></div>
   </div>
   <div class="exp-card reveal">
     <div class="exp-n">03</div>
-    <div><div class="exp-t">青空の下で<em>「食べる」</em></div><div class="exp-d">山の風と鳥の声の中で、すべての食材が腑に落ちる。</div></div>
+    <div><div class="exp-t">料理じゃなくて<em>体験</em>を食べてる感覚</div><div class="exp-d">農場→鶏→テーブルのストーリーが見えると、同じ料理でも全然違う味がする。</div></div>
   </div>
   <div class="exp-card reveal">
     <div class="exp-n">04</div>
-    <div><div class="exp-t">「循環」を<em>知る</em></div><div class="exp-d">雑草→堆肥→野菜→鶏→卵→人。その循環の一点に自分がいる。</div></div>
+    <div><div class="exp-t">5時間でこんなに<em>しゃべるとは</em></div><div class="exp-d">スマホを置いて、ひたすら食べて話す。気づいたら5時間経ってる。</div></div>
   </div>
   <div class="exp-card reveal">
     <div class="exp-n">05</div>
-    <div><div class="exp-t">5時間の<em>「対話」</em></div><div class="exp-d">シェフとの会話、仲間との時間。都市から完全に切り離された5時間。</div></div>
+    <div><div class="exp-t">帰りたくない<em>と思う</em></div><div class="exp-d">日が沈んで、静かになって、「もう少しいたい」と全員が思う夜になる。</div></div>
+  </div>
+</section>
+
+<!-- PROMISE -->
+<section class="section promise">
+  <div class="s-label">Note</div>
+  <div class="s-title">持ち物・<br>注意事項</div>
+  <div class="promise-items">
+    <div class="promise-item reveal">
+      <div class="promise-icon">👟</div>
+      <div><div class="promise-t">汚れてもいい靴で</div><div class="promise-d">農場内を歩きます。革靴は絶対NG</div></div>
+    </div>
+    <div class="promise-item reveal">
+      <div class="promise-icon">📱</div>
+      <div><div class="promise-t">スマホは電池満タンで</div><div class="promise-d">山奥なので充電環境なし。電源ゼロで帰るな</div></div>
+    </div>
+    <div class="promise-item reveal">
+      <div class="promise-icon">🧥</div>
+      <div><div class="promise-t">防寒を忘れずに</div><div class="promise-d">屋外席。夜は冷える。上着必須</div></div>
+    </div>
+    <div class="promise-item reveal">
+      <div class="promise-icon">🕛</div>
+      <div><div class="promise-t">品川08:46は絶対厳守</div><div class="promise-d">これ乗り遅れたら本当に詰む。余裕もって集合</div></div>
+    </div>
   </div>
 </section>
 
@@ -376,13 +312,34 @@ footer span { font-size: 10px; letter-spacing: .1em; color: #333; }
 
 <footer>
   <span>© 2026 GOOD VIBES AGENCY</span>
-  <span>INTERNAL</span>
+  <span>INTERNAL USE ONLY</span>
 </footer>
 
 <script>
+// カウントダウン
+function updateCD() {
+  const target = new Date('2026-04-07T08:46:00+09:00').getTime();
+  const now = Date.now();
+  const diff = target - now;
+  if (diff <= 0) {
+    document.getElementById('cd-d').textContent = '00';
+    document.getElementById('cd-h').textContent = '00';
+    document.getElementById('cd-m').textContent = '00';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+}
+updateCD(); setInterval(updateCD, 30000);
+
+// スクロールアニメ
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
+}, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>

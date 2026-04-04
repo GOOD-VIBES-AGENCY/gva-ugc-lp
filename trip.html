@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOOD VIBES TRIP — 4/7 田舎の大鵬</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0C0C0C;
+  --white:#FAFAF7;
+  --cream:#F2EFE8;
+  --earth:#5C4A32;
+  --moss:#3D5242;
+  --gold:#C4A44E;
+  --gray:#888;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Noto Sans JP',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ── HERO ── */
+.hero{
+  height:100svh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(61,82,66,.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(92,74,50,.3) 0%, transparent 50%),
+    var(--black);
+}
+.hero-noise{
+  position:absolute;inset:0;z-index:1;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+.hero-content{position:relative;z-index:2;padding:0 24px}
+.hero-eyebrow{
+  font-size:10px;letter-spacing:.4em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:32px;
+  opacity:0;animation:fadeUp .8s .3s forwards;
+}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(48px,10vw,120px);
+  font-weight:300;line-height:.95;
+  letter-spacing:-.02em;margin-bottom:24px;
+  opacity:0;animation:fadeUp .8s .5s forwards;
+}
+.hero-title em{
+  display:block;font-style:italic;font-weight:300;
+  color:var(--gold);
+}
+.hero-sub{
+  font-size:clamp(13px,1.5vw,16px);
+  font-weight:300;color:rgba(250,250,247,.6);
+  letter-spacing:.05em;line-height:1.8;
+  max-width:480px;margin:0 auto 48px;
+  opacity:0;animation:fadeUp .8s .7s forwards;
+}
+.hero-date{
+  display:inline-flex;align-items:center;gap:16px;
+  border:1px solid rgba(196,164,78,.3);
+  padding:12px 28px;
+  font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);
+  opacity:0;animation:fadeUp .8s .9s forwards;
+}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:9px;letter-spacing:.25em;color:var(--gray);
+  text-transform:uppercase;
+  opacity:0;animation:fadeUp .8s 1.2s forwards;
+}
+.scroll-line{
+  width:1px;height:40px;background:linear-gradient(var(--gold),transparent);
+  animation:scrollLine 2s 1.5s infinite;
+}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION BASE ── */
+section{padding:120px 40px}
+.container{max-width:1000px;margin:0 auto}
+.section-label{
+  font-size:9px;letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:40px;
+  display:flex;align-items:center;gap:16px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:rgba(196,164,78,.2)}
+
+/* ── ITINERARY ── */
+.itinerary{background:var(--black)}
+.itinerary-grid{
+  display:grid;
+  grid-template-columns:80px 1fr;
+  gap:0;
+  position:relative;
+}
+.itinerary-grid::before{
+  content:'';
+  position:absolute;left:39px;top:20px;bottom:20px;
+  width:1px;background:linear-gradient(var(--gold),rgba(196,164,78,.1));
+}
+.stop{
+  display:contents;
+}
+.stop-time{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-weight:300;
+  color:var(--gold);padding:32px 0;
+  position:relative;line-height:1;
+}
+.stop-time::before{
+  content:'';
+  position:absolute;right:-1px;top:36px;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 12px rgba(196,164,78,.5);
+}
+.stop-content{
+  padding:24px 0 24px 40px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.stop:last-child .stop-content{border-bottom:none}
+.stop-station{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(20px,2.5vw,28px);font-weight:300;
+  margin-bottom:8px;letter-spacing:-.01em;
+}
+.stop-station em{font-style:italic;color:var(--gold)}
+.stop-desc{
+  font-size:13px;font-weight:300;
+  color:rgba(250,250,247,.55);line-height:1.9;
+}
+.stop-badge{
+  display:inline-block;
+  font-size:9px;letter-spacing:.15em;text-transform:uppercase;
+  border:1px solid rgba(196,164,78,.3);color:var(--gold);
+  padding:4px 10px;margin-bottom:10px;
+}
+
+/* ── ABOUT ── */
+.about{background:var(--cream);color:var(--black)}
+.about .section-label{color:var(--earth)}
+.about .section-label::after{background:rgba(92,74,50,.2)}
+.about-lead{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,4vw,48px);
+  font-weight:300;line-height:1.4;
+  letter-spacing:-.01em;margin-bottom:64px;
+  max-width:700px;
+}
+.about-lead strong{font-weight:400;border-bottom:1px solid var(--earth)}
+.about-quote{
+  border-left:2px solid var(--earth);
+  padding:24px 32px;
+  background:rgba(92,74,50,.05);
+  margin-bottom:48px;
+}
+.about-quote p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18px,2vw,24px);font-style:italic;
+  font-weight:300;line-height:1.7;color:var(--earth);
+}
+.about-quote cite{
+  display:block;margin-top:12px;
+  font-size:11px;letter-spacing:.15em;
+  color:var(--gray);font-style:normal;
+  text-transform:uppercase;
+}
+
+/* ── EXPERIENCE ── */
+.experience{background:var(--black)}
+.exp-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2px;margin-top:16px;
+}
+.exp-item{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  padding:40px 32px;
+  transition:background .3s;
+}
+.exp-item:hover{background:rgba(196,164,78,.05);border-color:rgba(196,164,78,.2)}
+.exp-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:48px;font-weight:300;color:rgba(196,164,78,.2);
+  line-height:1;margin-bottom:20px;
+}
+.exp-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:300;margin-bottom:12px;
+}
+.exp-title em{font-style:italic;color:var(--gold)}
+.exp-desc{font-size:13px;font-weight:300;color:rgba(250,250,247,.5);line-height:1.9}
+
+/* ── CTA ── */
+.cta{
+  background:var(--moss);
+  text-align:center;padding:120px 40px;
+}
+.cta-headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(32px,6vw,72px);
+  font-weight:300;line-height:1.1;
+  letter-spacing:-.02em;margin-bottom:24px;
+}
+.cta-headline em{font-style:italic;color:var(--cream)}
+.cta-sub{
+  font-size:14px;font-weight:300;
+  color:rgba(250,250,247,.6);margin-bottom:48px;
+  letter-spacing:.05em;
+}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--cream);color:var(--black);
+  padding:18px 40px;font-size:12px;
+  font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;text-decoration:none;
+  transition:transform .2s,background .2s;
+}
+.cta-btn:hover{transform:translate(4px,-4px);background:var(--gold)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--black);
+  border-top:1px solid rgba(255,255,255,.05);
+  padding:32px 40px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+footer span{font-size:10px;letter-spacing:.12em;color:var(--gray)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  section{padding:80px 24px}
+  .itinerary-grid{grid-template-columns:60px 1fr}
+  .itinerary-grid::before{left:29px}
+  .stop-time::before{right:1px}
+  footer{flex-direction:column;gap:12px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Good Vibes Agency — All Hands Trip 2026</p>
+    <h1 class="hero-title">
+      GOOD VIBES<br><em>TRIP</em>
+    </h1>
+    <p class="hero-sub">東京から3時間。そこには、<br>命をいただくことの意味がある。</p>
+    <div class="hero-date">
+      <span>2026.04.07 TUE</span>
+      <span>—</span>
+      <span>京都府綾部市</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section class="itinerary">
+  <div class="container">
+    <div class="section-label">Itinerary</div>
+    <div class="itinerary-grid">
+
+      <div class="stop">
+        <div class="stop-time">08<span style="font-size:.6em">:46</span></div>
+        <div class="stop-content">
+          <div class="stop-badge">🚅 新幹線のぞみ</div>
+          <div class="stop-station">品川駅 <em>Shinagawa</em></div>
+          <div class="stop-desc">旅のスタート。車窓から都市の景色が里山へと変わっていく。コーヒー片手に、今日という特別な一日への期待を膨らませよう。</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time">10<span style="font-size:.6em">:05</span></div>
+        <div class="stop-content">
+          <div class="stop-badge">🔁 乗り換え 13分</div>
+          <div class="stop-station">京都駅 <em>Kyoto</em></div>
+          <div class="stop-desc">観光客でにぎわう京都を横目に、特急ホームへ。ここから先は「もうひとつの京都」へ向かう。</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time">11<span style="font-size:.6em">:07</span></div>
+        <div class="stop-content">
+          <div class="stop-badge">🚗 レンタカー 約40分</div>
+          <div class="stop-station">福知山駅 <em>Fukuchiyama</em></div>
+          <div class="stop-desc">日本レンタカーでミニバンをピックアップ。7人全員乗り込み、いよいよ最後のドライブへ。古民家が続く里山を抜け、山の奥へ奥へ。</div>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time">12<span style="font-size:.6em">:00</span></div>
+        <div class="stop-content">
+          <div class="stop-badge" style="border-color:rgba(196,164,78,.6);color:var(--gold)">🏔️ 到着 — コーススタート</div>
+          <div class="stop-station" style="font-size:clamp(24px,3vw,36px)">田舎の大鵬 <em>Inaka no Taiho</em></div>
+          <div class="stop-desc">「遠いところ、わざわざどうも！」— シェフ・渡辺幸樹さんが笑顔で出迎える。ここからは、5時間の「命をいただく体験」が始まる。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="container">
+    <div class="section-label">About the Place</div>
+    <p class="about-lead">
+      <strong>命を止める瞬間から、コースは始まる。</strong><br>
+      農場の傍に立つ青空レストラン。その日の朝に育てた鶏を絞め、捌き、5時間かけて中国料理として昇華する。
+    </p>
+    <div class="about-quote">
+      <p>「生き物は結局、絞めないと食べられない。でも、それを知らない人がたくさんいる。だから見せたい。感謝してもらいたい。」</p>
+      <cite>渡辺幸樹 — 田舎の大鵬 オーナーシェフ</cite>
+    </div>
+    <p style="font-size:15px;font-weight:300;color:#444;line-height:1.9">
+      京都・二条の名店「大鵬」の二代目が、綾部の山奥に開いた農場直結のレストラン。中国の田舎料理と日本の里山が出会う、唯一無二の場所。席はウッドデッキ。山の風と鳥の声の中で食べる。
+    </p>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience">
+  <div class="container">
+    <div class="section-label">5 Experiences</div>
+    <div class="exp-grid">
+      <div class="exp-item">
+        <div class="exp-num">01</div>
+        <div class="exp-title">鶏の解体を<em>「見る」</em></div>
+        <div class="exp-desc">その日の朝に命を止める瞬間から、コースが始まる。「かわいそう」より先に「感謝」が生まれる瞬間を体験する。</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-num">02</div>
+        <div class="exp-title">農場を<em>「歩く」</em></div>
+        <div class="exp-desc">畑と養鶏場をシェフが案内してくれる。食材がどこから来るかを、頭ではなく目で知る。</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-num">03</div>
+        <div class="exp-title">青空の下で<em>「食べる」</em></div>
+        <div class="exp-desc">ウッドデッキに並ぶコース料理。山の風と鳥の声とともに、すべての食材が腑に落ちる瞬間がある。</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-num">04</div>
+        <div class="exp-title">「循環」を<em>知る</em></div>
+        <div class="exp-desc">雑草が堆肥になり、野菜が育ち、鶏が食べ、卵が生まれ、人が食べる。自分がその循環の一点にいる。</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-num">05</div>
+        <div class="exp-title">5時間の<em>「対話」</em></div>
+        <div class="exp-desc">シェフとの会話、仲間との時間、自分の内側との対話。都市の喧騒から完全に切り離された、特別な5時間。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2 class="cta-headline">
+      命をいただく、<br><em>その意味を知る一日。</em>
+    </h2>
+    <p class="cta-sub">2026年4月7日（火）品川発 / 7名 / 田舎の大鵬</p>
+  </div>
+</section>
+
+<footer>
+  <span>GOOD VIBES AGENCY — All Hands Trip 2026</span>
+  <span>CONFIDENTIAL</span>
+</footer>
+
+</body>
+</html>

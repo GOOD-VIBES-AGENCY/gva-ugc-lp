@@ -296,11 +296,11 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
   caretGeo.center();
 
   const caretMat = new THREE.MeshStandardMaterial({
-    color: 0xC7FF4F,
-    emissive: 0x5A7800,
-    emissiveIntensity: 0.55,
-    metalness: 0.5,
-    roughness: 0.2,
+    color: 0xEEEEEE,
+    emissive: 0x444444,
+    emissiveIntensity: 0.15,
+    metalness: 0.6,
+    roughness: 0.15,
   });
 
   const caret = new THREE.Mesh(caretGeo, caretMat);
@@ -314,7 +314,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
     tc.width = 2048; tc.height = 180;
     const ctx = tc.getContext('2d');
     ctx.clearRect(0,0,2048,180);
-    ctx.fillStyle = '#C7FF4F';
+    ctx.fillStyle = '#FFFFFF';
     // フォント読み込み待ち
     ctx.font = '300 72px Unbounded, sans-serif';
     ctx.textAlign = 'center';
@@ -358,7 +358,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
   for(let i=0;i<600;i++) pPos[i]=(Math.random()-.5)*16;
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
-  scene.add(new THREE.Points(pGeo,new THREE.PointsMaterial({color:0xC7FF4F,size:0.022,transparent:true,opacity:.25})));
+  scene.add(new THREE.Points(pGeo,new THREE.PointsMaterial({color:0xffffff,size:0.022,transparent:true,opacity:.15})));
 
   // resize
   window.addEventListener('resize',()=>{

@@ -380,145 +380,147 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </footer>
 
 <script>
+
 // ══ CANVAS ANIMATION ══
 (function(){
   const canvas = document.getElementById('hero-canvas');
   const ctx = canvas.getContext('2d');
   const LIME = '#C7FF4F';
-  const BG = '#0A0A0A';
+  const LIME_RGB = [199,255,79];
   let W, H, t = 0;
-
-  // パーティクル
-  const PARTICLES = [];
-  const N = 60;
 
   function resize(){
     W = canvas.width  = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
   }
 
-  function initParticles(){
-    PARTICLES.length = 0;
-    for(let i=0;i<N;i++){
-      PARTICLES.push({
-        x: Math.random()*W, y: Math.random()*H,
-        vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.3,
-        size: Math.random()*1.5+.3,
-        alpha: Math.random()*.5+.1,
-        lime: Math.random()<.25,
-      });
-    }
+  // ─ ビーム (lime green sweeping lines) ─
+  const BEAMS = Array.from({length:6},(_,i)=>({
+    y: Math.random()*1.5,
+    speed: .0004 + Math.random()*.0006,
+    width: Math.random()*60+20,
+    alpha: Math.random()*.18+.08,
+    phase: i*(Math.PI*2/6),
+  }));
+
+  // ─ グリッチブロック ─
+  let glitchActive=0, glitchBlocks=[];
+  function triggerGlitch(){
+    glitchActive=12;
+    glitchBlocks=Array.from({length:5},()=>({
+      y:Math.random()*H,h:Math.random()*8+2,
+      shift:(Math.random()-.5)*60,
+      alpha:Math.random()*.5+.3,
+      lime:Math.random()<.4,
+    }));
   }
 
-  function drawGrid(){
-    ctx.strokeStyle='rgba(247,245,240,0.025)';
-    ctx.lineWidth=1;
-    const step=Math.min(W,H)/8;
+  // ─ パーティクル ─
+  const PARTS=Array.from({length:80},()=>reset_part({}));
+  function reset_part(p){
+    p.x=Math.random()*1; p.y=Math.random()*1;
+    p.vx=(Math.random()-.5)*.0015; p.vy=(Math.random()-.5)*.001;
+    p.r=Math.random()*.008+.002;
+    p.alpha=Math.random()*.4+.05;
+    p.lime=Math.random()<.3;
+    return p;
+  }
+
+  function frame(){
+    t++;
+    ctx.fillStyle='#0A0A0A'; ctx.fillRect(0,0,W,H);
+
+    // ── グリッド ──
+    ctx.strokeStyle='rgba(247,245,240,0.04)'; ctx.lineWidth=1;
+    const step=Math.min(W,H)/10;
     for(let x=0;x<W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
     for(let y=0;y<H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
-  }
 
-  function drawScanlines(){
-    for(let y=0;y<H;y+=4){
-      ctx.fillStyle='rgba(0,0,0,0.06)';
-      ctx.fillRect(0,y,W,1);
-    }
-  }
+    // ── 背景GVAテキスト ──
+    ctx.save();
+    const fs=Math.min(W*.6,340);
+    ctx.font='900 '+fs+'px Unbounded,sans-serif';
+    ctx.fillStyle='rgba(199,255,79,0.035)';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('GVA',W/2,H*.48);
+    ctx.restore();
 
-  // グリッチライン
-  let glitchTimer=0;
-  function drawGlitch(){
-    glitchTimer++;
-    if(glitchTimer % 80 < 3){
-      const y=Math.random()*H;
-      const h=Math.random()*3+1;
-      const shift=Math.random()*20-10;
-      ctx.drawImage(canvas,shift,y,W-Math.abs(shift),h, shift>0?shift:0,y,W-Math.abs(shift),h);
-      // ライムグリーンのグリッチライン
-      ctx.fillStyle=LIME;
-      ctx.globalAlpha=Math.random()*.15;
-      ctx.fillRect(0,y+Math.random()*4,W,1);
-      ctx.globalAlpha=1;
-    }
-  }
+    // ── ライムグリーン ビーム ──
+    BEAMS.forEach(b=>{
+      b.y += b.speed;
+      if(b.y>1.5) b.y=-0.5;
+      const yPos = b.y * H;
+      const grad = ctx.createLinearGradient(0,yPos-b.width,0,yPos+b.width);
+      grad.addColorStop(0,'rgba(199,255,79,0)');
+      grad.addColorStop(.5,`rgba(199,255,79,${b.alpha})`);
+      grad.addColorStop(1,'rgba(199,255,79,0)');
+      ctx.fillStyle=grad;
+      ctx.fillRect(0,yPos-b.width,W,b.width*2);
+    });
 
-  // ノイズ（少量）
-  function drawNoise(){
-    const imageData=ctx.getImageData(0,0,W,H);
-    const data=imageData.data;
-    for(let i=0;i<2000;i++){
-      const px=Math.floor(Math.random()*W);
-      const py=Math.floor(Math.random()*H);
-      const idx=(py*W+px)*4;
-      const v=Math.random()*30;
-      data[idx]=v; data[idx+1]=v; data[idx+2]=v; data[idx+3]=30;
-    }
-    ctx.putImageData(imageData,0,0);
-  }
-
-  // ライムライン（水平）
-  function drawLimeLines(){
-    const num=3;
-    for(let i=0;i<num;i++){
-      const y=((t*0.3+i*H/num)%H);
-      const alpha=.04+Math.sin(t*.02+i)*0.02;
-      ctx.fillStyle=LIME;
-      ctx.globalAlpha=alpha;
-      ctx.fillRect(0,y,W,1);
-      ctx.globalAlpha=1;
-    }
-  }
-
-  // パーティクル描画
-  function drawParticles(){
-    PARTICLES.forEach(p=>{
+    // ── パーティクル ──
+    PARTS.forEach(p=>{
       p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0)p.x=W; if(p.x>W)p.x=0;
-      if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+      if(p.x<0||p.x>1||p.y<0||p.y>1) reset_part(p);
       ctx.beginPath();
-      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.arc(p.x*W,p.y*H,p.r*Math.min(W,H),0,Math.PI*2);
       ctx.fillStyle=p.lime?LIME:'rgba(247,245,240,1)';
       ctx.globalAlpha=p.alpha;
       ctx.fill();
       ctx.globalAlpha=1;
     });
-  }
 
-  // 大型テキスト（背景）
-  function drawBgText(){
-    ctx.save();
-    ctx.font='900 '+Math.min(W*.55,320)+'px Unbounded,sans-serif';
-    ctx.fillStyle='rgba(247,245,240,0.025)';
-    ctx.textAlign='center';
-    ctx.textBaseline='middle';
-    // ゆっくり移動
-    const ox=Math.sin(t*.003)*20;
-    const oy=Math.cos(t*.002)*10;
-    ctx.fillText('GVA',W/2+ox,H/2+oy);
-    ctx.restore();
-  }
+    // ── ライムの縦ライン ──
+    for(let i=0;i<3;i++){
+      const x=((t*.5+i*(W/3))%W);
+      ctx.fillStyle=LIME;
+      ctx.globalAlpha=.06+Math.sin(t*.03+i)*0.03;
+      ctx.fillRect(x,0,1,H);
+      ctx.globalAlpha=1;
+    }
 
-  function frame(){
-    t++;
-    // 背景
-    ctx.fillStyle=BG;
-    ctx.fillRect(0,0,W,H);
+    // ── グリッチ ──
+    if(t%70===0) triggerGlitch();
+    if(glitchActive>0){
+      glitchActive--;
+      glitchBlocks.forEach(b=>{
+        ctx.save();
+        if(b.lime){
+          ctx.fillStyle=LIME;
+          ctx.globalAlpha=b.alpha*.25;
+          ctx.fillRect(0,b.y,W,b.h);
+        }
+        // ピクセルシフト
+        ctx.globalAlpha=b.alpha*.6;
+        ctx.drawImage(canvas,0,b.y,W,b.h, b.shift,b.y,W,b.h);
+        // RGB分離
+        ctx.fillStyle='rgba(255,0,0,0.06)'; ctx.fillRect(-6,b.y,W,b.h);
+        ctx.fillStyle='rgba(0,255,200,0.06)'; ctx.fillRect(6,b.y,W,b.h);
+        ctx.restore();
+      });
+    }
 
-    drawGrid();
-    drawBgText();
-    drawLimeLines();
-    drawParticles();
-    drawScanlines();
-    drawGlitch();
-    drawNoise();
+    // ── スキャンライン ──
+    for(let y=0;y<H;y+=3){
+      ctx.fillStyle='rgba(0,0,0,0.06)'; ctx.fillRect(0,y,W,1);
+    }
+
+    // ── ノイズ(少量) ──
+    if(t%2===0){
+      const id=ctx.getImageData(0,0,W,H), d=id.data;
+      for(let i=0;i<600;i++){
+        const px=Math.floor(Math.random()*W), py=Math.floor(Math.random()*H);
+        const idx=(py*W+px)*4, v=Math.random()*40;
+        d[idx]=v;d[idx+1]=v;d[idx+2]=v;d[idx+3]=25;
+      }
+      ctx.putImageData(id,0,0);
+    }
 
     requestAnimationFrame(frame);
   }
 
-  window.addEventListener('resize',()=>{resize();initParticles()});
-  resize();
-  initParticles();
-  frame();
+  window.addEventListener('resize',resize);
+  resize(); frame();
 })();
 
 // ══ ACCORDION ══

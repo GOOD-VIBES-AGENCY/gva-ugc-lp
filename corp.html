@@ -6,7 +6,6 @@
 <title>GOOD VIBES AGENCY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
-<!-- Three.js -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -19,7 +18,7 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* ─ HEADER ─ */
+/* HEADER */
 .header{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(247,245,240,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);z-index:200;gap:12px}
 .h-logo{flex-shrink:0}
 .h-logo img{height:22px;max-width:160px;object-fit:contain;object-position:left;display:block}
@@ -29,59 +28,63 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .h-cta{flex-shrink:0;font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--white);background:var(--fg);text-decoration:none;text-transform:uppercase;padding:8px 16px;transition:background .2s}
 .h-cta:hover{background:#333}
 
-/* ─ HERO ─ */
+/* HERO */
 .hero{
   height:100svh;min-height:640px;
   background:#0A0A0A;
-  display:grid;grid-template-rows:1fr auto;
+  display:flex;flex-direction:column;
   position:relative;overflow:hidden;
   padding-top:56px;
 }
-/* Three.js canvas */
 #three-canvas{
   position:absolute;inset:0;
   width:100%!important;height:100%!important;
-  z-index:0;
+  z-index:1;
 }
-/* ビネット */
-.hero-vignette{
-  position:absolute;inset:0;z-index:2;
-  background:
-    radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(10,10,10,.7) 100%),
-    linear-gradient(to bottom,rgba(10,10,10,.6) 0%,transparent 25%,transparent 65%,rgba(10,10,10,.9) 100%);
+/* テキストオーバーレイ */
+.hero-overlay{
+  position:relative;z-index:3;
+  flex:1;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:0 var(--pad) clamp(40px,6vw,80px);
+  background:linear-gradient(to top,rgba(10,10,10,.85) 0%,rgba(10,10,10,.1) 35%,transparent 60%);
   pointer-events:none;
 }
-.hero-content{
-  position:relative;z-index:3;
-  display:grid;align-content:end;
-  padding:0 var(--pad) clamp(40px,6vw,88px);
-}
 .hero-eyebrow{
-  font-size:10px;font-weight:400;letter-spacing:.4em;
-  color:rgba(199,255,79,.7);text-transform:uppercase;
-  margin-bottom:clamp(10px,2vw,20px);
-  opacity:0;animation:fadeUp .5s .15s both;
+  font-size:9px;font-weight:400;letter-spacing:.4em;
+  color:rgba(199,255,79,.65);text-transform:uppercase;
+  margin-bottom:clamp(10px,1.5vw,18px);
+  opacity:0;animation:fadeUp .5s .5s both;
 }
 .hero-title{
-  font-size:clamp(68px,15vw,200px);
+  font-size:clamp(60px,13vw,180px);
   font-weight:900;line-height:.88;
   letter-spacing:-.03em;text-transform:uppercase;
   overflow:hidden;
-  margin-bottom:clamp(16px,2.5vw,36px);
+  margin-bottom:clamp(14px,2vw,28px);
 }
 .tl{display:block;transform:translateY(105%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards}
-.tl:nth-child(1){color:#F7F5F0;animation-delay:.1s}
-.tl:nth-child(2){color:var(--noise);animation-delay:.22s}
-.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;opacity:0;animation:fadeUp .6s .75s both}
-.hero-sub{font-size:clamp(9px,1.1vw,12px);font-weight:200;letter-spacing:.22em;color:rgba(247,245,240,.35);text-transform:uppercase;line-height:2}
-.hero-scroll{font-size:8px;letter-spacing:.3em;color:rgba(247,245,240,.25);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
-.scroll-bar{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--noise));animation:pulse 2s ease-in-out infinite}
-.hero-ticker{position:relative;z-index:3;border-top:1px solid rgba(247,245,240,.07);padding:10px 0;overflow:hidden;display:flex;flex-shrink:0}
-.ticker-track{display:flex;white-space:nowrap;animation:tick 28s linear infinite}
-.ticker-item{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(247,245,240,.15);padding:0 28px}
+.tl:nth-child(1){color:#F7F5F0;animation-delay:.6s}
+.tl:nth-child(2){color:var(--noise);animation-delay:.75s}
+.hero-sub{
+  font-size:clamp(9px,1vw,11px);font-weight:200;
+  letter-spacing:.22em;color:rgba(247,245,240,.3);
+  text-transform:uppercase;line-height:2;
+  opacity:0;animation:fadeUp .5s 1.1s both;
+}
+
+/* ティッカー */
+.hero-ticker{
+  position:relative;z-index:3;
+  border-top:1px solid rgba(247,245,240,.07);
+  padding:10px 0;overflow:hidden;display:flex;flex-shrink:0;
+}
+.ticker-track{display:flex;white-space:nowrap;animation:tick 26s linear infinite}
+.ticker-item{font-size:9px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(247,245,240,.12);padding:0 28px}
 .ticker-item::after{content:'◆';color:var(--noise);margin-left:28px;font-size:7px}
 
-/* ─ ACCORDION ─ */
+/* ACCORDION */
 .acc-root{border-top:1px solid var(--line)}
 .acc-section{border-bottom:1px solid var(--line)}
 .acc-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:clamp(16px,2.2vw,26px) var(--pad);background:none;border:none;cursor:pointer;font-family:var(--font-d);text-align:left;transition:background .2s}
@@ -104,7 +107,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .about-body{font-size:14px;font-weight:300;line-height:2.1;color:#444;font-family:var(--font-j)}
 .about-nums{display:flex;flex-direction:column;gap:2px}
 .about-num-row{border:1px solid var(--line);padding:18px 22px}
-.abn-n{font-size:clamp(28px,4.5vw,48px);font-weight:900;letter-spacing:-.02em;color:var(--fg)}
+.abn-n{font-size:clamp(28px,4.5vw,48px);font-weight:900;letter-spacing:-.02em}
 .abn-l{font-size:9px;font-weight:400;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase;margin-top:4px}
 
 /* SERVICE */
@@ -170,7 +173,6 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 @keyframes slideUp{to{transform:translateY(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
 @media(max-width:640px){
   .h-nav{display:none}
@@ -194,26 +196,15 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </header>
 
 <section class="hero">
-  <!-- Three.js 3Dロゴ -->
   <canvas id="three-canvas"></canvas>
-  <div class="hero-vignette"></div>
 
-  <div class="hero-content">
+  <div class="hero-overlay">
     <p class="hero-eyebrow">Good Vibes Agency — Tokyo</p>
     <h1 class="hero-title" aria-label="MAKE NOISE.">
       <span class="tl">MAKE</span>
       <span class="tl">NOISE.</span>
     </h1>
-    <div class="hero-bottom">
-      <p class="hero-sub">
-        We move culture.<br>
-        We build the world's next icons.
-      </p>
-      <div class="hero-scroll">
-        <div class="scroll-bar"></div>
-        Scroll
-      </div>
-    </div>
+    <p class="hero-sub">We move culture. We build the world's next icons.</p>
   </div>
 
   <div class="hero-ticker">
@@ -238,12 +229,12 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
       <span class="acc-label">About</span>
       <div class="acc-meta"><span class="acc-num">01</span><span class="acc-icon">+</span></div>
     </button>
-    <div class="acc-panel" id="about-panel" role="region">
+    <div class="acc-panel" id="about-panel">
       <div class="acc-inner"><div class="acc-content">
         <div class="about-grid">
           <div>
             <h2 class="about-headline">カルチャーを、<br>動かす。</h2>
-            <p class="about-body">GVAはブランドと文化をつなぐ会社だ。<br>東京から世界へ、時代のノイズを鳴らし続ける。</p>
+            <p class="about-body">GVAはブランドと文化をつなぐ会社だ。東京から世界へ、時代のノイズを鳴らし続ける。</p>
           </div>
           <div class="about-nums">
             <div class="about-num-row"><div class="abn-n">10,000<span style="font-size:.4em;color:var(--ghost)">+</span></div><div class="abn-l">Talent Network</div></div>
@@ -260,7 +251,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
       <span class="acc-label">Service</span>
       <div class="acc-meta"><span class="acc-num">02</span><span class="acc-icon">+</span></div>
     </button>
-    <div class="acc-panel" id="service-panel" role="region">
+    <div class="acc-panel" id="service-panel">
       <div class="acc-inner"><div class="acc-content">
         <div class="sv-list">
           <div class="sv-item" data-sv><div class="sv-n">01</div><div><div class="sv-name">Creator Marketing</div><div class="sv-copy">Campaigns that move culture.</div><div class="sv-desc">クリエイターキャスティングから施策設計・進行・レポートまで一気通貫でサポート。</div></div><span class="sv-arrow">+</span></div>
@@ -277,7 +268,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
       <span class="acc-label">Talent</span>
       <div class="acc-meta"><span class="acc-num">03</span><span class="acc-icon">+</span></div>
     </button>
-    <div class="acc-panel" id="talent-panel" role="region">
+    <div class="acc-panel" id="talent-panel">
       <div class="acc-inner"><div class="acc-content">
         <div class="talent-grid">
           <div class="talent-card" data-tc><div class="talent-img">🌸</div><div class="talent-info"><div class="t-name">桃佳</div><div class="t-handle">@moo_mo_k</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">215K</div><div class="t-stat-l">Followers</div></div></div></div></div>
@@ -299,7 +290,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
       <span class="acc-label">Recruit</span>
       <div class="acc-meta"><span class="acc-num">04</span><span class="acc-icon">+</span></div>
     </button>
-    <div class="acc-panel" id="recruit-panel" role="region">
+    <div class="acc-panel" id="recruit-panel">
       <div class="acc-inner"><div class="acc-content">
         <h2 class="recruit-hero">MAKE NOISE<br><em>WITH US.</em></h2>
         <div class="rec-items">
@@ -317,7 +308,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
       <span class="acc-label">Contact</span>
       <div class="acc-meta"><span class="acc-num">05</span><span class="acc-icon">+</span></div>
     </button>
-    <div class="acc-panel" id="contact-panel" role="region">
+    <div class="acc-panel" id="contact-panel">
       <div class="acc-inner"><div class="acc-content">
         <form class="contact-form" onsubmit="return false">
           <div class="form-row">
@@ -341,123 +332,136 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </footer>
 
 <script>
-// ══ THREE.JS 3D LOGO ROTATION ══
+// ══ THREE.JS — GVAロゴ忠実3D ══
 (function(){
   const canvas = document.getElementById('three-canvas');
   const hero = canvas.closest('.hero');
-  const W = ()=>hero.offsetWidth;
-  const H = ()=>hero.offsetHeight;
 
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.setSize(W(), H());
-  renderer.setClearColor(0x0A0A0A, 1);
+  renderer.setClearColor(0x0A0A0A,1);
+  renderer.shadowMap.enabled=true;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.2;
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, W()/H(), 0.1, 100);
-  camera.position.set(0, 0, 5);
+  const W=()=>hero.offsetWidth, H=()=>hero.offsetHeight;
+  renderer.setSize(W(),H());
 
-  // ─ ライト ─
-  const ambient = new THREE.AmbientLight(0xffffff, 0.3);
-  scene.add(ambient);
+  const scene=new THREE.Scene();
+  scene.fog=new THREE.FogExp2(0x0A0A0A,.08);
 
-  // ライムグリーンのキーライト
-  const keyLight = new THREE.DirectionalLight(0xC7FF4F, 2.5);
-  keyLight.position.set(2, 3, 4);
-  scene.add(keyLight);
+  const camera=new THREE.PerspectiveCamera(42,W()/H(),.1,100);
+  camera.position.set(0,0,6.5);
 
-  // 白のフィルライト
-  const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
-  fillLight.position.set(-3, -1, 2);
-  scene.add(fillLight);
+  // ─ ライティング ─
+  scene.add(new THREE.AmbientLight(0x111111,1));
 
-  // リムライト（ライムグリーン）
-  const rimLight = new THREE.DirectionalLight(0xC7FF4F, 1.5);
-  rimLight.position.set(0, -3, -3);
-  scene.add(rimLight);
+  // メインライト（ライムグリーン）
+  const lime1=new THREE.DirectionalLight(0xC7FF4F,4);
+  lime1.position.set(3,4,5);
+  scene.add(lime1);
 
-  // ─ GVAロゴを押し出した3Dオブジェクト（三角形マーク）─
-  // 三角形シェイプ（ロゴのシンボルマークを模倣）
-  const shape = new THREE.Shape();
-  // 上向き三角形（内側くり抜き）
-  const outer = 1.2;
-  const thick = 0.22;
-  // 外側三角形
-  shape.moveTo(0, outer);
-  shape.lineTo(-outer * 0.9, -outer * 0.6);
-  shape.lineTo(outer * 0.9, -outer * 0.6);
+  // フィルライト（白）
+  const fill=new THREE.DirectionalLight(0xffffff,1.5);
+  fill.position.set(-4,2,3);
+  scene.add(fill);
+
+  // バックライト（ライムグリーン）
+  const back=new THREE.DirectionalLight(0xC7FF4F,2);
+  back.position.set(0,-3,-4);
+  scene.add(back);
+
+  // スポットライト（上から）
+  const spot=new THREE.SpotLight(0xffffff,3,20,Math.PI/6,.5);
+  spot.position.set(0,8,4);
+  scene.add(spot);
+
+  // ─ GVAロゴシンボル（∧キャレット）の正確な形状 ─
+  // ロゴ解析から得た数値：
+  // 外側: 頂点(0,1)から左右(-0.85,-0.8)(0.85,-0.8)へ
+  // ストローク幅: 約0.22
+  // 内側の頂点: 約(0, 0.45)
+  const S=1.8;   // スケール
+  const sw=0.21; // ストローク幅（半分）
+
+  // 外側V形状（底辺なし = 開いたV）
+  const outerL_bottom=-0.85*S, outerR_bottom=0.85*S;
+  const outerY_top=1.0*S, outerY_bottom=-0.82*S;
+  // 内側V頂点（外側頂点より少し下）
+  const innerY_top=0.45*S;
+  const innerL_bottom=outerL_bottom+(sw*2), innerR_bottom=outerR_bottom-(sw*2);
+
+  const shape=new THREE.Shape();
+  // 外側左下 → 頂点 → 外側右下 → 内側右下 → 内側頂点 → 内側左下 → 戻る
+  shape.moveTo(outerL_bottom, outerY_bottom);
+  shape.lineTo(0, outerY_top);
+  shape.lineTo(outerR_bottom, outerY_bottom);
+  shape.lineTo(innerR_bottom, outerY_bottom);
+  shape.lineTo(0, innerY_top);
+  shape.lineTo(innerL_bottom, outerY_bottom);
   shape.closePath();
-  // 内側くり抜き
-  const hole = new THREE.Path();
-  const inner = outer - thick * 1.4;
-  hole.moveTo(0, inner * 0.85);
-  hole.lineTo(-inner * 0.72, -inner * 0.5);
-  hole.lineTo(inner * 0.72, -inner * 0.5);
-  hole.closePath();
-  shape.holes.push(hole);
 
-  const extrudeSettings = {depth:0.28, bevelEnabled:true, bevelThickness:0.04, bevelSize:0.03, bevelSegments:4};
-  const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-  geometry.center();
+  const extCfg={
+    depth:0.32,
+    bevelEnabled:true,
+    bevelThickness:0.04,
+    bevelSize:0.03,
+    bevelSegments:6,
+  };
+  const geo=new THREE.ExtrudeGeometry(shape,extCfg);
+  geo.center();
 
-  // マテリアル：メタリック + ライムグリーン発光
-  const material = new THREE.MeshStandardMaterial({
-    color: 0xC7FF4F,
-    emissive: 0x4A6000,
-    emissiveIntensity: 0.3,
-    metalness: 0.7,
-    roughness: 0.2,
+  // マテリアル（メタリックライムグリーン）
+  const mat=new THREE.MeshStandardMaterial({
+    color:0xC7FF4F,
+    emissive:0x3a5500,
+    emissiveIntensity:0.4,
+    metalness:0.75,
+    roughness:0.15,
+    envMapIntensity:1.0,
   });
 
-  const logo = new THREE.Mesh(geometry, material);
-  logo.position.set(1.2, 0.4, 0); // 右上寄り
-  logo.scale.setScalar(0.85);
-  scene.add(logo);
+  const logoMesh=new THREE.Mesh(geo,mat);
+  logoMesh.position.set(0,0.15,0); // 中央・わずかに上
+  scene.add(logoMesh);
 
-  // ─ グリッド平面（背景） ─
-  const gridHelper = new THREE.GridHelper(20, 20, 0x222222, 0x1a1a1a);
-  gridHelper.position.y = -2.5;
-  gridHelper.rotation.x = Math.PI * 0.05;
-  scene.add(gridHelper);
+  // ─ 微細な浮遊パーティクル ─
+  const pGeo=new THREE.BufferGeometry();
+  const pN=200;
+  const pPos=new Float32Array(pN*3);
+  for(let i=0;i<pN*3;i++) pPos[i]=(Math.random()-.5)*14;
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+  scene.add(new THREE.Points(pGeo,new THREE.PointsMaterial({
+    color:0xC7FF4F,size:0.025,transparent:true,opacity:.3
+  })));
 
-  // ─ パーティクル ─
-  const partGeo = new THREE.BufferGeometry();
-  const partCount = 300;
-  const positions = new Float32Array(partCount * 3);
-  for(let i=0;i<partCount*3;i++) positions[i]=(Math.random()-.5)*12;
-  partGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
-  const partMat = new THREE.PointsMaterial({color:0xC7FF4F, size:0.02, transparent:true, opacity:.4});
-  const particles = new THREE.Points(partGeo, partMat);
-  scene.add(particles);
+  // ─ グリッド（奥行き感） ─
+  const grid=new THREE.GridHelper(16,16,0x1a1a1a,0x141414);
+  grid.position.y=-2.8;
+  grid.rotation.x=0.08;
+  scene.add(grid);
 
-  // ─ リサイズ ─
+  // ─ resize ─
   window.addEventListener('resize',()=>{
     renderer.setSize(W(),H());
     camera.aspect=W()/H();
     camera.updateProjectionMatrix();
   });
 
-  // ─ アニメーションループ ─
+  // ─ animation ─
   let t=0;
   function animate(){
     requestAnimationFrame(animate);
-    t+=0.01;
-
-    // ロゴ回転（Y軸メイン）
-    logo.rotation.y = t * 0.6;
-    logo.rotation.x = Math.sin(t * 0.3) * 0.2;
-    // ゆらぎ
-    logo.position.y = 0.4 + Math.sin(t * 0.5) * 0.08;
-
-    // ライトもゆっくり回る
-    keyLight.position.x = Math.sin(t * 0.4) * 4;
-    keyLight.position.z = Math.cos(t * 0.4) * 4;
-
-    // パーティクル回転
-    particles.rotation.y = t * 0.03;
-    particles.rotation.x = t * 0.01;
-
-    renderer.render(scene, camera);
+    t+=0.008;
+    // Y軸回転（メイン）+ わずかなX軸ゆらぎ
+    logoMesh.rotation.y=t*0.7;
+    logoMesh.rotation.x=Math.sin(t*0.4)*0.12;
+    // 上下フロート
+    logoMesh.position.y=0.15+Math.sin(t*0.6)*0.07;
+    // ライトも少し動く
+    lime1.position.x=Math.sin(t*0.35)*4;
+    lime1.position.z=Math.cos(t*0.35)*4+3;
+    renderer.render(scene,camera);
   }
   animate();
 })();

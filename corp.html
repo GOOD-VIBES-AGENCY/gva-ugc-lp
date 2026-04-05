@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOOD VIBES AGENCY — MAKE NOISE.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --void:#0A0A0A; --noise:#C7FF4F; --air:#F5F5F0;
+  --ash:#1A1A1A; --smog:#2E2E2E; --ghost:#6B6B6B;
+  --noise-dim:#8FB832; --noise-glow:rgba(199,255,79,0.12);
+  --font-d:'Unbounded',sans-serif; --font-j:'Noto Sans JP',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--air);font-family:var(--font-d);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cursor{position:fixed;width:10px;height:10px;background:var(--noise);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:difference}
+.cursor.big{width:36px;height:36px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,80px);z-index:100;mix-blend-mode:difference}
+.nav-logo{font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--air);text-decoration:none;text-transform:uppercase}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:10px;font-weight:400;letter-spacing:.18em;color:var(--ghost);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--noise)}
+.nav-cta{font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--void);background:var(--noise);text-decoration:none;text-transform:uppercase;padding:10px 20px;transition:background .2s}
+.nav-cta:hover{background:var(--noise-dim)}
+
+/* HERO */
+.hero{position:relative;height:100svh;min-height:700px;display:grid;grid-template-rows:1fr auto;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 65% 40%,rgba(199,255,79,.06) 0%,transparent 60%),var(--void)}
+.hero-noise{position:absolute;inset:0;z-index:1;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");background-size:200px}
+.hero-vignette{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(10,10,10,.4) 0%,transparent 35%,transparent 55%,rgba(10,10,10,.95) 100%)}
+.hero-content{position:relative;z-index:3;display:grid;align-content:end;padding:0 clamp(24px,5vw,80px) clamp(48px,6vw,96px);gap:0}
+.hero-title{font-size:clamp(72px,15vw,200px);font-weight:900;line-height:.88;letter-spacing:-.03em;text-transform:uppercase;overflow:hidden}
+.tl{display:block;transform:translateY(105%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards}
+.tl:nth-child(1){animation-delay:.1s}
+.tl:nth-child(2){color:var(--noise);animation-delay:.25s}
+.hero-meta{display:flex;align-items:flex-end;justify-content:space-between;margin-top:clamp(16px,2.5vw,36px);opacity:0;transform:translateY(16px);animation:fadeUp .7s ease .7s forwards}
+.hero-sub{font-size:clamp(10px,1.1vw,13px);font-weight:200;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase;line-height:1.9}
+.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:8px;font-weight:400;letter-spacing:.3em;color:var(--ghost);text-transform:uppercase}
+.hero-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--noise));animation:pulse 2s ease-in-out infinite}
+
+/* TICKER */
+.ticker{position:relative;z-index:3;border-top:1px solid var(--smog);padding:11px 0;overflow:hidden;display:flex}
+.ticker-track{display:flex;white-space:nowrap;animation:tick 22s linear infinite}
+.ticker-item{font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--ghost);padding:0 40px}
+.ticker-item::after{content:'◆';color:var(--noise);margin-left:40px}
+
+/* NUMBERS */
+.numbers{background:var(--ash);border-top:1px solid var(--smog);padding:clamp(48px,7vw,100px) clamp(24px,5vw,80px)}
+.numbers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.num-card{padding:clamp(32px,4vw,56px) clamp(24px,3vw,40px);border:1px solid var(--smog)}
+.num-n{font-size:clamp(48px,7vw,96px);font-weight:900;color:var(--noise);line-height:1;letter-spacing:-.03em}
+.num-l{font-size:10px;font-weight:400;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase;margin-top:8px}
+
+/* SERVICE */
+.service{padding:clamp(64px,8vw,120px) clamp(24px,5vw,80px);border-top:1px solid var(--smog)}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:clamp(40px,5vw,72px)}
+.section-tag{font-size:10px;font-weight:400;letter-spacing:.3em;color:var(--ghost);text-transform:uppercase}
+.section-title{font-size:clamp(32px,5vw,64px);font-weight:900;letter-spacing:-.02em}
+.service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.sv-card{padding:clamp(28px,3.5vw,48px);border:1px solid var(--smog);position:relative;overflow:hidden;transition:border-color .25s}
+.sv-card:hover{border-color:var(--noise)}
+.sv-card::before{content:'';position:absolute;top:0;left:0;width:0;height:3px;background:var(--noise);transition:width .3s ease}
+.sv-card:hover::before{width:100%}
+.sv-num{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--ghost);margin-bottom:20px}
+.sv-name{font-size:clamp(18px,2.5vw,28px);font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
+.sv-copy{font-size:12px;font-weight:200;letter-spacing:.12em;color:var(--ghost);text-transform:uppercase;margin-bottom:20px}
+.sv-desc{font-size:13px;font-weight:300;color:rgba(245,245,240,.55);line-height:1.9;font-family:var(--font-j)}
+
+/* ABOUT */
+.about{background:var(--noise);padding:clamp(64px,8vw,120px) clamp(24px,5vw,80px)}
+.about-inner{max-width:900px}
+.about-tag{font-size:10px;font-weight:700;letter-spacing:.3em;color:rgba(10,10,10,.5);text-transform:uppercase;margin-bottom:28px}
+.about-headline{font-size:clamp(36px,6vw,80px);font-weight:900;letter-spacing:-.02em;color:var(--void);line-height:1.05;margin-bottom:32px}
+.about-body{font-size:clamp(14px,1.5vw,18px);font-weight:400;line-height:1.9;color:rgba(10,10,10,.7);font-family:var(--font-j);max-width:640px}
+
+/* RECRUIT */
+.recruit{padding:clamp(64px,8vw,120px) clamp(24px,5vw,80px);border-top:1px solid var(--smog);display:flex;align-items:center;justify-content:space-between;gap:40px}
+.recruit-title{font-size:clamp(40px,7vw,100px);font-weight:900;letter-spacing:-.03em;line-height:.9}
+.recruit-cta{flex-shrink:0;display:inline-block;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--void);background:var(--noise);padding:18px 36px;text-decoration:none;transition:background .2s}
+.recruit-cta:hover{background:var(--noise-dim)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--smog);padding:32px clamp(24px,5vw,80px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-logo{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase}
+.footer-copy{font-size:10px;letter-spacing:.1em;color:rgba(107,107,107,.5)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:10px;letter-spacing:.15em;color:var(--ghost);text-decoration:none;text-transform:uppercase}
+
+/* ANIMATIONS */
+@keyframes slideUp{to{transform:translateY(0)}}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .numbers-grid{grid-template-columns:1fr}
+  .service-grid{grid-template-columns:1fr}
+  .recruit{flex-direction:column;align-items:flex-start}
+  footer{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="/" class="nav-logo">Good Vibes Agency</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#service">Service</a></li>
+    <li><a href="/talent">Talent</a></li>
+    <li><a href="#recruit">Recruit</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <h1 class="hero-title" aria-label="MAKE NOISE.">
+      <span class="tl">MAKE</span>
+      <span class="tl">NOISE.</span>
+    </h1>
+    <div class="hero-meta">
+      <p class="hero-sub">
+        We don't follow culture.<br>
+        We build it, amplify it,<br>
+        and export it globally.
+      </p>
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        Scroll
+      </div>
+    </div>
+  </div>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Influencer Marketing</span>
+      <span class="ticker-item">Talent Management</span>
+      <span class="ticker-item">Creative Direction</span>
+      <span class="ticker-item">Brand Strategy</span>
+      <span class="ticker-item">Casting</span>
+      <span class="ticker-item">Social Media</span>
+      <span class="ticker-item">Influencer Marketing</span>
+      <span class="ticker-item">Talent Management</span>
+      <span class="ticker-item">Creative Direction</span>
+      <span class="ticker-item">Brand Strategy</span>
+      <span class="ticker-item">Casting</span>
+      <span class="ticker-item">Social Media</span>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="numbers">
+  <div class="numbers-grid">
+    <div class="num-card reveal">
+      <div class="num-n">300<span style="font-size:.5em;color:var(--ghost)">+</span></div>
+      <div class="num-l">Talent Network</div>
+    </div>
+    <div class="num-card reveal">
+      <div class="num-n">500<span style="font-size:.5em;color:var(--ghost)">+</span></div>
+      <div class="num-l">Campaigns Delivered</div>
+    </div>
+    <div class="num-card reveal">
+      <div class="num-n">5B<span style="font-size:.5em;color:var(--ghost)">+</span></div>
+      <div class="num-l">Total Reach</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section class="service" id="service">
+  <div class="section-header">
+    <span class="section-tag">What We Do</span>
+    <h2 class="section-title">Service</h2>
+  </div>
+  <div class="service-grid">
+    <div class="sv-card reveal">
+      <div class="sv-num">01</div>
+      <div class="sv-name">Influencer Marketing</div>
+      <div class="sv-copy">Campaigns that move culture.</div>
+      <div class="sv-desc">インフルエンサーキャスティングから施策設計・進行・レポートまで一気通貫でサポート。</div>
+    </div>
+    <div class="sv-card reveal">
+      <div class="sv-num">02</div>
+      <div class="sv-name">Talent Management</div>
+      <div class="sv-copy">We build iconic careers.</div>
+      <div class="sv-desc">所属タレントの案件管理・マネジメント・ブランディングを担当。</div>
+    </div>
+    <div class="sv-card reveal">
+      <div class="sv-num">03</div>
+      <div class="sv-name">Casting</div>
+      <div class="sv-copy">The right face, always.</div>
+      <div class="sv-desc">タレント・インフルエンサー・モデルなど、目的に合った人材のキャスティングを提供。</div>
+    </div>
+    <div class="sv-card reveal">
+      <div class="sv-num">04</div>
+      <div class="sv-name">Digital Marketing</div>
+      <div class="sv-copy">Content that breaks feeds.</div>
+      <div class="sv-desc">SNS運用代行、クリエイティブ制作、コンテンツ制作などデジタルPR全般を支援。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-tag">About GVA</div>
+    <h2 class="about-headline reveal">ノイズが、<br>歴史になる。</h2>
+    <p class="about-body reveal">インフルエンサーで終わるな。GVAは才能を文化に変え、日本から世界へ届ける会社だ。</p>
+  </div>
+</section>
+
+<!-- RECRUIT -->
+<section class="recruit" id="recruit">
+  <h2 class="recruit-title reveal">
+    MAKE<br>
+    <span style="color:var(--noise)">NOISE</span><br>
+    WITH US.
+  </h2>
+  <a href="#contact" class="recruit-cta">Join Us →</a>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <div class="footer-logo">Good Vibes Agency</div>
+  <div class="footer-links">
+    <a href="mailto:toru.t@goodvibesagency.tokyo">Contact</a>
+    <a href="/privacy">Privacy</a>
+  </div>
+  <div class="footer-copy">© 2025 株式会社GOOD VIBES AGENCY</div>
+</footer>
+
+<script>
+// Cursor
+const cur=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+});
+
+// Reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

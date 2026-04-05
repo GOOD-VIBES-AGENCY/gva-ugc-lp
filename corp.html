@@ -31,78 +31,79 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .hero{
   height:100svh;min-height:640px;
   background:var(--fg);
-  display:flex;flex-direction:column;
+  display:grid;
+  grid-template-rows:1fr auto;
   position:relative;overflow:hidden;
   padding-top:56px;
 }
-/* 動画 */
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;filter:grayscale(50%);z-index:0}
-/* 大型ロゴマーク（背景） */
-.hero-watermark{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  z-index:1;
-  font-size:clamp(300px,60vw,700px);
-  font-weight:900;color:rgba(247,245,240,.03);
-  letter-spacing:-.05em;line-height:1;
-  pointer-events:none;user-select:none;
-  font-family:var(--font-d);text-transform:uppercase;
-  white-space:nowrap;
-}
-/* ノイズライン */
-.hero-lines{position:absolute;inset:0;z-index:1;overflow:hidden}
-.hero-lines::before{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--noise),transparent);
-  opacity:.4;
-}
-/* ビネット */
-.hero-vignette{position:absolute;inset:0;z-index:2;background:linear-gradient(160deg,rgba(17,17,17,.6) 0%,rgba(17,17,17,.1) 40%,rgba(17,17,17,.5) 100%)}
 
-/* ─ 中央配置コンテンツ ─ */
-.hero-center{
+/* キャンバス動画 */
+#hero-canvas{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  z-index:0;
+  opacity:1;
+}
+
+/* ビネット */
+.hero-vignette{
+  position:absolute;inset:0;z-index:2;
+  background:
+    linear-gradient(to bottom,
+      rgba(17,17,17,.55) 0%,
+      rgba(17,17,17,.0) 30%,
+      rgba(17,17,17,.0) 55%,
+      rgba(17,17,17,.85) 100%
+    );
+}
+
+/* コンテンツ（左下） */
+.hero-content{
   position:relative;z-index:3;
-  flex:1;display:flex;flex-direction:column;
-  justify-content:center;
-  padding:0 var(--pad);
+  display:grid;align-content:end;
+  padding:0 var(--pad) clamp(40px,6vw,88px);
 }
 .hero-eyebrow{
   font-size:10px;font-weight:400;letter-spacing:.4em;
   color:var(--noise);text-transform:uppercase;
   margin-bottom:clamp(12px,2vw,24px);
-  opacity:0;animation:fadeUp .5s .1s both;
+  opacity:0;animation:fadeUp .5s .15s both;
 }
-/* MAKE NOISE — 画面幅いっぱい */
 .hero-title{
-  font-size:clamp(72px,18vw,220px);
-  font-weight:900;
-  line-height:.88;
-  letter-spacing:-.03em;
-  text-transform:uppercase;
+  font-size:clamp(68px,15vw,200px);
+  font-weight:900;line-height:.88;
+  letter-spacing:-.03em;text-transform:uppercase;
   overflow:hidden;
-  margin-bottom:clamp(20px,3vw,40px);
+  margin-bottom:clamp(16px,2.5vw,36px);
 }
 .tl{display:block;transform:translateY(105%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards}
 .tl:nth-child(1){color:var(--bg);animation-delay:.1s}
 .tl:nth-child(2){color:var(--noise);animation-delay:.22s}
 
-.hero-sub{
-  font-size:clamp(10px,1.3vw,13px);font-weight:200;
-  letter-spacing:.25em;color:rgba(247,245,240,.45);
-  text-transform:uppercase;line-height:2;
-  opacity:0;animation:fadeUp .6s .7s both;
+.hero-bottom{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  opacity:0;animation:fadeUp .6s .75s both;
 }
+.hero-sub{
+  font-size:clamp(9px,1.1vw,12px);font-weight:200;
+  letter-spacing:.22em;color:rgba(247,245,240,.4);
+  text-transform:uppercase;line-height:2;
+}
+.hero-scroll{
+  font-size:8px;letter-spacing:.3em;color:rgba(247,245,240,.3);
+  text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.scroll-bar{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--noise));animation:pulse 2s ease-in-out infinite}
 
-/* ─ 下部ティッカー ─ */
+/* ティッカー */
 .hero-ticker{
   position:relative;z-index:3;
-  border-top:1px solid rgba(247,245,240,.1);
-  padding:10px 0;overflow:hidden;display:flex;
-  flex-shrink:0;
+  border-top:1px solid rgba(247,245,240,.08);
+  padding:10px 0;overflow:hidden;display:flex;flex-shrink:0;
 }
-.ticker-track{display:flex;white-space:nowrap;animation:tick 24s linear infinite}
-.ticker-item{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(247,245,240,.2);padding:0 32px}
-.ticker-item span{color:var(--noise);margin-left:32px;font-size:8px}
+.ticker-track{display:flex;white-space:nowrap;animation:tick 26s linear infinite}
+.ticker-item{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(247,245,240,.18);padding:0 28px}
+.ticker-item::after{content:'◆';color:var(--noise);margin-left:28px;font-size:7px}
 
 /* ─ ACCORDION ─ */
 .acc-root{border-top:1px solid var(--line)}
@@ -121,7 +122,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .acc-inner{overflow:hidden}
 .acc-content{padding:clamp(24px,4vw,56px) var(--pad) clamp(36px,5vw,64px)}
 
-/* ─ ABOUT ─ */
+/* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:start}
 .about-headline{font-size:clamp(26px,4vw,48px);font-weight:900;letter-spacing:-.02em;line-height:1.08;margin-bottom:24px}
 .about-body{font-size:14px;font-weight:300;line-height:2.1;color:#444;font-family:var(--font-j)}
@@ -130,7 +131,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .abn-n{font-size:clamp(28px,4.5vw,48px);font-weight:900;letter-spacing:-.02em;color:var(--fg)}
 .abn-l{font-size:9px;font-weight:400;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase;margin-top:4px}
 
-/* ─ SERVICE ─ */
+/* SERVICE */
 .sv-list{display:flex;flex-direction:column}
 .sv-item{border:1px solid var(--line);border-bottom:0;padding:clamp(18px,2.8vw,30px) clamp(18px,3vw,38px);display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:start;cursor:pointer;transition:background .2s}
 .sv-item:last-child{border-bottom:1px solid var(--line)}
@@ -146,7 +147,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .sv-arrow{font-size:18px;color:var(--ghost);transition:transform .2s;padding-top:3px}
 .sv-item.active .sv-arrow{transform:rotate(45deg);color:rgba(0,0,0,.35)}
 
-/* ─ TALENT ─ */
+/* TALENT */
 .talent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:2px}
 .talent-card{border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:border-color .2s}
 .talent-card:hover{border-color:var(--fg)}
@@ -160,7 +161,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .t-stat-n{font-size:15px;font-weight:700}
 .t-stat-l{font-size:9px;letter-spacing:.12em;color:var(--ghost);text-transform:uppercase;margin-top:2px}
 
-/* ─ RECRUIT ─ */
+/* RECRUIT */
 .recruit-hero{font-size:clamp(34px,7vw,90px);font-weight:900;letter-spacing:-.03em;line-height:.9;margin-bottom:clamp(24px,4vw,48px)}
 .recruit-hero em{color:var(--noise);font-style:normal}
 .rec-items{display:flex;flex-direction:column;margin-bottom:clamp(24px,4vw,40px)}
@@ -172,7 +173,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .recruit-cta{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);background:var(--fg);text-decoration:none;padding:14px 28px;transition:background .2s}
 .recruit-cta:hover{background:#333}
 
-/* ─ CONTACT ─ */
+/* CONTACT */
 .contact-form{display:grid;gap:14px;max-width:600px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form-field{display:flex;flex-direction:column;gap:6px}
@@ -183,19 +184,19 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .form-submit{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);background:var(--fg);border:none;padding:14px 28px;cursor:pointer;font-family:var(--font-d);transition:background .2s;width:fit-content}
 .form-submit:hover{background:#333}
 
-/* ─ FOOTER ─ */
+/* FOOTER */
 footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .f-logo img{height:18px;max-width:140px;object-fit:contain;object-position:left;opacity:.45}
 .f-links{display:flex;gap:18px}
 .f-links a{font-size:9px;letter-spacing:.12em;color:var(--ghost);text-decoration:none;text-transform:uppercase}
 .f-copy{font-size:9px;letter-spacing:.08em;color:rgba(136,136,128,.45)}
 
-/* ─ ANIMATIONS ─ */
+/* ANIMATIONS */
 @keyframes slideUp{to{transform:translateY(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
-/* ─ RESPONSIVE ─ */
 @media(max-width:640px){
   .h-nav{display:none}
   .about-grid{grid-template-columns:1fr}
@@ -206,11 +207,8 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="header">
-  <a href="/" class="h-logo">
-    <img src="gva-logo.png" alt="GOOD VIBES AGENCY">
-  </a>
+  <a href="/" class="h-logo"><img src="gva-logo.png" alt="GOOD VIBES AGENCY"></a>
   <ul class="h-nav">
     <li><a href="#" data-acc="about">About</a></li>
     <li><a href="#" data-acc="service">Service</a></li>
@@ -220,52 +218,47 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
   <a href="#" class="h-cta" data-acc="contact">Contact</a>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-  <!-- 動画（hero.mp4を置けば有効化される） -->
-  <!--<video class="hero-video" autoplay muted loop playsinline>
-    <source src="hero.mp4" type="video/mp4">
-  </video>-->
-
-  <!-- 背景ウォーターマーク -->
-  <div class="hero-watermark" aria-hidden="true">GVA</div>
-  <div class="hero-lines"></div>
+  <!-- キャンバス「動画」 -->
+  <canvas id="hero-canvas"></canvas>
   <div class="hero-vignette"></div>
 
-  <!-- 中央コンテンツ -->
-  <div class="hero-center">
+  <div class="hero-content">
     <p class="hero-eyebrow">Good Vibes Agency — Tokyo</p>
     <h1 class="hero-title" aria-label="MAKE NOISE.">
       <span class="tl">MAKE</span>
       <span class="tl">NOISE.</span>
     </h1>
-    <p class="hero-sub">
-      We move culture.<br>
-      We build the world's next icons.
-    </p>
+    <div class="hero-bottom">
+      <p class="hero-sub">
+        We move culture.<br>
+        We build the world's next icons.
+      </p>
+      <div class="hero-scroll">
+        <div class="scroll-bar"></div>
+        Scroll
+      </div>
+    </div>
   </div>
 
-  <!-- ティッカー -->
   <div class="hero-ticker">
     <div class="ticker-track">
-      <span class="ticker-item">Creator Marketing<span>◆</span></span>
-      <span class="ticker-item">Talent Management<span>◆</span></span>
-      <span class="ticker-item">Brand Strategy<span>◆</span></span>
-      <span class="ticker-item">Casting<span>◆</span></span>
-      <span class="ticker-item">Culture Building<span>◆</span></span>
-      <span class="ticker-item">Creator Marketing<span>◆</span></span>
-      <span class="ticker-item">Talent Management<span>◆</span></span>
-      <span class="ticker-item">Brand Strategy<span>◆</span></span>
-      <span class="ticker-item">Casting<span>◆</span></span>
-      <span class="ticker-item">Culture Building<span>◆</span></span>
+      <span class="ticker-item">Creator Marketing</span>
+      <span class="ticker-item">Talent Management</span>
+      <span class="ticker-item">Brand Strategy</span>
+      <span class="ticker-item">Casting</span>
+      <span class="ticker-item">Culture Building</span>
+      <span class="ticker-item">Creator Marketing</span>
+      <span class="ticker-item">Talent Management</span>
+      <span class="ticker-item">Brand Strategy</span>
+      <span class="ticker-item">Casting</span>
+      <span class="ticker-item">Culture Building</span>
     </div>
   </div>
 </section>
 
-<!-- ACCORDION -->
 <main class="acc-root">
 
-  <!-- ABOUT -->
   <section class="acc-section" id="about">
     <button class="acc-trigger" aria-expanded="false" data-panel="about-panel">
       <span class="acc-label">About</span>
@@ -275,11 +268,10 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
       <div class="acc-inner"><div class="acc-content">
         <div class="about-grid">
           <div>
-            <h2 class="about-headline">文化を、<br>つくる会社。</h2>
+            <h2 class="about-headline">カルチャーを、<br>動かす。</h2>
             <p class="about-body">
-              GVAは、時代を動かす会社だ。<br>
-              才能を発掘し、ブランドと出会わせ、<br>
-              新しい文化を東京から世界へ届ける。
+              GVAはブランドと文化をつなぐ会社だ。<br>
+              東京から世界へ、時代のノイズを鳴らし続ける。
             </p>
           </div>
           <div class="about-nums">
@@ -301,7 +293,6 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
     </div>
   </section>
 
-  <!-- SERVICE -->
   <section class="acc-section" id="service">
     <button class="acc-trigger" aria-expanded="false" data-panel="service-panel">
       <span class="acc-label">Service</span>
@@ -310,48 +301,15 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
     <div class="acc-panel" id="service-panel" role="region">
       <div class="acc-inner"><div class="acc-content">
         <div class="sv-list">
-          <div class="sv-item" data-sv>
-            <div class="sv-n">01</div>
-            <div>
-              <div class="sv-name">Creator Marketing</div>
-              <div class="sv-copy">Campaigns that move culture.</div>
-              <div class="sv-desc">クリエイターキャスティングから施策設計・進行・レポートまで一気通貫でサポート。</div>
-            </div>
-            <span class="sv-arrow">+</span>
-          </div>
-          <div class="sv-item" data-sv>
-            <div class="sv-n">02</div>
-            <div>
-              <div class="sv-name">Talent Management</div>
-              <div class="sv-copy">We build iconic careers.</div>
-              <div class="sv-desc">所属タレントの案件管理・マネジメント・ブランディングを担当。</div>
-            </div>
-            <span class="sv-arrow">+</span>
-          </div>
-          <div class="sv-item" data-sv>
-            <div class="sv-n">03</div>
-            <div>
-              <div class="sv-name">Casting</div>
-              <div class="sv-copy">The right face, always.</div>
-              <div class="sv-desc">ブランド・映像・イベントなど、目的に合った人材を選定・手配。</div>
-            </div>
-            <span class="sv-arrow">+</span>
-          </div>
-          <div class="sv-item" data-sv>
-            <div class="sv-n">04</div>
-            <div>
-              <div class="sv-name">Brand Strategy</div>
-              <div class="sv-copy">Culture by design.</div>
-              <div class="sv-desc">SNS運用、コンテンツ制作、ブランドコミュニケーション全般を支援。</div>
-            </div>
-            <span class="sv-arrow">+</span>
-          </div>
+          <div class="sv-item" data-sv><div class="sv-n">01</div><div><div class="sv-name">Creator Marketing</div><div class="sv-copy">Campaigns that move culture.</div><div class="sv-desc">クリエイターキャスティングから施策設計・進行・レポートまで一気通貫でサポート。</div></div><span class="sv-arrow">+</span></div>
+          <div class="sv-item" data-sv><div class="sv-n">02</div><div><div class="sv-name">Talent Management</div><div class="sv-copy">We build iconic careers.</div><div class="sv-desc">所属タレントの案件管理・マネジメント・ブランディングを担当。</div></div><span class="sv-arrow">+</span></div>
+          <div class="sv-item" data-sv><div class="sv-n">03</div><div><div class="sv-name">Casting</div><div class="sv-copy">The right face, always.</div><div class="sv-desc">ブランド・映像・イベントなど、目的に合った人材を選定・手配。</div></div><span class="sv-arrow">+</span></div>
+          <div class="sv-item" data-sv><div class="sv-n">04</div><div><div class="sv-name">Brand Strategy</div><div class="sv-copy">Culture by design.</div><div class="sv-desc">SNS運用、コンテンツ制作、ブランドコミュニケーション全般を支援。</div></div><span class="sv-arrow">+</span></div>
         </div>
       </div></div>
     </div>
   </section>
 
-  <!-- TALENT -->
   <section class="acc-section" id="talent">
     <button class="acc-trigger" aria-expanded="false" data-panel="talent-panel">
       <span class="acc-label">Talent</span>
@@ -360,21 +318,20 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
     <div class="acc-panel" id="talent-panel" role="region">
       <div class="acc-inner"><div class="acc-content">
         <div class="talent-grid">
-          <div class="talent-card" data-tc><div class="talent-img">🌸</div><div class="talent-info"><div class="t-name">桃佳</div><div class="t-handle">@moo_mo_k</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">215K</div><div class="t-stat-l">Followers</div></div><div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div></div></div></div>
-          <div class="talent-card" data-tc><div class="talent-img">✨</div><div class="talent-info"><div class="t-name">かんな</div><div class="t-handle">@k_r__ko</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">171K</div><div class="t-stat-l">Followers</div></div><div><div class="t-stat-n">Lifestyle</div><div class="t-stat-l">Category</div></div></div></div></div>
-          <div class="talent-card" data-tc><div class="talent-img">🌿</div><div class="talent-info"><div class="t-name">ゆい</div><div class="t-handle">@yui___12.8</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">184K</div><div class="t-stat-l">Followers</div></div><div><div class="t-stat-n">Beauty</div><div class="t-stat-l">Category</div></div></div></div></div>
-          <div class="talent-card" data-tc><div class="talent-img">🖤</div><div class="talent-info"><div class="t-name">乙</div><div class="t-handle">@_021miu</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">244K</div><div class="t-stat-l">Followers</div></div><div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div></div></div></div>
-          <div class="talent-card" data-tc><div class="talent-img">💙</div><div class="talent-info"><div class="t-name">岸本沙季</div><div class="t-handle">@saki__kishimoto</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">62K</div><div class="t-stat-l">Followers</div></div><div><div class="t-stat-n">Beauty</div><div class="t-stat-l">Category</div></div></div></div></div>
-          <div class="talent-card" data-tc><div class="talent-img">🌊</div><div class="talent-info"><div class="t-name">miu</div><div class="t-handle">@uruuril</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">68K</div><div class="t-stat-l">Followers</div></div><div><div class="t-stat-n">Lifestyle</div><div class="t-stat-l">Category</div></div></div></div></div>
-          <div class="talent-card" data-tc><div class="talent-img">🌺</div><div class="talent-info"><div class="t-name">小西莉々栞</div><div class="t-handle">@ririka_konishi</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">65K</div><div class="t-stat-l">Followers</div></div><div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div></div></div></div>
-          <div class="talent-card" data-tc><div class="talent-img">🎵</div><div class="talent-info"><div class="t-name">紗英</div><div class="t-handle">@saeeeoky</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">27K</div><div class="t-stat-l">Followers</div></div><div><div class="t-stat-n">Music</div><div class="t-stat-l">Category</div></div></div></div></div>
-          <div class="talent-card" data-tc><div class="talent-img">🔥</div><div class="talent-info"><div class="t-name">酒巻茉侑</div><div class="t-handle">@mkmyxi</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">25K</div><div class="t-stat-l">Followers</div></div><div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div></div></div></div>
+          <div class="talent-card" data-tc><div class="talent-img">🌸</div><div class="talent-info"><div class="t-name">桃佳</div><div class="t-handle">@moo_mo_k</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">215K</div><div class="t-stat-l">Followers</div></div></div></div></div>
+          <div class="talent-card" data-tc><div class="talent-img">✨</div><div class="talent-info"><div class="t-name">かんな</div><div class="t-handle">@k_r__ko</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">171K</div><div class="t-stat-l">Followers</div></div></div></div></div>
+          <div class="talent-card" data-tc><div class="talent-img">🌿</div><div class="talent-info"><div class="t-name">ゆい</div><div class="t-handle">@yui___12.8</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">184K</div><div class="t-stat-l">Followers</div></div></div></div></div>
+          <div class="talent-card" data-tc><div class="talent-img">🖤</div><div class="talent-info"><div class="t-name">乙</div><div class="t-handle">@_021miu</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">244K</div><div class="t-stat-l">Followers</div></div></div></div></div>
+          <div class="talent-card" data-tc><div class="talent-img">💙</div><div class="talent-info"><div class="t-name">岸本沙季</div><div class="t-handle">@saki__kishimoto</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">62K</div><div class="t-stat-l">Followers</div></div></div></div></div>
+          <div class="talent-card" data-tc><div class="talent-img">🌊</div><div class="talent-info"><div class="t-name">miu</div><div class="t-handle">@uruuril</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">68K</div><div class="t-stat-l">Followers</div></div></div></div></div>
+          <div class="talent-card" data-tc><div class="talent-img">🌺</div><div class="talent-info"><div class="t-name">小西莉々栞</div><div class="t-handle">@ririka_konishi</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">65K</div><div class="t-stat-l">Followers</div></div></div></div></div>
+          <div class="talent-card" data-tc><div class="talent-img">🎵</div><div class="talent-info"><div class="t-name">紗英</div><div class="t-handle">@saeeeoky</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">27K</div><div class="t-stat-l">Followers</div></div></div></div></div>
+          <div class="talent-card" data-tc><div class="talent-img">🔥</div><div class="talent-info"><div class="t-name">酒巻茉侑</div><div class="t-handle">@mkmyxi</div></div><div class="talent-detail"><div class="t-stats"><div><div class="t-stat-n">25K</div><div class="t-stat-l">Followers</div></div></div></div></div>
         </div>
       </div></div>
     </div>
   </section>
 
-  <!-- RECRUIT -->
   <section class="acc-section" id="recruit">
     <button class="acc-trigger" aria-expanded="false" data-panel="recruit-panel">
       <span class="acc-label">Recruit</span>
@@ -393,7 +350,6 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section class="acc-section" id="contact">
     <button class="acc-trigger" aria-expanded="false" data-panel="contact-panel">
       <span class="acc-label">Contact</span>
@@ -407,16 +363,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
             <div class="form-field"><label class="form-label">会社名</label><input type="text" class="form-input" placeholder="株式会社〇〇"></div>
           </div>
           <div class="form-field"><label class="form-label">メールアドレス</label><input type="email" class="form-input" placeholder="info@example.com"></div>
-          <div class="form-field">
-            <label class="form-label">お問い合わせ種別</label>
-            <select class="form-select">
-              <option>クリエイターマーケティング</option>
-              <option>タレントマネジメント</option>
-              <option>キャスティング</option>
-              <option>採用について</option>
-              <option>その他</option>
-            </select>
-          </div>
+          <div class="form-field"><label class="form-label">お問い合わせ種別</label><select class="form-select"><option>クリエイターマーケティング</option><option>タレントマネジメント</option><option>キャスティング</option><option>採用について</option><option>その他</option></select></div>
           <div class="form-field"><label class="form-label">内容</label><textarea class="form-textarea" placeholder="お問い合わせ内容をご記入ください"></textarea></div>
           <button type="submit" class="form-submit">Send Message →</button>
         </form>
@@ -433,6 +380,148 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </footer>
 
 <script>
+// ══ CANVAS ANIMATION ══
+(function(){
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  const LIME = '#C7FF4F';
+  const BG = '#0A0A0A';
+  let W, H, t = 0;
+
+  // パーティクル
+  const PARTICLES = [];
+  const N = 60;
+
+  function resize(){
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function initParticles(){
+    PARTICLES.length = 0;
+    for(let i=0;i<N;i++){
+      PARTICLES.push({
+        x: Math.random()*W, y: Math.random()*H,
+        vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.3,
+        size: Math.random()*1.5+.3,
+        alpha: Math.random()*.5+.1,
+        lime: Math.random()<.25,
+      });
+    }
+  }
+
+  function drawGrid(){
+    ctx.strokeStyle='rgba(247,245,240,0.025)';
+    ctx.lineWidth=1;
+    const step=Math.min(W,H)/8;
+    for(let x=0;x<W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    for(let y=0;y<H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+  }
+
+  function drawScanlines(){
+    for(let y=0;y<H;y+=4){
+      ctx.fillStyle='rgba(0,0,0,0.06)';
+      ctx.fillRect(0,y,W,1);
+    }
+  }
+
+  // グリッチライン
+  let glitchTimer=0;
+  function drawGlitch(){
+    glitchTimer++;
+    if(glitchTimer % 80 < 3){
+      const y=Math.random()*H;
+      const h=Math.random()*3+1;
+      const shift=Math.random()*20-10;
+      ctx.drawImage(canvas,shift,y,W-Math.abs(shift),h, shift>0?shift:0,y,W-Math.abs(shift),h);
+      // ライムグリーンのグリッチライン
+      ctx.fillStyle=LIME;
+      ctx.globalAlpha=Math.random()*.15;
+      ctx.fillRect(0,y+Math.random()*4,W,1);
+      ctx.globalAlpha=1;
+    }
+  }
+
+  // ノイズ（少量）
+  function drawNoise(){
+    const imageData=ctx.getImageData(0,0,W,H);
+    const data=imageData.data;
+    for(let i=0;i<2000;i++){
+      const px=Math.floor(Math.random()*W);
+      const py=Math.floor(Math.random()*H);
+      const idx=(py*W+px)*4;
+      const v=Math.random()*30;
+      data[idx]=v; data[idx+1]=v; data[idx+2]=v; data[idx+3]=30;
+    }
+    ctx.putImageData(imageData,0,0);
+  }
+
+  // ライムライン（水平）
+  function drawLimeLines(){
+    const num=3;
+    for(let i=0;i<num;i++){
+      const y=((t*0.3+i*H/num)%H);
+      const alpha=.04+Math.sin(t*.02+i)*0.02;
+      ctx.fillStyle=LIME;
+      ctx.globalAlpha=alpha;
+      ctx.fillRect(0,y,W,1);
+      ctx.globalAlpha=1;
+    }
+  }
+
+  // パーティクル描画
+  function drawParticles(){
+    PARTICLES.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle=p.lime?LIME:'rgba(247,245,240,1)';
+      ctx.globalAlpha=p.alpha;
+      ctx.fill();
+      ctx.globalAlpha=1;
+    });
+  }
+
+  // 大型テキスト（背景）
+  function drawBgText(){
+    ctx.save();
+    ctx.font='900 '+Math.min(W*.55,320)+'px Unbounded,sans-serif';
+    ctx.fillStyle='rgba(247,245,240,0.025)';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    // ゆっくり移動
+    const ox=Math.sin(t*.003)*20;
+    const oy=Math.cos(t*.002)*10;
+    ctx.fillText('GVA',W/2+ox,H/2+oy);
+    ctx.restore();
+  }
+
+  function frame(){
+    t++;
+    // 背景
+    ctx.fillStyle=BG;
+    ctx.fillRect(0,0,W,H);
+
+    drawGrid();
+    drawBgText();
+    drawLimeLines();
+    drawParticles();
+    drawScanlines();
+    drawGlitch();
+    drawNoise();
+
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('resize',()=>{resize();initParticles()});
+  resize();
+  initParticles();
+  frame();
+})();
+
+// ══ ACCORDION ══
 function openAcc(id){
   const panel=document.getElementById(id);
   const btn=document.querySelector('[data-panel="'+id+'"]');

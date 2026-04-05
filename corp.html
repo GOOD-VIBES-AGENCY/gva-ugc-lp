@@ -6,11 +6,13 @@
 <title>GOOD VIBES AGENCY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- Three.js -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#F7F5F0;--fg:#111111;--line:#D8D4CC;
-  --noise:#C7FF4F;--noise-dk:#9CC020;--ghost:#888880;--white:#FFFFFF;
+  --noise:#C7FF4F;--ghost:#888880;--white:#FFFFFF;
   --font-d:'Unbounded',sans-serif;--font-j:'Noto Sans JP',sans-serif;
   --pad:clamp(20px,5vw,72px);
 }
@@ -19,45 +21,36 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 
 /* ─ HEADER ─ */
 .header{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(247,245,240,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);z-index:200;gap:12px}
-.h-logo{flex-shrink:0;display:flex;align-items:center}
-.h-logo img{height:22px;max-width:160px;object-fit:contain;object-position:left}
+.h-logo{flex-shrink:0}
+.h-logo img{height:22px;max-width:160px;object-fit:contain;object-position:left;display:block}
 .h-nav{display:flex;gap:clamp(12px,2.5vw,36px);list-style:none;flex-shrink:0}
-.h-nav a{font-size:9px;font-weight:400;letter-spacing:.16em;color:var(--ghost);text-decoration:none;text-transform:uppercase;transition:color .2s;white-space:nowrap}
+.h-nav a{font-size:9px;font-weight:400;letter-spacing:.16em;color:var(--ghost);text-decoration:none;text-transform:uppercase;transition:color .2s}
 .h-nav a:hover{color:var(--fg)}
-.h-cta{flex-shrink:0;font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--white);background:var(--fg);text-decoration:none;text-transform:uppercase;padding:8px 16px;white-space:nowrap;transition:background .2s}
+.h-cta{flex-shrink:0;font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--white);background:var(--fg);text-decoration:none;text-transform:uppercase;padding:8px 16px;transition:background .2s}
 .h-cta:hover{background:#333}
 
 /* ─ HERO ─ */
 .hero{
   height:100svh;min-height:640px;
-  background:var(--fg);
-  display:grid;
-  grid-template-rows:1fr auto;
+  background:#0A0A0A;
+  display:grid;grid-template-rows:1fr auto;
   position:relative;overflow:hidden;
   padding-top:56px;
 }
-
-/* キャンバス動画 */
-#hero-canvas{
+/* Three.js canvas */
+#three-canvas{
   position:absolute;inset:0;
-  width:100%;height:100%;
+  width:100%!important;height:100%!important;
   z-index:0;
-  opacity:1;
 }
-
 /* ビネット */
 .hero-vignette{
   position:absolute;inset:0;z-index:2;
   background:
-    linear-gradient(to bottom,
-      rgba(17,17,17,.55) 0%,
-      rgba(17,17,17,.0) 30%,
-      rgba(17,17,17,.0) 55%,
-      rgba(17,17,17,.85) 100%
-    );
+    radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(10,10,10,.7) 100%),
+    linear-gradient(to bottom,rgba(10,10,10,.6) 0%,transparent 25%,transparent 65%,rgba(10,10,10,.9) 100%);
+  pointer-events:none;
 }
-
-/* コンテンツ（左下） */
 .hero-content{
   position:relative;z-index:3;
   display:grid;align-content:end;
@@ -65,8 +58,8 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 }
 .hero-eyebrow{
   font-size:10px;font-weight:400;letter-spacing:.4em;
-  color:var(--noise);text-transform:uppercase;
-  margin-bottom:clamp(12px,2vw,24px);
+  color:rgba(199,255,79,.7);text-transform:uppercase;
+  margin-bottom:clamp(10px,2vw,20px);
   opacity:0;animation:fadeUp .5s .15s both;
 }
 .hero-title{
@@ -77,32 +70,15 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
   margin-bottom:clamp(16px,2.5vw,36px);
 }
 .tl{display:block;transform:translateY(105%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards}
-.tl:nth-child(1){color:var(--bg);animation-delay:.1s}
+.tl:nth-child(1){color:#F7F5F0;animation-delay:.1s}
 .tl:nth-child(2){color:var(--noise);animation-delay:.22s}
-
-.hero-bottom{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  opacity:0;animation:fadeUp .6s .75s both;
-}
-.hero-sub{
-  font-size:clamp(9px,1.1vw,12px);font-weight:200;
-  letter-spacing:.22em;color:rgba(247,245,240,.4);
-  text-transform:uppercase;line-height:2;
-}
-.hero-scroll{
-  font-size:8px;letter-spacing:.3em;color:rgba(247,245,240,.3);
-  text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;
-}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;opacity:0;animation:fadeUp .6s .75s both}
+.hero-sub{font-size:clamp(9px,1.1vw,12px);font-weight:200;letter-spacing:.22em;color:rgba(247,245,240,.35);text-transform:uppercase;line-height:2}
+.hero-scroll{font-size:8px;letter-spacing:.3em;color:rgba(247,245,240,.25);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
 .scroll-bar{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--noise));animation:pulse 2s ease-in-out infinite}
-
-/* ティッカー */
-.hero-ticker{
-  position:relative;z-index:3;
-  border-top:1px solid rgba(247,245,240,.08);
-  padding:10px 0;overflow:hidden;display:flex;flex-shrink:0;
-}
-.ticker-track{display:flex;white-space:nowrap;animation:tick 26s linear infinite}
-.ticker-item{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(247,245,240,.18);padding:0 28px}
+.hero-ticker{position:relative;z-index:3;border-top:1px solid rgba(247,245,240,.07);padding:10px 0;overflow:hidden;display:flex;flex-shrink:0}
+.ticker-track{display:flex;white-space:nowrap;animation:tick 28s linear infinite}
+.ticker-item{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(247,245,240,.15);padding:0 28px}
 .ticker-item::after{content:'◆';color:var(--noise);margin-left:28px;font-size:7px}
 
 /* ─ ACCORDION ─ */
@@ -191,7 +167,6 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 .f-links a{font-size:9px;letter-spacing:.12em;color:var(--ghost);text-decoration:none;text-transform:uppercase}
 .f-copy{font-size:9px;letter-spacing:.08em;color:rgba(136,136,128,.45)}
 
-/* ANIMATIONS */
 @keyframes slideUp{to{transform:translateY(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -219,8 +194,8 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </header>
 
 <section class="hero">
-  <!-- キャンバス「動画」 -->
-  <canvas id="hero-canvas"></canvas>
+  <!-- Three.js 3Dロゴ -->
+  <canvas id="three-canvas"></canvas>
   <div class="hero-vignette"></div>
 
   <div class="hero-content">
@@ -258,7 +233,6 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </section>
 
 <main class="acc-root">
-
   <section class="acc-section" id="about">
     <button class="acc-trigger" aria-expanded="false" data-panel="about-panel">
       <span class="acc-label">About</span>
@@ -269,24 +243,12 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
         <div class="about-grid">
           <div>
             <h2 class="about-headline">カルチャーを、<br>動かす。</h2>
-            <p class="about-body">
-              GVAはブランドと文化をつなぐ会社だ。<br>
-              東京から世界へ、時代のノイズを鳴らし続ける。
-            </p>
+            <p class="about-body">GVAはブランドと文化をつなぐ会社だ。<br>東京から世界へ、時代のノイズを鳴らし続ける。</p>
           </div>
           <div class="about-nums">
-            <div class="about-num-row">
-              <div class="abn-n">10,000<span style="font-size:.4em;color:var(--ghost)">+</span></div>
-              <div class="abn-l">Talent Network</div>
-            </div>
-            <div class="about-num-row">
-              <div class="abn-n">500<span style="font-size:.4em;color:var(--ghost)">+</span></div>
-              <div class="abn-l">Projects Delivered</div>
-            </div>
-            <div class="about-num-row">
-              <div class="abn-n">100<span style="font-size:.4em;color:var(--ghost)">+</span></div>
-              <div class="abn-l">Brand Partners</div>
-            </div>
+            <div class="about-num-row"><div class="abn-n">10,000<span style="font-size:.4em;color:var(--ghost)">+</span></div><div class="abn-l">Talent Network</div></div>
+            <div class="about-num-row"><div class="abn-n">500<span style="font-size:.4em;color:var(--ghost)">+</span></div><div class="abn-l">Projects Delivered</div></div>
+            <div class="about-num-row"><div class="abn-n">100<span style="font-size:.4em;color:var(--ghost)">+</span></div><div class="abn-l">Brand Partners</div></div>
           </div>
         </div>
       </div></div>
@@ -370,7 +332,6 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
       </div></div>
     </div>
   </section>
-
 </main>
 
 <footer>
@@ -380,147 +341,125 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </footer>
 
 <script>
-
-// ══ CANVAS ANIMATION ══
+// ══ THREE.JS 3D LOGO ROTATION ══
 (function(){
-  const canvas = document.getElementById('hero-canvas');
-  const ctx = canvas.getContext('2d');
-  const LIME = '#C7FF4F';
-  const LIME_RGB = [199,255,79];
-  let W, H, t = 0;
+  const canvas = document.getElementById('three-canvas');
+  const hero = canvas.closest('.hero');
+  const W = ()=>hero.offsetWidth;
+  const H = ()=>hero.offsetHeight;
 
-  function resize(){
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(W(), H());
+  renderer.setClearColor(0x0A0A0A, 1);
 
-  // ─ ビーム (lime green sweeping lines) ─
-  const BEAMS = Array.from({length:6},(_,i)=>({
-    y: Math.random()*1.5,
-    speed: .0004 + Math.random()*.0006,
-    width: Math.random()*60+20,
-    alpha: Math.random()*.18+.08,
-    phase: i*(Math.PI*2/6),
-  }));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, W()/H(), 0.1, 100);
+  camera.position.set(0, 0, 5);
 
-  // ─ グリッチブロック ─
-  let glitchActive=0, glitchBlocks=[];
-  function triggerGlitch(){
-    glitchActive=12;
-    glitchBlocks=Array.from({length:5},()=>({
-      y:Math.random()*H,h:Math.random()*8+2,
-      shift:(Math.random()-.5)*60,
-      alpha:Math.random()*.5+.3,
-      lime:Math.random()<.4,
-    }));
-  }
+  // ─ ライト ─
+  const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+  scene.add(ambient);
+
+  // ライムグリーンのキーライト
+  const keyLight = new THREE.DirectionalLight(0xC7FF4F, 2.5);
+  keyLight.position.set(2, 3, 4);
+  scene.add(keyLight);
+
+  // 白のフィルライト
+  const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  fillLight.position.set(-3, -1, 2);
+  scene.add(fillLight);
+
+  // リムライト（ライムグリーン）
+  const rimLight = new THREE.DirectionalLight(0xC7FF4F, 1.5);
+  rimLight.position.set(0, -3, -3);
+  scene.add(rimLight);
+
+  // ─ GVAロゴを押し出した3Dオブジェクト（三角形マーク）─
+  // 三角形シェイプ（ロゴのシンボルマークを模倣）
+  const shape = new THREE.Shape();
+  // 上向き三角形（内側くり抜き）
+  const outer = 1.2;
+  const thick = 0.22;
+  // 外側三角形
+  shape.moveTo(0, outer);
+  shape.lineTo(-outer * 0.9, -outer * 0.6);
+  shape.lineTo(outer * 0.9, -outer * 0.6);
+  shape.closePath();
+  // 内側くり抜き
+  const hole = new THREE.Path();
+  const inner = outer - thick * 1.4;
+  hole.moveTo(0, inner * 0.85);
+  hole.lineTo(-inner * 0.72, -inner * 0.5);
+  hole.lineTo(inner * 0.72, -inner * 0.5);
+  hole.closePath();
+  shape.holes.push(hole);
+
+  const extrudeSettings = {depth:0.28, bevelEnabled:true, bevelThickness:0.04, bevelSize:0.03, bevelSegments:4};
+  const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+  geometry.center();
+
+  // マテリアル：メタリック + ライムグリーン発光
+  const material = new THREE.MeshStandardMaterial({
+    color: 0xC7FF4F,
+    emissive: 0x4A6000,
+    emissiveIntensity: 0.3,
+    metalness: 0.7,
+    roughness: 0.2,
+  });
+
+  const logo = new THREE.Mesh(geometry, material);
+  logo.position.set(1.2, 0.4, 0); // 右上寄り
+  logo.scale.setScalar(0.85);
+  scene.add(logo);
+
+  // ─ グリッド平面（背景） ─
+  const gridHelper = new THREE.GridHelper(20, 20, 0x222222, 0x1a1a1a);
+  gridHelper.position.y = -2.5;
+  gridHelper.rotation.x = Math.PI * 0.05;
+  scene.add(gridHelper);
 
   // ─ パーティクル ─
-  const PARTS=Array.from({length:80},()=>reset_part({}));
-  function reset_part(p){
-    p.x=Math.random()*1; p.y=Math.random()*1;
-    p.vx=(Math.random()-.5)*.0015; p.vy=(Math.random()-.5)*.001;
-    p.r=Math.random()*.008+.002;
-    p.alpha=Math.random()*.4+.05;
-    p.lime=Math.random()<.3;
-    return p;
+  const partGeo = new THREE.BufferGeometry();
+  const partCount = 300;
+  const positions = new Float32Array(partCount * 3);
+  for(let i=0;i<partCount*3;i++) positions[i]=(Math.random()-.5)*12;
+  partGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  const partMat = new THREE.PointsMaterial({color:0xC7FF4F, size:0.02, transparent:true, opacity:.4});
+  const particles = new THREE.Points(partGeo, partMat);
+  scene.add(particles);
+
+  // ─ リサイズ ─
+  window.addEventListener('resize',()=>{
+    renderer.setSize(W(),H());
+    camera.aspect=W()/H();
+    camera.updateProjectionMatrix();
+  });
+
+  // ─ アニメーションループ ─
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.01;
+
+    // ロゴ回転（Y軸メイン）
+    logo.rotation.y = t * 0.6;
+    logo.rotation.x = Math.sin(t * 0.3) * 0.2;
+    // ゆらぎ
+    logo.position.y = 0.4 + Math.sin(t * 0.5) * 0.08;
+
+    // ライトもゆっくり回る
+    keyLight.position.x = Math.sin(t * 0.4) * 4;
+    keyLight.position.z = Math.cos(t * 0.4) * 4;
+
+    // パーティクル回転
+    particles.rotation.y = t * 0.03;
+    particles.rotation.x = t * 0.01;
+
+    renderer.render(scene, camera);
   }
-
-  function frame(){
-    t++;
-    ctx.fillStyle='#0A0A0A'; ctx.fillRect(0,0,W,H);
-
-    // ── グリッド ──
-    ctx.strokeStyle='rgba(247,245,240,0.04)'; ctx.lineWidth=1;
-    const step=Math.min(W,H)/10;
-    for(let x=0;x<W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
-    for(let y=0;y<H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
-
-    // ── 背景GVAテキスト ──
-    ctx.save();
-    const fs=Math.min(W*.6,340);
-    ctx.font='900 '+fs+'px Unbounded,sans-serif';
-    ctx.fillStyle='rgba(199,255,79,0.035)';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('GVA',W/2,H*.48);
-    ctx.restore();
-
-    // ── ライムグリーン ビーム ──
-    BEAMS.forEach(b=>{
-      b.y += b.speed;
-      if(b.y>1.5) b.y=-0.5;
-      const yPos = b.y * H;
-      const grad = ctx.createLinearGradient(0,yPos-b.width,0,yPos+b.width);
-      grad.addColorStop(0,'rgba(199,255,79,0)');
-      grad.addColorStop(.5,`rgba(199,255,79,${b.alpha})`);
-      grad.addColorStop(1,'rgba(199,255,79,0)');
-      ctx.fillStyle=grad;
-      ctx.fillRect(0,yPos-b.width,W,b.width*2);
-    });
-
-    // ── パーティクル ──
-    PARTS.forEach(p=>{
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0||p.x>1||p.y<0||p.y>1) reset_part(p);
-      ctx.beginPath();
-      ctx.arc(p.x*W,p.y*H,p.r*Math.min(W,H),0,Math.PI*2);
-      ctx.fillStyle=p.lime?LIME:'rgba(247,245,240,1)';
-      ctx.globalAlpha=p.alpha;
-      ctx.fill();
-      ctx.globalAlpha=1;
-    });
-
-    // ── ライムの縦ライン ──
-    for(let i=0;i<3;i++){
-      const x=((t*.5+i*(W/3))%W);
-      ctx.fillStyle=LIME;
-      ctx.globalAlpha=.06+Math.sin(t*.03+i)*0.03;
-      ctx.fillRect(x,0,1,H);
-      ctx.globalAlpha=1;
-    }
-
-    // ── グリッチ ──
-    if(t%70===0) triggerGlitch();
-    if(glitchActive>0){
-      glitchActive--;
-      glitchBlocks.forEach(b=>{
-        ctx.save();
-        if(b.lime){
-          ctx.fillStyle=LIME;
-          ctx.globalAlpha=b.alpha*.25;
-          ctx.fillRect(0,b.y,W,b.h);
-        }
-        // ピクセルシフト
-        ctx.globalAlpha=b.alpha*.6;
-        ctx.drawImage(canvas,0,b.y,W,b.h, b.shift,b.y,W,b.h);
-        // RGB分離
-        ctx.fillStyle='rgba(255,0,0,0.06)'; ctx.fillRect(-6,b.y,W,b.h);
-        ctx.fillStyle='rgba(0,255,200,0.06)'; ctx.fillRect(6,b.y,W,b.h);
-        ctx.restore();
-      });
-    }
-
-    // ── スキャンライン ──
-    for(let y=0;y<H;y+=3){
-      ctx.fillStyle='rgba(0,0,0,0.06)'; ctx.fillRect(0,y,W,1);
-    }
-
-    // ── ノイズ(少量) ──
-    if(t%2===0){
-      const id=ctx.getImageData(0,0,W,H), d=id.data;
-      for(let i=0;i<600;i++){
-        const px=Math.floor(Math.random()*W), py=Math.floor(Math.random()*H);
-        const idx=(py*W+px)*4, v=Math.random()*40;
-        d[idx]=v;d[idx+1]=v;d[idx+2]=v;d[idx+3]=25;
-      }
-      ctx.putImageData(id,0,0);
-    }
-
-    requestAnimationFrame(frame);
-  }
-
-  window.addEventListener('resize',resize);
-  resize(); frame();
+  animate();
 })();
 
 // ══ ACCORDION ══

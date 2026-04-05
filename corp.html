@@ -3,266 +3,483 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GOOD VIBES AGENCY — MAKE NOISE.</title>
+<title>GOOD VIBES AGENCY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --void:#0A0A0A; --noise:#C7FF4F; --air:#F5F5F0;
-  --ash:#1A1A1A; --smog:#2E2E2E; --ghost:#6B6B6B;
-  --noise-dim:#8FB832; --noise-glow:rgba(199,255,79,0.12);
-  --font-d:'Unbounded',sans-serif; --font-j:'Noto Sans JP',sans-serif;
+  --bg:#F7F5F0;
+  --fg:#111111;
+  --line:#D8D4CC;
+  --noise:#C7FF4F;
+  --noise-dk:#9CC020;
+  --ghost:#888880;
+  --white:#FFFFFF;
+  --font-d:'Unbounded',sans-serif;
+  --font-j:'Noto Sans JP',sans-serif;
+  --pad:clamp(20px,5vw,72px);
 }
 html{scroll-behavior:smooth}
-body{background:var(--void);color:var(--air);font-family:var(--font-d);overflow-x:hidden;cursor:none}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* CURSOR */
-.cursor{position:fixed;width:10px;height:10px;background:var(--noise);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:difference}
-.cursor.big{width:36px;height:36px}
+/* ─ HEADER ─ */
+.header{position:fixed;top:0;left:0;right:0;height:60px;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);z-index:200}
+.h-logo{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--fg)}
+.h-nav{display:flex;gap:clamp(16px,3vw,40px);list-style:none}
+.h-nav a{font-size:9px;font-weight:400;letter-spacing:.18em;color:var(--ghost);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.h-nav a:hover{color:var(--fg)}
+.h-cta{font-size:9px;font-weight:700;letter-spacing:.15em;color:var(--white);background:var(--fg);text-decoration:none;text-transform:uppercase;padding:9px 18px;transition:background .2s}
+.h-cta:hover{background:#333}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,80px);z-index:100;mix-blend-mode:difference}
-.nav-logo{font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--air);text-decoration:none;text-transform:uppercase}
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{font-size:10px;font-weight:400;letter-spacing:.18em;color:var(--ghost);text-decoration:none;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--noise)}
-.nav-cta{font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--void);background:var(--noise);text-decoration:none;text-transform:uppercase;padding:10px 20px;transition:background .2s}
-.nav-cta:hover{background:var(--noise-dim)}
-
-/* HERO */
-.hero{position:relative;height:100svh;min-height:700px;display:grid;grid-template-rows:1fr auto;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 65% 40%,rgba(199,255,79,.06) 0%,transparent 60%),var(--void)}
-.hero-noise{position:absolute;inset:0;z-index:1;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");background-size:200px}
-.hero-vignette{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(10,10,10,.4) 0%,transparent 35%,transparent 55%,rgba(10,10,10,.95) 100%)}
-.hero-content{position:relative;z-index:3;display:grid;align-content:end;padding:0 clamp(24px,5vw,80px) clamp(48px,6vw,96px);gap:0}
-.hero-title{font-size:clamp(72px,15vw,200px);font-weight:900;line-height:.88;letter-spacing:-.03em;text-transform:uppercase;overflow:hidden}
-.tl{display:block;transform:translateY(105%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards}
+/* ─ HERO ─ */
+.hero{height:100svh;min-height:600px;padding-top:60px;background:var(--fg);display:flex;flex-direction:column;justify-content:flex-end;padding-left:var(--pad);padding-right:var(--pad);padding-bottom:clamp(32px,5vw,72px);position:relative;overflow:hidden}
+/* グリッド装飾ライン */
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(247,245,240,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(247,245,240,.03) 1px,transparent 1px);background-size:80px 80px}
+.hero-tagline{font-size:10px;font-weight:400;letter-spacing:.35em;color:var(--ghost);text-transform:uppercase;margin-bottom:clamp(16px,3vw,32px);opacity:0;animation:fadeUp .6s .2s both}
+.hero-title{font-size:clamp(60px,14vw,180px);font-weight:900;line-height:.88;letter-spacing:-.03em;color:var(--bg);text-transform:uppercase;overflow:hidden}
+.tl{display:block;transform:translateY(100%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards}
 .tl:nth-child(1){animation-delay:.1s}
 .tl:nth-child(2){color:var(--noise);animation-delay:.25s}
-.hero-meta{display:flex;align-items:flex-end;justify-content:space-between;margin-top:clamp(16px,2.5vw,36px);opacity:0;transform:translateY(16px);animation:fadeUp .7s ease .7s forwards}
-.hero-sub{font-size:clamp(10px,1.1vw,13px);font-weight:200;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase;line-height:1.9}
-.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:8px;font-weight:400;letter-spacing:.3em;color:var(--ghost);text-transform:uppercase}
-.hero-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--noise));animation:pulse 2s ease-in-out infinite}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;margin-top:clamp(20px,3vw,48px);opacity:0;animation:fadeUp .6s .7s both}
+.hero-desc{font-size:clamp(10px,1.1vw,12px);font-weight:200;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase;line-height:2}
+.hero-scroll{font-size:8px;letter-spacing:.3em;color:var(--ghost);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-bar{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--noise));animation:pulse 2s ease-in-out infinite}
 
-/* TICKER */
-.ticker{position:relative;z-index:3;border-top:1px solid var(--smog);padding:11px 0;overflow:hidden;display:flex}
-.ticker-track{display:flex;white-space:nowrap;animation:tick 22s linear infinite}
-.ticker-item{font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--ghost);padding:0 40px}
-.ticker-item::after{content:'◆';color:var(--noise);margin-left:40px}
+/* ─ ACCORDION SECTION ─ */
+.acc-root{border-top:1px solid var(--line)}
 
-/* NUMBERS */
-.numbers{background:var(--ash);border-top:1px solid var(--smog);padding:clamp(48px,7vw,100px) clamp(24px,5vw,80px)}
-.numbers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.num-card{padding:clamp(32px,4vw,56px) clamp(24px,3vw,40px);border:1px solid var(--smog)}
-.num-n{font-size:clamp(48px,7vw,96px);font-weight:900;color:var(--noise);line-height:1;letter-spacing:-.03em}
-.num-l{font-size:10px;font-weight:400;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase;margin-top:8px}
+.acc-section{border-bottom:1px solid var(--line)}
 
-/* SERVICE */
-.service{padding:clamp(64px,8vw,120px) clamp(24px,5vw,80px);border-top:1px solid var(--smog)}
-.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:clamp(40px,5vw,72px)}
-.section-tag{font-size:10px;font-weight:400;letter-spacing:.3em;color:var(--ghost);text-transform:uppercase}
-.section-title{font-size:clamp(32px,5vw,64px);font-weight:900;letter-spacing:-.02em}
-.service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
-.sv-card{padding:clamp(28px,3.5vw,48px);border:1px solid var(--smog);position:relative;overflow:hidden;transition:border-color .25s}
-.sv-card:hover{border-color:var(--noise)}
-.sv-card::before{content:'';position:absolute;top:0;left:0;width:0;height:3px;background:var(--noise);transition:width .3s ease}
-.sv-card:hover::before{width:100%}
-.sv-num{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--ghost);margin-bottom:20px}
-.sv-name{font-size:clamp(18px,2.5vw,28px);font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
-.sv-copy{font-size:12px;font-weight:200;letter-spacing:.12em;color:var(--ghost);text-transform:uppercase;margin-bottom:20px}
-.sv-desc{font-size:13px;font-weight:300;color:rgba(245,245,240,.55);line-height:1.9;font-family:var(--font-j)}
+.acc-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:clamp(18px,2.5vw,28px) var(--pad);background:none;border:none;cursor:pointer;font-family:var(--font-d);text-align:left;transition:background .2s}
+.acc-trigger:hover{background:rgba(0,0,0,.02)}
+.acc-trigger[aria-expanded="true"]{background:var(--fg);color:var(--bg)}
+.acc-trigger[aria-expanded="true"] .acc-icon{transform:rotate(45deg);color:var(--noise)}
 
-/* ABOUT */
-.about{background:var(--noise);padding:clamp(64px,8vw,120px) clamp(24px,5vw,80px)}
-.about-inner{max-width:900px}
-.about-tag{font-size:10px;font-weight:700;letter-spacing:.3em;color:rgba(10,10,10,.5);text-transform:uppercase;margin-bottom:28px}
-.about-headline{font-size:clamp(36px,6vw,80px);font-weight:900;letter-spacing:-.02em;color:var(--void);line-height:1.05;margin-bottom:32px}
-.about-body{font-size:clamp(14px,1.5vw,18px);font-weight:400;line-height:1.9;color:rgba(10,10,10,.7);font-family:var(--font-j);max-width:640px}
+.acc-label{font-size:clamp(14px,2.5vw,22px);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.acc-meta{display:flex;align-items:center;gap:16px}
+.acc-num{font-size:10px;font-weight:400;letter-spacing:.2em;color:var(--ghost)}
+.acc-icon{font-size:22px;font-weight:200;transition:transform .3s ease;line-height:1;color:var(--ghost)}
+.acc-trigger[aria-expanded="true"] .acc-num{color:var(--ghost)}
 
-/* RECRUIT */
-.recruit{padding:clamp(64px,8vw,120px) clamp(24px,5vw,80px);border-top:1px solid var(--smog);display:flex;align-items:center;justify-content:space-between;gap:40px}
-.recruit-title{font-size:clamp(40px,7vw,100px);font-weight:900;letter-spacing:-.03em;line-height:.9}
-.recruit-cta{flex-shrink:0;display:inline-block;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--void);background:var(--noise);padding:18px 36px;text-decoration:none;transition:background .2s}
-.recruit-cta:hover{background:var(--noise-dim)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.acc-panel.open{grid-template-rows:1fr}
+.acc-inner{overflow:hidden}
+.acc-content{padding:clamp(24px,4vw,56px) var(--pad) clamp(40px,5vw,72px)}
 
-/* FOOTER */
-footer{border-top:1px solid var(--smog);padding:32px clamp(24px,5vw,80px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.footer-logo{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase}
-.footer-copy{font-size:10px;letter-spacing:.1em;color:rgba(107,107,107,.5)}
-.footer-links{display:flex;gap:24px}
-.footer-links a{font-size:10px;letter-spacing:.15em;color:var(--ghost);text-decoration:none;text-transform:uppercase}
+/* ─ ABOUT ─ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);align-items:start}
+.about-headline{font-size:clamp(28px,4vw,52px);font-weight:900;letter-spacing:-.02em;line-height:1.1;margin-bottom:24px}
+.about-body{font-size:14px;font-weight:300;line-height:2;color:#444;font-family:var(--font-j)}
+.about-nums{display:flex;flex-direction:column;gap:2px}
+.about-num-row{border:1px solid var(--line);padding:20px 24px;display:flex;justify-content:space-between;align-items:baseline}
+.abn-n{font-size:clamp(32px,5vw,56px);font-weight:900;letter-spacing:-.02em;color:var(--fg)}
+.abn-l{font-size:9px;font-weight:400;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase}
 
-/* ANIMATIONS */
+/* ─ SERVICE ─ */
+.sv-list{display:flex;flex-direction:column;gap:0}
+.sv-item{border:1px solid var(--line);border-bottom:0;padding:clamp(20px,3vw,32px) clamp(20px,3vw,40px);display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:start;cursor:pointer;transition:background .2s}
+.sv-item:last-child{border-bottom:1px solid var(--line)}
+.sv-item:hover{background:rgba(0,0,0,.02)}
+.sv-item.active{background:var(--noise)}
+.sv-n{font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--ghost)}
+.sv-item.active .sv-n{color:rgba(0,0,0,.4)}
+.sv-name{font-size:clamp(15px,2.2vw,22px);font-weight:700;letter-spacing:-.01em}
+.sv-copy{font-size:11px;font-weight:400;letter-spacing:.12em;color:var(--ghost);text-transform:uppercase;margin-top:4px}
+.sv-item.active .sv-copy{color:rgba(0,0,0,.5)}
+.sv-desc{font-size:13px;font-weight:300;line-height:1.9;color:#555;font-family:var(--font-j);grid-column:2;margin-top:12px;display:none}
+.sv-item.active .sv-desc{display:block;color:rgba(0,0,0,.65)}
+.sv-arrow{font-size:18px;color:var(--ghost);transition:transform .2s}
+.sv-item.active .sv-arrow{transform:rotate(45deg);color:rgba(0,0,0,.5)}
+
+/* ─ TALENT ─ */
+.talent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:2px}
+.talent-card{border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:border-color .2s}
+.talent-card:hover{border-color:var(--fg)}
+.talent-card.open{border-color:var(--fg);grid-column:1/-1}
+.talent-img{aspect-ratio:3/4;background:var(--line);overflow:hidden}
+.talent-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.talent-card:hover .talent-img img{transform:scale(1.04)}
+.talent-info{padding:14px 16px}
+.t-name{font-size:13px;font-weight:700;margin-bottom:2px}
+.t-handle{font-size:10px;letter-spacing:.1em;color:var(--ghost)}
+.talent-detail{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s}
+.talent-card.open .talent-detail{max-height:200px;padding:0 16px 20px}
+.t-stats{display:flex;gap:24px;margin-top:8px}
+.t-stat-n{font-size:18px;font-weight:700}
+.t-stat-l{font-size:9px;letter-spacing:.15em;color:var(--ghost);text-transform:uppercase;margin-top:2px}
+
+/* ─ RECRUIT ─ */
+.recruit-hero{font-size:clamp(36px,7vw,96px);font-weight:900;letter-spacing:-.03em;line-height:.9;margin-bottom:clamp(28px,4vw,56px)}
+.recruit-hero span{color:var(--noise);-webkit-text-stroke:2px var(--fg)}
+.rec-items{display:flex;flex-direction:column;gap:0;margin-bottom:clamp(28px,4vw,48px)}
+.rec-item{border:1px solid var(--line);border-bottom:0;padding:clamp(16px,2.5vw,24px) clamp(20px,3vw,32px);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s}
+.rec-item:last-child{border-bottom:1px solid var(--line)}
+.rec-item:hover{background:rgba(0,0,0,.03)}
+.rec-title{font-size:clamp(13px,1.8vw,18px);font-weight:700}
+.rec-arr{font-size:20px;color:var(--ghost)}
+.recruit-cta{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);background:var(--fg);text-decoration:none;padding:16px 32px;transition:background .2s}
+.recruit-cta:hover{background:#333}
+
+/* ─ CONTACT ─ */
+.contact-form{display:grid;gap:16px;max-width:640px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-field{display:flex;flex-direction:column;gap:8px}
+.form-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ghost)}
+.form-input,.form-textarea,.form-select{width:100%;padding:12px 16px;border:1px solid var(--line);background:var(--white);font-family:var(--font-j);font-size:14px;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--fg)}
+.form-textarea{resize:vertical;min-height:120px}
+.form-submit{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);background:var(--fg);border:none;padding:16px 32px;cursor:pointer;font-family:var(--font-d);transition:background .2s;width:fit-content}
+.form-submit:hover{background:#333}
+
+/* ─ FOOTER ─ */
+footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.f-logo{font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase}
+.f-links{display:flex;gap:20px}
+.f-links a{font-size:9px;letter-spacing:.15em;color:var(--ghost);text-decoration:none;text-transform:uppercase}
+.f-copy{font-size:9px;letter-spacing:.1em;color:rgba(136,136,128,.5)}
+
+/* ─ ANIMATIONS ─ */
 @keyframes slideUp{to{transform:translateY(0)}}
-@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .nav-links{display:none}
-  .numbers-grid{grid-template-columns:1fr}
-  .service-grid{grid-template-columns:1fr}
-  .recruit{flex-direction:column;align-items:flex-start}
-  footer{flex-direction:column;align-items:flex-start}
+/* ─ RESPONSIVE ─ */
+@media(max-width:680px){
+  .h-nav{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .talent-grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-
-<nav>
-  <a href="/" class="nav-logo">Good Vibes Agency</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#service">Service</a></li>
-    <li><a href="/talent">Talent</a></li>
-    <li><a href="#recruit">Recruit</a></li>
+<!-- HEADER -->
+<header class="header">
+  <a href="/" class="h-logo">Good Vibes Agency</a>
+  <ul class="h-nav">
+    <li><a href="#" data-acc="about">About</a></li>
+    <li><a href="#" data-acc="service">Service</a></li>
+    <li><a href="#" data-acc="talent">Talent</a></li>
+    <li><a href="#" data-acc="recruit">Recruit</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Contact</a>
-</nav>
+  <a href="#" class="h-cta" data-acc="contact">Contact</a>
+</header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-noise"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-content">
-    <h1 class="hero-title" aria-label="MAKE NOISE.">
-      <span class="tl">MAKE</span>
-      <span class="tl">NOISE.</span>
-    </h1>
-    <div class="hero-meta">
-      <p class="hero-sub">
-        We don't follow culture.<br>
-        We build it, amplify it,<br>
-        and export it globally.
-      </p>
-      <div class="hero-scroll">
-        <div class="hero-scroll-line"></div>
-        Scroll
+  <p class="hero-tagline">Tokyo — Good Vibes Agency</p>
+  <h1 class="hero-title" aria-label="MAKE NOISE.">
+    <span class="tl">MAKE</span>
+    <span class="tl">NOISE.</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      We build culture.<br>
+      From Tokyo to the world.
+    </p>
+    <div class="hero-scroll">
+      <div class="scroll-bar"></div>
+      Scroll
+    </div>
+  </div>
+</section>
+
+<!-- ACCORDION ROOT -->
+<main class="acc-root">
+
+  <!-- ABOUT -->
+  <section class="acc-section" id="about">
+    <button class="acc-trigger" aria-expanded="false" data-panel="about-panel">
+      <span class="acc-label">About</span>
+      <div class="acc-meta">
+        <span class="acc-num">01</span>
+        <span class="acc-icon">+</span>
+      </div>
+    </button>
+    <div class="acc-panel" id="about-panel" role="region">
+      <div class="acc-inner">
+        <div class="acc-content">
+          <div class="about-grid">
+            <div>
+              <h2 class="about-headline">ノイズが、<br>歴史になる。</h2>
+              <p class="about-body">
+                インフルエンサーで終わるな。GVAは才能を文化に変え、日本から世界へ届ける会社だ。タレントとブランドをつなぐことで、時代を動かすカルチャーを生み出す。
+              </p>
+            </div>
+            <div class="about-nums">
+              <div class="about-num-row">
+                <div>
+                  <div class="abn-n">300<span style="font-size:.5em;color:var(--ghost)">+</span></div>
+                  <div class="abn-l">Talent Network</div>
+                </div>
+              </div>
+              <div class="about-num-row">
+                <div>
+                  <div class="abn-n">500<span style="font-size:.5em;color:var(--ghost)">+</span></div>
+                  <div class="abn-l">Campaigns</div>
+                </div>
+              </div>
+              <div class="about-num-row">
+                <div>
+                  <div class="abn-n">5B<span style="font-size:.5em;color:var(--ghost)">+</span></div>
+                  <div class="abn-l">Total Reach</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="ticker">
-    <div class="ticker-track">
-      <span class="ticker-item">Influencer Marketing</span>
-      <span class="ticker-item">Talent Management</span>
-      <span class="ticker-item">Creative Direction</span>
-      <span class="ticker-item">Brand Strategy</span>
-      <span class="ticker-item">Casting</span>
-      <span class="ticker-item">Social Media</span>
-      <span class="ticker-item">Influencer Marketing</span>
-      <span class="ticker-item">Talent Management</span>
-      <span class="ticker-item">Creative Direction</span>
-      <span class="ticker-item">Brand Strategy</span>
-      <span class="ticker-item">Casting</span>
-      <span class="ticker-item">Social Media</span>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- NUMBERS -->
-<section class="numbers">
-  <div class="numbers-grid">
-    <div class="num-card reveal">
-      <div class="num-n">300<span style="font-size:.5em;color:var(--ghost)">+</span></div>
-      <div class="num-l">Talent Network</div>
+  <!-- SERVICE -->
+  <section class="acc-section" id="service">
+    <button class="acc-trigger" aria-expanded="false" data-panel="service-panel">
+      <span class="acc-label">Service</span>
+      <div class="acc-meta">
+        <span class="acc-num">02</span>
+        <span class="acc-icon">+</span>
+      </div>
+    </button>
+    <div class="acc-panel" id="service-panel" role="region">
+      <div class="acc-inner">
+        <div class="acc-content">
+          <div class="sv-list">
+            <div class="sv-item" data-sv>
+              <div class="sv-n">01</div>
+              <div>
+                <div class="sv-name">Influencer Marketing</div>
+                <div class="sv-copy">Campaigns that move culture.</div>
+                <div class="sv-desc">インフルエンサーキャスティングから施策設計・進行・レポートまで一気通貫でサポート。</div>
+              </div>
+              <span class="sv-arrow">+</span>
+            </div>
+            <div class="sv-item" data-sv>
+              <div class="sv-n">02</div>
+              <div>
+                <div class="sv-name">Talent Management</div>
+                <div class="sv-copy">We build iconic careers.</div>
+                <div class="sv-desc">所属タレントの案件管理・マネジメント・ブランディングを担当。</div>
+              </div>
+              <span class="sv-arrow">+</span>
+            </div>
+            <div class="sv-item" data-sv>
+              <div class="sv-n">03</div>
+              <div>
+                <div class="sv-name">Casting</div>
+                <div class="sv-copy">The right face, always.</div>
+                <div class="sv-desc">タレント・インフルエンサー・モデルなど、目的に合った人材のキャスティングを提供。</div>
+              </div>
+              <span class="sv-arrow">+</span>
+            </div>
+            <div class="sv-item" data-sv>
+              <div class="sv-n">04</div>
+              <div>
+                <div class="sv-name">Digital Marketing</div>
+                <div class="sv-copy">Content that breaks feeds.</div>
+                <div class="sv-desc">SNS運用代行、クリエイティブ制作、コンテンツ制作などデジタルPR全般を支援。</div>
+              </div>
+              <span class="sv-arrow">+</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="num-card reveal">
-      <div class="num-n">500<span style="font-size:.5em;color:var(--ghost)">+</span></div>
-      <div class="num-l">Campaigns Delivered</div>
-    </div>
-    <div class="num-card reveal">
-      <div class="num-n">5B<span style="font-size:.5em;color:var(--ghost)">+</span></div>
-      <div class="num-l">Total Reach</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- SERVICE -->
-<section class="service" id="service">
-  <div class="section-header">
-    <span class="section-tag">What We Do</span>
-    <h2 class="section-title">Service</h2>
-  </div>
-  <div class="service-grid">
-    <div class="sv-card reveal">
-      <div class="sv-num">01</div>
-      <div class="sv-name">Influencer Marketing</div>
-      <div class="sv-copy">Campaigns that move culture.</div>
-      <div class="sv-desc">インフルエンサーキャスティングから施策設計・進行・レポートまで一気通貫でサポート。</div>
+  <!-- TALENT -->
+  <section class="acc-section" id="talent">
+    <button class="acc-trigger" aria-expanded="false" data-panel="talent-panel">
+      <span class="acc-label">Talent</span>
+      <div class="acc-meta">
+        <span class="acc-num">03</span>
+        <span class="acc-icon">+</span>
+      </div>
+    </button>
+    <div class="acc-panel" id="talent-panel" role="region">
+      <div class="acc-inner">
+        <div class="acc-content">
+          <div class="talent-grid">
+            <div class="talent-card" data-tc>
+              <div class="talent-img" style="background:#e8e4dc"></div>
+              <div class="talent-info"><div class="t-name">桃佳</div><div class="t-handle">@moo_mo_k</div></div>
+              <div class="talent-detail">
+                <div class="t-stats">
+                  <div><div class="t-stat-n">215K</div><div class="t-stat-l">Followers</div></div>
+                  <div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="talent-card" data-tc>
+              <div class="talent-img" style="background:#dce4e8"></div>
+              <div class="talent-info"><div class="t-name">かんな</div><div class="t-handle">@k_r__ko</div></div>
+              <div class="talent-detail">
+                <div class="t-stats">
+                  <div><div class="t-stat-n">170K</div><div class="t-stat-l">Followers</div></div>
+                  <div><div class="t-stat-n">Lifestyle</div><div class="t-stat-l">Category</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="talent-card" data-tc>
+              <div class="talent-img" style="background:#dce8dc"></div>
+              <div class="talent-info"><div class="t-name">ゆい</div><div class="t-handle">@yui___12.8</div></div>
+              <div class="talent-detail">
+                <div class="t-stats">
+                  <div><div class="t-stat-n">184K</div><div class="t-stat-l">Followers</div></div>
+                  <div><div class="t-stat-n">Beauty</div><div class="t-stat-l">Category</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="talent-card" data-tc>
+              <div class="talent-img" style="background:#e8dce8"></div>
+              <div class="talent-info"><div class="t-name">乙</div><div class="t-handle">@_021miu</div></div>
+              <div class="talent-detail">
+                <div class="t-stats">
+                  <div><div class="t-stat-n">243K</div><div class="t-stat-l">Followers</div></div>
+                  <div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="sv-card reveal">
-      <div class="sv-num">02</div>
-      <div class="sv-name">Talent Management</div>
-      <div class="sv-copy">We build iconic careers.</div>
-      <div class="sv-desc">所属タレントの案件管理・マネジメント・ブランディングを担当。</div>
-    </div>
-    <div class="sv-card reveal">
-      <div class="sv-num">03</div>
-      <div class="sv-name">Casting</div>
-      <div class="sv-copy">The right face, always.</div>
-      <div class="sv-desc">タレント・インフルエンサー・モデルなど、目的に合った人材のキャスティングを提供。</div>
-    </div>
-    <div class="sv-card reveal">
-      <div class="sv-num">04</div>
-      <div class="sv-name">Digital Marketing</div>
-      <div class="sv-copy">Content that breaks feeds.</div>
-      <div class="sv-desc">SNS運用代行、クリエイティブ制作、コンテンツ制作などデジタルPR全般を支援。</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-inner">
-    <div class="about-tag">About GVA</div>
-    <h2 class="about-headline reveal">ノイズが、<br>歴史になる。</h2>
-    <p class="about-body reveal">インフルエンサーで終わるな。GVAは才能を文化に変え、日本から世界へ届ける会社だ。</p>
-  </div>
-</section>
+  <!-- RECRUIT -->
+  <section class="acc-section" id="recruit">
+    <button class="acc-trigger" aria-expanded="false" data-panel="recruit-panel">
+      <span class="acc-label">Recruit</span>
+      <div class="acc-meta">
+        <span class="acc-num">04</span>
+        <span class="acc-icon">+</span>
+      </div>
+    </button>
+    <div class="acc-panel" id="recruit-panel" role="region">
+      <div class="acc-inner">
+        <div class="acc-content">
+          <h2 class="recruit-hero">MAKE NOISE<br><span>WITH US.</span></h2>
+          <div class="rec-items">
+            <div class="rec-item"><span class="rec-title">タレントマネージャー</span><span class="rec-arr">→</span></div>
+            <div class="rec-item"><span class="rec-title">PRプランナー</span><span class="rec-arr">→</span></div>
+            <div class="rec-item"><span class="rec-title">インターン</span><span class="rec-arr">→</span></div>
+          </div>
+          <a href="#contact" class="recruit-cta" data-acc="contact">Join Us →</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- RECRUIT -->
-<section class="recruit" id="recruit">
-  <h2 class="recruit-title reveal">
-    MAKE<br>
-    <span style="color:var(--noise)">NOISE</span><br>
-    WITH US.
-  </h2>
-  <a href="#contact" class="recruit-cta">Join Us →</a>
-</section>
+  <!-- CONTACT -->
+  <section class="acc-section" id="contact">
+    <button class="acc-trigger" aria-expanded="false" data-panel="contact-panel">
+      <span class="acc-label">Contact</span>
+      <div class="acc-meta">
+        <span class="acc-num">05</span>
+        <span class="acc-icon">+</span>
+      </div>
+    </button>
+    <div class="acc-panel" id="contact-panel" role="region">
+      <div class="acc-inner">
+        <div class="acc-content">
+          <form class="contact-form">
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label">お名前</label>
+                <input type="text" class="form-input" placeholder="高橋 徹">
+              </div>
+              <div class="form-field">
+                <label class="form-label">会社名</label>
+                <input type="text" class="form-input" placeholder="株式会社〇〇">
+              </div>
+            </div>
+            <div class="form-field">
+              <label class="form-label">メールアドレス</label>
+              <input type="email" class="form-input" placeholder="info@example.com">
+            </div>
+            <div class="form-field">
+              <label class="form-label">お問い合わせ種別</label>
+              <select class="form-select">
+                <option>インフルエンサーマーケティング</option>
+                <option>タレントマネジメント</option>
+                <option>キャスティング</option>
+                <option>採用について</option>
+                <option>その他</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label">内容</label>
+              <textarea class="form-textarea" placeholder="お問い合わせ内容をご記入ください"></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- FOOTER / CONTACT -->
-<footer id="contact">
-  <div class="footer-logo">Good Vibes Agency</div>
-  <div class="footer-links">
-    <a href="mailto:toru.t@goodvibesagency.tokyo">Contact</a>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Good Vibes Agency</div>
+  <div class="f-links">
     <a href="/privacy">Privacy</a>
+    <a href="mailto:toru.t@goodvibesagency.tokyo">Email</a>
   </div>
-  <div class="footer-copy">© 2025 株式会社GOOD VIBES AGENCY</div>
+  <div class="f-copy">© 2025 株式会社GOOD VIBES AGENCY</div>
 </footer>
 
 <script>
-// Cursor
-const cur=document.getElementById('cursor');
-document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
-  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+// Accordion
+function openAcc(panelId){
+  const panel=document.getElementById(panelId);
+  const btn=document.querySelector('[data-panel="'+panelId+'"]');
+  if(!panel||!btn)return;
+  const isOpen=btn.getAttribute('aria-expanded')==='true';
+  // CONTACTは閉じない
+  if(panelId==='contact-panel'&&isOpen)return;
+  btn.setAttribute('aria-expanded',!isOpen);
+  panel.classList.toggle('open',!isOpen);
+  if(!isOpen){
+    setTimeout(()=>btn.closest('.acc-section').scrollIntoView({behavior:'smooth',block:'start'}),50);
+  }
+}
+
+document.querySelectorAll('.acc-trigger').forEach(btn=>{
+  btn.addEventListener('click',()=>openAcc(btn.dataset.panel));
 });
 
-// Reveal
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// Nav links
+document.querySelectorAll('[data-acc]').forEach(el=>{
+  el.addEventListener('click',e=>{
+    e.preventDefault();
+    const id=el.dataset.acc+'-panel';
+    const panel=document.getElementById(id);
+    const trigger=document.querySelector('[data-panel="'+id+'"]');
+    if(trigger&&trigger.getAttribute('aria-expanded')!=='true'){
+      openAcc(id);
+    } else {
+      document.getElementById(el.dataset.acc)?.scrollIntoView({behavior:'smooth'});
+    }
+  });
+});
+
+// Service items
+document.querySelectorAll('[data-sv]').forEach(item=>{
+  item.addEventListener('click',()=>{
+    const isActive=item.classList.contains('active');
+    document.querySelectorAll('[data-sv]').forEach(i=>i.classList.remove('active'));
+    if(!isActive)item.classList.add('active');
+  });
+});
+
+// Talent cards
+document.querySelectorAll('[data-tc]').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('open'));
+});
 </script>
 </body>
 </html>

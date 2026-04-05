@@ -25,7 +25,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 
 /* ─ HEADER ─ */
 .header{position:fixed;top:0;left:0;right:0;height:60px;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);z-index:200}
-.h-logo{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--fg)}
+.h-logo img{height:28px;display:block;filter:invert(0)}
 .h-nav{display:flex;gap:clamp(16px,3vw,40px);list-style:none}
 .h-nav a{font-size:9px;font-weight:400;letter-spacing:.18em;color:var(--ghost);text-decoration:none;text-transform:uppercase;transition:color .2s}
 .h-nav a:hover{color:var(--fg)}
@@ -34,34 +34,36 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 
 /* ─ HERO ─ */
 .hero{height:100svh;min-height:600px;padding-top:60px;background:var(--fg);display:flex;flex-direction:column;justify-content:flex-end;padding-left:var(--pad);padding-right:var(--pad);padding-bottom:clamp(32px,5vw,72px);position:relative;overflow:hidden}
-/* グリッド装飾ライン */
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(247,245,240,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(247,245,240,.03) 1px,transparent 1px);background-size:80px 80px}
-.hero-tagline{font-size:10px;font-weight:400;letter-spacing:.35em;color:var(--ghost);text-transform:uppercase;margin-bottom:clamp(16px,3vw,32px);opacity:0;animation:fadeUp .6s .2s both}
-.hero-title{font-size:clamp(60px,14vw,180px);font-weight:900;line-height:.88;letter-spacing:-.03em;color:var(--bg);text-transform:uppercase;overflow:hidden}
+/* 動画背景 */
+.hero-video{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;opacity:.2;filter:grayscale(60%)}
+/* 動画なしフォールバック */
+.hero-video-fallback{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(ellipse 60% 50% at 70% 35%, rgba(199,255,79,.07) 0%,transparent 65%),
+  var(--fg)}
+.hero-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(247,245,240,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(247,245,240,.025) 1px,transparent 1px);background-size:80px 80px}
+.hero-vignette{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(17,17,17,.5) 0%,transparent 30%,transparent 55%,rgba(17,17,17,.9) 100%)}
+
+.hero-tagline{position:relative;z-index:3;font-size:10px;font-weight:400;letter-spacing:.35em;color:var(--ghost);text-transform:uppercase;margin-bottom:clamp(16px,3vw,32px);opacity:0;animation:fadeUp .6s .2s both}
+.hero-title{position:relative;z-index:3;font-size:clamp(60px,14vw,180px);font-weight:900;line-height:.88;letter-spacing:-.03em;color:var(--bg);text-transform:uppercase;overflow:hidden}
 .tl{display:block;transform:translateY(100%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards}
 .tl:nth-child(1){animation-delay:.1s}
 .tl:nth-child(2){color:var(--noise);animation-delay:.25s}
-.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;margin-top:clamp(20px,3vw,48px);opacity:0;animation:fadeUp .6s .7s both}
+.hero-bottom{position:relative;z-index:3;display:flex;align-items:flex-end;justify-content:space-between;margin-top:clamp(20px,3vw,48px);opacity:0;animation:fadeUp .6s .7s both}
 .hero-desc{font-size:clamp(10px,1.1vw,12px);font-weight:200;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase;line-height:2}
 .hero-scroll{font-size:8px;letter-spacing:.3em;color:var(--ghost);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
 .scroll-bar{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--noise));animation:pulse 2s ease-in-out infinite}
 
 /* ─ ACCORDION SECTION ─ */
 .acc-root{border-top:1px solid var(--line)}
-
 .acc-section{border-bottom:1px solid var(--line)}
-
 .acc-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:clamp(18px,2.5vw,28px) var(--pad);background:none;border:none;cursor:pointer;font-family:var(--font-d);text-align:left;transition:background .2s}
 .acc-trigger:hover{background:rgba(0,0,0,.02)}
 .acc-trigger[aria-expanded="true"]{background:var(--fg);color:var(--bg)}
 .acc-trigger[aria-expanded="true"] .acc-icon{transform:rotate(45deg);color:var(--noise)}
-
 .acc-label{font-size:clamp(14px,2.5vw,22px);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
 .acc-meta{display:flex;align-items:center;gap:16px}
 .acc-num{font-size:10px;font-weight:400;letter-spacing:.2em;color:var(--ghost)}
 .acc-icon{font-size:22px;font-weight:200;transition:transform .3s ease;line-height:1;color:var(--ghost)}
-.acc-trigger[aria-expanded="true"] .acc-num{color:var(--ghost)}
-
 .acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
 .acc-panel.open{grid-template-rows:1fr}
 .acc-inner{overflow:hidden}
@@ -70,14 +72,14 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 /* ─ ABOUT ─ */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);align-items:start}
 .about-headline{font-size:clamp(28px,4vw,52px);font-weight:900;letter-spacing:-.02em;line-height:1.1;margin-bottom:24px}
-.about-body{font-size:14px;font-weight:300;line-height:2;color:#444;font-family:var(--font-j)}
+.about-body{font-size:14px;font-weight:300;line-height:2.1;color:#444;font-family:var(--font-j)}
 .about-nums{display:flex;flex-direction:column;gap:2px}
-.about-num-row{border:1px solid var(--line);padding:20px 24px;display:flex;justify-content:space-between;align-items:baseline}
-.abn-n{font-size:clamp(32px,5vw,56px);font-weight:900;letter-spacing:-.02em;color:var(--fg)}
-.abn-l{font-size:9px;font-weight:400;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase}
+.about-num-row{border:1px solid var(--line);padding:20px 24px}
+.abn-n{font-size:clamp(32px,5vw,52px);font-weight:900;letter-spacing:-.02em;color:var(--fg)}
+.abn-l{font-size:9px;font-weight:400;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase;margin-top:4px}
 
 /* ─ SERVICE ─ */
-.sv-list{display:flex;flex-direction:column;gap:0}
+.sv-list{display:flex;flex-direction:column}
 .sv-item{border:1px solid var(--line);border-bottom:0;padding:clamp(20px,3vw,32px) clamp(20px,3vw,40px);display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:start;cursor:pointer;transition:background .2s}
 .sv-item:last-child{border-bottom:1px solid var(--line)}
 .sv-item:hover{background:rgba(0,0,0,.02)}
@@ -89,30 +91,27 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .sv-item.active .sv-copy{color:rgba(0,0,0,.5)}
 .sv-desc{font-size:13px;font-weight:300;line-height:1.9;color:#555;font-family:var(--font-j);grid-column:2;margin-top:12px;display:none}
 .sv-item.active .sv-desc{display:block;color:rgba(0,0,0,.65)}
-.sv-arrow{font-size:18px;color:var(--ghost);transition:transform .2s}
-.sv-item.active .sv-arrow{transform:rotate(45deg);color:rgba(0,0,0,.5)}
+.sv-arrow{font-size:18px;color:var(--ghost);transition:transform .2s;padding-top:4px}
+.sv-item.active .sv-arrow{transform:rotate(45deg);color:rgba(0,0,0,.4)}
 
 /* ─ TALENT ─ */
-.talent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:2px}
+.talent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px}
 .talent-card{border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:border-color .2s}
 .talent-card:hover{border-color:var(--fg)}
-.talent-card.open{border-color:var(--fg);grid-column:1/-1}
-.talent-img{aspect-ratio:3/4;background:var(--line);overflow:hidden}
-.talent-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-.talent-card:hover .talent-img img{transform:scale(1.04)}
+.talent-img{aspect-ratio:3/4;background:var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--ghost)}
 .talent-info{padding:14px 16px}
 .t-name{font-size:13px;font-weight:700;margin-bottom:2px}
 .t-handle{font-size:10px;letter-spacing:.1em;color:var(--ghost)}
 .talent-detail{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s}
 .talent-card.open .talent-detail{max-height:200px;padding:0 16px 20px}
 .t-stats{display:flex;gap:24px;margin-top:8px}
-.t-stat-n{font-size:18px;font-weight:700}
+.t-stat-n{font-size:16px;font-weight:700}
 .t-stat-l{font-size:9px;letter-spacing:.15em;color:var(--ghost);text-transform:uppercase;margin-top:2px}
 
 /* ─ RECRUIT ─ */
 .recruit-hero{font-size:clamp(36px,7vw,96px);font-weight:900;letter-spacing:-.03em;line-height:.9;margin-bottom:clamp(28px,4vw,56px)}
-.recruit-hero span{color:var(--noise);-webkit-text-stroke:2px var(--fg)}
-.rec-items{display:flex;flex-direction:column;gap:0;margin-bottom:clamp(28px,4vw,48px)}
+.recruit-hero em{color:var(--noise);font-style:normal}
+.rec-items{display:flex;flex-direction:column;margin-bottom:clamp(28px,4vw,48px)}
 .rec-item{border:1px solid var(--line);border-bottom:0;padding:clamp(16px,2.5vw,24px) clamp(20px,3vw,32px);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s}
 .rec-item:last-child{border-bottom:1px solid var(--line)}
 .rec-item:hover{background:rgba(0,0,0,.03)}
@@ -134,7 +133,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 
 /* ─ FOOTER ─ */
 footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.f-logo{font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--ghost);text-transform:uppercase}
+.f-logo img{height:20px;opacity:.4}
 .f-links{display:flex;gap:20px}
 .f-links a{font-size:9px;letter-spacing:.15em;color:var(--ghost);text-decoration:none;text-transform:uppercase}
 .f-copy{font-size:9px;letter-spacing:.1em;color:rgba(136,136,128,.5)}
@@ -144,7 +143,6 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
-/* ─ RESPONSIVE ─ */
 @media(max-width:680px){
   .h-nav{display:none}
   .about-grid{grid-template-columns:1fr}
@@ -157,7 +155,9 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
 
 <!-- HEADER -->
 <header class="header">
-  <a href="/" class="h-logo">Good Vibes Agency</a>
+  <a href="/" class="h-logo">
+    <img src="gva-logo.png" alt="GOOD VIBES AGENCY">
+  </a>
   <ul class="h-nav">
     <li><a href="#" data-acc="about">About</a></li>
     <li><a href="#" data-acc="service">Service</a></li>
@@ -169,6 +169,16 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
 
 <!-- HERO -->
 <section class="hero">
+  <!-- 動画背景（mp4を用意したら差し替える） -->
+  <div class="hero-video-fallback"></div>
+  <!--
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+  -->
+  <div class="hero-grid"></div>
+  <div class="hero-vignette"></div>
+
   <p class="hero-tagline">Tokyo — Good Vibes Agency</p>
   <h1 class="hero-title" aria-label="MAKE NOISE.">
     <span class="tl">MAKE</span>
@@ -176,8 +186,8 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
   </h1>
   <div class="hero-bottom">
     <p class="hero-desc">
-      We build culture.<br>
-      From Tokyo to the world.
+      We move culture.<br>
+      We shape the world.
     </p>
     <div class="hero-scroll">
       <div class="scroll-bar"></div>
@@ -193,38 +203,31 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
   <section class="acc-section" id="about">
     <button class="acc-trigger" aria-expanded="false" data-panel="about-panel">
       <span class="acc-label">About</span>
-      <div class="acc-meta">
-        <span class="acc-num">01</span>
-        <span class="acc-icon">+</span>
-      </div>
+      <div class="acc-meta"><span class="acc-num">01</span><span class="acc-icon">+</span></div>
     </button>
     <div class="acc-panel" id="about-panel" role="region">
-      <div class="acc-inner">
-        <div class="acc-content">
-          <div class="about-grid">
-            <div>
-              <h2 class="about-headline">ノイズが、<br>歴史になる。</h2>
-              <p class="about-body">
-                インフルエンサーで終わるな。GVAは才能を文化に変え、日本から世界へ届ける会社だ。タレントとブランドをつなぐことで、時代を動かすカルチャーを生み出す。
-              </p>
+      <div class="acc-inner"><div class="acc-content">
+        <div class="about-grid">
+          <div>
+            <h2 class="about-headline">声が、<br>時代になる。</h2>
+            <p class="about-body">
+              GVAは、人と文化をつなぐ会社だ。<br>
+              発信すること、届けること、動かすこと。<br>
+              その先にある世界を、東京からつくっていく。
+            </p>
+          </div>
+          <div class="about-nums">
+            <div class="about-num-row">
+              <div class="abn-n">10,000<span style="font-size:.4em;color:var(--ghost)">+</span></div>
+              <div class="abn-l">Talent Network</div>
             </div>
-            <div class="about-nums">
-              <div class="about-num-row">
-                <div>
-                  <div class="abn-n">300<span style="font-size:.5em;color:var(--ghost)">+</span></div>
-                  <div class="abn-l">Talent Network</div>
-                </div>
-              </div>
-              <div class="about-num-row">
-                <div>
-                  <div class="abn-n">500<span style="font-size:.5em;color:var(--ghost)">+</span></div>
-                  <div class="abn-l">Campaigns</div>
-                </div>
-              </div>
+            <div class="about-num-row">
+              <div class="abn-n">500<span style="font-size:.4em;color:var(--ghost)">+</span></div>
+              <div class="abn-l">Projects Delivered</div>
             </div>
           </div>
         </div>
-      </div>
+      </div></div>
     </div>
   </section>
 
@@ -232,54 +235,49 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
   <section class="acc-section" id="service">
     <button class="acc-trigger" aria-expanded="false" data-panel="service-panel">
       <span class="acc-label">Service</span>
-      <div class="acc-meta">
-        <span class="acc-num">02</span>
-        <span class="acc-icon">+</span>
-      </div>
+      <div class="acc-meta"><span class="acc-num">02</span><span class="acc-icon">+</span></div>
     </button>
     <div class="acc-panel" id="service-panel" role="region">
-      <div class="acc-inner">
-        <div class="acc-content">
-          <div class="sv-list">
-            <div class="sv-item" data-sv>
-              <div class="sv-n">01</div>
-              <div>
-                <div class="sv-name">Influencer Marketing</div>
-                <div class="sv-copy">Campaigns that move culture.</div>
-                <div class="sv-desc">インフルエンサーキャスティングから施策設計・進行・レポートまで一気通貫でサポート。</div>
-              </div>
-              <span class="sv-arrow">+</span>
+      <div class="acc-inner"><div class="acc-content">
+        <div class="sv-list">
+          <div class="sv-item" data-sv>
+            <div class="sv-n">01</div>
+            <div>
+              <div class="sv-name">Creator Marketing</div>
+              <div class="sv-copy">Campaigns that move culture.</div>
+              <div class="sv-desc">クリエイター・キャスティングから施策設計・進行・レポートまで一気通貫でサポート。</div>
             </div>
-            <div class="sv-item" data-sv>
-              <div class="sv-n">02</div>
-              <div>
-                <div class="sv-name">Talent Management</div>
-                <div class="sv-copy">We build iconic careers.</div>
-                <div class="sv-desc">所属タレントの案件管理・マネジメント・ブランディングを担当。</div>
-              </div>
-              <span class="sv-arrow">+</span>
+            <span class="sv-arrow">+</span>
+          </div>
+          <div class="sv-item" data-sv>
+            <div class="sv-n">02</div>
+            <div>
+              <div class="sv-name">Talent Management</div>
+              <div class="sv-copy">We build iconic careers.</div>
+              <div class="sv-desc">所属タレントの案件管理・マネジメント・ブランディングを担当。</div>
             </div>
-            <div class="sv-item" data-sv>
-              <div class="sv-n">03</div>
-              <div>
-                <div class="sv-name">Casting</div>
-                <div class="sv-copy">The right face, always.</div>
-                <div class="sv-desc">タレント・インフルエンサー・モデルなど、目的に合った人材のキャスティングを提供。</div>
-              </div>
-              <span class="sv-arrow">+</span>
+            <span class="sv-arrow">+</span>
+          </div>
+          <div class="sv-item" data-sv>
+            <div class="sv-n">03</div>
+            <div>
+              <div class="sv-name">Casting</div>
+              <div class="sv-copy">The right face, always.</div>
+              <div class="sv-desc">ブランド・映像・イベントなど、目的に合った人材を選定・手配。</div>
             </div>
-            <div class="sv-item" data-sv>
-              <div class="sv-n">04</div>
-              <div>
-                <div class="sv-name">Digital Marketing</div>
-                <div class="sv-copy">Content that breaks feeds.</div>
-                <div class="sv-desc">SNS運用代行、クリエイティブ制作、コンテンツ制作などデジタルPR全般を支援。</div>
-              </div>
-              <span class="sv-arrow">+</span>
+            <span class="sv-arrow">+</span>
+          </div>
+          <div class="sv-item" data-sv>
+            <div class="sv-n">04</div>
+            <div>
+              <div class="sv-name">Brand Strategy</div>
+              <div class="sv-copy">Culture by design.</div>
+              <div class="sv-desc">SNS運用、コンテンツ制作、ブランドコミュニケーション全般を支援。</div>
             </div>
+            <span class="sv-arrow">+</span>
           </div>
         </div>
-      </div>
+      </div></div>
     </div>
   </section>
 
@@ -287,58 +285,103 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
   <section class="acc-section" id="talent">
     <button class="acc-trigger" aria-expanded="false" data-panel="talent-panel">
       <span class="acc-label">Talent</span>
-      <div class="acc-meta">
-        <span class="acc-num">03</span>
-        <span class="acc-icon">+</span>
-      </div>
+      <div class="acc-meta"><span class="acc-num">03</span><span class="acc-icon">+</span></div>
     </button>
     <div class="acc-panel" id="talent-panel" role="region">
-      <div class="acc-inner">
-        <div class="acc-content">
-          <div class="talent-grid">
-            <div class="talent-card" data-tc>
-              <div class="talent-img" style="background:#e8e4dc"></div>
-              <div class="talent-info"><div class="t-name">桃佳</div><div class="t-handle">@moo_mo_k</div></div>
-              <div class="talent-detail">
-                <div class="t-stats">
-                  <div><div class="t-stat-n">215K</div><div class="t-stat-l">Followers</div></div>
-                  <div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div>
-                </div>
+      <div class="acc-inner"><div class="acc-content">
+        <div class="talent-grid">
+          <div class="talent-card" data-tc>
+            <div class="talent-img">🌸</div>
+            <div class="talent-info"><div class="t-name">桃佳</div><div class="t-handle">@moo_mo_k</div></div>
+            <div class="talent-detail">
+              <div class="t-stats">
+                <div><div class="t-stat-n">215K</div><div class="t-stat-l">Followers</div></div>
+                <div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div>
               </div>
             </div>
-            <div class="talent-card" data-tc>
-              <div class="talent-img" style="background:#dce4e8"></div>
-              <div class="talent-info"><div class="t-name">かんな</div><div class="t-handle">@k_r__ko</div></div>
-              <div class="talent-detail">
-                <div class="t-stats">
-                  <div><div class="t-stat-n">170K</div><div class="t-stat-l">Followers</div></div>
-                  <div><div class="t-stat-n">Lifestyle</div><div class="t-stat-l">Category</div></div>
-                </div>
+          </div>
+          <div class="talent-card" data-tc>
+            <div class="talent-img">✨</div>
+            <div class="talent-info"><div class="t-name">かんな</div><div class="t-handle">@k_r__ko</div></div>
+            <div class="talent-detail">
+              <div class="t-stats">
+                <div><div class="t-stat-n">171K</div><div class="t-stat-l">Followers</div></div>
+                <div><div class="t-stat-n">Lifestyle</div><div class="t-stat-l">Category</div></div>
               </div>
             </div>
-            <div class="talent-card" data-tc>
-              <div class="talent-img" style="background:#dce8dc"></div>
-              <div class="talent-info"><div class="t-name">ゆい</div><div class="t-handle">@yui___12.8</div></div>
-              <div class="talent-detail">
-                <div class="t-stats">
-                  <div><div class="t-stat-n">184K</div><div class="t-stat-l">Followers</div></div>
-                  <div><div class="t-stat-n">Beauty</div><div class="t-stat-l">Category</div></div>
-                </div>
+          </div>
+          <div class="talent-card" data-tc>
+            <div class="talent-img">🌿</div>
+            <div class="talent-info"><div class="t-name">ゆい</div><div class="t-handle">@yui___12.8</div></div>
+            <div class="talent-detail">
+              <div class="t-stats">
+                <div><div class="t-stat-n">184K</div><div class="t-stat-l">Followers</div></div>
+                <div><div class="t-stat-n">Beauty</div><div class="t-stat-l">Category</div></div>
               </div>
             </div>
-            <div class="talent-card" data-tc>
-              <div class="talent-img" style="background:#e8dce8"></div>
-              <div class="talent-info"><div class="t-name">乙</div><div class="t-handle">@_021miu</div></div>
-              <div class="talent-detail">
-                <div class="t-stats">
-                  <div><div class="t-stat-n">243K</div><div class="t-stat-l">Followers</div></div>
-                  <div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div>
-                </div>
+          </div>
+          <div class="talent-card" data-tc>
+            <div class="talent-img">🖤</div>
+            <div class="talent-info"><div class="t-name">乙</div><div class="t-handle">@_021miu</div></div>
+            <div class="talent-detail">
+              <div class="t-stats">
+                <div><div class="t-stat-n">244K</div><div class="t-stat-l">Followers</div></div>
+                <div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="talent-card" data-tc>
+            <div class="talent-img">💙</div>
+            <div class="talent-info"><div class="t-name">岸本沙季</div><div class="t-handle">@saki__kishimoto</div></div>
+            <div class="talent-detail">
+              <div class="t-stats">
+                <div><div class="t-stat-n">62K</div><div class="t-stat-l">Followers</div></div>
+                <div><div class="t-stat-n">Beauty</div><div class="t-stat-l">Category</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="talent-card" data-tc>
+            <div class="talent-img">🌊</div>
+            <div class="talent-info"><div class="t-name">miu</div><div class="t-handle">@uruuril</div></div>
+            <div class="talent-detail">
+              <div class="t-stats">
+                <div><div class="t-stat-n">68K</div><div class="t-stat-l">Followers</div></div>
+                <div><div class="t-stat-n">Lifestyle</div><div class="t-stat-l">Category</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="talent-card" data-tc>
+            <div class="talent-img">🌺</div>
+            <div class="talent-info"><div class="t-name">小西莉々栞</div><div class="t-handle">@ririka_konishi</div></div>
+            <div class="talent-detail">
+              <div class="t-stats">
+                <div><div class="t-stat-n">65K</div><div class="t-stat-l">Followers</div></div>
+                <div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="talent-card" data-tc>
+            <div class="talent-img">🎵</div>
+            <div class="talent-info"><div class="t-name">紗英</div><div class="t-handle">@saeeeoky</div></div>
+            <div class="talent-detail">
+              <div class="t-stats">
+                <div><div class="t-stat-n">27K</div><div class="t-stat-l">Followers</div></div>
+                <div><div class="t-stat-n">Music</div><div class="t-stat-l">Category</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="talent-card" data-tc>
+            <div class="talent-img">🔥</div>
+            <div class="talent-info"><div class="t-name">酒巻茉侑</div><div class="t-handle">@mkmyxi</div></div>
+            <div class="talent-detail">
+              <div class="t-stats">
+                <div><div class="t-stat-n">25K</div><div class="t-stat-l">Followers</div></div>
+                <div><div class="t-stat-n">Fashion</div><div class="t-stat-l">Category</div></div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div></div>
     </div>
   </section>
 
@@ -346,23 +389,18 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
   <section class="acc-section" id="recruit">
     <button class="acc-trigger" aria-expanded="false" data-panel="recruit-panel">
       <span class="acc-label">Recruit</span>
-      <div class="acc-meta">
-        <span class="acc-num">04</span>
-        <span class="acc-icon">+</span>
-      </div>
+      <div class="acc-meta"><span class="acc-num">04</span><span class="acc-icon">+</span></div>
     </button>
     <div class="acc-panel" id="recruit-panel" role="region">
-      <div class="acc-inner">
-        <div class="acc-content">
-          <h2 class="recruit-hero">MAKE NOISE<br><span>WITH US.</span></h2>
-          <div class="rec-items">
-            <div class="rec-item"><span class="rec-title">タレントマネージャー</span><span class="rec-arr">→</span></div>
-            <div class="rec-item"><span class="rec-title">PRプランナー</span><span class="rec-arr">→</span></div>
-            <div class="rec-item"><span class="rec-title">インターン</span><span class="rec-arr">→</span></div>
-          </div>
-          <a href="#contact" class="recruit-cta" data-acc="contact">Join Us →</a>
+      <div class="acc-inner"><div class="acc-content">
+        <h2 class="recruit-hero">MAKE NOISE<br><em>WITH US.</em></h2>
+        <div class="rec-items">
+          <div class="rec-item"><span class="rec-title">タレントマネージャー</span><span class="rec-arr">→</span></div>
+          <div class="rec-item"><span class="rec-title">PRプランナー</span><span class="rec-arr">→</span></div>
+          <div class="rec-item"><span class="rec-title">インターン</span><span class="rec-arr">→</span></div>
         </div>
-      </div>
+        <a href="#" class="recruit-cta" data-acc="contact">Join Us →</a>
+      </div></div>
     </div>
   </section>
 
@@ -370,47 +408,42 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
   <section class="acc-section" id="contact">
     <button class="acc-trigger" aria-expanded="false" data-panel="contact-panel">
       <span class="acc-label">Contact</span>
-      <div class="acc-meta">
-        <span class="acc-num">05</span>
-        <span class="acc-icon">+</span>
-      </div>
+      <div class="acc-meta"><span class="acc-num">05</span><span class="acc-icon">+</span></div>
     </button>
     <div class="acc-panel" id="contact-panel" role="region">
-      <div class="acc-inner">
-        <div class="acc-content">
-          <form class="contact-form">
-            <div class="form-row">
-              <div class="form-field">
-                <label class="form-label">お名前</label>
-                <input type="text" class="form-input" placeholder="高橋 徹">
-              </div>
-              <div class="form-field">
-                <label class="form-label">会社名</label>
-                <input type="text" class="form-input" placeholder="株式会社〇〇">
-              </div>
+      <div class="acc-inner"><div class="acc-content">
+        <form class="contact-form" onsubmit="return false">
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label">お名前</label>
+              <input type="text" class="form-input" placeholder="高橋 徹">
             </div>
             <div class="form-field">
-              <label class="form-label">メールアドレス</label>
-              <input type="email" class="form-input" placeholder="info@example.com">
+              <label class="form-label">会社名</label>
+              <input type="text" class="form-input" placeholder="株式会社〇〇">
             </div>
-            <div class="form-field">
-              <label class="form-label">お問い合わせ種別</label>
-              <select class="form-select">
-                <option>インフルエンサーマーケティング</option>
-                <option>タレントマネジメント</option>
-                <option>キャスティング</option>
-                <option>採用について</option>
-                <option>その他</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <label class="form-label">内容</label>
-              <textarea class="form-textarea" placeholder="お問い合わせ内容をご記入ください"></textarea>
-            </div>
-            <button type="submit" class="form-submit">Send Message →</button>
-          </form>
-        </div>
-      </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">メールアドレス</label>
+            <input type="email" class="form-input" placeholder="info@example.com">
+          </div>
+          <div class="form-field">
+            <label class="form-label">お問い合わせ種別</label>
+            <select class="form-select">
+              <option>クリエイターマーケティング</option>
+              <option>タレントマネジメント</option>
+              <option>キャスティング</option>
+              <option>採用について</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">内容</label>
+            <textarea class="form-textarea" placeholder="お問い合わせ内容をご記入ください"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message →</button>
+        </form>
+      </div></div>
     </div>
   </section>
 
@@ -418,7 +451,7 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
 
 <!-- FOOTER -->
 <footer>
-  <div class="f-logo">Good Vibes Agency</div>
+  <div class="f-logo"><img src="gva-logo.png" alt="GOOD VIBES AGENCY"></div>
   <div class="f-links">
     <a href="/privacy">Privacy</a>
     <a href="mailto:toru.t@goodvibesagency.tokyo">Email</a>
@@ -427,50 +460,37 @@ footer{border-top:1px solid var(--line);padding:24px var(--pad);display:flex;jus
 </footer>
 
 <script>
-// Accordion
 function openAcc(panelId){
   const panel=document.getElementById(panelId);
   const btn=document.querySelector('[data-panel="'+panelId+'"]');
   if(!panel||!btn)return;
   const isOpen=btn.getAttribute('aria-expanded')==='true';
-  // CONTACTは閉じない
   if(panelId==='contact-panel'&&isOpen)return;
-  btn.setAttribute('aria-expanded',!isOpen);
+  btn.setAttribute('aria-expanded',String(!isOpen));
   panel.classList.toggle('open',!isOpen);
   if(!isOpen){
     setTimeout(()=>btn.closest('.acc-section').scrollIntoView({behavior:'smooth',block:'start'}),50);
   }
 }
-
 document.querySelectorAll('.acc-trigger').forEach(btn=>{
   btn.addEventListener('click',()=>openAcc(btn.dataset.panel));
 });
-
-// Nav links
 document.querySelectorAll('[data-acc]').forEach(el=>{
   el.addEventListener('click',e=>{
     e.preventDefault();
     const id=el.dataset.acc+'-panel';
-    const panel=document.getElementById(id);
     const trigger=document.querySelector('[data-panel="'+id+'"]');
-    if(trigger&&trigger.getAttribute('aria-expanded')!=='true'){
-      openAcc(id);
-    } else {
-      document.getElementById(el.dataset.acc)?.scrollIntoView({behavior:'smooth'});
-    }
+    if(trigger&&trigger.getAttribute('aria-expanded')!=='true') openAcc(id);
+    else document.getElementById(el.dataset.acc)?.scrollIntoView({behavior:'smooth'});
   });
 });
-
-// Service items
 document.querySelectorAll('[data-sv]').forEach(item=>{
   item.addEventListener('click',()=>{
-    const isActive=item.classList.contains('active');
+    const active=item.classList.contains('active');
     document.querySelectorAll('[data-sv]').forEach(i=>i.classList.remove('active'));
-    if(!isActive)item.classList.add('active');
+    if(!active)item.classList.add('active');
   });
 });
-
-// Talent cards
 document.querySelectorAll('[data-tc]').forEach(card=>{
   card.addEventListener('click',()=>card.classList.toggle('open'));
 });

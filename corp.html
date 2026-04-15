@@ -78,8 +78,8 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 }
 @media(max-width:640px){
   .hero{height:calc(100svh - 56px);}
-  .hero-right{position:relative;top:0;height:100%;padding-top:56px;}
-  .hero-right video{object-position:center 30%;}
+  .hero-right{position:relative!important;top:0!important;height:100%!important;width:100%!important;}
+  .hero-right video{object-fit:cover;object-position:top!important;will-change:unset!important;}
 }
 .hero-id{
   display:flex;align-items:center;gap:16px;
@@ -228,7 +228,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
   </div>
   <div class="hero-right">
     <video autoplay muted loop playsinline>
-      <source src="hero_wide.mp4" type="video/mp4">
+      <source src="hero.mp4" type="video/mp4">
     </video>
   </div>
 </section>

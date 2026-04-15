@@ -3,7 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GOOD VIBES AGENCY</title>
+<title>GOOD VIBES AGENCY | インフルエンサーマーケティング・タレントマネジメント</title>
+<meta name="description" content="インフルエンサーマーケティングとタレントマネジメントで、"人生を変える体験"を提供する。GOOD VIBES AGENCYはブランドと才能を繋ぐ東京のエージェンシーです。">
+<meta name="keywords" content="インフルエンサーマーケティング,タレントマネジメント,インフルエンサー,GOOD VIBES AGENCY,GVA,東京">
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://goodvibesagency.tokyo/">
+<meta property="og:title" content="GOOD VIBES AGENCY | インフルエンサーマーケティング・タレントマネジメント">
+<meta property="og:description" content='"人生を変える体験"を提供する。インフルエンサーマーケティングとタレントマネジメントのエージェンシー。'>
+<meta property="og:image" content="https://goodvibesagency.tokyo/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GOOD VIBES AGENCY">
+<meta name="twitter:description" content='"人生を変える体験"を提供する。'>
+<meta name="twitter:image" content="https://goodvibesagency.tokyo/ogp.png">
+<!-- Google Analytics - Measurement IDを設定してください -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
@@ -206,7 +221,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </head>
 <body>
 <header class="header">
-  <a href="/" class="h-logo"><img src="gva-logo.png" alt="GOOD VIBES AGENCY"></a>
+  <a href="https://goodvibesagency.tokyo/" class="h-logo"><img src="gva-logo.png" alt="GOOD VIBES AGENCY"></a>
   <ul class="h-nav">
     <li><a href="#" data-acc="about">About</a></li>
     <li><a href="#" data-acc="service">Service</a></li>
@@ -375,9 +390,10 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
   <section class="acc-section" id="contact">
     <button class="acc-trigger" aria-expanded="false" data-panel="contact-panel"><span class="acc-label">Contact</span><div class="acc-meta"><span class="acc-num">04</span><span class="acc-icon">+</span></div></button>
     <div class="acc-panel" id="contact-panel"><div class="acc-inner"><div class="acc-content">
-      <form class="contact-form" id="contact-form" action="https://formspree.io/f/FORMSPREE_ID" method="POST">
-        <input type="hidden" name="_subject" value="GVAコーポレートサイト お問い合わせ">
-        <input type="hidden" name="_next" value="https://good-vibes-agency.github.io/gva-ugc-lp/corp.html">
+      <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="subject" value="GVAコーポレートサイト お問い合わせ">
+        <input type="hidden" name="redirect" value="https://goodvibesagency.tokyo/">
         <div class="form-row">
           <div class="form-field"><label class="form-label">お名前</label><input type="text" class="form-input" placeholder="山田 太郎"></div>
           <div class="form-field"><label class="form-label">会社名</label><input type="text" class="form-input" placeholder="株式会社〇〇"></div>
@@ -393,7 +409,11 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 <footer>
   <div class="f-logo"><img src="gva-logo.png" alt="GOOD VIBES AGENCY"></div>
   <div class="f-links"><a href="privacy.html">Privacy</a><a href="mailto:toru.t@goodvibesagency.tokyo">Email</a></div>
-  <div class="f-copy">© 2025 株式会社GOOD VIBES AGENCY</div>
+  <div class="f-copy">
+    © 2025 株式会社GOOD VIBES AGENCY｜
+    〒XXX-XXXX 東京都渋谷区〇〇X-X-X｜
+    <a href="mailto:info@goodvibesagency.tokyo" style="color:inherit">info@goodvibesagency.tokyo</a>
+  </div>
 </footer>
 
 <script>

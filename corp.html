@@ -132,9 +132,9 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 /* ACCORDION */
 .acc-root{border-top:1px solid var(--line)}
 .acc-section{border-bottom:1px solid var(--line)}
-.acc-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:clamp(16px,2.2vw,26px) var(--pad);background:none;border:none;cursor:pointer;font-family:var(--font-d);text-align:left;transition:background .2s;color:var(--fg);-webkit-text-fill-color:var(--fg)}
+.acc-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:clamp(16px,2.2vw,26px) var(--pad);background:none;border:none;cursor:pointer;font-family:var(--font-d);text-align:left;transition:background .2s;color:var(--fg)}
+.acc-trigger[aria-expanded="true"]{background:var(--fg);color:var(--bg);-webkit-text-fill-color:var(--bg)}
 .acc-trigger:hover{background:rgba(0,0,0,.025)}
-.acc-trigger[aria-expanded="true"]{background:var(--fg);color:var(--bg)}
 .acc-trigger[aria-expanded="true"] .acc-icon{transform:rotate(45deg);color:#F7F5F0}
 .acc-label{font-size:clamp(13px,2.2vw,20px);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
 .acc-meta{display:flex;align-items:center;gap:16px}
@@ -158,14 +158,14 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .sv-item:hover{background:rgba(0,0,0,.02)}
 .sv-item.active{background:var(--fg);color:var(--bg)}
 .sv-n{font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--ghost)}
-.sv-item.active .sv-n{color:rgba(0,0,0,.35)}
+.sv-item.active .sv-n{color:rgba(247,245,240,.35)}
 .sv-name{font-size:clamp(14px,2vw,21px);font-weight:700;letter-spacing:-.01em}
 .sv-copy{font-size:11px;font-weight:400;letter-spacing:.1em;color:var(--ghost);text-transform:uppercase;margin-top:4px}
-.sv-item.active .sv-copy{color:rgba(0,0,0,.45)}
+.sv-item.active .sv-copy{color:rgba(247,245,240,.5)}
 .sv-desc{font-size:13px;font-weight:300;line-height:1.9;color:#555;font-family:var(--font-j);grid-column:2;margin-top:12px;display:none}
-.sv-item.active .sv-desc{display:block;color:rgba(0,0,0,.6)}
+.sv-item.active .sv-desc{display:block;color:rgba(247,245,240,.72)}
 .sv-arrow{font-size:18px;color:var(--ghost);transition:transform .2s;padding-top:3px}
-.sv-item.active .sv-arrow{transform:rotate(45deg);color:rgba(0,0,0,.35)}
+.sv-item.active .sv-arrow{transform:rotate(45deg);color:rgba(247,245,240,.45)}
 .talent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:2px}
 .talent-card{border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:border-color .2s}
 .talent-card:hover{border-color:var(--fg)}
@@ -215,7 +215,6 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
     <li><a href="#" data-acc="about">About</a></li>
     <li><a href="#" data-acc="service">Service</a></li>
     <li><a href="#" data-acc="talent">Talent</a></li>
-    <li><a href="#" data-acc="recruit">Recruit</a></li>
   </ul>
   <a href="#" class="h-cta" data-acc="contact">Contact</a>
 </header>
@@ -224,7 +223,6 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
   <div class="hero-left">
     <div></div>
     <div class="hero-main">
-      <p class="hero-lead">Influencer Marketing<br>&amp; Talent Management</p>
       <a href="#" class="hero-cta-pill" data-acc="contact">GET IN TOUCH →</a>
     </div>
     <p class="hero-loc">Tokyo · Japan</p>
@@ -277,20 +275,9 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
       </div>
     </div></div></div>
   </section>
-  <section class="acc-section" id="recruit">
-    <button class="acc-trigger" aria-expanded="false" data-panel="recruit-panel"><span class="acc-label">Recruit</span><div class="acc-meta"><span class="acc-num">04</span><span class="acc-icon">+</span></div></button>
-    <div class="acc-panel" id="recruit-panel"><div class="acc-inner"><div class="acc-content">
-      <h2 class="recruit-hero">MAKE NOISE<br><em>WITH US.</em></h2>
-      <div class="rec-items">
-        <div class="rec-item"><span class="rec-title">タレントマネージャー</span><span class="rec-arr">→</span></div>
-        <div class="rec-item"><span class="rec-title">PRプランナー</span><span class="rec-arr">→</span></div>
-        <div class="rec-item"><span class="rec-title">インターン</span><span class="rec-arr">→</span></div>
-      </div>
-      <a href="#" class="recruit-cta" data-acc="contact">Join Us →</a>
-    </div></div></div>
-  </section>
+
   <section class="acc-section" id="contact">
-    <button class="acc-trigger" aria-expanded="false" data-panel="contact-panel"><span class="acc-label">Contact</span><div class="acc-meta"><span class="acc-num">05</span><span class="acc-icon">+</span></div></button>
+    <button class="acc-trigger" aria-expanded="false" data-panel="contact-panel"><span class="acc-label">Contact</span><div class="acc-meta"><span class="acc-num">04</span><span class="acc-icon">+</span></div></button>
     <div class="acc-panel" id="contact-panel"><div class="acc-inner"><div class="acc-content">
       <form class="contact-form" onsubmit="return false">
         <div class="form-row">

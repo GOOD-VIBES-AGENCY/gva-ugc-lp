@@ -25,33 +25,71 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .h-cta{flex-shrink:0;font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--white);background:var(--fg);text-decoration:none;text-transform:uppercase;padding:8px 16px;transition:background .2s}
 .h-cta:hover{background:#333}
 /* HERO */
-/* HERO — VIDEO BG */
+/* HERO — SPLIT LAYOUT */
 .hero{
   height:100svh;min-height:600px;
   background:#0A0A0A;
-  display:grid;
-  grid-template-rows:auto 1fr auto auto;
+  display:flex;
   padding-top:56px;
   overflow:hidden;
-  position:relative;
 }
-.hero-video{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  z-index:0;
+.hero-left{
+  flex:1;min-width:0;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(28px,4vh,56px) var(--pad) clamp(28px,4vh,48px);
 }
-.hero-veil{
-  position:absolute;inset:0;
-  background:linear-gradient(
-    to bottom,
-    rgba(0,0,0,.55) 0%,
-    rgba(0,0,0,.35) 40%,
-    rgba(0,0,0,.72) 100%
-  );
-  z-index:1;
+.hero-brand img{
+  height:18px;width:auto;
+  opacity:.5;
+  filter:invert(1);
 }
-.hero-id,.hero-hl,.hero-bottom{position:relative;z-index:2;}
+.hero-main h1{
+  font-size:clamp(52px,8.5vw,120px);
+  font-weight:900;line-height:.88;
+  letter-spacing:-.04em;text-transform:uppercase;
+  margin-bottom:clamp(20px,3.5vh,36px);
+}
+.hero-main h1 span{display:block}
+.tl{transform:translateY(110%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards;}
+.tl:nth-child(1){color:#F7F5F0;animation-delay:.4s}
+.tl-stroke{
+  color:transparent;
+  -webkit-text-stroke:2px var(--noise);
+  animation-delay:.55s;
+}
+.hero-desc{
+  font-family:var(--font-j);
+  font-size:clamp(11px,.8vw,13px);line-height:2;
+  color:rgba(247,245,240,.36);font-weight:300;
+  margin-bottom:clamp(20px,3.5vh,32px);
+}
+.hero-cta-pill{
+  display:inline-block;
+  font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:#0A0A0A;background:var(--noise);
+  padding:12px 24px;text-decoration:none;
+  transition:opacity .2s;
+}
+.hero-cta-pill:hover{opacity:.82}
+.hero-loc{
+  font-size:8px;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(247,245,240,.2);font-weight:400;
+}
+.hero-right{
+  flex-shrink:0;
+  display:flex;align-items:stretch;
+  overflow:hidden;
+}
+.hero-right video{
+  height:100%;width:auto;
+  display:block;
+}
+@media(max-width:640px){
+  .hero{flex-direction:column;}
+  .hero-left{flex:0 0 auto;padding-bottom:20px;}
+  .hero-right{flex:1;}
+  .hero-right video{width:100%;height:100%;object-fit:cover;}
+}
 .hero-id{
   display:flex;align-items:center;gap:16px;
   padding:clamp(20px,3vh,36px) var(--pad) 0;
@@ -195,29 +233,24 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </header>
 
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="hero.mp4" type="video/mp4">
-  </video>
-  <div class="hero-veil"></div>
-  <div class="hero-id">
-    <span>Good Vibes Agency</span>
-    <span class="hero-id-bar"></span>
-    <span>Tokyo · Japan</span>
-  </div>
-  <div class="hero-hl">
-    <h1>
-      <span class="tl">MAKE</span>
-      <span class="tl tl-stroke">NOISE.</span>
-    </h1>
-  </div>
-  <div class="hero-bottom">
-    <p class="hero-desc">インフルエンサーマーケティングと<br>タレントマネジメントで、<br>ブランドの可能性を広げる。</p>
-    <a href="#" class="hero-cta-pill" data-acc="contact">GET IN TOUCH →</a>
-  </div>
-  <div class="hero-ticker">
-    <div class="ticker-track">
-      <span class="ticker-item">Creator Marketing</span><span class="ticker-item">Talent Management</span><span class="ticker-item">Brand Strategy</span><span class="ticker-item">Casting</span><span class="ticker-item">Culture Building</span><span class="ticker-item">Creator Marketing</span><span class="ticker-item">Talent Management</span><span class="ticker-item">Brand Strategy</span><span class="ticker-item">Casting</span><span class="ticker-item">Culture Building</span>
+  <div class="hero-left">
+    <div class="hero-brand">
+      <img src="gva-logo.png" alt="GOOD VIBES AGENCY">
     </div>
+    <div class="hero-main">
+      <h1>
+        <span class="tl">MAKE</span>
+        <span class="tl tl-stroke">NOISE.</span>
+      </h1>
+      <p class="hero-desc">インフルエンサーマーケティングと<br>タレントマネジメントで、<br>ブランドの可能性を広げる。</p>
+      <a href="#" class="hero-cta-pill" data-acc="contact">GET IN TOUCH →</a>
+    </div>
+    <p class="hero-loc">Tokyo &middot; Japan &mdash; Est. 2021</p>
+  </div>
+  <div class="hero-right">
+    <video autoplay muted loop playsinline>
+      <source src="hero.mp4" type="video/mp4">
+    </video>
   </div>
 </section>
 

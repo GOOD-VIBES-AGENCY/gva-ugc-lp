@@ -196,7 +196,11 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .form-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ghost)}
 .form-input,.form-textarea,.form-select{width:100%;padding:11px 14px;border:1px solid var(--line);background:var(--white);font-family:var(--font-j);font-size:14px;outline:none;transition:border-color .2s;-webkit-appearance:none;border-radius:0;color:var(--fg);-webkit-text-fill-color:var(--fg)}
 .form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--fg)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--line);-webkit-text-fill-color:var(--line)}
 .form-textarea{resize:vertical;min-height:110px}
+.form-select-wrap{position:relative;display:block}
+.form-select-wrap .form-select{width:100%;padding-right:36px;cursor:pointer}
+.form-select-arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;font-size:14px;color:var(--ghost);line-height:1}
 .form-submit{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);background:var(--fg);border:none;padding:14px 28px;cursor:pointer;font-family:var(--font-d);transition:background .2s;width:fit-content}
 .form-submit:hover{background:#333}
 footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
@@ -287,7 +291,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
           <div class="form-field"><label class="form-label">会社名</label><input type="text" class="form-input" placeholder="株式会社〇〇"></div>
         </div>
         <div class="form-field"><label class="form-label">メールアドレス</label><input type="email" class="form-input" placeholder="info@example.com"></div>
-        <div class="form-field"><label class="form-label">お問い合わせ種別</label><select class="form-select"><option>クリエイターマーケティング</option><option>タレントマネジメント</option><option>キャスティング</option><option>採用について</option><option>その他</option></select></div>
+        <div class="form-field"><label class="form-label">お問い合わせ種別</label><div class="form-select-wrap"><select class="form-select"><option value="" disabled selected>選択してください</option><option>クリエイターマーケティング</option><option>タレントマネジメント</option><option>キャスティング</option><option>その他</option></select><span class="form-select-arrow">▾</span></div></div>
         <div class="form-field"><label class="form-label">内容</label><textarea class="form-textarea" placeholder="お問い合わせ内容をご記入ください"></textarea></div>
         <button type="submit" class="form-submit">Send Message →</button>
       </form>

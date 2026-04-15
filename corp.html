@@ -133,7 +133,9 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .acc-root{border-top:1px solid var(--line)}
 .acc-section{border-bottom:1px solid var(--line)}
 .acc-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:clamp(16px,2.2vw,26px) var(--pad);background:none;border:none;cursor:pointer;font-family:var(--font-d);text-align:left;transition:background .2s;color:var(--fg)}
-.acc-trigger[aria-expanded="true"]{background:var(--fg);color:var(--bg);-webkit-text-fill-color:var(--bg)}
+.acc-trigger[aria-expanded="true"]{background:#111111!important;color:#F7F5F0!important;-webkit-text-fill-color:#F7F5F0!important}
+.acc-trigger[aria-expanded="true"] .acc-label{color:#F7F5F0!important;-webkit-text-fill-color:#F7F5F0!important}
+.acc-trigger[aria-expanded="true"] .acc-num{color:rgba(247,245,240,.4)!important;-webkit-text-fill-color:rgba(247,245,240,.4)!important}
 .acc-trigger:hover{background:rgba(0,0,0,.025)}
 .acc-trigger[aria-expanded="true"] .acc-icon{transform:rotate(45deg);color:#F7F5F0}
 .acc-label{font-size:clamp(13px,2.2vw,20px);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
@@ -192,7 +194,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form-field{display:flex;flex-direction:column;gap:6px}
 .form-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ghost)}
-.form-input,.form-textarea,.form-select{width:100%;padding:11px 14px;border:1px solid var(--line);background:var(--white);font-family:var(--font-j);font-size:14px;outline:none;transition:border-color .2s;-webkit-appearance:none;border-radius:0}
+.form-input,.form-textarea,.form-select{width:100%;padding:11px 14px;border:1px solid var(--line);background:var(--white);font-family:var(--font-j);font-size:14px;outline:none;transition:border-color .2s;-webkit-appearance:none;border-radius:0;color:var(--fg);-webkit-text-fill-color:var(--fg)}
 .form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--fg)}
 .form-textarea{resize:vertical;min-height:110px}
 .form-submit{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--white);background:var(--fg);border:none;padding:14px 28px;cursor:pointer;font-family:var(--font-d);transition:background .2s;width:fit-content}
@@ -239,7 +241,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
     <button class="acc-trigger" aria-expanded="false" data-panel="about-panel"><span class="acc-label">About</span><div class="acc-meta"><span class="acc-num">01</span><span class="acc-icon">+</span></div></button>
     <div class="acc-panel" id="about-panel"><div class="acc-inner"><div class="acc-content">
       <div class="about-grid">
-        <div><h2 class="about-headline">人生を、<br>変える。</h2><p class="about-body">人生を変える体験を届けるために、GVAはノイズを鳴らす。<br>才能とブランドが出会う場所から、誰かの人生が動き始める。</p></div>
+        <div><h2 class="about-headline">才能と<br>ブランドを、繋ぐ。</h2><p class="about-body">GOOD VIBES AGENCYは、インフルエンサーマーケティングとタレントマネジメントを通じて、ブランドと生活者のリアルなコミュニケーションを生み出すエージェンシーです。</p></div>
         <div class="about-nums">
           <div class="about-num-row"><div class="abn-n">10,000<span style="font-size:.4em;color:var(--ghost)">+</span></div><div class="abn-l">Talent Network</div></div>
           <div class="about-num-row"><div class="abn-n">500<span style="font-size:.4em;color:var(--ghost)">+</span></div><div class="abn-l">Projects Delivered</div></div>
@@ -281,7 +283,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
     <div class="acc-panel" id="contact-panel"><div class="acc-inner"><div class="acc-content">
       <form class="contact-form" onsubmit="return false">
         <div class="form-row">
-          <div class="form-field"><label class="form-label">お名前</label><input type="text" class="form-input" placeholder="高橋 徹"></div>
+          <div class="form-field"><label class="form-label">お名前</label><input type="text" class="form-input" placeholder="山田 太郎"></div>
           <div class="form-field"><label class="form-label">会社名</label><input type="text" class="form-input" placeholder="株式会社〇〇"></div>
         </div>
         <div class="form-field"><label class="form-label">メールアドレス</label><input type="email" class="form-input" placeholder="info@example.com"></div>
@@ -294,7 +296,7 @@ footer{border-top:1px solid var(--line);padding:20px var(--pad);display:flex;jus
 </main>
 <footer>
   <div class="f-logo"><img src="gva-logo.png" alt="GOOD VIBES AGENCY"></div>
-  <div class="f-links"><a href="/privacy">Privacy</a><a href="mailto:toru.t@goodvibesagency.tokyo">Email</a></div>
+  <div class="f-links"><a href="privacy.html">Privacy</a><a href="mailto:toru.t@goodvibesagency.tokyo">Email</a></div>
   <div class="f-copy">© 2025 株式会社GOOD VIBES AGENCY</div>
 </footer>
 

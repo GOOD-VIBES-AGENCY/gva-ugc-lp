@@ -28,8 +28,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 /* HERO — FULLSCREEN VIDEO */
 .hero{
   background:#0A0A0A;
-  display:block;
-  position:relative;
+  padding-top:56px;/* below fixed header */
   line-height:0;
 }
 .hero-left{display:none;}
@@ -65,12 +64,13 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-d);overflow-x:h
 }
 .hero-right{
   width:100%;
-  padding-top:56px;/* space for fixed header */
+  aspect-ratio:16/9;
+  overflow:hidden;
 }
 .hero-right video{
-  width:100%;
-  height:auto;
+  width:100%;height:100%;
   display:block;
+  object-fit:cover;
 }
 @media(max-width:640px){
   .hero{height:calc(100svh - 56px);}

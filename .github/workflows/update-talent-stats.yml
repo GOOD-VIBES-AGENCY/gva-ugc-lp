@@ -1,0 +1,95 @@
+name: Update Talent Follower Counts
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # Every Monday at 9:00 AM JST (UTC+9)
+  workflow_dispatch:      # Allow manual trigger
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch Instagram follower counts
+        env:
+          IG_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          BIZ_ID: "17841401684294468"
+        run: |
+          python3 - << 'PYEOF'
+          import urllib.request, json, urllib.parse, time, os, re
+
+          TOKEN = os.environ['IG_TOKEN']
+          BIZ_ID = os.environ['BIZ_ID']
+
+          talents = [
+              ("moo_mo_k", "桃佳 ｜MOMOKA"),
+              ("k_r__ko", "かんな"),
+              ("yui___12.8", "ゆい"),
+              ("saki__kishimoto", "岸本　沙季| Saki Kishimoto"),
+              ("uruuril", "miu"),
+              ("ririka_konishi", "莉々栞 /ririka"),
+              ("mkmyxi", "𝑀𝐴𝑌𝑈"),
+              ("saeeeoky", "紗英"),
+              ("_021miu", "乙"),
+          ]
+
+          def fmt(n):
+              if n >= 1000:
+                  k = n / 1000
+                  return f"{k:.1f}K".replace('.0K', 'K')
+              return str(n)
+
+          results = []
+          for handle, fallback_name in talents:
+              fields = urllib.parse.quote(f"business_discovery.username({handle}){{name,followers_count}}")
+              url = f"https://graph.facebook.com/v21.0/{BIZ_ID}?fields={fields}&access_token={TOKEN}"
+              try:
+                  with urllib.request.urlopen(url) as r:
+                      data = json.loads(r.read())
+                  bd = data.get('business_discovery', {})
+                  followers = bd.get('followers_count', 0)
+                  name = bd.get('name', fallback_name)
+                  print(f"✅ @{handle}: {name} / {followers:,}")
+                  results.append({'handle': handle, 'name': name, 'followers': followers, 'followers_fmt': fmt(followers)})
+              except Exception as e:
+                  print(f"❌ @{handle}: {e}")
+              time.sleep(0.5)
+
+          # Save data
+          with open('talent_data.json', 'w', encoding='utf-8') as f:
+              json.dump(results, f, ensure_ascii=False, indent=2)
+
+          # Update follower counts in corp.html
+          with open('corp.html', 'r', encoding='utf-8') as f:
+              html = f.read()
+
+          for r in results:
+              handle = r['handle']
+              followers_fmt = r['followers_fmt']
+              # Update the follower count display
+              pattern = f'(data-tc>.*?@{re.escape(handle)}.*?<div class="t-stat-n">)(.*?)(</div>)'
+              html = re.sub(pattern, lambda m: m.group(1) + followers_fmt + m.group(3), html, flags=re.DOTALL)
+
+          with open('corp.html', 'w', encoding='utf-8') as f:
+              f.write(html)
+
+          print("Updated corp.html with latest follower counts")
+          PYEOF
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "GVA Bot"
+          git config user.email "bot@goodvibesagency.tokyo"
+          git add corp.html talent_data.json
+          git diff --staged --quiet || git commit -m "chore: weekly talent follower count update $(date +'%Y-%m-%d')"
+          git push

@@ -19,7 +19,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-seri
 /* ── HEADER ── */
 .header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 20px;position:sticky;top:0;z-index:100}
 .header-inner{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:3px}
-.header-logo{height:20px;display:block}
+.header-logo{height:20px;width:auto;max-width:180px;display:block;object-fit:contain}
 .header-label{font-size:11px;color:var(--light);letter-spacing:.08em;text-transform:uppercase}
 
 /* ── CONTAINER ── */
@@ -128,7 +128,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-seri
 <!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <img src="gva-logo.png" alt="GOOD VIBES AGENCY" class="header-logo">
+    <img src="gva-logo.png" alt="GOOD VIBES AGENCY" <img src="gva-logo.png" alt="GOOD VIBES AGENCY" style="height:20px;width:auto;max-width:200px;display:block">
     <span class="header-label">Campaign Proposal</span>
   </div>
 </header>

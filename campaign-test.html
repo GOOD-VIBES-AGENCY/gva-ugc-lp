@@ -11,10 +11,10 @@
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;min-height:100vh;padding-bottom:80px}
 
 /* HEADER */
-.header{background:var(--card);border-bottom:1px solid var(--border);padding:20px 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
-.header-logo{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}
-.header-divider{width:1px;height:18px;background:var(--border)}
-.header-title{font-size:13px;color:var(--sub)}
+.header{background:#fff;border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:flex-start;flex-direction:column;gap:4px;position:sticky;top:0;z-index:10}
+
+
+
 
 /* HERO */
 .hero{padding:40px 24px 0;max-width:640px;margin:0 auto}
@@ -77,10 +77,9 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-seri
 </head>
 <body>
 
-<header class="header">
-  <span class="header-logo">GVA</span>
-  <span class="header-divider"></span>
-  <span class="header-title">Campaign Proposal</span>
+<header class="header" style="padding:16px 24px 12px;border-bottom:1px solid #E5E5E5;background:#fff;flex-direction:column;align-items:flex-start;gap:6px">
+  <img src="gva-logo.png" alt="GOOD VIBES AGENCY" style="height:22px;display:block">
+  <span style="font-size:11px;color:#999;letter-spacing:.08em;text-transform:uppercase">Campaign Proposal</span>
 </header>
 
 <!-- HERO -->

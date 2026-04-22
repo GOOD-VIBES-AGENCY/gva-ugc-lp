@@ -6,13 +6,13 @@
   <title>MATCHA VIBES | Tokyo, Japan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --lime: #C8FF00;
-      --matcha: #3D8B37;
-      --black: #000000;
-      --white: #FFFFFF;
+      --black: #0A0A0A;
+      --cream: #F5F0E8;
+      --green: #00E676;
+      --gray: #666666;
     }
 
     * {
@@ -21,17 +21,23 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Space Grotesk', sans-serif;
-      background: var(--white);
-      color: var(--black);
-      overflow-x: hidden;
+    html {
+      scroll-behavior: smooth;
     }
 
-    /* HERO SECTION */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HERO - Section 1 */
     .hero {
       min-height: 100vh;
-      background: var(--lime);
+      min-height: 100dvh;
+      background: var(--black);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -40,176 +46,43 @@
       padding: 2rem;
     }
 
-    .logo-stack {
-      text-align: center;
-    }
-
-    .logo-line {
+    .hero-logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 25vw;
-      line-height: 0.85;
-      color: var(--black);
+      font-size: clamp(5rem, 18vw, 14rem);
+      color: var(--cream);
+      line-height: 0.9;
+      text-align: center;
       letter-spacing: -0.02em;
     }
 
-    @media (min-width: 768px) {
-      .logo-line {
-        font-size: 20vw;
-      }
-    }
-
-    .subline {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1rem, 3vw, 1.5rem);
-      font-weight: 700;
+    .hero-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--green);
       margin-top: 2rem;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
     }
 
-    .location {
+    .hero-location {
       position: absolute;
       bottom: 2rem;
       right: 2rem;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(0.875rem, 2vw, 1.25rem);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray);
       letter-spacing: 0.1em;
     }
 
-    /* PRODUCT SECTION */
-    .product {
-      min-height: 100vh;
-      background: var(--white);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 4rem 2rem;
-      gap: 3rem;
-    }
-
-    .cup-container {
-      position: relative;
-      width: 200px;
-      height: 320px;
-    }
-
-    @media (min-width: 768px) {
-      .cup-container {
-        width: 280px;
-        height: 450px;
-      }
-    }
-
-    .cup-lid {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      height: 40px;
+    /* CONCEPT PILLARS - Section 2 */
+    .concept {
       background: var(--black);
-      border-radius: 10px 10px 0 0;
-      z-index: 3;
+      padding: 8rem 2rem;
     }
 
-    .cup-lid::after {
-      content: '';
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40%;
-      height: 12px;
-      background: var(--lime);
-      border-radius: 4px;
-    }
-
-    .cup-body {
-      position: absolute;
-      top: 35px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 85%;
-      height: calc(100% - 35px);
-      background: var(--lime);
-      border: 4px solid var(--black);
-      border-radius: 0 0 20px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .cup-text {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.5rem;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      letter-spacing: 0.15em;
-      color: var(--black);
-    }
-
-    @media (min-width: 768px) {
-      .cup-text {
-        font-size: 3.5rem;
-      }
-    }
-
-    .sleeve {
-      position: absolute;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 80px;
-      background: var(--black);
-      z-index: 2;
-    }
-
-    @media (min-width: 768px) {
-      .sleeve {
-        height: 100px;
-        bottom: 120px;
-      }
-    }
-
-    .sleeve::after {
-      content: '#matchavibes';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--lime);
-      letter-spacing: 0.05em;
-    }
-
-    .price-tag {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 8vw, 5rem);
-      color: var(--black);
-      border: 4px solid var(--black);
-      padding: 0.5rem 2rem;
-      background: var(--white);
-    }
-
-    /* WHY SECTION */
-    .why {
-      padding: 6rem 2rem;
-      background: var(--white);
-    }
-
-    .why-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .cards {
+    .concept-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 2rem;
@@ -218,144 +91,329 @@
     }
 
     @media (min-width: 768px) {
-      .cards {
+      .concept-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
+    .concept-card {
+      border: 1px solid var(--cream);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .concept-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      filter: grayscale(100%) brightness(1.2);
+    }
+
+    .concept-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .concept-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* CLEAR CUP DRINKS - Section 3 */
+    .drinks {
+      background: var(--black);
+      padding: 8rem 2rem;
+    }
+
+    .drinks-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .drinks-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      color: var(--cream);
+      line-height: 1.1;
+    }
+
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 640px) {
+      .drinks-grid {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
-    .card {
-      border: 4px solid var(--black);
-      padding: 2.5rem 2rem;
+    @media (min-width: 900px) {
+      .drinks-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
+    .drink-item {
       text-align: center;
-      background: var(--white);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .card:hover {
-      transform: translate(-4px, -4px);
-      box-shadow: 8px 8px 0 var(--black);
+    .cup {
+      width: 80px;
+      height: 140px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.15) 0%,
+        rgba(255,255,255,0.05) 50%,
+        rgba(255,255,255,0.1) 100%
+      );
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px 4px 12px 12px;
+      overflow: hidden;
+      box-shadow:
+        inset 0 0 20px rgba(255,255,255,0.05),
+        0 4px 20px rgba(0,0,0,0.3);
     }
 
-    .card-emoji {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
-      display: block;
+    @media (min-width: 768px) {
+      .cup {
+        width: 100px;
+        height: 170px;
+      }
     }
 
-    .card-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--black);
-    }
-
-    .card-desc {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: var(--black);
-    }
-
-    /* HASHTAG SECTION */
-    .hashtag {
+    .cup-lid {
+      position: absolute;
+      top: 0;
+      left: -2px;
+      right: -2px;
+      height: 18px;
       background: var(--black);
-      padding: 6rem 2rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .cup-lid::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 6px;
+      background: var(--gray);
+      border-radius: 2px;
+    }
+
+    .cup-drink {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 75%;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .drink-blueberry .cup-drink {
+      background: linear-gradient(180deg, #00E676 30%, #7B1FA2 100%);
+    }
+
+    .drink-yogurt .cup-drink {
+      background: linear-gradient(180deg, #00E676 40%, #F5F0E8 100%);
+    }
+
+    .drink-banana .cup-drink {
+      background: linear-gradient(180deg, #00E676 30%, #FFD54F 100%);
+    }
+
+    .drink-latte .cup-drink {
+      background: linear-gradient(180deg, #00E676 50%, #FFFFFF 100%);
+    }
+
+    .drink-shot .cup-drink {
+      background: linear-gradient(180deg, #00C853 0%, #1B5E20 100%);
+    }
+
+    .drink-foam {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 0 0 50% 50%;
+    }
+
+    .drink-latte .drink-foam {
+      background: rgba(255,255,255,0.9);
+    }
+
+    .drink-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .drink-price {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--gray);
+    }
+
+    /* TAGLINE SECTION - Section 4 */
+    .tagline-section {
+      background: var(--cream);
+      padding: 10rem 2rem;
       text-align: center;
     }
 
-    .hashtag-text {
+    .tagline-text {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 12vw, 8rem);
-      color: var(--white);
-      margin-bottom: 1.5rem;
+      font-size: clamp(4rem, 15vw, 12rem);
+      color: var(--black);
+      line-height: 0.95;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .hashtag-sub {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1rem, 3vw, 1.5rem);
-      color: var(--lime);
-      font-weight: 600;
-      letter-spacing: 0.05em;
+    .tagline-brand {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray);
+      margin-top: 3rem;
+      letter-spacing: 0.2em;
     }
 
-    /* ROADMAP SECTION */
+    /* ROADMAP - Section 5 */
     .roadmap {
       background: var(--black);
-      padding: 6rem 2rem;
+      padding: 8rem 2rem;
     }
 
-    .roadmap-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      color: var(--white);
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .steps {
+    .roadmap-steps {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2rem;
+      gap: 3rem;
       max-width: 1000px;
       margin: 0 auto;
     }
 
     @media (min-width: 768px) {
-      .steps {
+      .roadmap-steps {
         flex-direction: row;
         justify-content: center;
+        align-items: flex-start;
+        gap: 0;
       }
     }
 
     .step {
       text-align: center;
       flex: 1;
-      max-width: 280px;
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .step::after {
+        content: '';
+        position: absolute;
+        top: 28px;
+        right: 0;
+        width: 50%;
+        height: 1px;
+        background: var(--gray);
+      }
+
+      .step:last-child::after {
+        display: none;
+      }
+
+      .step::before {
+        content: '';
+        position: absolute;
+        top: 28px;
+        left: 0;
+        width: 50%;
+        height: 1px;
+        background: var(--gray);
+      }
+
+      .step:first-child::before {
+        display: none;
+      }
     }
 
     .step-number {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 5rem;
-      color: var(--lime);
+      font-size: 4rem;
+      color: var(--cream);
       line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step:first-child .step-number {
+      color: var(--green);
     }
 
     .step-label {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      color: var(--white);
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-top: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .step-label span {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gray);
       margin-top: 0.5rem;
-    }
-
-    .arrow {
-      display: none;
-      font-size: 3rem;
-      color: var(--lime);
-    }
-
-    @media (min-width: 768px) {
-      .arrow {
-        display: block;
-      }
+      text-transform: none;
+      letter-spacing: 0;
     }
 
     /* FOOTER */
     .footer {
-      background: var(--lime);
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.1);
       padding: 3rem 2rem;
       text-align: center;
     }
 
     .footer-logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      color: var(--black);
+      font-size: 1.5rem;
+      color: var(--cream);
+      letter-spacing: 0.1em;
     }
 
     .footer-copy {
-      font-size: 0.875rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--gray);
       margin-top: 1rem;
-      color: var(--black);
     }
   </style>
 </head>
@@ -363,79 +421,110 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="logo-stack">
-      <div class="logo-line">MATCHA</div>
-      <div class="logo-line">VIBES</div>
-    </div>
-    <p class="subline">The real one. Right here.</p>
-    <span class="location">TOKYO, JAPAN</span>
+    <h1 class="hero-logo">MATCHA VIBES</h1>
+    <p class="hero-tagline">Good vibes start here.</p>
+    <span class="hero-location">TOKYO, JAPAN</span>
   </section>
 
-  <!-- PRODUCT -->
-  <section class="product">
-    <div class="cup-container">
-      <div class="cup-lid"></div>
-      <div class="cup-body">
-        <span class="cup-text">MATCHA VIBES</span>
+  <!-- CONCEPT PILLARS -->
+  <section class="concept">
+    <div class="concept-grid">
+      <div class="concept-card">
+        <span class="concept-icon">&#127861;</span>
+        <h3 class="concept-title">REAL MATCHA</h3>
+        <p class="concept-desc">Authentic Japanese matcha. No shortcuts.</p>
       </div>
-      <div class="sleeve"></div>
-    </div>
-    <div class="price-tag">¥600 / $4</div>
-  </section>
-
-  <!-- WHY -->
-  <section class="why">
-    <h2 class="why-title">WHY MATCHA VIBES?</h2>
-    <div class="cards">
-      <div class="card">
-        <span class="card-emoji">🍵</span>
-        <h3 class="card-title">REAL MATCHA</h3>
-        <p class="card-desc">Authentic Uji matcha from Kyoto. No shortcuts. No artificial. The real deal.</p>
+      <div class="concept-card">
+        <span class="concept-icon">&#128101;</span>
+        <h3 class="concept-title">YOUR PEOPLE</h3>
+        <p class="concept-desc">Community. Connection. Good energy.</p>
       </div>
-      <div class="card">
-        <span class="card-emoji">🗼</span>
-        <h3 class="card-title">TOKYO ONLY</h3>
-        <p class="card-desc">You can only get this here. Right now. Right here in Tokyo.</p>
-      </div>
-      <div class="card">
-        <span class="card-emoji">📱</span>
-        <h3 class="card-title">MADE FOR YOUR FEED</h3>
-        <p class="card-desc">Designed to pop on your Instagram and TikTok. Every sip is content.</p>
+      <div class="concept-card">
+        <span class="concept-icon">&#9889;</span>
+        <h3 class="concept-title">NEW ENERGY</h3>
+        <p class="concept-desc">Fuel for your next move.</p>
       </div>
     </div>
   </section>
 
-  <!-- HASHTAG -->
-  <section class="hashtag">
-    <p class="hashtag-text">#matchavibes</p>
-    <p class="hashtag-sub">Tag us on Instagram & TikTok ✨</p>
+  <!-- CLEAR CUP DRINKS -->
+  <section class="drinks">
+    <div class="drinks-header">
+      <h2 class="drinks-title">The cup is clear.<br>The vibes are not.</h2>
+    </div>
+    <div class="drinks-grid">
+      <div class="drink-item drink-blueberry">
+        <div class="cup">
+          <div class="cup-lid"></div>
+          <div class="cup-drink"></div>
+        </div>
+        <p class="drink-name">Blueberry Matcha</p>
+        <p class="drink-price">¥850</p>
+      </div>
+      <div class="drink-item drink-yogurt">
+        <div class="cup">
+          <div class="cup-lid"></div>
+          <div class="cup-drink"></div>
+        </div>
+        <p class="drink-name">Yogurt Smoothie</p>
+        <p class="drink-price">¥750</p>
+      </div>
+      <div class="drink-item drink-banana">
+        <div class="cup">
+          <div class="cup-lid"></div>
+          <div class="cup-drink"></div>
+        </div>
+        <p class="drink-name">Banana Recovery</p>
+        <p class="drink-price">¥700</p>
+      </div>
+      <div class="drink-item drink-latte">
+        <div class="cup">
+          <div class="cup-lid"></div>
+          <div class="cup-drink"></div>
+          <div class="drink-foam"></div>
+        </div>
+        <p class="drink-name">Classic Latte</p>
+        <p class="drink-price">¥600</p>
+      </div>
+      <div class="drink-item drink-shot">
+        <div class="cup">
+          <div class="cup-lid"></div>
+          <div class="cup-drink"></div>
+        </div>
+        <p class="drink-name">Matcha Shot</p>
+        <p class="drink-price">¥400</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAGLINE -->
+  <section class="tagline-section">
+    <h2 class="tagline-text">Good vibes<br>start here.</h2>
+    <p class="tagline-brand">MATCHA VIBES TOKYO</p>
   </section>
 
   <!-- ROADMAP -->
   <section class="roadmap">
-    <h2 class="roadmap-title">THE JOURNEY</h2>
-    <div class="steps">
+    <div class="roadmap-steps">
       <div class="step">
         <div class="step-number">01</div>
-        <div class="step-label">TOKYO</div>
+        <div class="step-label">TOKYO POP-UP<span>Summer 2026</span></div>
       </div>
-      <span class="arrow">→</span>
       <div class="step">
         <div class="step-number">02</div>
-        <div class="step-label">SCALE</div>
+        <div class="step-label">SCALE TOKYO<span>2027</span></div>
       </div>
-      <span class="arrow">→</span>
       <div class="step">
         <div class="step-number">03</div>
-        <div class="step-label">WORLD</div>
+        <div class="step-label">GLOBAL<span>2028+</span></div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-logo">MATCHA VIBES ☕</div>
-    <p class="footer-copy">© 2026 MATCHA VIBES. All rights reserved.</p>
+    <div class="footer-logo">MATCHA VIBES</div>
+    <p class="footer-copy">© 2026 MATCHA VIBES. Tokyo, Japan.</p>
   </footer>
 
 </body>

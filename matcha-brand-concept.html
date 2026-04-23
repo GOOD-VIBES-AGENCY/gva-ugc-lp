@@ -19,7 +19,10 @@
       --cream: #F5F0E8;
       --neon: #00E676;
       --gray: #666666;
+      --gray-dark: #444444;
       --gray-light: #999999;
+      --border: #333333;
+      --border-light: #cccccc;
     }
 
     html {
@@ -36,7 +39,7 @@
     }
 
     /* ========================================
-       SECTION 1: HERO
+       SECTION 1: HERO (100vh, #0A0A0A)
     ======================================== */
     .hero {
       min-height: 100vh;
@@ -56,7 +59,7 @@
 
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 20vw, 16rem);
+      font-size: 15vw;
       line-height: 0.85;
       color: var(--cream);
       letter-spacing: -0.02em;
@@ -64,7 +67,7 @@
 
     .hero-title-outline {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 20vw, 16rem);
+      font-size: 15vw;
       line-height: 0.85;
       color: transparent;
       -webkit-text-stroke: 2px var(--cream);
@@ -73,20 +76,23 @@
 
     .hero-tagline {
       margin-top: 3rem;
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--neon);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
     }
 
-    .hero-location {
-      margin-top: 1.5rem;
-      font-size: 12px;
+    .hero-tagline-good {
+      font-size: 14px;
       font-weight: 300;
       color: var(--gray);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      letter-spacing: 0.3em;
+    }
+
+    .hero-tagline-start {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--neon);
+      letter-spacing: 0.3em;
     }
 
     .hero-image {
@@ -100,70 +106,69 @@
       height: 100dvh;
       object-fit: cover;
       object-position: center;
-      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .hero-image:hover img {
-      transform: scale(1.03);
     }
 
     /* ========================================
-       SECTION 2: THREE PILLARS
+       SECTION 2: PHILOSOPHY (#F5F0E8)
     ======================================== */
-    .pillars {
+    .philosophy {
       background: var(--cream);
       color: var(--black);
-      padding: 10rem 8vw;
+      padding: 12rem 8vw;
     }
 
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .philosophy-content {
+      display: flex;
       gap: 4rem;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .pillar {
-      position: relative;
-      padding-top: 2rem;
+    .philosophy-line {
+      flex-shrink: 0;
+      width: 1px;
+      background: var(--border-light);
     }
 
-    .pillar::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: var(--black);
-      opacity: 0.15;
+    .philosophy-text {
+      flex: 1;
     }
 
-    .pillar-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 5rem;
-      line-height: 1;
+    .philosophy-poem {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      line-height: 2.2;
       color: var(--black);
-      opacity: 0.1;
-      margin-bottom: 1rem;
+      white-space: pre-line;
     }
 
-    .pillar-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      letter-spacing: 0.05em;
-      margin-bottom: 1.5rem;
-    }
-
-    .pillar-desc {
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.7;
-      color: var(--gray);
-      max-width: 280px;
+    .philosophy-cta {
+      margin-top: 4rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--neon);
     }
 
     /* ========================================
-       SECTION 3: MENU / LINEUP
+       SECTION 3: FULLSCREEN IMAGE
+    ======================================== */
+    .fullscreen-image {
+      width: 100vw;
+      height: 70vh;
+      overflow: hidden;
+    }
+
+    .fullscreen-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ========================================
+       SECTION 4: THE LINEUP (#0A0A0A)
     ======================================== */
     .lineup {
       background: var(--black);
@@ -176,286 +181,224 @@
 
     .lineup-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 8vw, 7rem);
+      font-size: 8vw;
       color: var(--cream);
       letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .lineup-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--gray);
+      letter-spacing: 0.1em;
     }
 
     .lineup-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
     }
 
     .drink-card {
       position: relative;
-    }
-
-    .drink-image {
-      position: relative;
-      aspect-ratio: 1;
       overflow: hidden;
-      margin-bottom: 1.5rem;
     }
 
-    .drink-image img {
+    .drink-card-inner {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+    }
+
+    .drink-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    .drink-card:hover .drink-image img {
-      transform: scale(1.03);
+    .drink-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .drink-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0) 100%);
     }
 
     .drink-name {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 24px;
+      font-size: 22px;
       color: var(--cream);
       letter-spacing: 0.03em;
-      margin-bottom: 0.5rem;
-    }
-
-    .drink-desc {
-      font-size: 13px;
-      color: var(--gray-light);
-      line-height: 1.5;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.25rem;
     }
 
     .drink-price {
-      font-size: 16px;
-      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
       color: var(--neon);
     }
 
     /* ========================================
-       SECTION 4: QUOTE
+       SECTION 5: QUOTE (#F5F0E8)
     ======================================== */
     .quote {
-      background: var(--black);
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      background: var(--cream);
+      padding: 15rem 4rem;
       text-align: center;
-      padding: 8rem 4rem;
     }
 
     .quote-text {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 8vw, 7rem);
-      color: var(--cream);
-      line-height: 1.15;
-      max-width: 900px;
+      font-size: 12vw;
+      color: var(--black);
+      line-height: 0.9;
+      margin-bottom: 3rem;
     }
 
     .quote-attr {
-      margin-top: 4rem;
+      font-family: 'Inter', sans-serif;
       font-size: 14px;
-      font-weight: 400;
-      color: var(--neon);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      font-weight: 300;
+      color: var(--gray-light);
+      letter-spacing: 0.1em;
     }
 
     /* ========================================
-       SECTION 5: LOCATIONS
+       SECTION 6: WHERE TO FIND US (#0A0A0A)
     ======================================== */
     .locations {
-      background: var(--cream);
-      color: var(--black);
+      background: var(--black);
       padding: 10rem 8vw;
-    }
-
-    .locations-header {
-      text-align: center;
-      margin-bottom: 6rem;
     }
 
     .locations-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      letter-spacing: 0.03em;
-      margin-bottom: 1rem;
-    }
-
-    .locations-subtitle {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--gray);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      font-size: 5vw;
+      color: var(--cream);
+      letter-spacing: 0.02em;
+      margin-bottom: 5rem;
     }
 
     .locations-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 4rem;
-      max-width: 1000px;
-      margin: 0 auto;
+      gap: 2rem;
     }
 
-    .location-item {
-      text-align: center;
+    .location-card {
+      border: 1px solid var(--border);
+      padding: 3rem;
+      transition: border-color 0.3s ease;
     }
 
-    .location-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
+    .location-card:hover {
+      border-color: var(--neon);
     }
 
-    .location-tagline {
+    .location-jp {
+      font-family: 'Inter', sans-serif;
       font-size: 14px;
       font-weight: 400;
+      color: var(--gray-light);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .location-en {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      color: var(--cream);
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .location-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
       color: var(--gray);
+      margin-bottom: 0.5rem;
       font-style: italic;
     }
 
+    .location-status {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--neon);
+      letter-spacing: 0.1em;
+    }
+
     /* ========================================
-       SECTION 6: FOOTER
+       SECTION 7: FOOTER (#0A0A0A)
     ======================================== */
     .footer {
       background: var(--black);
-      padding: 8rem 8vw;
+      padding: 10rem 8vw;
       text-align: center;
     }
 
     .footer-logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 12vw, 10rem);
+      font-size: 3vw;
       color: var(--cream);
-      line-height: 0.9;
-      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
     }
 
     .footer-tagline {
+      font-family: 'Inter', sans-serif;
       font-size: 14px;
-      font-weight: 400;
+      font-weight: 300;
       color: var(--neon);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      letter-spacing: 0.1em;
       margin-bottom: 3rem;
     }
 
     .footer-info {
+      font-family: 'Inter', sans-serif;
       font-size: 12px;
       font-weight: 300;
-      color: var(--gray);
+      color: var(--gray-dark);
       letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-
-    .footer-social {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--cream);
-      letter-spacing: 0.1em;
-    }
-
-    .footer-social a {
-      color: var(--cream);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-social a:hover {
-      color: var(--neon);
-    }
-
-    /* ========================================
-       MOBILE RESPONSIVE
-    ======================================== */
-    @media (max-width: 1024px) {
-      .lineup-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr;
-        grid-template-rows: 60vh auto;
-        grid-template-rows: 60dvh auto;
-      }
-
-      .hero-image {
-        order: -1;
-      }
-
-      .hero-image img {
-        height: 60vh;
-        height: 60dvh;
-      }
-
-      .hero-text {
-        padding: 4rem 6vw;
-        text-align: left;
-      }
-
-      .hero-title,
-      .hero-title-outline {
-        font-size: clamp(4rem, 18vw, 8rem);
-      }
-
-      .pillars-grid {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-      }
-
-      .pillar-desc {
-        max-width: 100%;
-      }
-
-      .lineup {
-        padding: 6rem 6vw;
-      }
-
-      .lineup-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        display: flex;
-        padding-bottom: 2rem;
-      }
-
-      .drink-card {
-        flex: 0 0 80vw;
-        scroll-snap-align: start;
-      }
-
-      .locations-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .quote {
-        min-height: auto;
-        padding: 6rem 6vw;
-      }
-
-      .pillars,
-      .locations {
-        padding: 6rem 6vw;
-      }
-
-      .footer {
-        padding: 5rem 6vw;
-      }
+      margin-bottom: 0.5rem;
     }
 
     /* ========================================
        ANIMATIONS
     ======================================== */
-    @keyframes fadeInUp {
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero initial animations */
+    .hero-text > * {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroFadeUp 0.8s ease-out forwards;
+    }
+
+    .hero-title { animation-delay: 0.1s; }
+    .hero-title-outline { animation-delay: 0.2s; }
+    .hero-tagline { animation-delay: 0.4s; }
+
+    @keyframes heroFadeUp {
       from {
         opacity: 0;
         transform: translateY(30px);
@@ -466,15 +409,99 @@
       }
     }
 
-    .hero-text > * {
-      animation: fadeInUp 0.8s ease-out forwards;
-      opacity: 0;
+    /* ========================================
+       MOBILE RESPONSIVE
+    ======================================== */
+    @media (max-width: 1024px) {
+      .locations-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
     }
 
-    .hero-title { animation-delay: 0.1s; }
-    .hero-title-outline { animation-delay: 0.2s; }
-    .hero-tagline { animation-delay: 0.4s; }
-    .hero-location { animation-delay: 0.5s; }
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: 55vh auto;
+        grid-template-rows: 55dvh auto;
+      }
+
+      .hero-image {
+        order: -1;
+      }
+
+      .hero-image img {
+        height: 55vh;
+        height: 55dvh;
+      }
+
+      .hero-text {
+        padding: 4rem 6vw;
+      }
+
+      .hero-title,
+      .hero-title-outline {
+        font-size: 22vw;
+      }
+
+      .philosophy {
+        padding: 8rem 6vw;
+      }
+
+      .philosophy-content {
+        gap: 2rem;
+      }
+
+      .philosophy-poem {
+        font-size: 1.1rem;
+        line-height: 2;
+      }
+
+      .fullscreen-image {
+        height: 50vh;
+      }
+
+      .lineup {
+        padding: 6rem 6vw;
+      }
+
+      .lineup-title {
+        font-size: 14vw;
+      }
+
+      .lineup-grid {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .quote {
+        padding: 8rem 6vw;
+      }
+
+      .quote-text {
+        font-size: 16vw;
+      }
+
+      .locations {
+        padding: 6rem 6vw;
+      }
+
+      .locations-title {
+        font-size: 10vw;
+      }
+
+      .locations-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        padding: 6rem 6vw;
+      }
+
+      .footer-logo {
+        font-size: 6vw;
+      }
+    }
   </style>
 </head>
 <body>
@@ -484,117 +511,152 @@
     <div class="hero-text">
       <h1 class="hero-title">MATCHA</h1>
       <span class="hero-title-outline">VIBES</span>
-      <p class="hero-tagline">Good vibes start here.</p>
-      <p class="hero-location">Tokyo, Japan</p>
+      <div class="hero-tagline">
+        <span class="hero-tagline-good">Good vibes</span>
+        <span class="hero-tagline-start">start here.</span>
+      </div>
     </div>
     <div class="hero-image">
-      <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha - MATCHA VIBES signature drink">
+      <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="MATCHA VIBES signature blueberry matcha">
     </div>
   </section>
 
-  <!-- SECTION 2: THREE PILLARS -->
-  <section class="pillars">
-    <div class="pillars-grid">
-      <div class="pillar">
-        <div class="pillar-number">01</div>
-        <h2 class="pillar-title">REAL MATCHA</h2>
-        <p class="pillar-desc">Sourced directly from Kyoto's finest tea farms. No shortcuts. No compromises. Just pure, ceremonial-grade matcha that honors centuries of tradition.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-number">02</div>
-        <h2 class="pillar-title">YOUR PEOPLE</h2>
-        <p class="pillar-desc">Runners at dawn. Travelers between flights. Creators before deadlines. This is where your tribe finds their ritual. Together.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-number">03</div>
-        <h2 class="pillar-title">THE MOMENT</h2>
-        <p class="pillar-desc">After the run. Between meetings. Before the big pitch. These small moments matter. We're here to make them extraordinary.</p>
+  <!-- SECTION 2: PHILOSOPHY -->
+  <section class="philosophy">
+    <div class="philosophy-content">
+      <div class="philosophy-line"></div>
+      <div class="philosophy-text">
+        <p class="philosophy-poem fade-up">Some mornings, you just run.
+And somewhere along the way, you stop.
+Not because you are tired.
+Because something pulled you in.
+
+MATCHA VIBES is that place.
+Real matcha. Real people. Real Tokyo.
+The kind of moment that stays with you
+long after the run ends.
+
+We believe a single cup can change
+the tone of your day.
+And the right day can change
+the direction of your life.</p>
+        <p class="philosophy-cta fade-up">Good vibes start here.</p>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 3: MENU / LINEUP -->
+  <!-- SECTION 3: FULLSCREEN IMAGE -->
+  <section class="fullscreen-image">
+    <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="MATCHA VIBES yogurt smoothie">
+  </section>
+
+  <!-- SECTION 4: THE LINEUP -->
   <section class="lineup">
-    <div class="lineup-header">
+    <div class="lineup-header fade-up">
       <h2 class="lineup-title">THE LINEUP</h2>
+      <p class="lineup-subtitle">Four drinks. Infinite vibes.</p>
     </div>
     <div class="lineup-grid">
-      <article class="drink-card">
-        <div class="drink-image">
+      <article class="drink-card fade-up">
+        <div class="drink-card-inner">
           <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha">
+          <div class="drink-info">
+            <h3 class="drink-name">BLUEBERRY MATCHA</h3>
+            <p class="drink-price">¥850</p>
+          </div>
         </div>
-        <h3 class="drink-name">Blueberry Matcha</h3>
-        <p class="drink-desc">Matcha meets its match.</p>
-        <p class="drink-price">¥850</p>
       </article>
-      <article class="drink-card">
-        <div class="drink-image">
+      <article class="drink-card fade-up">
+        <div class="drink-card-inner">
           <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie">
+          <div class="drink-info">
+            <h3 class="drink-name">YOGURT SMOOTHIE</h3>
+            <p class="drink-price">¥750</p>
+          </div>
         </div>
-        <h3 class="drink-name">Yogurt Smoothie</h3>
-        <p class="drink-desc">Smooth like your next run.</p>
-        <p class="drink-price">¥750</p>
       </article>
-      <article class="drink-card">
-        <div class="drink-image">
+      <article class="drink-card fade-up">
+        <div class="drink-card-inner">
           <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery">
+          <div class="drink-info">
+            <h3 class="drink-name">BANANA RECOVERY</h3>
+            <p class="drink-price">¥700</p>
+          </div>
         </div>
-        <h3 class="drink-name">Banana Recovery</h3>
-        <p class="drink-desc">Post-run fuel. Pre-life fuel.</p>
-        <p class="drink-price">¥700</p>
       </article>
-      <article class="drink-card">
-        <div class="drink-image">
+      <article class="drink-card fade-up">
+        <div class="drink-card-inner">
           <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte">
+          <div class="drink-info">
+            <h3 class="drink-name">CLASSIC LATTE</h3>
+            <p class="drink-price">¥650</p>
+          </div>
         </div>
-        <h3 class="drink-name">Classic Latte</h3>
-        <p class="drink-desc">The original vibe.</p>
-        <p class="drink-price">¥650</p>
       </article>
     </div>
   </section>
 
-  <!-- SECTION 4: QUOTE -->
+  <!-- SECTION 5: QUOTE -->
   <section class="quote">
-    <blockquote class="quote-text">
-      The best part<br>
-      of your day<br>
-      starts with us.
+    <blockquote class="quote-text fade-up">
+      The best part<br>of your run.
     </blockquote>
-    <cite class="quote-attr">— Matcha Vibes Tokyo</cite>
+    <cite class="quote-attr fade-up">— Every runner who has visited us</cite>
   </section>
 
-  <!-- SECTION 5: LOCATIONS -->
+  <!-- SECTION 6: WHERE TO FIND US -->
   <section class="locations">
-    <div class="locations-header">
-      <h2 class="locations-title">WHERE TO FIND US</h2>
-      <p class="locations-subtitle">Coming Soon to Tokyo</p>
-    </div>
+    <h2 class="locations-title fade-up">WHERE TO FIND US</h2>
     <div class="locations-grid">
-      <div class="location-item">
-        <h3 class="location-name">KOKYOGAIEN</h3>
-        <p class="location-tagline">For the runners.</p>
+      <div class="location-card fade-up">
+        <p class="location-jp">皇居外苑</p>
+        <h3 class="location-en">IMPERIAL PALACE</h3>
+        <p class="location-desc">For the runners.</p>
+        <p class="location-status">Opening 2026</p>
       </div>
-      <div class="location-item">
-        <h3 class="location-name">HARAJUKU</h3>
-        <p class="location-tagline">For the explorers.</p>
+      <div class="location-card fade-up">
+        <p class="location-jp">原宿</p>
+        <h3 class="location-en">HARAJUKU</h3>
+        <p class="location-desc">For the explorers.</p>
+        <p class="location-status">Opening 2026</p>
       </div>
-      <div class="location-item">
-        <h3 class="location-name">SHIBUYA</h3>
-        <p class="location-tagline">For everyone.</p>
+      <div class="location-card fade-up">
+        <p class="location-jp">渋谷</p>
+        <h3 class="location-en">SHIBUYA</h3>
+        <p class="location-desc">For everyone.</p>
+        <p class="location-status">Opening 2026</p>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 6: FOOTER -->
+  <!-- SECTION 7: FOOTER -->
   <footer class="footer">
-    <div class="footer-logo">MATCHA<br>VIBES</div>
+    <p class="footer-logo">MATCHA VIBES</p>
     <p class="footer-tagline">Good vibes start here.</p>
-    <p class="footer-info">Tokyo, Japan 2026</p>
-    <p class="footer-social">
-      <a href="https://instagram.com/matchavibes.tokyo" target="_blank" rel="noopener">@matchavibes.tokyo</a>
-    </p>
+    <p class="footer-info">TOKYO, JAPAN 2026</p>
+    <p class="footer-info">@matchavibes.tokyo</p>
   </footer>
+
+  <script>
+    // IntersectionObserver for fade-up animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 
 </body>
 </html>

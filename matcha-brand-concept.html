@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MATCHA VIBES | Tokyo, Japan</title>
+  <title>MATCHA VIBES — Good vibes start here.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --black: #0A0A0A;
-      --cream: #F5F0E8;
-      --green: #00E676;
-      --gray: #666666;
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+    }
+
+    :root {
+      --black: #0A0A0A;
+      --cream: #F5F0E8;
+      --neon: #00E676;
+      --gray: #666666;
+      --gray-light: #999999;
     }
 
     html {
@@ -26,505 +27,573 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--black);
       color: var(--cream);
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
-    /* HERO - Section 1 */
+    /* ========================================
+       SECTION 1: HERO
+    ======================================== */
     .hero {
       min-height: 100vh;
       min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       background: var(--black);
+    }
+
+    .hero-text {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      position: relative;
-      padding: 2rem;
+      padding: 4rem;
+      padding-left: 8vw;
     }
 
-    .hero-logo {
+    .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(5rem, 18vw, 14rem);
+      font-size: clamp(4rem, 20vw, 16rem);
+      line-height: 0.85;
       color: var(--cream);
-      line-height: 0.9;
-      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title-outline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 20vw, 16rem);
+      line-height: 0.85;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--cream);
       letter-spacing: -0.02em;
     }
 
     .hero-tagline {
-      font-family: 'Inter', sans-serif;
-      font-size: 18px;
+      margin-top: 3rem;
+      font-size: 14px;
       font-weight: 400;
-      color: var(--green);
-      margin-top: 2rem;
-      letter-spacing: 0.15em;
+      color: var(--neon);
+      letter-spacing: 0.2em;
       text-transform: uppercase;
     }
 
     .hero-location {
-      position: absolute;
-      bottom: 2rem;
-      right: 2rem;
-      font-family: 'Inter', sans-serif;
+      margin-top: 1.5rem;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 300;
       color: var(--gray);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
 
-    /* CONCEPT PILLARS - Section 2 */
-    .concept {
-      background: var(--black);
-      padding: 8rem 2rem;
+    .hero-image {
+      position: relative;
+      overflow: hidden;
     }
 
-    .concept-grid {
+    .hero-image img {
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .hero-image:hover img {
+      transform: scale(1.03);
+    }
+
+    /* ========================================
+       SECTION 2: THREE PILLARS
+    ======================================== */
+    .pillars {
+      background: var(--cream);
+      color: var(--black);
+      padding: 10rem 8vw;
+    }
+
+    .pillars-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
     }
 
-    @media (min-width: 768px) {
-      .concept-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-      }
+    .pillar {
+      position: relative;
+      padding-top: 2rem;
     }
 
-    .concept-card {
-      border: 1px solid var(--cream);
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    .concept-icon {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      display: block;
-      filter: grayscale(100%) brightness(1.2);
-    }
-
-    .concept-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      color: var(--cream);
-      margin-bottom: 1rem;
-      letter-spacing: 0.05em;
-    }
-
-    .concept-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--gray);
-      line-height: 1.6;
-    }
-
-    /* CLEAR CUP DRINKS - Section 3 */
-    .drinks {
+    .pillar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
       background: var(--black);
-      padding: 8rem 2rem;
+      opacity: 0.15;
     }
 
-    .drinks-header {
-      text-align: center;
+    .pillar-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--black);
+      opacity: 0.1;
+      margin-bottom: 1rem;
+    }
+
+    .pillar-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+
+    .pillar-desc {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--gray);
+      max-width: 280px;
+    }
+
+    /* ========================================
+       SECTION 3: MENU / LINEUP
+    ======================================== */
+    .lineup {
+      background: var(--black);
+      padding: 10rem 8vw;
+    }
+
+    .lineup-header {
       margin-bottom: 5rem;
     }
 
-    .drinks-title {
+    .lineup-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2rem, 6vw, 4rem);
+      font-size: clamp(3rem, 8vw, 7rem);
       color: var(--cream);
-      line-height: 1.1;
-    }
-
-    .drinks-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem 1rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    @media (min-width: 640px) {
-      .drinks-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (min-width: 900px) {
-      .drinks-grid {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 1.5rem;
-      }
-    }
-
-    .drink-item {
-      text-align: center;
-    }
-
-    .cup {
-      width: 80px;
-      height: 140px;
-      margin: 0 auto 1.5rem;
-      position: relative;
-      background: linear-gradient(
-        135deg,
-        rgba(255,255,255,0.15) 0%,
-        rgba(255,255,255,0.05) 50%,
-        rgba(255,255,255,0.1) 100%
-      );
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 4px 4px 12px 12px;
-      overflow: hidden;
-      box-shadow:
-        inset 0 0 20px rgba(255,255,255,0.05),
-        0 4px 20px rgba(0,0,0,0.3);
-    }
-
-    @media (min-width: 768px) {
-      .cup {
-        width: 100px;
-        height: 170px;
-      }
-    }
-
-    .cup-lid {
-      position: absolute;
-      top: 0;
-      left: -2px;
-      right: -2px;
-      height: 18px;
-      background: var(--black);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 4px 4px 0 0;
-    }
-
-    .cup-lid::after {
-      content: '';
-      position: absolute;
-      top: 4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30px;
-      height: 6px;
-      background: var(--gray);
-      border-radius: 2px;
-    }
-
-    .cup-drink {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 75%;
-      border-radius: 0 0 10px 10px;
-    }
-
-    .drink-blueberry .cup-drink {
-      background: linear-gradient(180deg, #00E676 30%, #7B1FA2 100%);
-    }
-
-    .drink-yogurt .cup-drink {
-      background: linear-gradient(180deg, #00E676 40%, #F5F0E8 100%);
-    }
-
-    .drink-banana .cup-drink {
-      background: linear-gradient(180deg, #00E676 30%, #FFD54F 100%);
-    }
-
-    .drink-latte .cup-drink {
-      background: linear-gradient(180deg, #00E676 50%, #FFFFFF 100%);
-    }
-
-    .drink-shot .cup-drink {
-      background: linear-gradient(180deg, #00C853 0%, #1B5E20 100%);
-    }
-
-    .drink-foam {
-      position: absolute;
-      top: 18px;
-      left: 0;
-      right: 0;
-      height: 12px;
-      background: rgba(255,255,255,0.6);
-      border-radius: 0 0 50% 50%;
-    }
-
-    .drink-latte .drink-foam {
-      background: rgba(255,255,255,0.9);
-    }
-
-    .drink-name {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--cream);
-      margin-bottom: 0.5rem;
       letter-spacing: 0.02em;
     }
 
-    .drink-price {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--gray);
+    .lineup-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
     }
 
-    /* TAGLINE SECTION - Section 4 */
-    .tagline-section {
-      background: var(--cream);
-      padding: 10rem 2rem;
-      text-align: center;
+    .drink-card {
+      position: relative;
     }
 
-    .tagline-text {
+    .drink-image {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .drink-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .drink-card:hover .drink-image img {
+      transform: scale(1.03);
+    }
+
+    .drink-name {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 15vw, 12rem);
-      color: var(--black);
-      line-height: 0.95;
-      max-width: 1200px;
-      margin: 0 auto;
+      font-size: 24px;
+      color: var(--cream);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.5rem;
     }
 
-    .tagline-brand {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
+    .drink-desc {
+      font-size: 13px;
+      color: var(--gray-light);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    .drink-price {
+      font-size: 16px;
       font-weight: 500;
-      color: var(--gray);
-      margin-top: 3rem;
-      letter-spacing: 0.2em;
+      color: var(--neon);
     }
 
-    /* ROADMAP - Section 5 */
-    .roadmap {
+    /* ========================================
+       SECTION 4: QUOTE
+    ======================================== */
+    .quote {
       background: var(--black);
-      padding: 8rem 2rem;
-    }
-
-    .roadmap-steps {
+      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3rem;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 4rem;
+    }
+
+    .quote-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      color: var(--cream);
+      line-height: 1.15;
+      max-width: 900px;
+    }
+
+    .quote-attr {
+      margin-top: 4rem;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--neon);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ========================================
+       SECTION 5: LOCATIONS
+    ======================================== */
+    .locations {
+      background: var(--cream);
+      color: var(--black);
+      padding: 10rem 8vw;
+    }
+
+    .locations-header {
+      text-align: center;
+      margin-bottom: 6rem;
+    }
+
+    .locations-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      letter-spacing: 0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .locations-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--gray);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
       max-width: 1000px;
       margin: 0 auto;
     }
 
-    @media (min-width: 768px) {
-      .roadmap-steps {
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 0;
-      }
-    }
-
-    .step {
+    .location-item {
       text-align: center;
-      flex: 1;
-      position: relative;
     }
 
-    @media (min-width: 768px) {
-      .step::after {
-        content: '';
-        position: absolute;
-        top: 28px;
-        right: 0;
-        width: 50%;
-        height: 1px;
-        background: var(--gray);
-      }
-
-      .step:last-child::after {
-        display: none;
-      }
-
-      .step::before {
-        content: '';
-        position: absolute;
-        top: 28px;
-        left: 0;
-        width: 50%;
-        height: 1px;
-        background: var(--gray);
-      }
-
-      .step:first-child::before {
-        display: none;
-      }
-    }
-
-    .step-number {
+    .location-name {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 4rem;
-      color: var(--cream);
-      line-height: 1;
-      position: relative;
-      z-index: 1;
-    }
-
-    .step:first-child .step-number {
-      color: var(--green);
-    }
-
-    .step-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      color: var(--cream);
-      margin-top: 1rem;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
       letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
     }
 
-    .step-label span {
-      display: block;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
+    .location-tagline {
+      font-size: 14px;
       font-weight: 400;
       color: var(--gray);
-      margin-top: 0.5rem;
-      text-transform: none;
-      letter-spacing: 0;
+      font-style: italic;
     }
 
-    /* FOOTER */
+    /* ========================================
+       SECTION 6: FOOTER
+    ======================================== */
     .footer {
       background: var(--black);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding: 3rem 2rem;
+      padding: 8rem 8vw;
       text-align: center;
     }
 
     .footer-logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
+      font-size: clamp(4rem, 12vw, 10rem);
+      color: var(--cream);
+      line-height: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--neon);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+
+    .footer-info {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .footer-social {
+      font-size: 14px;
+      font-weight: 400;
       color: var(--cream);
       letter-spacing: 0.1em;
     }
 
-    .footer-copy {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      color: var(--gray);
-      margin-top: 1rem;
+    .footer-social a {
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.3s ease;
     }
+
+    .footer-social a:hover {
+      color: var(--neon);
+    }
+
+    /* ========================================
+       MOBILE RESPONSIVE
+    ======================================== */
+    @media (max-width: 1024px) {
+      .lineup-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60vh auto;
+        grid-template-rows: 60dvh auto;
+      }
+
+      .hero-image {
+        order: -1;
+      }
+
+      .hero-image img {
+        height: 60vh;
+        height: 60dvh;
+      }
+
+      .hero-text {
+        padding: 4rem 6vw;
+        text-align: left;
+      }
+
+      .hero-title,
+      .hero-title-outline {
+        font-size: clamp(4rem, 18vw, 8rem);
+      }
+
+      .pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+
+      .pillar-desc {
+        max-width: 100%;
+      }
+
+      .lineup {
+        padding: 6rem 6vw;
+      }
+
+      .lineup-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        display: flex;
+        padding-bottom: 2rem;
+      }
+
+      .drink-card {
+        flex: 0 0 80vw;
+        scroll-snap-align: start;
+      }
+
+      .locations-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .quote {
+        min-height: auto;
+        padding: 6rem 6vw;
+      }
+
+      .pillars,
+      .locations {
+        padding: 6rem 6vw;
+      }
+
+      .footer {
+        padding: 5rem 6vw;
+      }
+    }
+
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-text > * {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .hero-title { animation-delay: 0.1s; }
+    .hero-title-outline { animation-delay: 0.2s; }
+    .hero-tagline { animation-delay: 0.4s; }
+    .hero-location { animation-delay: 0.5s; }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
+  <!-- SECTION 1: HERO -->
   <section class="hero">
-    <h1 class="hero-logo">MATCHA VIBES</h1>
-    <p class="hero-tagline">Good vibes start here.</p>
-    <span class="hero-location">TOKYO, JAPAN</span>
+    <div class="hero-text">
+      <h1 class="hero-title">MATCHA</h1>
+      <span class="hero-title-outline">VIBES</span>
+      <p class="hero-tagline">Good vibes start here.</p>
+      <p class="hero-location">Tokyo, Japan</p>
+    </div>
+    <div class="hero-image">
+      <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha - MATCHA VIBES signature drink">
+    </div>
   </section>
 
-  <!-- CONCEPT PILLARS -->
-  <section class="concept">
-    <div class="concept-grid">
-      <div class="concept-card">
-        <span class="concept-icon">&#127861;</span>
-        <h3 class="concept-title">REAL MATCHA</h3>
-        <p class="concept-desc">Authentic Japanese matcha. No shortcuts.</p>
+  <!-- SECTION 2: THREE PILLARS -->
+  <section class="pillars">
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-number">01</div>
+        <h2 class="pillar-title">REAL MATCHA</h2>
+        <p class="pillar-desc">Sourced directly from Kyoto's finest tea farms. No shortcuts. No compromises. Just pure, ceremonial-grade matcha that honors centuries of tradition.</p>
       </div>
-      <div class="concept-card">
-        <span class="concept-icon">&#128101;</span>
-        <h3 class="concept-title">YOUR PEOPLE</h3>
-        <p class="concept-desc">Community. Connection. Good energy.</p>
+      <div class="pillar">
+        <div class="pillar-number">02</div>
+        <h2 class="pillar-title">YOUR PEOPLE</h2>
+        <p class="pillar-desc">Runners at dawn. Travelers between flights. Creators before deadlines. This is where your tribe finds their ritual. Together.</p>
       </div>
-      <div class="concept-card">
-        <span class="concept-icon">&#9889;</span>
-        <h3 class="concept-title">NEW ENERGY</h3>
-        <p class="concept-desc">Fuel for your next move.</p>
+      <div class="pillar">
+        <div class="pillar-number">03</div>
+        <h2 class="pillar-title">THE MOMENT</h2>
+        <p class="pillar-desc">After the run. Between meetings. Before the big pitch. These small moments matter. We're here to make them extraordinary.</p>
       </div>
     </div>
   </section>
 
-  <!-- CLEAR CUP DRINKS -->
-  <section class="drinks">
-    <div class="drinks-header">
-      <h2 class="drinks-title">The cup is clear.<br>The vibes are not.</h2>
+  <!-- SECTION 3: MENU / LINEUP -->
+  <section class="lineup">
+    <div class="lineup-header">
+      <h2 class="lineup-title">THE LINEUP</h2>
     </div>
-    <div class="drinks-grid">
-      <div class="drink-item drink-blueberry">
-        <div class="cup">
-          <div class="cup-lid"></div>
-          <div class="cup-drink"></div>
+    <div class="lineup-grid">
+      <article class="drink-card">
+        <div class="drink-image">
+          <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha">
         </div>
-        <p class="drink-name">Blueberry Matcha</p>
+        <h3 class="drink-name">Blueberry Matcha</h3>
+        <p class="drink-desc">Matcha meets its match.</p>
         <p class="drink-price">¥850</p>
-      </div>
-      <div class="drink-item drink-yogurt">
-        <div class="cup">
-          <div class="cup-lid"></div>
-          <div class="cup-drink"></div>
+      </article>
+      <article class="drink-card">
+        <div class="drink-image">
+          <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie">
         </div>
-        <p class="drink-name">Yogurt Smoothie</p>
+        <h3 class="drink-name">Yogurt Smoothie</h3>
+        <p class="drink-desc">Smooth like your next run.</p>
         <p class="drink-price">¥750</p>
-      </div>
-      <div class="drink-item drink-banana">
-        <div class="cup">
-          <div class="cup-lid"></div>
-          <div class="cup-drink"></div>
+      </article>
+      <article class="drink-card">
+        <div class="drink-image">
+          <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery">
         </div>
-        <p class="drink-name">Banana Recovery</p>
+        <h3 class="drink-name">Banana Recovery</h3>
+        <p class="drink-desc">Post-run fuel. Pre-life fuel.</p>
         <p class="drink-price">¥700</p>
-      </div>
-      <div class="drink-item drink-latte">
-        <div class="cup">
-          <div class="cup-lid"></div>
-          <div class="cup-drink"></div>
-          <div class="drink-foam"></div>
+      </article>
+      <article class="drink-card">
+        <div class="drink-image">
+          <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte">
         </div>
-        <p class="drink-name">Classic Latte</p>
-        <p class="drink-price">¥600</p>
+        <h3 class="drink-name">Classic Latte</h3>
+        <p class="drink-desc">The original vibe.</p>
+        <p class="drink-price">¥650</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SECTION 4: QUOTE -->
+  <section class="quote">
+    <blockquote class="quote-text">
+      The best part<br>
+      of your day<br>
+      starts with us.
+    </blockquote>
+    <cite class="quote-attr">— Matcha Vibes Tokyo</cite>
+  </section>
+
+  <!-- SECTION 5: LOCATIONS -->
+  <section class="locations">
+    <div class="locations-header">
+      <h2 class="locations-title">WHERE TO FIND US</h2>
+      <p class="locations-subtitle">Coming Soon to Tokyo</p>
+    </div>
+    <div class="locations-grid">
+      <div class="location-item">
+        <h3 class="location-name">KOKYOGAIEN</h3>
+        <p class="location-tagline">For the runners.</p>
       </div>
-      <div class="drink-item drink-shot">
-        <div class="cup">
-          <div class="cup-lid"></div>
-          <div class="cup-drink"></div>
-        </div>
-        <p class="drink-name">Matcha Shot</p>
-        <p class="drink-price">¥400</p>
+      <div class="location-item">
+        <h3 class="location-name">HARAJUKU</h3>
+        <p class="location-tagline">For the explorers.</p>
+      </div>
+      <div class="location-item">
+        <h3 class="location-name">SHIBUYA</h3>
+        <p class="location-tagline">For everyone.</p>
       </div>
     </div>
   </section>
 
-  <!-- TAGLINE -->
-  <section class="tagline-section">
-    <h2 class="tagline-text">Good vibes<br>start here.</h2>
-    <p class="tagline-brand">MATCHA VIBES TOKYO</p>
-  </section>
-
-  <!-- ROADMAP -->
-  <section class="roadmap">
-    <div class="roadmap-steps">
-      <div class="step">
-        <div class="step-number">01</div>
-        <div class="step-label">TOKYO POP-UP<span>Summer 2026</span></div>
-      </div>
-      <div class="step">
-        <div class="step-number">02</div>
-        <div class="step-label">SCALE TOKYO<span>2027</span></div>
-      </div>
-      <div class="step">
-        <div class="step-number">03</div>
-        <div class="step-label">GLOBAL<span>2028+</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
+  <!-- SECTION 6: FOOTER -->
   <footer class="footer">
-    <div class="footer-logo">MATCHA VIBES</div>
-    <p class="footer-copy">© 2026 MATCHA VIBES. Tokyo, Japan.</p>
+    <div class="footer-logo">MATCHA<br>VIBES</div>
+    <p class="footer-tagline">Good vibes start here.</p>
+    <p class="footer-info">Tokyo, Japan 2026</p>
+    <p class="footer-social">
+      <a href="https://instagram.com/matchavibes.tokyo" target="_blank" rel="noopener">@matchavibes.tokyo</a>
+    </p>
   </footer>
 
 </body>

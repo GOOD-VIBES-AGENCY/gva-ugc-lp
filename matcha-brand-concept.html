@@ -6,7 +6,7 @@
   <title>MATCHA VIBES — Good vibes start here.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,14 +15,17 @@
     }
 
     :root {
-      --black: #0A0A0A;
-      --cream: #F5F0E8;
-      --neon: #00E676;
-      --gray: #666666;
-      --gray-dark: #444444;
-      --gray-light: #999999;
-      --border: #333333;
-      --border-light: #cccccc;
+      --bg-primary: #FAFAF8;
+      --bg-secondary: #F0EDE6;
+      --text-primary: #111111;
+      --text-secondary: #999999;
+      --text-muted: #BBB;
+      --accent: #00E676;
+      --border: #E8E5E0;
+      --border-dark: #D8D5D0;
+      --footer-bg: #111111;
+      --footer-text: #F5F0E8;
+      --footer-muted: #666666;
     }
 
     html {
@@ -31,132 +34,226 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--black);
-      color: var(--cream);
+      background: var(--bg-primary);
+      color: var(--text-primary);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
     /* ========================================
-       SECTION 1: HERO (100vh, #0A0A0A)
+       HEADER (fixed, 60px)
+    ======================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(250, 250, 248, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8vw;
+      z-index: 1000;
+    }
+
+    .header-logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: var(--text-primary);
+    }
+
+    .header-location {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-secondary);
+    }
+
+    /* ========================================
+       SECTION 1: HERO (100vh)
     ======================================== */
     .hero {
       min-height: 100vh;
       min-height: 100dvh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: var(--black);
-    }
-
-    .hero-text {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 4rem;
-      padding-left: 8vw;
-    }
-
-    .hero-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 15vw;
-      line-height: 0.85;
-      color: var(--cream);
-      letter-spacing: -0.02em;
-    }
-
-    .hero-title-outline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 15vw;
-      line-height: 0.85;
-      color: transparent;
-      -webkit-text-stroke: 2px var(--cream);
-      letter-spacing: -0.02em;
-    }
-
-    .hero-tagline {
-      margin-top: 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .hero-tagline-good {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--gray);
-      letter-spacing: 0.3em;
-    }
-
-    .hero-tagline-start {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--neon);
-      letter-spacing: 0.3em;
+      background: var(--bg-primary);
+      padding-top: 60px;
     }
 
     .hero-image {
-      position: relative;
+      height: 60vh;
+      height: 60dvh;
       overflow: hidden;
     }
 
     .hero-image img {
       width: 100%;
-      height: 100vh;
-      height: 100dvh;
+      height: 100%;
       object-fit: cover;
       object-position: center;
     }
 
+    .hero-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 8vw;
+    }
+
+    .hero-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+      font-size: 6vw;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
     /* ========================================
-       SECTION 2: PHILOSOPHY (#F5F0E8)
+       SECTION 2: PHILOSOPHY (white)
     ======================================== */
     .philosophy {
-      background: var(--cream);
-      color: var(--black);
-      padding: 12rem 8vw;
+      background: var(--bg-primary);
+      padding: 8rem 8vw;
     }
 
     .philosophy-content {
-      display: flex;
-      gap: 4rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .philosophy-line {
-      flex-shrink: 0;
-      width: 1px;
-      background: var(--border-light);
+      max-width: 700px;
     }
 
     .philosophy-text {
-      flex: 1;
-    }
-
-    .philosophy-poem {
       font-family: 'Inter', sans-serif;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: 300;
-      line-height: 2.2;
-      color: var(--black);
-      white-space: pre-line;
+      line-height: 1.8;
+      color: var(--text-primary);
     }
 
-    .philosophy-cta {
+    .philosophy-divider {
       margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .philosophy-tag {
       font-family: 'Inter', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--neon);
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--text-secondary);
     }
 
     /* ========================================
-       SECTION 3: FULLSCREEN IMAGE
+       SECTION 3: MENU (#F0EDE6)
+    ======================================== */
+    .menu {
+      background: var(--bg-secondary);
+      padding: 8rem 8vw;
+    }
+
+    .menu-header {
+      margin-bottom: 4rem;
+    }
+
+    .menu-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .menu-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+      font-size: 4vw;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .drink-card {
+      background: white;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .drink-card-image {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+    }
+
+    .drink-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .drink-card:hover .drink-card-image img {
+      transform: scale(1.02);
+    }
+
+    .drink-card-info {
+      padding: 1.5rem;
+    }
+
+    .drink-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+    }
+
+    .drink-price {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .drink-copy {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ========================================
+       SECTION 4: FULLSCREEN IMAGE
     ======================================== */
     .fullscreen-image {
       width: 100vw;
-      height: 70vh;
+      height: 60vh;
       overflow: hidden;
     }
 
@@ -168,209 +265,132 @@
     }
 
     /* ========================================
-       SECTION 4: THE LINEUP (#0A0A0A)
+       SECTION 5: ABOUT (white)
     ======================================== */
-    .lineup {
-      background: var(--black);
+    .about {
+      background: var(--bg-primary);
       padding: 10rem 8vw;
     }
 
-    .lineup-header {
-      margin-bottom: 5rem;
+    .about-content {
+      max-width: 600px;
     }
 
-    .lineup-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 8vw;
-      color: var(--cream);
-      letter-spacing: 0.02em;
+    .about-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .about-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 2.0;
+      color: #444444;
+      white-space: pre-line;
+    }
+
+    .about-tagline {
+      margin-top: 2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    /* ========================================
+       SECTION 6: WHERE (#F0EDE6)
+    ======================================== */
+    .where {
+      background: var(--bg-secondary);
+      padding: 8rem 8vw;
+    }
+
+    .where-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
       margin-bottom: 1rem;
     }
 
-    .lineup-subtitle {
+    .where-title {
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--gray);
-      letter-spacing: 0.1em;
+      font-weight: 200;
+      font-size: 3.5vw;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 4rem;
     }
 
-    .lineup-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
+    .location-list {
+      list-style: none;
     }
 
-    .drink-card {
-      position: relative;
-      overflow: hidden;
+    .location-item {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .drink-card-inner {
-      position: relative;
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
+    .location-item:last-child {
+      border-bottom: 1px solid var(--border-dark);
     }
 
-    .drink-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .drink-card:hover img {
-      transform: scale(1.05);
-    }
-
-    .drink-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 1.5rem;
-      background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0) 100%);
-    }
-
-    .drink-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      color: var(--cream);
-      letter-spacing: 0.03em;
-      margin-bottom: 0.25rem;
-    }
-
-    .drink-price {
+    .location-name {
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 400;
-      color: var(--neon);
+      color: var(--text-primary);
+    }
+
+    .location-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
     }
 
     /* ========================================
-       SECTION 5: QUOTE (#F5F0E8)
-    ======================================== */
-    .quote {
-      background: var(--cream);
-      padding: 15rem 4rem;
-      text-align: center;
-    }
-
-    .quote-text {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 12vw;
-      color: var(--black);
-      line-height: 0.9;
-      margin-bottom: 3rem;
-    }
-
-    .quote-attr {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--gray-light);
-      letter-spacing: 0.1em;
-    }
-
-    /* ========================================
-       SECTION 6: WHERE TO FIND US (#0A0A0A)
-    ======================================== */
-    .locations {
-      background: var(--black);
-      padding: 10rem 8vw;
-    }
-
-    .locations-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 5vw;
-      color: var(--cream);
-      letter-spacing: 0.02em;
-      margin-bottom: 5rem;
-    }
-
-    .locations-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-
-    .location-card {
-      border: 1px solid var(--border);
-      padding: 3rem;
-      transition: border-color 0.3s ease;
-    }
-
-    .location-card:hover {
-      border-color: var(--neon);
-    }
-
-    .location-jp {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--gray-light);
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.1em;
-    }
-
-    .location-en {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
-      color: var(--cream);
-      letter-spacing: 0.02em;
-      margin-bottom: 1.5rem;
-    }
-
-    .location-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--gray);
-      margin-bottom: 0.5rem;
-      font-style: italic;
-    }
-
-    .location-status {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--neon);
-      letter-spacing: 0.1em;
-    }
-
-    /* ========================================
-       SECTION 7: FOOTER (#0A0A0A)
+       FOOTER (#111)
     ======================================== */
     .footer {
-      background: var(--black);
-      padding: 10rem 8vw;
-      text-align: center;
+      background: var(--footer-bg);
+      padding: 5rem 8vw;
     }
 
     .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3vw;
-      color: var(--cream);
-      letter-spacing: 0.05em;
-      margin-bottom: 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--footer-text);
+      margin-bottom: 1rem;
     }
 
     .footer-tagline {
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: 11px;
       font-weight: 300;
-      color: var(--neon);
-      letter-spacing: 0.1em;
-      margin-bottom: 3rem;
+      color: var(--footer-muted);
+      margin-bottom: 1rem;
     }
 
-    .footer-info {
+    .footer-social {
       font-family: 'Inter', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 300;
-      color: var(--gray-dark);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
+      color: var(--footer-muted);
     }
 
     /* ========================================
@@ -378,8 +398,8 @@
     ======================================== */
     .fade-up {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
     .fade-up.visible {
@@ -387,21 +407,21 @@
       transform: translateY(0);
     }
 
-    /* Hero initial animations */
-    .hero-text > * {
+    /* Hero initial animation */
+    .hero-label,
+    .hero-title {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
       animation: heroFadeUp 0.8s ease-out forwards;
     }
 
-    .hero-title { animation-delay: 0.1s; }
-    .hero-title-outline { animation-delay: 0.2s; }
-    .hero-tagline { animation-delay: 0.4s; }
+    .hero-label { animation-delay: 0.2s; }
+    .hero-title { animation-delay: 0.4s; }
 
     @keyframes heroFadeUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
       }
       to {
         opacity: 1;
@@ -413,232 +433,208 @@
        MOBILE RESPONSIVE
     ======================================== */
     @media (max-width: 1024px) {
-      .locations-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+      .menu-grid {
+        gap: 1rem;
+      }
+
+      .where-title {
+        font-size: 5vw;
       }
     }
 
     @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr;
-        grid-template-rows: 55vh auto;
-        grid-template-rows: 55dvh auto;
+      .header {
+        padding: 0 6vw;
       }
 
       .hero-image {
-        order: -1;
-      }
-
-      .hero-image img {
-        height: 55vh;
-        height: 55dvh;
+        height: 50vh;
+        height: 50dvh;
       }
 
       .hero-text {
-        padding: 4rem 6vw;
+        padding: 3rem 6vw;
       }
 
-      .hero-title,
-      .hero-title-outline {
-        font-size: 22vw;
+      .hero-title {
+        font-size: 10vw;
       }
 
       .philosophy {
-        padding: 8rem 6vw;
+        padding: 6rem 6vw;
       }
 
-      .philosophy-content {
-        gap: 2rem;
+      .philosophy-text {
+        font-size: 1.3rem;
       }
 
-      .philosophy-poem {
-        font-size: 1.1rem;
-        line-height: 2;
+      .menu {
+        padding: 6rem 6vw;
+      }
+
+      .menu-title {
+        font-size: 8vw;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
 
       .fullscreen-image {
         height: 50vh;
       }
 
-      .lineup {
+      .about {
         padding: 6rem 6vw;
       }
 
-      .lineup-title {
-        font-size: 14vw;
-      }
-
-      .lineup-grid {
-        grid-template-columns: 1fr;
-        gap: 2px;
-      }
-
-      .quote {
-        padding: 8rem 6vw;
-      }
-
-      .quote-text {
-        font-size: 16vw;
-      }
-
-      .locations {
+      .where {
         padding: 6rem 6vw;
       }
 
-      .locations-title {
-        font-size: 10vw;
+      .where-title {
+        font-size: 7vw;
       }
 
-      .locations-grid {
-        grid-template-columns: 1fr;
+      .location-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
       }
 
       .footer {
-        padding: 6rem 6vw;
-      }
-
-      .footer-logo {
-        font-size: 6vw;
+        padding: 4rem 6vw;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER -->
+  <header class="header">
+    <span class="header-logo">MATCHA VIBES</span>
+    <span class="header-location">TOKYO, JAPAN</span>
+  </header>
+
   <!-- SECTION 1: HERO -->
   <section class="hero">
-    <div class="hero-text">
-      <h1 class="hero-title">MATCHA</h1>
-      <span class="hero-title-outline">VIBES</span>
-      <div class="hero-tagline">
-        <span class="hero-tagline-good">Good vibes</span>
-        <span class="hero-tagline-start">start here.</span>
-      </div>
-    </div>
     <div class="hero-image">
       <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="MATCHA VIBES signature blueberry matcha">
+    </div>
+    <div class="hero-text">
+      <span class="hero-label">MATCHA VIBES</span>
+      <h1 class="hero-title">Good vibes<br>start here.</h1>
     </div>
   </section>
 
   <!-- SECTION 2: PHILOSOPHY -->
   <section class="philosophy">
     <div class="philosophy-content">
-      <div class="philosophy-line"></div>
-      <div class="philosophy-text">
-        <p class="philosophy-poem fade-up">Some mornings, you just run.
-And somewhere along the way, you stop.
-Not because you are tired.
-Because something pulled you in.
-
-MATCHA VIBES is that place.
-Real matcha. Real people. Real Tokyo.
-The kind of moment that stays with you
-long after the run ends.
-
-We believe a single cup can change
-the tone of your day.
-And the right day can change
-the direction of your life.</p>
-        <p class="philosophy-cta fade-up">Good vibes start here.</p>
+      <p class="philosophy-text fade-up">The drink the world fell in love with.<br>Tokyo's way of doing it right.</p>
+      <div class="philosophy-divider fade-up">
+        <span class="philosophy-tag">MATCHA VIBES / EST. 2026 / TOKYO</span>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 3: FULLSCREEN IMAGE -->
+  <!-- SECTION 3: MENU -->
+  <section class="menu">
+    <div class="menu-header fade-up">
+      <span class="menu-label">THE LINEUP</span>
+      <h2 class="menu-title">Four drinks.</h2>
+    </div>
+    <div class="menu-grid">
+      <article class="drink-card fade-up">
+        <div class="drink-card-image">
+          <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha">
+        </div>
+        <div class="drink-card-info">
+          <h3 class="drink-name">Blueberry Matcha</h3>
+          <p class="drink-price">¥850</p>
+          <p class="drink-copy">Matcha meets its match.</p>
+        </div>
+      </article>
+      <article class="drink-card fade-up">
+        <div class="drink-card-image">
+          <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie">
+        </div>
+        <div class="drink-card-info">
+          <h3 class="drink-name">Yogurt Smoothie</h3>
+          <p class="drink-price">¥750</p>
+          <p class="drink-copy">Smooth. Every time.</p>
+        </div>
+      </article>
+      <article class="drink-card fade-up">
+        <div class="drink-card-image">
+          <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery">
+        </div>
+        <div class="drink-card-info">
+          <h3 class="drink-name">Banana Recovery</h3>
+          <p class="drink-price">¥700</p>
+          <p class="drink-copy">The after-run essential.</p>
+        </div>
+      </article>
+      <article class="drink-card fade-up">
+        <div class="drink-card-image">
+          <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte">
+        </div>
+        <div class="drink-card-info">
+          <h3 class="drink-name">Classic Latte</h3>
+          <p class="drink-price">¥650</p>
+          <p class="drink-copy">The one that started it all.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SECTION 4: FULLSCREEN IMAGE -->
   <section class="fullscreen-image">
     <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="MATCHA VIBES yogurt smoothie">
   </section>
 
-  <!-- SECTION 4: THE LINEUP -->
-  <section class="lineup">
-    <div class="lineup-header fade-up">
-      <h2 class="lineup-title">THE LINEUP</h2>
-      <p class="lineup-subtitle">Tokyo's most obsessed-over matcha drinks.</p>
-    </div>
-    <div class="lineup-grid">
-      <article class="drink-card fade-up">
-        <div class="drink-card-inner">
-          <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha">
-          <div class="drink-info">
-            <h3 class="drink-name">BLUEBERRY MATCHA</h3>
-            <p class="drink-price">¥850</p>
-          </div>
-        </div>
-      </article>
-      <article class="drink-card fade-up">
-        <div class="drink-card-inner">
-          <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie">
-          <div class="drink-info">
-            <h3 class="drink-name">YOGURT SMOOTHIE</h3>
-            <p class="drink-price">¥750</p>
-          </div>
-        </div>
-      </article>
-      <article class="drink-card fade-up">
-        <div class="drink-card-inner">
-          <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery">
-          <div class="drink-info">
-            <h3 class="drink-name">BANANA RECOVERY</h3>
-            <p class="drink-price">¥700</p>
-          </div>
-        </div>
-      </article>
-      <article class="drink-card fade-up">
-        <div class="drink-card-inner">
-          <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte">
-          <div class="drink-info">
-            <h3 class="drink-name">CLASSIC LATTE</h3>
-            <p class="drink-price">¥650</p>
-          </div>
-        </div>
-      </article>
+  <!-- SECTION 5: ABOUT -->
+  <section class="about">
+    <div class="about-content">
+      <span class="about-label fade-up">ABOUT</span>
+      <p class="about-text fade-up">MATCHA VIBES is not a tea ceremony.
+It is a cup that makes you feel something —
+before a run, between adventures,
+or when you just need a moment.
+
+Tokyo. 2026.</p>
+      <p class="about-tagline fade-up">Good vibes start here.</p>
     </div>
   </section>
 
-  <!-- SECTION 5: QUOTE -->
-  <section class="quote">
-    <blockquote class="quote-text fade-up">
-      The best part<br>of your run.
-    </blockquote>
-    <cite class="quote-attr fade-up">— Everyone who has had their first sip</cite>
+  <!-- SECTION 6: WHERE -->
+  <section class="where">
+    <span class="where-label fade-up">FIND US</span>
+    <h2 class="where-title fade-up">Coming to Tokyo.</h2>
+    <ul class="location-list">
+      <li class="location-item fade-up">
+        <span class="location-name">皇居外苑 IMPERIAL PALACE</span>
+        <span class="location-sub">For the runners.</span>
+      </li>
+      <li class="location-item fade-up">
+        <span class="location-name">原宿 HARAJUKU</span>
+        <span class="location-sub">For the explorers.</span>
+      </li>
+      <li class="location-item fade-up">
+        <span class="location-name">渋谷 SHIBUYA</span>
+        <span class="location-sub">For everyone.</span>
+      </li>
+    </ul>
   </section>
 
-  <!-- SECTION 6: WHERE TO FIND US -->
-  <section class="locations">
-    <h2 class="locations-title fade-up">WHERE TO FIND US</h2>
-    <div class="locations-grid">
-      <div class="location-card fade-up">
-        <p class="location-jp">皇居外苑</p>
-        <h3 class="location-en">IMPERIAL PALACE</h3>
-        <p class="location-desc">For the runners.</p>
-        <p class="location-status">Opening 2026</p>
-      </div>
-      <div class="location-card fade-up">
-        <p class="location-jp">原宿</p>
-        <h3 class="location-en">HARAJUKU</h3>
-        <p class="location-desc">For the explorers.</p>
-        <p class="location-status">Opening 2026</p>
-      </div>
-      <div class="location-card fade-up">
-        <p class="location-jp">渋谷</p>
-        <h3 class="location-en">SHIBUYA</h3>
-        <p class="location-desc">For everyone.</p>
-        <p class="location-status">Opening 2026</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 7: FOOTER -->
+  <!-- FOOTER -->
   <footer class="footer">
     <p class="footer-logo">MATCHA VIBES</p>
-    <p class="footer-tagline">Good vibes start here.</p>
-    <p class="footer-info">TOKYO, JAPAN 2026</p>
-    <p class="footer-info">@matchavibes.tokyo</p>
+    <p class="footer-tagline">Good vibes start here. — Tokyo, Japan 2026</p>
+    <p class="footer-social">@matchavibes.tokyo</p>
   </footer>
 
   <script>
-    // IntersectionObserver for fade-up animations
     const observerOptions = {
       root: null,
       rootMargin: '0px',

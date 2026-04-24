@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>matcha vibes tokyo</title>
 
-<!-- Google Fonts -->
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 
-<!-- Swiper CSS -->
+<!-- Swiper -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
-<!-- Lenis smooth scroll -->
+<!-- Lenis -->
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 
 <style>
-  /* ─── RESET & BASE ─── */
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -25,756 +24,111 @@
   }
 
   :root {
-    --green: #2d5a2d;
-    --green-light: #3d7a3d;
-    --cream: #F5F0E8;
-    --black: #0a0a0a;
-    --white: #ffffff;
+    --green: #3d8b37;
+    --black: #111;
+    --white: #fff;
+    --offwhite: #fafaf8;
     --gray: #888;
     --font-serif: 'DM Serif Display', serif;
     --font-sans: 'DM Sans', sans-serif;
   }
 
   html {
+    font-size: 16px;
     scroll-behavior: auto;
-    overflow-x: hidden;
   }
 
   body {
     font-family: var(--font-sans);
-    font-weight: 300;
-    background: var(--white);
     color: var(--black);
+    background: var(--white);
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   img {
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
   }
 
-  /* ─── FADE-IN ANIMATION ─── */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .fade-up-delay-1 { transition-delay: 0.1s; }
-  .fade-up-delay-2 { transition-delay: 0.2s; }
-  .fade-up-delay-3 { transition-delay: 0.3s; }
-  .fade-up-delay-4 { transition-delay: 0.4s; }
-
-  /* ─── HEADER ─── */
-  #header {
+  /* ─────────────────────────────────────
+     HEADER
+  ───────────────────────────────────── */
+  #site-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 1000;
+    height: 52px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1.4rem 5vw;
-    transition: background 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.5s ease;
+    justify-content: center;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
   }
 
-  #header.scrolled {
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  #site-header.scrolled {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
   }
 
   .header-logo {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: clamp(0.85rem, 2vw, 1rem);
-    letter-spacing: 0.02em;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .header-logo.light {
     color: var(--white);
-    transition: color 0.5s ease;
-    text-decoration: none;
   }
 
-  #header.scrolled .header-logo {
-    color: var(--black);
-  }
-
-  .header-nav {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
-  }
-
-  .header-nav a {
-    font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    transition: color 0.5s ease;
-  }
-
-  #header.scrolled .header-nav a {
-    color: var(--black);
-  }
-
-  .header-nav a:hover {
-    opacity: 0.6;
-  }
-
-  .header-cta {
-    font-family: var(--font-sans);
-    font-weight: 400;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white) !important;
-    background: var(--green);
-    border: none;
-    padding: 0.6rem 1.4rem;
-    border-radius: 100px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.3s ease, color 0.3s ease !important;
-  }
-
-  .header-cta:hover {
-    background: var(--green-light);
-    opacity: 1 !important;
-  }
-
-  /* Mobile nav hidden */
-  @media (max-width: 768px) {
-    .header-nav-links {
-      display: none;
-    }
-    #header {
-      padding: 1.2rem 5vw;
-    }
-  }
-
-  /* ─── HERO ─── */
+  /* ─────────────────────────────────────
+     HERO
+  ───────────────────────────────────── */
   #hero {
-    position: relative;
-    width: 100%;
     height: 100svh;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-  }
-
-  .hero-bg img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    transform: scale(1.02);
-    transition: transform 8s ease;
-  }
-
-  #hero.loaded .hero-bg img {
-    transform: scale(1);
-  }
-
-  /* Gradient overlay - bottom heavy */
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.0) 0%,
-      rgba(0,0,0,0.05) 40%,
-      rgba(0,0,0,0.5) 70%,
-      rgba(0,0,0,0.78) 100%
-    );
-  }
-
-  .hero-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 0 5vw 6vw;
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5vw 0 8vw;
   }
 
   .hero-eyebrow {
     font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: clamp(0.7rem, 1.5vw, 0.85rem);
-    letter-spacing: 0.22em;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 1rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
   }
 
   .hero-headline {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 14vw;
-    line-height: 0.92;
-    color: var(--white);
-    letter-spacing: -0.02em;
-  }
-
-  @media (min-width: 768px) {
-    .hero-headline {
-      font-size: 10vw;
-    }
+    font-size: clamp(3.5rem, 8vw, 9rem);
+    line-height: 0.95;
+    color: var(--black);
+    margin-bottom: 2.5rem;
   }
 
   .hero-sub {
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .hero-sub-text {
     font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: clamp(0.8rem, 1.8vw, 1rem);
-    color: rgba(255,255,255,0.75);
-    letter-spacing: 0.04em;
-    max-width: 280px;
-    line-height: 1.6;
-  }
-
-  .hero-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--font-sans);
-    font-weight: 400;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white);
-    border: 1px solid rgba(255,255,255,0.5);
-    padding: 0.85rem 2rem;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: background 0.3s ease, border-color 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .hero-btn:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.8);
-  }
-
-  .hero-scroll-indicator {
-    position: absolute;
-    bottom: 2.5rem;
-    right: 5vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .hero-scroll-line {
-    width: 1px;
-    height: 48px;
-    background: rgba(255,255,255,0.3);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-scroll-line::after {
-    content: '';
-    position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--white);
-    animation: scrollLine 2s ease infinite;
-  }
-
-  @keyframes scrollLine {
-    0% { top: -100%; }
-    100% { top: 100%; }
-  }
-
-  /* ─── MARQUEE ─── */
-  #marquee {
-    background: var(--black);
-    height: 56px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .marquee-track {
-    display: flex;
-    white-space: nowrap;
-    animation: marqueeScroll 22s linear infinite;
-    will-change: transform;
-  }
-
-  .marquee-item {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.78rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--white);
-    padding: 0 3rem;
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-  }
-
-  .marquee-dot {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    background: var(--green);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  @keyframes marqueeScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* ─── SECTION LABEL ─── */
-  .section-label {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 1.2rem;
-  }
-
-  /* ─── DRINKS SECTION ─── */
-  #drinks {
-    padding: 8rem 5vw 8rem;
-    background: var(--white);
-  }
-
-  .drinks-header {
-    margin-bottom: 4rem;
-  }
-
-  .drinks-title {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(3.5rem, 9vw, 7rem);
-    line-height: 0.95;
-    color: var(--black);
-    letter-spacing: -0.02em;
-  }
-
-  .drinks-header-row {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .drinks-desc {
-    font-family: var(--font-sans);
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
     font-weight: 300;
-    font-size: clamp(0.85rem, 1.8vw, 1rem);
-    color: var(--gray);
-    max-width: 280px;
+    color: #555;
     line-height: 1.7;
-  }
-
-  .drinks-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-  }
-
-  @media (min-width: 900px) {
-    .drinks-grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.8rem;
-    }
-  }
-
-  .drink-card {
-    position: relative;
-    cursor: pointer;
-  }
-
-  .drink-card-img {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    aspect-ratio: 3/4;
-    background: #f0f0f0;
-  }
-
-  .drink-card-img img {
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .drink-card:hover .drink-card-img img {
-    transform: scale(1.05);
-  }
-
-  .badge-new {
-    position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    background: var(--green);
-    color: var(--white);
-    font-family: var(--font-sans);
-    font-weight: 400;
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.6rem;
-    border-radius: 100px;
-    z-index: 2;
-  }
-
-  .drink-card-info {
-    padding: 1rem 0.2rem 0;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .drink-name {
-    font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: clamp(0.82rem, 2vw, 0.92rem);
-    letter-spacing: 0.02em;
-    color: var(--black);
-    line-height: 1.3;
-  }
-
-  .drink-price {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.82rem;
-    color: var(--gray);
-    white-space: nowrap;
-  }
-
-  /* ─── FEATURE (full bleed) ─── */
-  #feature {
-    height: 70svh;
-    position: relative;
-    overflow: hidden;
-  }
-
-  #feature img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 20%;
-  }
-
-  /* ─── STORY ─── */
-  #story {
-    background: var(--black);
-    padding: 8rem 5vw;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
-  }
-
-  .story-quote {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(2rem, 5vw, 4rem);
-    line-height: 1.2;
-    color: var(--cream);
-    max-width: 860px;
-    letter-spacing: -0.01em;
-  }
-
-  .story-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--green);
-    border-radius: 50%;
-  }
-
-  .story-tag {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(245,240,232,0.4);
-  }
-
-  /* ─── FLATLAY 2-SPLIT ─── */
-  #flatlay-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 60vw;
-  }
-
-  @media (max-width: 600px) {
-    #flatlay-split {
-      height: 100vw;
-    }
-  }
-
-  .flatlay-panel {
-    overflow: hidden;
-    position: relative;
-  }
-
-  .flatlay-panel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .flatlay-panel:hover img {
-    transform: scale(1.04);
-  }
-
-  .flatlay-panel-label {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.8);
-    background: rgba(0,0,0,0.35);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 0.4rem 0.9rem;
-    border-radius: 100px;
-  }
-
-  /* ─── POSTER SWIPER ─── */
-  #poster-section {
-    padding: 7rem 0;
-    background: var(--white);
-    overflow: hidden;
-  }
-
-  .poster-header {
-    padding: 0 5vw;
+    max-width: 320px;
     margin-bottom: 3rem;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-
-  .poster-title {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    color: var(--black);
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
-
-  .swiper-nav {
-    display: flex;
-    gap: 0.6rem;
-    flex-shrink: 0;
-  }
-
-  .swiper-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid rgba(0,0,0,0.15);
-    background: var(--white);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease, border-color 0.3s ease;
-    color: var(--black);
-    font-size: 1.1rem;
-  }
-
-  .swiper-btn:hover {
-    background: var(--black);
-    border-color: var(--black);
-    color: var(--white);
-  }
-
-  .poster-swiper {
-    padding: 0 5vw !important;
-    overflow: visible !important;
-  }
-
-  .poster-swiper .swiper-wrapper {
-    align-items: flex-start;
-  }
-
-  .poster-slide {
-    width: 65vw;
-    max-width: 360px;
-    border-radius: 12px;
-    overflow: hidden;
-    aspect-ratio: 2/3;
-    flex-shrink: 0;
-  }
-
-  @media (min-width: 768px) {
-    .poster-slide {
-      width: 28vw;
-      max-width: 340px;
-    }
-  }
-
-  .poster-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .poster-slide:hover img {
-    transform: scale(1.03);
-  }
-
-  /* ─── CUSTOMIZE ─── */
-  #customize {
-    background: var(--cream);
-    padding: 8rem 5vw;
-  }
-
-  .customize-header {
-    margin-bottom: 5rem;
-    text-align: center;
-  }
-
-  .customize-title {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    color: var(--black);
-    letter-spacing: -0.02em;
-    line-height: 0.95;
-    margin-bottom: 1.2rem;
-  }
-
-  .customize-sub {
-    font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: clamp(0.85rem, 1.8vw, 1rem);
-    color: rgba(0,0,0,0.5);
-    letter-spacing: 0.02em;
-  }
-
-  .steps-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  @media (min-width: 768px) {
-    .steps-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-    }
-  }
-
-  .step-card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 2.5rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .step-number {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 5rem;
-    color: rgba(0,0,0,0.06);
-    line-height: 1;
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-  }
-
-  .step-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--green);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .step-icon svg {
-    width: 18px;
-    height: 18px;
-    fill: none;
-    stroke: var(--white);
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .step-label {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 0.6rem;
-  }
-
-  .step-title {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.6rem;
-    color: var(--black);
-    margin-bottom: 0.8rem;
-    line-height: 1.15;
-  }
-
-  .step-desc {
-    font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: 0.88rem;
-    color: rgba(0,0,0,0.55);
-    line-height: 1.7;
-  }
-
-  .customize-cta {
-    margin-top: 4rem;
-    text-align: center;
   }
 
   .btn-primary {
@@ -782,29 +136,501 @@
     align-items: center;
     gap: 0.6rem;
     font-family: var(--font-sans);
-    font-weight: 400;
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--white);
-    background: var(--green);
-    padding: 1rem 2.5rem;
-    border-radius: 100px;
+    background: var(--black);
+    padding: 0.9rem 2rem;
     border: none;
     cursor: pointer;
     text-decoration: none;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: background 0.25s ease;
   }
 
   .btn-primary:hover {
-    background: var(--green-light);
-    transform: translateY(-2px);
+    background: var(--green);
   }
 
-  /* ─── LOGO SECTION ─── */
-  #logo-section {
-    background: var(--black);
+  .btn-arrow {
+    font-size: 1rem;
+    transition: transform 0.25s ease;
+  }
+
+  .btn-primary:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  .hero-image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0.08), transparent);
+  }
+
+  /* ─────────────────────────────────────
+     INTRO
+  ───────────────────────────────────── */
+  #intro {
+    background: var(--offwhite);
+    padding: 7rem 5vw;
+    display: flex;
+    align-items: flex-start;
+    gap: 4vw;
+  }
+
+  .intro-label {
+    flex-shrink: 0;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray);
+    align-self: flex-end;
+  }
+
+  .intro-text {
+    flex: 1;
+  }
+
+  .intro-headline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    line-height: 1.35;
+    color: var(--black);
+    max-width: 760px;
+    margin-bottom: 2.5rem;
+  }
+
+  .intro-body {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.8;
+    max-width: 480px;
+  }
+
+  .intro-accent {
+    display: inline-block;
+    width: 32px;
+    height: 2px;
+    background: var(--green);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ─────────────────────────────────────
+     PRODUCTS
+  ───────────────────────────────────── */
+  #products {
+    background: var(--white);
     padding: 6rem 5vw;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1;
+    color: var(--black);
+  }
+
+  .section-link {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+
+  .section-link:hover {
+    color: var(--black);
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    cursor: pointer;
+  }
+
+  .product-image-wrap {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--offwhite);
+    margin-bottom: 1.2rem;
+  }
+
+  .product-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .product-card:hover .product-image-wrap img {
+    transform: scale(1.04);
+  }
+
+  .new-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 38px;
+    height: 38px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+    z-index: 2;
+  }
+
+  .product-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--black);
+    margin-bottom: 0.4rem;
+  }
+
+  .product-desc {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--gray);
+    margin-bottom: 0.6rem;
+  }
+
+  .product-price {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--black);
+    letter-spacing: 0.02em;
+  }
+
+  /* ─────────────────────────────────────
+     FULLBLEED
+  ───────────────────────────────────── */
+  #fullbleed {
+    height: 75svh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #fullbleed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .fullbleed-caption {
+    position: absolute;
+    bottom: 3rem;
+    left: 5vw;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    color: var(--white);
+    line-height: 1.2;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.35);
+  }
+
+  /* ─────────────────────────────────────
+     FEATURE (SPLIT)
+  ───────────────────────────────────── */
+  #feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 75svh;
+  }
+
+  .feature-image {
+    overflow: hidden;
+  }
+
+  .feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  #feature:hover .feature-image img {
+    transform: scale(1.03);
+  }
+
+  .feature-content {
+    background: var(--offwhite);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 6vw;
+  }
+
+  .feature-tag {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-headline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(2.5rem, 4.5vw, 5rem);
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 2rem;
+  }
+
+  .feature-body {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.8;
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #444;
+    letter-spacing: 0.02em;
+  }
+
+  .feature-list li::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+
+  /* ─────────────────────────────────────
+     POSTER SWIPER
+  ───────────────────────────────────── */
+  #poster-section {
+    background: var(--white);
+    padding: 6rem 0 6rem 5vw;
+    overflow: hidden;
+  }
+
+  .poster-header {
+    padding-right: 5vw;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .swiper-poster {
+    overflow: visible;
+  }
+
+  .swiper-poster .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  .poster-slide {
+    width: clamp(240px, 28vw, 380px);
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .poster-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 3/4;
+    border-radius: 12px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .poster-slide:hover img {
+    transform: scale(1.03);
+  }
+
+  .poster-nav {
+    display: flex;
+    gap: 0.75rem;
+    padding-right: 5vw;
+  }
+
+  .poster-nav-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #ddd;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .poster-nav-btn:hover {
+    background: var(--black);
+    border-color: var(--black);
+    color: var(--white);
+  }
+
+  /* ─────────────────────────────────────
+     CUSTOMIZE
+  ───────────────────────────────────── */
+  #customize {
+    background: var(--offwhite);
+    padding: 7rem 5vw;
+  }
+
+  .customize-header {
+    margin-bottom: 5rem;
+    max-width: 600px;
+  }
+
+  .customize-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1;
+    color: var(--black);
+    margin-bottom: 1rem;
+  }
+
+  .customize-sub {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+
+  .step {
+    position: relative;
+  }
+
+  .step-number {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(0,0,0,0.06);
+    margin-bottom: -1.5rem;
+  }
+
+  .step-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .step-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--black);
+    margin-bottom: 0.75rem;
+  }
+
+  .step-body {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.8;
+  }
+
+  .step-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+  }
+
+  .step-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid #ddd;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .step-tag:hover,
+  .step-tag.active {
+    background: var(--black);
+    border-color: var(--black);
+    color: var(--white);
+  }
+
+  .step-tag.green {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+  }
+
+  /* ─────────────────────────────────────
+     LOGO BLACK
+  ───────────────────────────────────── */
+  #logo-black {
+    background: var(--black);
+    padding: 7rem 5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -813,368 +639,373 @@
     text-align: center;
   }
 
-  .logo-img-wrap {
-    width: min(240px, 50vw);
+  .logo-black-img {
+    width: clamp(120px, 20vw, 220px);
+    filter: invert(1);
+    opacity: 0.9;
   }
 
-  .logo-img-wrap img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
+  .logo-black-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.02em;
   }
 
-  .logo-tagline {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.72rem;
-    letter-spacing: 0.25em;
+  .logo-black-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.9rem 2.2rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    margin-top: 1rem;
   }
 
-  .logo-divider {
-    width: 1px;
-    height: 40px;
-    background: rgba(255,255,255,0.15);
+  .logo-black-cta:hover {
+    background: var(--white);
+    color: var(--black);
   }
 
-  /* ─── FOOTER ─── */
+  /* ─────────────────────────────────────
+     FOOTER
+  ───────────────────────────────────── */
   #footer {
-    background: var(--black);
-    border-top: 1px solid rgba(255,255,255,0.06);
+    background: var(--offwhite);
     padding: 5rem 5vw 3rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
   }
 
   .footer-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem 2rem;
-    margin-bottom: 5rem;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
   }
 
-  @media (min-width: 768px) {
-    .footer-grid {
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 2rem;
-    }
-  }
-
-  .footer-col-title {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-    margin-bottom: 1.4rem;
-  }
-
-  .footer-brand-name {
+  .footer-brand .footer-logo {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.4rem;
-    color: var(--white);
-    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    color: var(--black);
+    margin-bottom: 1rem;
+    display: block;
   }
 
-  .footer-brand-desc {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.4);
+  .footer-brand p {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #777;
     line-height: 1.8;
-    max-width: 220px;
+    max-width: 240px;
   }
 
-  .footer-links {
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .footer-social a {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover {
+    color: var(--black);
+  }
+
+  .footer-col h4 {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-col ul {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
 
-  .footer-links a {
-    font-family: var(--font-sans);
+  .footer-col ul a {
+    font-size: 0.85rem;
     font-weight: 300;
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.5);
+    color: #555;
     text-decoration: none;
-    transition: color 0.2s ease;
-    letter-spacing: 0.02em;
+    transition: color 0.2s;
   }
 
-  .footer-links a:hover {
-    color: var(--white);
+  .footer-col ul a:hover {
+    color: var(--black);
   }
 
   .footer-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(0,0,0,0.08);
   }
 
-  .footer-copy {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 0.04em;
+  .footer-bottom p {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: #aaa;
   }
 
-  .footer-socials {
+  .footer-bottom-links {
     display: flex;
-    gap: 1.2rem;
+    gap: 1.5rem;
   }
 
-  .footer-socials a {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+  .footer-bottom-links a {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #aaa;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color 0.2s;
   }
 
-  .footer-socials a:hover {
-    color: var(--white);
+  .footer-bottom-links a:hover {
+    color: var(--black);
   }
 
-  /* ─── SCENE BENCH SECTION ─── */
-  #scene-extra {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 50vw;
-    max-height: 600px;
+  /* ─────────────────────────────────────
+     SCROLL ANIMATIONS
+  ───────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  @media (max-width: 600px) {
-    #scene-extra {
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ─────────────────────────────────────
+     RESPONSIVE
+  ───────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #hero {
       grid-template-columns: 1fr;
-      height: auto;
     }
-    #scene-extra .scene-extra-panel {
-      height: 60vw;
+    .hero-image {
+      display: none;
     }
-  }
-
-  .scene-extra-panel {
-    overflow: hidden;
-  }
-
-  .scene-extra-panel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.9s ease;
-  }
-
-  .scene-extra-panel:hover img {
-    transform: scale(1.04);
-  }
-
-  /* ─── SWIPER OVERRIDES ─── */
-  .swiper {
-    overflow: visible;
-  }
-
-  .swiper-slide {
-    height: auto;
-  }
-
-  /* ─── LOCATION BANNER ─── */
-  #location-banner {
-    background: var(--green);
-    padding: 1.2rem 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .location-text {
-    font-family: var(--font-sans);
-    font-weight: 200;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.85);
-  }
-
-  .location-dot {
-    width: 4px;
-    height: 4px;
-    background: rgba(255,255,255,0.4);
-    border-radius: 50%;
-    flex-shrink: 0;
+    .hero-text {
+      padding: 0 5vw 0 6vw;
+    }
+    #intro {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .intro-label {
+      writing-mode: horizontal-tb;
+      transform: none;
+    }
+    #feature {
+      grid-template-columns: 1fr;
+    }
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
   }
 
   @media (max-width: 480px) {
-    .location-dot { display: none; }
-    .location-text { text-align: center; }
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  /* Swiper custom */
+  .swiper-poster {
+    cursor: grab;
+  }
+  .swiper-poster:active {
+    cursor: grabbing;
   }
 </style>
 </head>
 <body>
 
-<!-- ─── HEADER ─── -->
-<header id="header">
-  <a href="#" class="header-logo">matcha vibes tokyo</a>
-  <nav class="header-nav">
-    <div class="header-nav-links" style="display:flex;gap:2.5rem;">
-      <a href="#drinks">Menu</a>
-      <a href="#story">Story</a>
-      <a href="#customize">Customize</a>
-    </div>
-    <a href="#customize" class="header-cta">Order Now</a>
-  </nav>
+<!-- ═══════════════════════════════════
+     HEADER
+════════════════════════════════════ -->
+<header id="site-header">
+  <a href="#" class="header-logo" id="header-logo">matcha vibes tokyo</a>
 </header>
 
-<!-- ─── HERO ─── -->
+<!-- ═══════════════════════════════════
+     HERO
+════════════════════════════════════ -->
 <section id="hero">
-  <div class="hero-bg">
-    <img src="matcha-vibes-assets/scene-sizzle.jpg" alt="Matcha Vibes Tokyo" loading="eager">
+  <div class="hero-text">
+    <p class="hero-eyebrow">抹茶スムージースタンド — 東京</p>
+    <h1 class="hero-headline">good vibes<br>start here.</h1>
+    <p class="hero-sub">Hand-crafted matcha smoothies made with ceremonial-grade powder, sourced fresh from Uji. Your daily ritual, reimagined.</p>
+    <a href="#products" class="btn-primary">
+      View the Menu <span class="btn-arrow">→</span>
+    </a>
   </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow fade-up">Tokyo · 2024 · Matcha Done Right</p>
-    <h1 class="hero-headline fade-up fade-up-delay-1">good vibes<br>start here.</h1>
-    <div class="hero-sub fade-up fade-up-delay-2">
-      <p class="hero-sub-text">Premium matcha drinks crafted for Tokyo's most discerning taste.</p>
-      <a href="#drinks" class="hero-btn">Explore the menu →</a>
-    </div>
-  </div>
-  <div class="hero-scroll-indicator">
-    <div class="hero-scroll-line"></div>
+  <div class="hero-image">
+    <img src="matcha-vibes-assets/scene-sizzle.jpg" alt="matcha vibes tokyo" loading="eager">
+    <div class="hero-image-overlay"></div>
   </div>
 </section>
 
-<!-- ─── LOCATION BANNER ─── -->
-<div id="location-banner">
-  <span class="location-text">Harajuku</span>
-  <div class="location-dot"></div>
-  <span class="location-text">Shibuya</span>
-  <div class="location-dot"></div>
-  <span class="location-text">Shinjuku</span>
-  <div class="location-dot"></div>
-  <span class="location-text">Daikanyama</span>
-  <div class="location-dot"></div>
-  <span class="location-text">Omotesando</span>
-</div>
-
-<!-- ─── MARQUEE ─── -->
-<section id="marquee">
-  <div class="marquee-track">
-    <!-- repeat enough for seamless loop -->
-    <span class="marquee-item">MATCHA VIBES TOKYO <span class="marquee-dot"></span> GOOD VIBES START HERE <span class="marquee-dot"></span> TOKYO'S FINEST MATCHA <span class="marquee-dot"></span></span>
-    <span class="marquee-item">MATCHA VIBES TOKYO <span class="marquee-dot"></span> GOOD VIBES START HERE <span class="marquee-dot"></span> TOKYO'S FINEST MATCHA <span class="marquee-dot"></span></span>
-    <span class="marquee-item">MATCHA VIBES TOKYO <span class="marquee-dot"></span> GOOD VIBES START HERE <span class="marquee-dot"></span> TOKYO'S FINEST MATCHA <span class="marquee-dot"></span></span>
-    <span class="marquee-item">MATCHA VIBES TOKYO <span class="marquee-dot"></span> GOOD VIBES START HERE <span class="marquee-dot"></span> TOKYO'S FINEST MATCHA <span class="marquee-dot"></span></span>
+<!-- ═══════════════════════════════════
+     INTRO
+════════════════════════════════════ -->
+<section id="intro">
+  <span class="intro-label">Our Story</span>
+  <div class="intro-text">
+    <span class="intro-accent"></span>
+    <h2 class="intro-headline reveal">The matcha the world fell in love with.<br>Our version, right here in Tokyo.</h2>
+    <p class="intro-body reveal reveal-delay-1">We believe the best things are simple done extraordinarily well. Premium matcha, seasonal fruits, no shortcuts. Every cup built by hand, one vibe at a time.</p>
   </div>
 </section>
 
-<!-- ─── DRINKS ─── -->
-<section id="drinks">
-  <div class="drinks-header fade-up">
-    <p class="section-label">The Menu</p>
-    <div class="drinks-header-row">
-      <h2 class="drinks-title">The Menu.</h2>
-      <p class="drinks-desc">Four signature flavors. One obsession. Made fresh, every time.</p>
-    </div>
+<!-- ═══════════════════════════════════
+     PRODUCTS
+════════════════════════════════════ -->
+<section id="products">
+  <div class="section-header reveal">
+    <h2 class="section-title">The Menu.</h2>
+    <a href="#" class="section-link">All items</a>
   </div>
 
-  <div class="drinks-grid">
-    <div class="drink-card fade-up fade-up-delay-1">
-      <div class="drink-card-img">
-        <span class="badge-new">New</span>
-        <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha" loading="lazy">
+  <div class="products-grid">
+    <!-- Blueberry -->
+    <div class="product-card reveal">
+      <div class="product-image-wrap">
+        <span class="new-badge">New</span>
+        <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Matcha Blueberry" loading="lazy">
       </div>
-      <div class="drink-card-info">
-        <span class="drink-name">Blueberry<br>Matcha</span>
-        <span class="drink-price">¥680</span>
-      </div>
+      <p class="product-name">Matcha Blueberry</p>
+      <p class="product-desc">Wild blueberry · Oat milk · Ceremonial grade</p>
+      <p class="product-price">¥780</p>
     </div>
 
-    <div class="drink-card fade-up fade-up-delay-2">
-      <div class="drink-card-img">
-        <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Matcha" loading="lazy">
+    <!-- Banana -->
+    <div class="product-card reveal reveal-delay-1">
+      <div class="product-image-wrap">
+        <img src="matcha-vibes-assets/cup-banana.jpg" alt="Matcha Banana" loading="lazy">
       </div>
-      <div class="drink-card-info">
-        <span class="drink-name">Banana<br>Matcha</span>
-        <span class="drink-price">¥650</span>
-      </div>
+      <p class="product-name">Matcha Banana</p>
+      <p class="product-desc">Cavendish banana · Almond milk · Honey</p>
+      <p class="product-price">¥750</p>
     </div>
 
-    <div class="drink-card fade-up fade-up-delay-3">
-      <div class="drink-card-img">
-        <span class="badge-new">New</span>
-        <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Matcha" loading="lazy">
+    <!-- Yogurt -->
+    <div class="product-card reveal reveal-delay-2">
+      <div class="product-image-wrap">
+        <span class="new-badge">New</span>
+        <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Matcha Yogurt" loading="lazy">
       </div>
-      <div class="drink-card-info">
-        <span class="drink-name">Yogurt<br>Matcha</span>
-        <span class="drink-price">¥700</span>
-      </div>
+      <p class="product-name">Matcha Yogurt</p>
+      <p class="product-desc">Greek yogurt · Granola · Uji matcha</p>
+      <p class="product-price">¥820</p>
     </div>
 
-    <div class="drink-card fade-up fade-up-delay-4">
-      <div class="drink-card-img">
-        <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Matcha" loading="lazy">
+    <!-- Classic -->
+    <div class="product-card reveal reveal-delay-3">
+      <div class="product-image-wrap">
+        <img src="matcha-vibes-assets/cup-classic.jpg" alt="Matcha Classic" loading="lazy">
       </div>
-      <div class="drink-card-info">
-        <span class="drink-name">Classic<br>Matcha</span>
-        <span class="drink-price">¥580</span>
-      </div>
+      <p class="product-name">Matcha Classic</p>
+      <p class="product-desc">Pure matcha · Coconut milk · A touch of agave</p>
+      <p class="product-price">¥680</p>
     </div>
   </div>
 </section>
 
-<!-- ─── FEATURE (full bleed) ─── -->
-<section id="feature">
+<!-- ═══════════════════════════════════
+     FULLBLEED
+════════════════════════════════════ -->
+<section id="fullbleed">
   <img src="matcha-vibes-assets/scene-imperial.jpg" alt="Imperial Garden" loading="lazy">
+  <p class="fullbleed-caption">Tokyo roots.<br>World-class taste.</p>
 </section>
 
-<!-- ─── STORY ─── -->
-<section id="story">
-  <div class="story-dot fade-up"></div>
-  <p class="story-tag fade-up fade-up-delay-1">Our Philosophy</p>
-  <blockquote class="story-quote fade-up fade-up-delay-2">
-    We didn't invent matcha.<br>We just made Tokyo obsessed.
-  </blockquote>
-  <p class="story-tag fade-up fade-up-delay-3" style="color:rgba(245,240,232,0.25);font-size:0.68rem;">
-    matcha vibes tokyo — since 2024
-  </p>
+<!-- ═══════════════════════════════════
+     FEATURE (SPLIT)
+════════════════════════════════════ -->
+<section id="feature">
+  <div class="feature-image">
+    <img src="matcha-vibes-assets/flatlay-blueberry.jpg" alt="Three layers" loading="lazy">
+  </div>
+  <div class="feature-content">
+    <p class="feature-tag reveal">Our Craft</p>
+    <h2 class="feature-headline reveal reveal-delay-1">Three layers.<br>One vibe.</h2>
+    <p class="feature-body reveal reveal-delay-2">Every smoothie is built in three deliberate layers — base, blend, and crown. The result is a visual and flavour experience unlike anything else in the city.</p>
+    <ul class="feature-list reveal reveal-delay-3">
+      <li>Ceremonial-grade Uji matcha, whisked fresh</li>
+      <li>Seasonal fruits, sourced weekly from local markets</li>
+      <li>Plant-based milks, no artificial anything</li>
+      <li>Zero compromise on texture or taste</li>
+    </ul>
+    <a href="#customize" class="btn-primary reveal reveal-delay-4">
+      Build your cup <span class="btn-arrow">→</span>
+    </a>
+  </div>
 </section>
 
-<!-- ─── FLATLAY 2-SPLIT ─── -->
-<div id="flatlay-split">
-  <div class="flatlay-panel">
-    <img src="matcha-vibes-assets/flatlay-blueberry.jpg" alt="Blueberry Flatlay" loading="lazy">
-    <span class="flatlay-panel-label">Blueberry Series</span>
-  </div>
-  <div class="flatlay-panel">
-    <img src="matcha-vibes-assets/flatlay-classic.jpg" alt="Classic Flatlay" loading="lazy">
-    <span class="flatlay-panel-label">Classic Series</span>
-  </div>
-</div>
-
-<!-- ─── POSTER SWIPER ─── -->
+<!-- ═══════════════════════════════════
+     POSTER SWIPER
+════════════════════════════════════ -->
 <section id="poster-section">
-  <div class="poster-header fade-up">
-    <h2 class="poster-title">The Collection.</h2>
-    <div class="swiper-nav">
-      <button class="swiper-btn" id="poster-prev" aria-label="Previous">←</button>
-      <button class="swiper-btn" id="poster-next" aria-label="Next">→</button>
+  <div class="poster-header">
+    <h2 class="section-title reveal">Vibes.</h2>
+    <div class="poster-nav">
+      <button class="poster-nav-btn swiper-poster-prev">←</button>
+      <button class="poster-nav-btn swiper-poster-next">→</button>
     </div>
   </div>
 
-  <div class="swiper poster-swiper" id="posterSwiper">
+  <div class="swiper swiper-poster">
     <div class="swiper-wrapper">
       <div class="swiper-slide poster-slide">
         <img src="matcha-vibes-assets/poster-blueberry.jpg" alt="Blueberry Poster" loading="lazy">
@@ -1192,211 +1023,213 @@
   </div>
 </section>
 
-<!-- ─── SCENE EXTRA ─── -->
-<div id="scene-extra">
-  <div class="scene-extra-panel">
-    <img src="matcha-vibes-assets/scene-bench.jpg" alt="Scene Bench" loading="lazy">
-  </div>
-  <div class="scene-extra-panel">
-    <img src="matcha-vibes-assets/scene-trio.jpg" alt="Scene Trio" loading="lazy">
-  </div>
-</div>
-
-<!-- ─── CUSTOMIZE ─── -->
+<!-- ═══════════════════════════════════
+     CUSTOMIZE
+════════════════════════════════════ -->
 <section id="customize">
-  <div class="customize-header fade-up">
-    <p class="section-label" style="display:inline-block;">Build Your Experience</p>
+  <div class="customize-header reveal">
     <h2 class="customize-title">Build your cup.</h2>
-    <p class="customize-sub">Three steps to your perfect matcha moment.</p>
+    <p class="customize-sub">Three simple choices. One perfect smoothie. Tell us how you vibe.</p>
   </div>
 
   <div class="steps-grid">
-    <div class="step-card fade-up fade-up-delay-1">
-      <span class="step-number">01</span>
-      <div class="step-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    <!-- Step 1 -->
+    <div class="step reveal">
+      <div class="step-number">01</div>
+      <div class="step-icon">🌿</div>
+      <h3 class="step-title">Choose your base</h3>
+      <p class="step-body">Start with the foundation. Select a milk that complements your matcha — creamy, light, or nutty.</p>
+      <div class="step-options">
+        <span class="step-tag active green">Oat Milk</span>
+        <span class="step-tag">Almond Milk</span>
+        <span class="step-tag">Coconut Milk</span>
+        <span class="step-tag">Soy Milk</span>
       </div>
-      <p class="step-label">Step 01</p>
-      <h3 class="step-title">Pick your base.</h3>
-      <p class="step-desc">Start with our ceremonial-grade Uji matcha. Classic, oat milk, or coconut — your call.</p>
     </div>
 
-    <div class="step-card fade-up fade-up-delay-2">
-      <span class="step-number">02</span>
-      <div class="step-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+    <!-- Step 2 -->
+    <div class="step reveal reveal-delay-1">
+      <div class="step-number">02</div>
+      <div class="step-icon">🍓</div>
+      <h3 class="step-title">Pick your fruit</h3>
+      <p class="step-body">Fresh, seasonal, and sourced locally. Pick one to layer into your build.</p>
+      <div class="step-options">
+        <span class="step-tag">Blueberry</span>
+        <span class="step-tag active green">Strawberry</span>
+        <span class="step-tag">Banana</span>
+        <span class="step-tag">Mango</span>
+        <span class="step-tag">Peach</span>
       </div>
-      <p class="step-label">Step 02</p>
-      <h3 class="step-title">Choose your flavor.</h3>
-      <p class="step-desc">Blueberry, banana, yogurt, or strawberry. Each is crafted with real fruit — zero shortcuts.</p>
     </div>
 
-    <div class="step-card fade-up fade-up-delay-3">
-      <span class="step-number">03</span>
-      <div class="step-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <!-- Step 3 -->
+    <div class="step reveal reveal-delay-2">
+      <div class="step-number">03</div>
+      <div class="step-icon">✨</div>
+      <h3 class="step-title">Add your crown</h3>
+      <p class="step-body">The finishing touch. A little extra on top that makes every cup unmistakably yours.</p>
+      <div class="step-options">
+        <span class="step-tag">Granola</span>
+        <span class="step-tag active green">Coconut Flakes</span>
+        <span class="step-tag">Chia Seeds</span>
+        <span class="step-tag">Cacao Nibs</span>
       </div>
-      <p class="step-label">Step 03</p>
-      <h3 class="step-title">Make it yours.</h3>
-      <p class="step-desc">Ice level, sweetness, add-ons. We follow your lead — every cup is one of a kind.</p>
     </div>
-  </div>
-
-  <div class="customize-cta fade-up">
-    <a href="#" class="btn-primary">Start your order →</a>
   </div>
 </section>
 
-<!-- ─── LOGO ─── -->
-<section id="logo-section">
-  <div class="logo-img-wrap fade-up">
-    <img src="matcha-vibes-assets/logo-bubbly.png" alt="matcha vibes tokyo" loading="lazy">
-  </div>
-  <div class="logo-divider"></div>
-  <p class="logo-tagline fade-up fade-up-delay-1">Good vibes start here.</p>
+<!-- ═══════════════════════════════════
+     LOGO BLACK
+════════════════════════════════════ -->
+<section id="logo-black">
+  <img src="matcha-vibes-assets/logo-bubbly.png" alt="matcha vibes tokyo" class="logo-black-img">
+  <p class="logo-black-tagline">Good vibes start here.</p>
+  <a href="#products" class="logo-black-cta">
+    Order Now →
+  </a>
 </section>
 
-<!-- ─── FOOTER ─── -->
+<!-- ═══════════════════════════════════
+     FOOTER
+════════════════════════════════════ -->
 <footer id="footer">
   <div class="footer-grid">
-    <!-- Col 1: Brand -->
-    <div>
-      <p class="footer-brand-name">matcha vibes tokyo</p>
-      <p class="footer-brand-desc">Tokyo's most obsessive matcha brand. Crafted for the city, the streets, and the soul.</p>
+    <div class="footer-brand">
+      <span class="footer-logo">matcha vibes tokyo</span>
+      <p>A smoothie stand with soul. Born in Tokyo, inspired by the ancient ritual of matcha. Every cup, a good vibe.</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+        <a href="#">TikTok</a>
+      </div>
     </div>
 
-    <!-- Col 2: Menu -->
-    <div>
-      <p class="footer-col-title">Menu</p>
-      <ul class="footer-links">
-        <li><a href="#">Classic Matcha</a></li>
-        <li><a href="#">Blueberry Matcha</a></li>
-        <li><a href="#">Banana Matcha</a></li>
-        <li><a href="#">Yogurt Matcha</a></li>
-        <li><a href="#">Seasonal Specials</a></li>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="#">Matcha Classic</a></li>
+        <li><a href="#">Matcha Blueberry</a></li>
+        <li><a href="#">Matcha Banana</a></li>
+        <li><a href="#">Matcha Yogurt</a></li>
+        <li><a href="#">Seasonal Special</a></li>
       </ul>
     </div>
 
-    <!-- Col 3: Visit -->
-    <div>
-      <p class="footer-col-title">Visit Us</p>
-      <ul class="footer-links">
-        <li><a href="#">Harajuku</a></li>
-        <li><a href="#">Shibuya</a></li>
-        <li><a href="#">Shinjuku</a></li>
-        <li><a href="#">Daikanyama</a></li>
-        <li><a href="#">Omotesando</a></li>
-      </ul>
-    </div>
-
-    <!-- Col 4: Info -->
-    <div>
-      <p class="footer-col-title">Info</p>
-      <ul class="footer-links">
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
         <li><a href="#">Our Story</a></li>
-        <li><a href="#">Sustainability</a></li>
-        <li><a href="#">Wholesale</a></li>
+        <li><a href="#">Ingredients</a></li>
+        <li><a href="#">Locations</a></li>
+        <li><a href="#">Catering</a></li>
         <li><a href="#">Press</a></li>
-        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="#">店 — </a></li>
+        <li><a href="#">店 — </a></li>
+        <li><a href="#">表参道店 — Omotesando</a></li>
+        <li><a href="#">Hours</a></li>
+        <li><a href="#">Contact</a></li>
       </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p class="footer-copy">© 2024 matcha vibes tokyo. All rights reserved.</p>
-    <div class="footer-socials">
-      <a href="#">Instagram</a>
-      <a href="#">TikTok</a>
-      <a href="#">Twitter</a>
+    <p>© 2025 matcha vibes tokyo. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Sitemap</a>
     </div>
   </div>
 </footer>
 
-<!-- ─── SCRIPTS ─── -->
+<!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
-// ─── LENIS SMOOTH SCROLL ───
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smooth: true,
-  smoothTouch: false,
-});
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
-// ─── HEADER SCROLL BEHAVIOR ───
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 60) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-}, { passive: true });
-
-// ─── HERO IMAGE LOADED ───
-const heroSection = document.getElementById('hero');
-const heroImg = heroSection.querySelector('.hero-bg img');
-if (heroImg.complete) {
-  heroSection.classList.add('loaded');
-} else {
-  heroImg.addEventListener('load', () => heroSection.classList.add('loaded'));
-}
-
-// ─── INTERSECTION OBSERVER FADE ───
-const fadeEls = document.querySelectorAll('.fade-up');
-const fadeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      fadeObserver.unobserve(entry.target);
-    }
+  // ─── Lenis Smooth Scroll ───────────────────────────
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    smooth: true,
   });
-}, {
-  threshold: 0.12,
-  rootMargin: '0px 0px -40px 0px'
-});
 
-fadeEls.forEach(el => fadeObserver.observe(el));
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
 
-// Immediately show hero items
-document.querySelectorAll('#hero .fade-up').forEach((el, i) => {
-  setTimeout(() => el.classList.add('visible'), 300 + i * 150);
-});
+  // ─── Header scroll behavior ────────────────────────
+  const header = document.getElementById('site-header');
+  const headerLogo = document.getElementById('header-logo');
 
-// ─── POSTER SWIPER ───
-const posterSwiper = new Swiper('#posterSwiper', {
-  slidesPerView: 'auto',
-  spaceBetween: 16,
-  freeMode: true,
-  grabCursor: true,
-  navigation: {
-    prevEl: '#poster-prev',
-    nextEl: '#poster-next',
-  },
-  breakpoints: {
-    768: {
-      spaceBetween: 24,
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      header.classList.add('scrolled');
+      headerLogo.classList.remove('light');
+    } else {
+      header.classList.remove('scrolled');
     }
-  }
-});
+  }, { passive: true });
 
-document.getElementById('poster-prev').addEventListener('click', () => posterSwiper.slidePrev());
-document.getElementById('poster-next').addEventListener('click', () => posterSwiper.slideNext());
+  // ─── Swiper (Poster) ───────────────────────────────
+  const posterSwiper = new Swiper('.swiper-poster', {
+    slidesPerView: 'auto',
+    spaceBetween: 20,
+    freeMode: true,
+    grabCursor: true,
+    navigation: {
+      nextEl: '.swiper-poster-next',
+      prevEl: '.swiper-poster-prev',
+    },
+  });
 
-// ─── PARALLAX ON HERO ───
-window.addEventListener('scroll', () => {
-  const heroImg = document.querySelector('#hero .hero-bg img');
-  if (heroImg && window.scrollY < window.innerHeight) {
-    heroImg.style.transform = `scale(1.02) translateY(${window.scrollY * 0.25}px)`;
+  // ─── Scroll Reveal ────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // ─── Step tags toggle ─────────────────────────────
+  document.querySelectorAll('.step-options').forEach(group => {
+    group.querySelectorAll('.step-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        group.querySelectorAll('.step-tag').forEach(t => {
+          t.classList.remove('active', 'green');
+        });
+        tag.classList.add('active', 'green');
+      });
+    });
+  });
+
+  // ─── Subtle parallax on hero image ────────────────
+  const heroImg = document.querySelector('.hero-image img');
+  if (heroImg) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroImg.style.transform = `translateY(${y * 0.18}px)`;
+      }
+    }, { passive: true });
   }
-}, { passive: true });
 </script>
 
 </body>

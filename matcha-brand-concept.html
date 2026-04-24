@@ -1,764 +1,519 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>matcha vibes tokyo — Good vibes start here.</title>
-  <meta name="description" content="人生を変える体験を、抹茶と仲間と場所で。matcha vibes tokyo — Good vibes start here.">
+  <title>matcha vibes tokyo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;1,9..40,200;1,9..40,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --white: #FFFFFF;
-      --off-white: #FAFAF8;
-      --cream: #F5F0E8;
-      --black: #0A0A0A;
-      --green: #00E676;
-      --text: #111111;
-      --muted: #888888;
-    }
-
-    html { scroll-behavior: smooth; }
-
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--white);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
+      font-family:"DM Sans",sans-serif;
+      background:#fff;
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
     }
+    img { display:block; max-width:100%; }
+    .fade { opacity:0; transform:translateY(20px); transition:opacity 0.9s ease,transform 0.9s ease; }
+    .fade.in { opacity:1; transform:none; }
+    .d1 { transition-delay:.1s; }
+    .d2 { transition-delay:.2s; }
 
-    /* ═══════════════════════════════════════════════════════════════
-       HEADER — fixed 60px
-    ═══════════════════════════════════════════════════════════════ */
+    /* HEADER */
     header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 6vw;
-      z-index: 200;
-      background: transparent;
-      transition: background 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease;
+      position:fixed; top:0; left:0; right:0; height:56px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 5vw;
+      background:#fff;
+      border-bottom:1px solid rgba(0,0,0,0.07);
+      z-index:100;
     }
-    .site-name {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 15px;
-      color: var(--cream);
-      letter-spacing: -0.01em;
-      transition: color 0.4s ease;
+    .header-logo {
+      font-family:"DM Serif Display",serif;
+      font-style:italic;
+      font-size:15px;
+      color:#111;
+      text-decoration:none;
     }
-    .header-tag {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.5em;
-      color: #AAA;
-      text-transform: uppercase;
-      display: none;
+    .header-tokyo {
+      font-size:9px;
+      letter-spacing:0.5em;
+      color:#AAA;
+      display:none;
+    }
+    @media(min-width:768px) {
+      .header-tokyo { display:block; }
     }
 
-    @media (min-width: 768px) {
-      header { padding: 0 5vw; }
-      .header-tag { display: block; }
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       HERO — 100svh
-    ═══════════════════════════════════════════════════════════════ */
+    /* HERO */
     .hero {
-      position: relative;
-      height: 100svh;
-      min-height: 600px;
-      overflow: hidden;
-      background: var(--white);
+      height:100svh;
+      display:grid;
+      grid-template-columns:1fr;
+      grid-template-rows:1fr auto;
+      padding-top:56px;
     }
-
-    /* Mobile Hero */
-    .hero-bg-mobile {
-      position: absolute;
-      inset: 0;
+    .hero-img {
+      height:65svh;
+      overflow:hidden;
     }
-    .hero-bg-mobile img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
+    .hero-img img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:top center;
     }
-    .hero-gradient-mobile {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 55%;
-      background: linear-gradient(to bottom, transparent 0%, rgba(250,250,248,0.95) 100%);
+    .hero-text {
+      padding:2.5rem 6vw 3rem;
+      background:#fff;
     }
-    .hero-content-mobile {
-      position: absolute;
-      bottom: 0;
-      left: 0; right: 0;
-      padding: 0 6vw 5rem;
+    .hero-copy {
+      font-family:"DM Serif Display",serif;
+      font-style:italic;
+      font-size:13vw;
+      line-height:0.88;
+      color:#111;
     }
-    .hero-title-mobile {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 18vw;
-      line-height: 0.85;
-      color: var(--text);
-      letter-spacing: -0.02em;
+    .hero-line {
+      width:24px;
+      height:1px;
+      background:#E0E0E0;
+      margin:1.5rem 0;
     }
-    .hero-subtitle-mobile {
-      font-size: 10px;
-      font-weight: 300;
-      letter-spacing: 0.3em;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-top: 1.5rem;
+    .hero-brand {
+      font-size:10px;
+      font-weight:300;
+      color:#AAA;
+      letter-spacing:0.3em;
     }
-
-    /* PC Hero */
-    .hero-pc {
-      display: none;
-    }
-
-    @media (min-width: 768px) {
-      .hero-bg-mobile,
-      .hero-gradient-mobile,
-      .hero-content-mobile {
-        display: none;
+    @media(min-width:768px) {
+      .hero {
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:1fr;
       }
-      .hero-pc {
-        display: flex;
-        height: 100%;
+      .hero-img {
+        height:100%;
+        order:2;
       }
-      .hero-text-area {
-        width: 55%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0 6vw 0 10vw;
-        background: var(--white);
+      .hero-text {
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        padding:0 6vw 0 10vw;
       }
-      .hero-title-pc {
-        font-family: 'DM Serif Display', serif;
-        font-style: italic;
-        font-size: clamp(4rem, 7vw, 9rem);
-        line-height: 0.9;
-        color: var(--text);
-        letter-spacing: -0.02em;
-      }
-      .hero-subtitle-pc {
-        font-size: 10px;
-        font-weight: 300;
-        letter-spacing: 0.4em;
-        color: #CCC;
-        text-transform: uppercase;
-        margin-top: 3rem;
-      }
-      .hero-image-area {
-        width: 45%;
-        height: 100%;
-      }
-      .hero-image-area img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: top center;
+      .hero-copy {
+        font-size:clamp(3.5rem,6.5vw,8rem);
       }
     }
 
-    /* ═══════════════════════════════════════════════════════════════
-       MARQUEE — 48px
-    ═══════════════════════════════════════════════════════════════ */
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+    /* PRODUCT HERO */
+    .product-hero {
+      width:100%;
+      height:80svh;
+      overflow:hidden;
     }
-    .marquee {
-      overflow: hidden;
-      white-space: nowrap;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      background: var(--black);
-    }
-    .marquee-inner {
-      display: inline-flex;
-      animation: marquee 16s linear infinite;
-    }
-    .marquee-item {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 14px;
-      color: var(--cream);
-      letter-spacing: 0.05em;
-      padding: 0 2rem;
+    .product-hero img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
     }
 
-    /* ═══════════════════════════════════════════════════════════════
-       CULTURE STATEMENT
-    ═══════════════════════════════════════════════════════════════ */
-    .culture {
-      background: var(--white);
-      padding: 7rem 6vw;
-    }
-    .culture-line {
-      width: 40px;
-      height: 1px;
-      background: #E0E0E0;
-      margin-bottom: 3rem;
-    }
-    .culture-text {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: clamp(2rem, 4vw, 4rem);
-      line-height: 1.35;
-      color: var(--text);
-      max-width: 720px;
-    }
-    .culture-sub {
-      font-size: 13px;
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: #AAA;
-      margin-top: 2rem;
-    }
-
-    @media (min-width: 768px) {
-      .culture {
-        padding: 12rem 10vw;
-      }
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       FULL BLEED IMAGE
-    ═══════════════════════════════════════════════════════════════ */
-    .full-bleed {
-      width: 100vw;
-      height: 75vh;
-      min-height: 400px;
-    }
-    .full-bleed img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       THE DRINK — cream bg
-    ═══════════════════════════════════════════════════════════════ */
-    .drink {
-      background: var(--cream);
-      padding: 6rem 6vw;
-    }
-    .drink-label {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.5em;
-      color: #BBB;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-    .drink-title {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      line-height: 1.05;
-      color: var(--text);
-      margin-bottom: 3rem;
-    }
-    .steps {
-      display: flex;
-      flex-direction: column;
-    }
-    .step {
-      padding: 2rem 0;
-      border-top: 1px solid rgba(0,0,0,0.08);
-    }
-    .step-num {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.3em;
-      color: #CCC;
-    }
-    .step-title {
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      color: var(--text);
-      text-transform: uppercase;
-      margin-top: 0.5rem;
-    }
-    .step-options {
-      font-size: 11px;
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      margin-top: 0.5rem;
-    }
-    .drink-footer {
-      font-size: 12px;
-      font-weight: 300;
-      font-style: italic;
-      letter-spacing: 0.02em;
-      color: #BBB;
-      text-align: center;
-      margin-top: 3rem;
-    }
-
-    @media (min-width: 768px) {
-      .drink {
-        padding: 10rem 10vw;
-      }
-      .steps {
-        flex-direction: row;
-        gap: 2rem;
-      }
-      .step {
-        flex: 1;
-        border-top: 1px solid rgba(0,0,0,0.08);
-      }
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       MENU
-    ═══════════════════════════════════════════════════════════════ */
+    /* MENU */
     .menu {
-      background: var(--white);
-      padding: 5rem 6vw;
+      padding:5rem 6vw;
     }
-    .menu-label {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.5em;
-      color: #CCC;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
+    @media(min-width:768px) {
+      .menu { padding:8rem 8vw; }
+    }
+    .menu-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      margin-bottom:3rem;
+      padding-bottom:1.5rem;
+      border-bottom:1px solid rgba(0,0,0,0.08);
     }
     .menu-title {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: clamp(2.5rem, 5vw, 5.5rem);
-      line-height: 1;
-      color: var(--text);
-      margin-bottom: 3rem;
+      font-family:"DM Serif Display",serif;
+      font-style:italic;
+      font-size:clamp(2rem,5vw,4rem);
+      color:#111;
     }
-
-    /* Mobile Menu List */
+    .menu-count {
+      font-size:10px;
+      font-weight:300;
+      color:#AAA;
+      letter-spacing:0.2em;
+      display:none;
+    }
+    @media(min-width:768px) {
+      .menu-count { display:block; }
+    }
     .menu-list {
-      display: flex;
-      flex-direction: column;
+      list-style:none;
     }
     .menu-item {
-      display: flex;
-      gap: 1rem;
-      padding: 1.5rem 0;
-      border-top: 1px solid rgba(0,0,0,0.07);
+      display:flex;
+      gap:1.2rem;
+      padding:1.5rem 0;
+      border-bottom:1px solid rgba(0,0,0,0.07);
+      align-items:center;
     }
     .menu-item-img {
-      width: 80px;
-      height: 96px;
-      flex-shrink: 0;
-      border-radius: 4px;
-      overflow: hidden;
+      width:72px;
+      height:88px;
+      overflow:hidden;
+      flex-shrink:0;
     }
     .menu-item-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
     .menu-item-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      flex:1;
     }
     .menu-item-name {
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      color: var(--text);
-      text-transform: uppercase;
+      font-size:12px;
+      font-weight:400;
+      letter-spacing:0.08em;
+      color:#111;
     }
     .menu-item-desc {
-      font-size: 11px;
-      font-weight: 300;
-      color: #AAA;
-      margin-top: 0.3rem;
+      font-size:11px;
+      font-weight:300;
+      color:#AAA;
+      margin-top:4px;
     }
     .menu-item-price {
-      font-size: 12px;
-      font-weight: 300;
-      color: var(--muted);
-      margin-top: 0.8rem;
+      font-size:12px;
+      font-weight:300;
+      color:#888;
+      margin-top:10px;
     }
-
-    /* PC Menu Grid */
-    @media (min-width: 768px) {
-      .menu {
-        padding: 8rem 8vw;
-      }
+    @media(min-width:768px) {
       .menu-list {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        gap:1px;
+        background:rgba(0,0,0,0.07);
       }
       .menu-item {
-        flex-direction: column;
-        gap: 0;
-        padding: 0;
-        border-top: none;
+        flex-direction:column;
+        gap:0;
+        padding:0;
+        background:#fff;
+        border-bottom:none;
+        align-items:stretch;
       }
       .menu-item-img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 3/4;
-        border-radius: 6px;
+        width:100%;
+        height:auto;
+        aspect-ratio:3/4;
       }
       .menu-item-info {
-        padding-top: 1rem;
+        padding:1.2rem 1.4rem 1.6rem;
       }
     }
 
-    /* ═══════════════════════════════════════════════════════════════
-       VIBE SECTION
-    ═══════════════════════════════════════════════════════════════ */
-    .vibe {
-      background: var(--white);
-      padding: 6rem 6vw;
+    /* CUSTOMIZE */
+    .customize {
+      padding:5rem 6vw;
+      border-top:1px solid rgba(0,0,0,0.08);
     }
-    .vibe-label {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.5em;
-      color: #CCC;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
+    @media(min-width:768px) {
+      .customize { padding:8rem 8vw; }
     }
-    .vibe-text {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: clamp(1.8rem, 3.5vw, 3.5rem);
-      line-height: 1.4;
-      color: var(--text);
-      max-width: 600px;
+    .customize-title {
+      font-family:"DM Serif Display",serif;
+      font-style:italic;
+      font-size:clamp(1.8rem,4vw,3.5rem);
+      color:#111;
+      margin-bottom:2.5rem;
     }
-    .vibe-sub {
-      font-size: 13px;
-      font-weight: 300;
-      font-style: italic;
-      color: #BBB;
-      margin-top: 2rem;
+    .steps {
+      list-style:none;
+    }
+    .step {
+      padding:1.5rem 0;
+      border-top:1px solid rgba(0,0,0,0.08);
+      display:flex;
+      gap:1.5rem;
+      align-items:baseline;
+    }
+    .step-num {
+      font-size:9px;
+      color:#CCC;
+      letter-spacing:0.3em;
+      flex-shrink:0;
+      width:2rem;
+    }
+    .step-content {}
+    .step-label {
+      font-size:11px;
+      font-weight:400;
+      letter-spacing:0.1em;
+      color:#111;
+    }
+    .step-options {
+      font-size:11px;
+      font-weight:300;
+      color:#AAA;
+      margin-top:4px;
+    }
+    .customize-note {
+      font-size:11px;
+      font-weight:300;
+      color:#CCC;
+      text-align:right;
+      margin-top:1.5rem;
     }
 
-    @media (min-width: 768px) {
-      .vibe {
-        padding: 9rem 8vw;
-      }
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       LOGO SECTION — black bg
-    ═══════════════════════════════════════════════════════════════ */
+    /* LOGO SECTION */
     .logo-section {
-      background: var(--black);
-      padding: 9rem 4rem;
-      text-align: center;
-      border-top: 1px solid #181818;
-      border-bottom: 1px solid #181818;
+      background:#0A0A0A;
+      padding:8rem 4rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
     }
-    .logo-section img {
-      max-width: 400px;
-      width: 72vw;
-      height: auto;
+    .logo-section hr {
+      width:calc(100% - 4rem);
+      max-width:600px;
+      height:1px;
+      background:#181818;
+      border:none;
+    }
+    .logo-section-img {
+      max-width:380px;
+      width:70vw;
+      margin:3rem 0;
     }
     .logo-section-text {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.5em;
-      color: #282828;
-      text-transform: uppercase;
-      margin-top: 2rem;
+      font-size:9px;
+      color:#282828;
+      letter-spacing:0.5em;
+      text-align:center;
+      margin-top:2rem;
     }
 
-    /* ═══════════════════════════════════════════════════════════════
-       WHERE
-    ═══════════════════════════════════════════════════════════════ */
+    /* WHERE */
     .where {
-      background: var(--white);
-      padding: 5rem 6vw;
+      padding:5rem 6vw;
+    }
+    @media(min-width:768px) {
+      .where { padding:8rem 8vw; }
     }
     .where-title {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: clamp(2.5rem, 5.5vw, 5rem);
-      line-height: 1;
-      color: var(--text);
-      margin-bottom: 3.5rem;
+      font-family:"DM Serif Display",serif;
+      font-style:italic;
+      font-size:clamp(2rem,5vw,4.5rem);
+      color:#111;
+      margin-bottom:3rem;
     }
-    .location-list {
-      display: flex;
-      flex-direction: column;
+    .locations {
+      list-style:none;
     }
-    .location-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 2.2rem 0;
-      border-top: 1px solid rgba(0,0,0,0.08);
+    .location {
+      padding:1.8rem 0;
+      border-top:1px solid rgba(0,0,0,0.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
     }
-    .location-left {
-      display: flex;
-      flex-direction: column;
+    .location:last-child {
+      border-bottom:1px solid rgba(0,0,0,0.08);
     }
-    .location-jp {
-      font-size: 1.3rem;
-      font-weight: 300;
-      color: var(--text);
+    .location-info {}
+    .location-name {
+      font-size:clamp(1rem,2.5vw,1.4rem);
+      font-weight:300;
+      color:#111;
     }
-    .location-en {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.3em;
-      color: #BBB;
-      text-transform: uppercase;
-      margin-top: 0.3rem;
+    .location-sub {
+      font-size:9px;
+      letter-spacing:0.3em;
+      color:#BBB;
+      margin-top:3px;
     }
-    .location-tagline {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 12px;
-      color: #C0B89A;
+    .location-tag {
+      font-family:"DM Serif Display",serif;
+      font-style:italic;
+      font-size:12px;
+      color:#C0B89A;
     }
 
-    @media (min-width: 768px) {
-      .where {
-        padding: 8rem 8vw;
-      }
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════════════════════════ */
+    /* FOOTER */
     footer {
-      background: var(--white);
-      padding: 3rem 6vw;
-      border-top: 1px solid rgba(0,0,0,0.07);
+      padding:3rem 6vw;
+      border-top:1px solid rgba(0,0,0,0.07);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-    .footer-name {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 16px;
-      color: var(--text);
+    .footer-logo {
+      font-family:"DM Serif Display",serif;
+      font-style:italic;
+      font-size:14px;
+      color:#111;
     }
-    .footer-location {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: #CCC;
-      margin-top: 4px;
+    .footer-ig {
+      font-size:10px;
+      font-weight:300;
+      color:#CCC;
     }
-    .footer-social {
-      font-size: 10px;
-      font-weight: 300;
-      color: #CCC;
-      margin-top: 1.5rem;
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       FADE ANIMATIONS
-    ═══════════════════════════════════════════════════════════════ */
-    .fade {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-    }
-    .fade.in {
-      opacity: 1;
-      transform: none;
-    }
-    .d1 { transition-delay: 0.12s; }
-    .d2 { transition-delay: 0.24s; }
   </style>
 </head>
 <body>
 
   <!-- HEADER -->
   <header>
-    <span class="site-name">matcha vibes tokyo</span>
-    <span class="header-tag">TOKYO</span>
+    <a href="#" class="header-logo">matcha vibes tokyo</a>
+    <span class="header-tokyo">TOKYO</span>
   </header>
 
   <!-- HERO -->
   <section class="hero">
-    <!-- Mobile -->
-    <div class="hero-bg-mobile">
-      <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="matcha vibes tokyo cup" loading="eager">
-      <div class="hero-gradient-mobile"></div>
+    <div class="hero-img">
+      <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="matcha vibes">
     </div>
-    <div class="hero-content-mobile">
-      <h1 class="hero-title-mobile">good vibes<br>start here.</h1>
-      <p class="hero-subtitle-mobile">matcha × tokyo</p>
-    </div>
-    <!-- PC -->
-    <div class="hero-pc">
-      <div class="hero-text-area">
-        <h1 class="hero-title-pc">good vibes<br>start here.</h1>
-        <p class="hero-subtitle-pc">matcha × tokyo × culture</p>
-      </div>
-      <div class="hero-image-area">
-        <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="matcha vibes tokyo cup" loading="eager">
-      </div>
+    <div class="hero-text">
+      <h1 class="hero-copy fade">good vibes<br>start here.</h1>
+      <div class="hero-line fade d1"></div>
+      <p class="hero-brand fade d2">matcha vibes tokyo</p>
     </div>
   </section>
 
-  <!-- MARQUEE -->
-  <div class="marquee">
-    <div class="marquee-inner">
-      <span class="marquee-item">matcha vibes tokyo — good vibes start here —</span>
-      <span class="marquee-item">matcha vibes tokyo — good vibes start here —</span>
-      <span class="marquee-item">matcha vibes tokyo — good vibes start here —</span>
-      <span class="marquee-item">matcha vibes tokyo — good vibes start here —</span>
-      <span class="marquee-item">matcha vibes tokyo — good vibes start here —</span>
-      <span class="marquee-item">matcha vibes tokyo — good vibes start here —</span>
-      <span class="marquee-item">matcha vibes tokyo — good vibes start here —</span>
-      <span class="marquee-item">matcha vibes tokyo — good vibes start here —</span>
-    </div>
-  </div>
-
-  <!-- CULTURE STATEMENT -->
-  <section class="culture">
-    <div class="culture-line fade"></div>
-    <p class="culture-text fade d1">海外でバズっている抹茶を、<br>東京で一番かっこよく。</p>
-    <p class="culture-sub fade d2">Not traditional. Not foreign. Just ours.</p>
-  </section>
-
-  <!-- FULL BLEED -->
-  <div class="full-bleed">
-    <img src="matcha-vibes-assets/cup-duo.jpg" alt="matcha vibes tokyo drinks" loading="lazy">
-  </div>
-
-  <!-- THE DRINK -->
-  <section class="drink">
-    <p class="drink-label fade">the drink</p>
-    <h2 class="drink-title fade d1">Three layers.<br>Your combination.</h2>
-    <div class="steps">
-      <div class="step fade">
-        <span class="step-num">01</span>
-        <p class="step-title">BASE</p>
-        <p class="step-options">MATCHA</p>
-      </div>
-      <div class="step fade d1">
-        <span class="step-num">02</span>
-        <p class="step-title">MILK</p>
-        <p class="step-options">YOGURT · OATS · SOY</p>
-      </div>
-      <div class="step fade d2">
-        <span class="step-num">03</span>
-        <p class="step-title">TOPPING</p>
-        <p class="step-options">BLUEBERRY · BANANA · NONE</p>
-      </div>
-    </div>
-    <p class="drink-footer fade">9 combinations. All good vibes.</p>
+  <!-- PRODUCT HERO -->
+  <section class="product-hero fade">
+    <img src="matcha-vibes-assets/cup-duo.jpg" alt="matcha vibes duo">
   </section>
 
   <!-- MENU -->
   <section class="menu">
-    <p class="menu-label fade">the menu</p>
-    <h2 class="menu-title fade d1">Four drinks.</h2>
-    <div class="menu-list">
-      <div class="menu-item fade">
-        <div class="menu-item-img">
-          <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha" loading="lazy">
-        </div>
-        <div class="menu-item-info">
-          <span class="menu-item-name">Blueberry Matcha</span>
-          <span class="menu-item-desc">Purple meets green.</span>
-          <span class="menu-item-price">¥850</span>
-        </div>
-      </div>
-      <div class="menu-item fade d1">
-        <div class="menu-item-img">
-          <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie" loading="lazy">
-        </div>
-        <div class="menu-item-info">
-          <span class="menu-item-name">Yogurt Smoothie</span>
-          <span class="menu-item-desc">Creamy. Always.</span>
-          <span class="menu-item-price">¥750</span>
-        </div>
-      </div>
-      <div class="menu-item fade d2">
-        <div class="menu-item-img">
-          <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery" loading="lazy">
-        </div>
-        <div class="menu-item-info">
-          <span class="menu-item-name">Banana Recovery</span>
-          <span class="menu-item-desc">After the run.</span>
-          <span class="menu-item-price">¥700</span>
-        </div>
-      </div>
-      <div class="menu-item fade">
-        <div class="menu-item-img">
-          <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte" loading="lazy">
-        </div>
-        <div class="menu-item-info">
-          <span class="menu-item-name">Classic Latte</span>
-          <span class="menu-item-desc">Where it starts.</span>
-          <span class="menu-item-price">¥650</span>
-        </div>
-      </div>
+    <div class="menu-header fade">
+      <h2 class="menu-title">the menu</h2>
+      <span class="menu-count">four drinks</span>
     </div>
+    <ul class="menu-list">
+      <li class="menu-item fade">
+        <div class="menu-item-img">
+          <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha">
+        </div>
+        <div class="menu-item-info">
+          <p class="menu-item-name">BLUEBERRY MATCHA</p>
+          <p class="menu-item-desc">Purple meets green.</p>
+          <p class="menu-item-price">&yen;850</p>
+        </div>
+      </li>
+      <li class="menu-item fade d1">
+        <div class="menu-item-img">
+          <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie">
+        </div>
+        <div class="menu-item-info">
+          <p class="menu-item-name">YOGURT SMOOTHIE</p>
+          <p class="menu-item-desc">Creamy. Always.</p>
+          <p class="menu-item-price">&yen;750</p>
+        </div>
+      </li>
+      <li class="menu-item fade d2">
+        <div class="menu-item-img">
+          <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery">
+        </div>
+        <div class="menu-item-info">
+          <p class="menu-item-name">BANANA RECOVERY</p>
+          <p class="menu-item-desc">After the run.</p>
+          <p class="menu-item-price">&yen;700</p>
+        </div>
+      </li>
+      <li class="menu-item fade">
+        <div class="menu-item-img">
+          <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte">
+        </div>
+        <div class="menu-item-info">
+          <p class="menu-item-name">CLASSIC LATTE</p>
+          <p class="menu-item-desc">Where it starts.</p>
+          <p class="menu-item-price">&yen;650</p>
+        </div>
+      </li>
+    </ul>
   </section>
 
-  <!-- VIBE -->
-  <section class="vibe">
-    <p class="vibe-label fade">the vibe</p>
-    <p class="vibe-text fade d1">人生を変える体験を、<br>抹茶と仲間と場所で。</p>
-    <p class="vibe-sub fade d2">Good vibes start here.</p>
+  <!-- CUSTOMIZE -->
+  <section class="customize">
+    <h2 class="customize-title fade">build your cup</h2>
+    <ul class="steps">
+      <li class="step fade">
+        <span class="step-num">01</span>
+        <div class="step-content">
+          <p class="step-label">BASE</p>
+          <p class="step-options">MATCHA</p>
+        </div>
+      </li>
+      <li class="step fade d1">
+        <span class="step-num">02</span>
+        <div class="step-content">
+          <p class="step-label">MILK</p>
+          <p class="step-options">YOGURT &middot; OATS &middot; SOY</p>
+        </div>
+      </li>
+      <li class="step fade d2">
+        <span class="step-num">03</span>
+        <div class="step-content">
+          <p class="step-label">TOPPING</p>
+          <p class="step-options">BLUEBERRY &middot; BANANA &middot; NONE</p>
+        </div>
+      </li>
+    </ul>
+    <p class="customize-note fade">9 combinations.</p>
   </section>
 
   <!-- LOGO SECTION -->
   <section class="logo-section">
-    <img src="matcha-vibes-assets/logo-official.png" alt="matcha vibes tokyo" loading="lazy">
-    <p class="logo-section-text">matcha vibes tokyo — est. 2026</p>
+    <hr>
+    <img src="matcha-vibes-assets/logo-official.png" alt="matcha vibes tokyo" class="logo-section-img fade">
+    <hr>
+    <p class="logo-section-text fade">matcha vibes tokyo</p>
   </section>
 
   <!-- WHERE -->
   <section class="where">
     <h2 class="where-title fade">find us.</h2>
-    <div class="location-list">
-      <div class="location-item fade">
-        <div class="location-left">
-          <span class="location-jp">皇居外苑</span>
-          <span class="location-en">Imperial Palace</span>
+    <ul class="locations">
+      <li class="location fade">
+        <div class="location-info">
+          <p class="location-name">皇居外苑</p>
+          <p class="location-sub">IMPERIAL PALACE</p>
         </div>
-        <span class="location-tagline">For the runners.</span>
-      </div>
-      <div class="location-item fade d1">
-        <div class="location-left">
-          <span class="location-jp">原宿</span>
-          <span class="location-en">Harajuku</span>
+        <span class="location-tag">For the runners.</span>
+      </li>
+      <li class="location fade d1">
+        <div class="location-info">
+          <p class="location-name">原宿</p>
+          <p class="location-sub">HARAJUKU</p>
         </div>
-        <span class="location-tagline">For the explorers.</span>
-      </div>
-      <div class="location-item fade d2">
-        <div class="location-left">
-          <span class="location-jp">渋谷</span>
-          <span class="location-en">Shibuya</span>
+        <span class="location-tag">For the explorers.</span>
+      </li>
+      <li class="location fade d2">
+        <div class="location-info">
+          <p class="location-name">渋谷</p>
+          <p class="location-sub">SHIBUYA</p>
         </div>
-        <span class="location-tagline">For everyone.</span>
-      </div>
-    </div>
+        <span class="location-tag">For everyone.</span>
+      </li>
+    </ul>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <span class="footer-name">matcha vibes tokyo</span>
-    <p class="footer-location">Tokyo, Japan — Est. 2026</p>
-    <p class="footer-social">@matchavibes.tokyo</p>
+    <span class="footer-logo">matcha vibes tokyo</span>
+    <span class="footer-ig">@matchavibes.tokyo</span>
   </footer>
 
   <!-- SCRIPTS -->
@@ -774,27 +529,14 @@
       requestAnimationFrame(raf);
     })(0);
 
-    // Header scroll effect
-    const hdr = document.querySelector("header");
-    const logo = hdr.querySelector(".site-name");
-    window.addEventListener("scroll", () => {
-      const s = window.scrollY > 80;
-      hdr.style.background = s ? "rgba(255,255,255,0.95)" : "transparent";
-      hdr.style.backdropFilter = s ? "blur(16px)" : "none";
-      hdr.style.webkitBackdropFilter = s ? "blur(16px)" : "none";
-      hdr.style.borderBottom = s ? "1px solid rgba(0,0,0,0.07)" : "none";
-      logo.style.color = s ? "#111" : "#F5F0E8";
-    }, { passive: true });
-
-    // Intersection Observer for fade-in
+    // Fade on scroll
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add("in");
-        }
+        if (e.isIntersecting) e.target.classList.add("in");
       });
-    }, { threshold: 0.05 });
+    }, { threshold: 0.06 });
     document.querySelectorAll(".fade").forEach(el => io.observe(el));
   </script>
+
 </body>
 </html>

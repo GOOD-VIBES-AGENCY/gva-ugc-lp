@@ -4,23 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>matcha vibes tokyo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<!-- Swiper (Rhode uses it) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<!-- Rhode's exact font: NNRektoratWeb-Heavy from their CDN -->
+<style>
+@font-face {
+  font-family: 'NNRektorat';
+  src: url('https://www.rhodeskin.com/cdn/shop/t/1179/assets/NNRektoratWeb-Heavy.woff2?v=64959517310183983311776697315') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<!-- Rhode exact colors extracted from source:
+  bg: #FFFFFF
+  text: #303030
+  sub: #67645e
+  border: #f1f0ed
+  light-bg: #f5f3f0
+  announce-bg: #f1f0ed
+  accent: #2332D5 (Rhode blue, rarely used)
+-->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 <style>
-/* Rhode exact color extraction:
-   bg: #FFFFFF
-   text-primary: #303030
-   text-sub: #67645e
-   text-light: #B5B5B5
-   border: #f1f0ed
-   announce-bg: #f1f0ed
-*/
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:'DM Sans',sans-serif;
+  font-family:'Helvetica Neue','Arial',sans-serif;
   background:#fff;
   color:#303030;
   -webkit-font-smoothing:antialiased;
@@ -28,19 +39,22 @@ body{
   font-size:14px;
   line-height:1.5;
 }
+h1,h2,h3,h4{
+  font-family:'NNRektorat','Helvetica Neue',sans-serif;
+  font-weight:700;
+}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
 
-/* ─── ANNOUNCEMENT BAR ─── */
+/* ─── ANNOUNCE ─── */
 .announce{
   background:#f1f0ed;
   color:#67645e;
-  font-size:12px;
-  font-weight:300;
+  font-size:11px;
   letter-spacing:0.02em;
   text-align:center;
-  padding:9px 16px;
-  border-bottom:1px solid #e8e5e0;
+  padding:8px 16px;
 }
 
 /* ─── HEADER ─── */
@@ -48,148 +62,157 @@ header{
   position:sticky;top:0;
   background:#fff;
   border-bottom:1px solid #f1f0ed;
-  z-index:200;
+  z-index:300;
 }
 .hdr{
   height:56px;
   max-width:1440px;
   margin:0 auto;
-  padding:0 20px;
-  display:flex;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
   align-items:center;
-  justify-content:space-between;
-  position:relative;
 }
-.hdr-left{
-  display:flex;align-items:center;gap:24px;
-}
+/* left: hamburger (mobile) / nav (desktop) */
+.hdr-left{display:flex;align-items:center;gap:24px}
+.hdr-hamburger{display:flex;flex-direction:column;gap:5px}
+@media(min-width:768px){.hdr-hamburger{display:none}}
+.hdr-hamburger span{display:block;width:20px;height:1.5px;background:#84827e}
 .hdr-nav{display:none;list-style:none;gap:24px}
 @media(min-width:768px){.hdr-nav{display:flex}}
-.hdr-nav a{
-  font-size:13px;font-weight:400;
-  color:#303030;letter-spacing:0.02em;
-}
-.hdr-nav a:hover{text-decoration:underline}
+.hdr-nav a{font-size:13px;letter-spacing:0.02em;color:#303030}
+.hdr-nav a:hover{text-decoration:underline;text-underline-offset:3px}
+/* center: logo */
 .hdr-logo{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;font-size:18px;color:#303030;
-  position:absolute;left:50%;transform:translateX(-50%);
-  white-space:nowrap;
+  font-family:'NNRektorat','Helvetica Neue',sans-serif;
+  font-weight:700;
+  font-size:17px;
+  letter-spacing:-0.01em;
+  color:#303030;
+  text-align:center;
+  text-transform:uppercase;
 }
+/* right: actions */
 .hdr-right{
-  display:flex;align-items:center;gap:16px;
+  display:flex;align-items:center;justify-content:flex-end;gap:16px;
 }
-.hdr-link{
-  font-size:13px;font-weight:400;color:#303030;letter-spacing:0.02em;
-  cursor:pointer;
-}
-.hdr-link:hover{text-decoration:underline}
-/* mobile: hamburger */
-.hdr-hamburger{
-  display:flex;flex-direction:column;gap:5px;cursor:pointer;
-}
-@media(min-width:768px){.hdr-hamburger{display:none}}
-.hdr-hamburger span{display:block;width:22px;height:2px;background:#84827e;border-radius:1px}
+.hdr-act{font-size:13px;letter-spacing:0.02em;color:#303030}
+.hdr-act:hover{text-decoration:underline;text-underline-offset:3px}
 
-/* ─── HERO ─── */
-.hero{
-  position:relative;
-  overflow:hidden;
-  background:#f9f8f6;
-}
-.hero-img{
+/* ─── HERO SWIPER ─── */
+.hero-swiper{
   width:100%;
-  aspect-ratio:4/5;
-  overflow:hidden;
+  position:relative;
+}
+.hero-swiper .swiper-slide{
+  position:relative;overflow:hidden;
+  aspect-ratio:3/4;
+  background:#f5f3f0;
 }
 @media(min-width:768px){
-  .hero-img{aspect-ratio:16/8;max-height:90svh}
+  .hero-swiper .swiper-slide{aspect-ratio:16/8;max-height:88svh}
 }
-.hero-img img{
+.hero-img-wrap{width:100%;height:100%}
+.hero-img-wrap img{
   width:100%;height:100%;
   object-fit:cover;object-position:top center;
-  transition:transform 8s ease;
 }
-/* Rhode: right-bottom product card overlay */
-.hero-overlay{
+/* Rhode: right-bottom overlay card */
+.hero-card{
   position:absolute;
-  bottom:20px;right:20px;
+  bottom:16px;right:16px;
   background:#fff;
-  padding:16px 18px;
-  min-width:170px;
-  max-width:230px;
-  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+  padding:14px 16px;
+  min-width:160px;
+  max-width:220px;
 }
 @media(min-width:768px){
-  .hero-overlay{bottom:32px;right:32px;min-width:200px;max-width:260px;padding:20px 22px}
+  .hero-card{bottom:28px;right:28px;padding:18px 20px;min-width:190px;max-width:250px}
 }
-.ho-badge{
-  display:inline-block;
-  font-size:10px;font-weight:400;letter-spacing:0.05em;
-  background:#303030;color:#fff;
-  padding:2px 8px;
+.hero-card-eyebrow{
+  font-size:10px;
+  letter-spacing:0.1em;
+  color:#B5B5B5;
+  text-transform:uppercase;
+  margin-bottom:5px;
+}
+.hero-card-name{
+  font-family:'NNRektorat','Helvetica Neue',sans-serif;
+  font-weight:700;
+  font-size:1.1rem;
+  line-height:1.15;
+  color:#303030;
   margin-bottom:8px;
+  text-transform:uppercase;
+  letter-spacing:-0.01em;
 }
-.ho-desc{font-size:11px;font-weight:300;color:#67645e;margin-bottom:4px}
-.ho-name{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;font-size:1.2rem;
-  color:#303030;line-height:1.2;margin-bottom:8px;
+.hero-card-sub{
+  font-size:11px;color:#67645e;margin-bottom:10px;
 }
-.ho-price{font-size:12px;font-weight:300;color:#67645e;margin-bottom:12px}
-.ho-btn{
+.hero-card-btn{
   display:block;
-  font-size:11px;font-weight:400;letter-spacing:0.04em;
-  background:#303030;color:#fff;
-  text-align:center;padding:8px 16px;
-  cursor:pointer;
+  font-size:11px;
+  letter-spacing:0.04em;
+  background:#303030;
+  color:#fff;
+  text-align:center;
+  padding:8px 14px;
   transition:background 0.2s;
+  text-transform:uppercase;
 }
-.ho-btn:hover{background:#111}
+.hero-card-btn:hover{background:#111}
+/* swiper pagination */
+.hero-swiper .swiper-pagination{bottom:12px}
+.hero-swiper .swiper-pagination-bullet{background:#303030;opacity:0.3}
+.hero-swiper .swiper-pagination-bullet-active{opacity:1}
 
-/* ─── SECTION WRAPPER ─── */
-.section{
+/* ─── SECTION ─── */
+.sec{
   max-width:1440px;
   margin:0 auto;
-  padding:48px 20px;
+  padding:48px 16px;
 }
-@media(min-width:768px){.section{padding:64px 32px}}
-
-/* ─── SECTION HEADER ─── */
-.sh-eyebrow{
-  font-size:11px;font-weight:300;
-  letter-spacing:0.08em;color:#B5B5B5;
-  text-transform:uppercase;margin-bottom:6px;
+@media(min-width:768px){.sec{padding:64px 32px}}
+.sec-eyebrow{
+  font-size:11px;
+  letter-spacing:0.08em;
+  color:#B5B5B5;
+  text-transform:uppercase;
+  margin-bottom:4px;
 }
-.sh-title{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;
-  font-size:clamp(1.6rem,3.5vw,2.8rem);
-  color:#303030;margin-bottom:32px;
+.sec-title{
+  font-family:'NNRektorat','Helvetica Neue',sans-serif;
+  font-weight:700;
+  font-size:max(1.5rem,1.8vw);
+  color:#303030;
+  text-transform:uppercase;
+  letter-spacing:-0.01em;
+  margin-bottom:28px;
 }
 
 /* ─── PRODUCT GRID ─── */
 .pgrid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:8px;
 }
 @media(min-width:768px){
-  .pgrid{grid-template-columns:repeat(4,1fr);gap:16px}
+  .pgrid{grid-template-columns:repeat(4,1fr);gap:12px}
 }
-.pcard{cursor:pointer}
-.pcard-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:10px;font-weight:400;letter-spacing:0.05em;
-  color:#67645e;margin-bottom:8px;
-}
-.pcard-badge-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:#303030;flex-shrink:0;
+.pcard{}
+.pcard-label{
+  font-size:10px;
+  letter-spacing:0.06em;
+  color:#B5B5B5;
+  text-transform:uppercase;
+  margin-bottom:6px;
+  min-height:16px;
 }
 .pcard-img{
-  aspect-ratio:3/4;overflow:hidden;
-  background:#f5f3f0;margin-bottom:10px;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  background:#f5f3f0;
+  margin-bottom:10px;
   position:relative;
 }
 .pcard-img img{
@@ -199,159 +222,145 @@ header{
 }
 .pcard:hover .pcard-img img{transform:scale(1.03)}
 .pcard-name{
-  font-size:13px;font-weight:400;
-  color:#303030;margin-bottom:3px;
+  font-size:max(.875rem,1vw);
+  color:#303030;
+  margin-bottom:2px;
 }
 .pcard-sub{
-  font-size:12px;font-weight:300;
-  color:#67645e;margin-bottom:5px;
+  font-size:11px;
+  color:#67645e;
+  margin-bottom:4px;
 }
 .pcard-price{
-  font-size:13px;font-weight:300;color:#303030;
+  font-size:13px;
+  color:#303030;
 }
 
-/* ─── FULL BLEED IMAGE ─── */
+/* ─── FULL BLEED ─── */
 .bleed{
-  width:100%;height:52svh;overflow:hidden;
+  width:100%;
+  height:50svh;
+  overflow:hidden;
+  background:#f5f3f0;
 }
-@media(min-width:768px){.bleed{height:70svh}}
+@media(min-width:768px){.bleed{height:68svh}}
 .bleed img{
   width:100%;height:100%;
   object-fit:cover;object-position:center;
 }
 
-/* ─── FEATURE ROW — Rhode style ─── */
-.feature{
+/* ─── FEATURE ─── */
+.feat{
   display:grid;
   grid-template-columns:1fr;
   border-top:1px solid #f1f0ed;
 }
 @media(min-width:768px){
-  .feature{grid-template-columns:1fr 1fr}
-  .feature.rev .fi{order:2}
-  .feature.rev .fb{order:1}
+  .feat{grid-template-columns:1fr 1fr}
+  .feat.rev .fi{order:2}
+  .feat.rev .fb{order:1}
 }
 .fi{
   overflow:hidden;
   aspect-ratio:1/1;
   background:#f5f3f0;
 }
-@media(min-width:768px){.fi{aspect-ratio:auto;min-height:500px}}
+@media(min-width:768px){.fi{aspect-ratio:auto;min-height:520px}}
 .fi img{
   width:100%;height:100%;
   object-fit:cover;object-position:top;
   transition:transform 0.8s ease;
 }
-.feature:hover .fi img{transform:scale(1.02)}
-
+.feat:hover .fi img{transform:scale(1.02)}
 .fb{
   display:flex;flex-direction:column;justify-content:center;
-  padding:32px 24px;
+  padding:28px 20px;
   background:#fff;
   border-top:1px solid #f1f0ed;
 }
 @media(min-width:768px){
   .fb{padding:48px 40px;border-top:none;border-left:1px solid #f1f0ed}
-  .feature.rev .fb{border-left:none;border-right:1px solid #f1f0ed}
+  .feat.rev .fb{border-left:none;border-right:1px solid #f1f0ed}
 }
 .fb-badge{
   display:inline-block;
-  font-size:10px;font-weight:400;letter-spacing:0.05em;
+  font-size:9px;letter-spacing:0.1em;
   background:#303030;color:#fff;
-  padding:2px 8px;margin-bottom:12px;width:fit-content;
+  padding:3px 8px;
+  text-transform:uppercase;
+  margin-bottom:12px;width:fit-content;
 }
 .fb-eyebrow{
-  font-size:11px;font-weight:300;
-  letter-spacing:0.08em;color:#B5B5B5;
-  text-transform:uppercase;margin-bottom:8px;
+  font-size:10px;letter-spacing:0.08em;
+  color:#B5B5B5;text-transform:uppercase;margin-bottom:6px;
 }
 .fb-title{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;
-  font-size:clamp(1.5rem,3vw,2.2rem);
-  color:#303030;line-height:1.2;margin-bottom:10px;
+  font-family:'NNRektorat','Helvetica Neue',sans-serif;
+  font-weight:700;
+  font-size:max(1.4rem,2vw);
+  color:#303030;line-height:1.1;
+  text-transform:uppercase;letter-spacing:-0.01em;
+  margin-bottom:8px;
 }
-.fb-sub{
-  font-size:12px;font-weight:300;
-  color:#67645e;margin-bottom:6px;
-}
-.fb-desc{
-  font-size:12px;font-weight:300;
-  color:#67645e;line-height:1.85;margin-bottom:20px;
-}
-.fb-price{font-size:13px;font-weight:300;color:#303030;margin-bottom:14px}
+.fb-sub{font-size:12px;color:#67645e;margin-bottom:10px}
+.fb-desc{font-size:12px;color:#67645e;line-height:1.85;margin-bottom:18px}
+.fb-price{font-size:13px;color:#303030;margin-bottom:14px}
 .fb-btn{
   display:inline-block;width:fit-content;
-  font-size:12px;font-weight:400;letter-spacing:0.04em;
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
   background:#303030;color:#fff;
-  padding:10px 24px;cursor:pointer;
+  padding:10px 22px;
   transition:background 0.2s;
 }
 .fb-btn:hover{background:#111}
 
 /* ─── CUSTOMIZE ─── */
-.customize-wrap{
-  background:#fafaf8;
-  border-top:1px solid #f1f0ed;
-  border-bottom:1px solid #f1f0ed;
-}
-.cust-inner{
-  max-width:1440px;margin:0 auto;
-  padding:48px 20px;
-}
+.cust-wrap{background:#fafaf8;border-top:1px solid #f1f0ed;border-bottom:1px solid #f1f0ed}
+.cust-inner{max-width:1440px;margin:0 auto;padding:48px 16px}
 @media(min-width:768px){.cust-inner{padding:64px 32px}}
-.steps{
-  display:grid;grid-template-columns:1fr;gap:0;
-  margin-top:0;
-}
+.steps{display:grid;grid-template-columns:1fr;gap:0}
 @media(min-width:600px){.steps{grid-template-columns:repeat(3,1fr)}}
-.step{
-  padding:20px 0;
-  border-top:1px solid #f1f0ed;
-}
+.step{padding:18px 0;border-top:1px solid #f1f0ed}
 @media(min-width:600px){
-  .step{padding:24px 28px 24px 0;border-top:none;border-right:1px solid #f1f0ed}
+  .step{padding:20px 24px 20px 0;border-top:none;border-right:1px solid #f1f0ed}
   .step:last-child{border-right:none;padding-right:0}
-  .step:not(:first-child){padding-left:28px}
+  .step:not(:first-child){padding-left:24px}
 }
-.step-n{font-size:10px;color:#B5B5B5;letter-spacing:0.2em;margin-bottom:6px}
-.step-name{font-size:12px;font-weight:400;letter-spacing:0.05em;color:#303030;text-transform:uppercase;margin-bottom:6px}
-.step-opts{font-size:12px;font-weight:300;color:#67645e;line-height:1.9}
-.cust-note{
-  font-size:11px;font-weight:300;
-  color:#B5B5B5;text-align:right;
-  margin-top:20px;letter-spacing:0.15em;
+.sn{font-size:10px;color:#B5B5B5;letter-spacing:0.15em;margin-bottom:5px}
+.sname{
+  font-family:'NNRektorat','Helvetica Neue',sans-serif;
+  font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:0.02em;
+  color:#303030;margin-bottom:5px;
 }
+.sopts{font-size:12px;color:#67645e;line-height:1.9}
+.cust-note{font-size:10px;color:#B5B5B5;text-align:right;margin-top:18px;letter-spacing:0.1em}
 
 /* ─── LOGO ─── */
-.logo-sec{
-  background:#0A0A0A;
-  padding:64px 20px;
-  text-align:center;
-}
-.logo-divider{border:none;border-top:1px solid #1e1e1e;margin:0 auto 40px}
-.logo-divider.b{margin:40px auto 0}
-.logo-img{max-width:260px;width:60vw;margin:0 auto}
-.logo-sub{font-size:10px;font-weight:300;color:#2a2a2a;letter-spacing:0.4em;margin-top:20px}
+.logo-sec{background:#0A0A0A;padding:60px 16px;text-align:center}
+.logo-hr{border:none;border-top:1px solid #1e1e1e;margin:0 auto 36px}
+.logo-hr.b{margin:36px auto 0}
+.logo-img{max-width:240px;width:58vw;margin:0 auto}
+.logo-sub{font-size:10px;color:#222;letter-spacing:0.4em;margin-top:18px}
 
 /* ─── FOOTER ─── */
 footer{
   border-top:1px solid #f1f0ed;
-  padding:24px 20px;
-  max-width:1440px;margin:0 auto;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:12px;
+  padding:24px 16px;
+  display:flex;flex-direction:column;gap:12px;
+}
+@media(min-width:768px){
+  footer{flex-direction:row;justify-content:space-between;align-items:center;padding:24px 32px}
 }
 .f-brand{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;font-size:15px;color:#303030;
+  font-family:'NNRektorat','Helvetica Neue',sans-serif;
+  font-weight:700;font-size:14px;
+  text-transform:uppercase;letter-spacing:-0.01em;color:#303030;
 }
-.f-links{
-  display:flex;gap:20px;list-style:none;
-}
-.f-links a{font-size:12px;font-weight:300;color:#67645e}
+.f-links{display:flex;gap:20px;list-style:none}
+.f-links a{font-size:12px;color:#67645e}
 .f-links a:hover{text-decoration:underline}
-.f-ig{font-size:12px;font-weight:300;color:#B5B5B5}
+.f-ig{font-size:12px;color:#B5B5B5}
 
 /* ─── FADE ─── */
 .fade{opacity:0;transform:translateY(12px);transition:opacity 0.85s ease,transform 0.85s ease}
@@ -362,51 +371,66 @@ footer{
 <body>
 
 <!-- ANNOUNCE -->
-<div class="announce">tokyo delivery available &nbsp;·&nbsp; matcha vibes tokyo</div>
+<div class="announce">tokyo delivery available &nbsp;&middot;&nbsp; matcha vibes tokyo</div>
 
 <!-- HEADER -->
 <header>
   <div class="hdr">
-    <!-- mobile hamburger -->
-    <div class="hdr-hamburger">
-      <span></span><span></span><span></span>
+    <div class="hdr-left">
+      <div class="hdr-hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="hdr-nav">
+        <li><a href="#">Drinks</a></li>
+        <li><a href="#">Customize</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
     </div>
-    <!-- desktop nav left -->
-    <ul class="hdr-nav">
-      <li><a href="#">drinks</a></li>
-      <li><a href="#">customize</a></li>
-      <li><a href="#">about</a></li>
-    </ul>
-    <!-- logo center -->
-    <span class="hdr-logo">matcha vibes tokyo</span>
-    <!-- right actions -->
+    <span class="hdr-logo">Matcha Vibes Tokyo</span>
     <div class="hdr-right">
-      <span class="hdr-link">order</span>
+      <a href="#" class="hdr-act">Order</a>
     </div>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-img">
-    <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="matcha vibes tokyo" loading="eager">
+<!-- HERO SWIPER -->
+<div class="hero-swiper swiper">
+  <div class="swiper-wrapper">
+    <!-- Slide 1 -->
+    <div class="swiper-slide">
+      <div class="hero-img-wrap">
+        <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="" loading="eager">
+      </div>
+      <div class="hero-card">
+        <p class="hero-card-eyebrow">New</p>
+        <p class="hero-card-name">Blueberry<br>Matcha</p>
+        <p class="hero-card-sub">Purple meets green.</p>
+        <span class="hero-card-btn">Shop Now</span>
+      </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="swiper-slide">
+      <div class="hero-img-wrap">
+        <img src="matcha-vibes-assets/cup-duo.jpg" alt="" loading="lazy">
+      </div>
+      <div class="hero-card">
+        <p class="hero-card-eyebrow">Signature</p>
+        <p class="hero-card-name">Three Colors.<br>One Vibe.</p>
+        <p class="hero-card-sub">9 combinations.</p>
+        <span class="hero-card-btn">Explore Menu</span>
+      </div>
+    </div>
   </div>
-  <div class="hero-overlay">
-    <span class="ho-badge">New</span>
-    <p class="ho-desc">new arrival</p>
-    <p class="ho-name">Blueberry<br>Matcha</p>
-    <p class="ho-price">¥850</p>
-    <span class="ho-btn">shop now</span>
-  </div>
-</section>
+  <div class="swiper-pagination"></div>
+</div>
 
 <!-- PRODUCT GRID -->
-<div class="section">
-  <p class="sh-eyebrow fade">drinks</p>
-  <h2 class="sh-title fade">The Menu.</h2>
+<div class="sec">
+  <p class="sec-eyebrow fade">drinks</p>
+  <h2 class="sec-title fade">The Menu.</h2>
   <div class="pgrid">
     <div class="pcard fade">
-      <div class="pcard-badge"><span class="pcard-badge-dot"></span>New</div>
+      <p class="pcard-label">&#9679; New</p>
       <div class="pcard-img">
         <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="" loading="lazy">
       </div>
@@ -415,7 +439,7 @@ footer{
       <p class="pcard-price">¥850</p>
     </div>
     <div class="pcard fade d1">
-      <div class="pcard-badge" style="visibility:hidden"><span class="pcard-badge-dot"></span>x</div>
+      <p class="pcard-label">&nbsp;</p>
       <div class="pcard-img">
         <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="" loading="lazy">
       </div>
@@ -424,7 +448,7 @@ footer{
       <p class="pcard-price">¥750</p>
     </div>
     <div class="pcard fade">
-      <div class="pcard-badge" style="visibility:hidden"><span class="pcard-badge-dot"></span>x</div>
+      <p class="pcard-label">&nbsp;</p>
       <div class="pcard-img">
         <img src="matcha-vibes-assets/cup-banana.jpg" alt="" loading="lazy">
       </div>
@@ -433,7 +457,7 @@ footer{
       <p class="pcard-price">¥700</p>
     </div>
     <div class="pcard fade d1">
-      <div class="pcard-badge" style="visibility:hidden"><span class="pcard-badge-dot"></span>x</div>
+      <p class="pcard-label">&nbsp;</p>
       <div class="pcard-img">
         <img src="matcha-vibes-assets/cup-classic.jpg" alt="" loading="lazy">
       </div>
@@ -450,7 +474,7 @@ footer{
 </div>
 
 <!-- FEATURE 1 -->
-<div class="feature fade">
+<div class="feat fade">
   <div class="fi">
     <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="" loading="lazy">
   </div>
@@ -461,12 +485,12 @@ footer{
     <p class="fb-sub">Designed with Tokyo in mind</p>
     <p class="fb-desc">Matcha as the base. Your choice of milk. Blueberry on top — the colour that turns heads.</p>
     <p class="fb-price">¥850</p>
-    <span class="fb-btn">shop now</span>
+    <span class="fb-btn">Shop Now</span>
   </div>
 </div>
 
 <!-- FEATURE 2 -->
-<div class="feature rev fade">
+<div class="feat rev fade">
   <div class="fi">
     <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="" loading="lazy">
   </div>
@@ -476,12 +500,12 @@ footer{
     <p class="fb-sub">The everyday essential</p>
     <p class="fb-desc">Thick, smooth, and satisfying. Yogurt base meets matcha for a drink that feels like a reset.</p>
     <p class="fb-price">¥750</p>
-    <span class="fb-btn">shop now</span>
+    <span class="fb-btn">Shop Now</span>
   </div>
 </div>
 
 <!-- FEATURE 3 -->
-<div class="feature fade">
+<div class="feat fade">
   <div class="fi">
     <img src="matcha-vibes-assets/cup-banana.jpg" alt="" loading="lazy">
   </div>
@@ -491,30 +515,30 @@ footer{
     <p class="fb-sub">For the morning people</p>
     <p class="fb-desc">Banana and matcha — energy that actually lasts. Made for Tokyo runners.</p>
     <p class="fb-price">¥700</p>
-    <span class="fb-btn">shop now</span>
+    <span class="fb-btn">Shop Now</span>
   </div>
 </div>
 
 <!-- CUSTOMIZE -->
-<div class="customize-wrap">
+<div class="cust-wrap">
   <div class="cust-inner">
-    <p class="sh-eyebrow fade">customize</p>
-    <h2 class="sh-title fade">Build your cup.</h2>
+    <p class="sec-eyebrow fade">customize</p>
+    <h2 class="sec-title fade">Build Your Cup.</h2>
     <div class="steps">
       <div class="step fade d1">
-        <p class="step-n">01</p>
-        <p class="step-name">Base</p>
-        <p class="step-opts">Matcha</p>
+        <p class="sn">01</p>
+        <p class="sname">Base</p>
+        <p class="sopts">Matcha</p>
       </div>
       <div class="step fade d1">
-        <p class="step-n">02</p>
-        <p class="step-name">Milk</p>
-        <p class="step-opts">Yogurt<br>Oats<br>Soy</p>
+        <p class="sn">02</p>
+        <p class="sname">Milk</p>
+        <p class="sopts">Yogurt<br>Oats<br>Soy</p>
       </div>
       <div class="step fade d1">
-        <p class="step-n">03</p>
-        <p class="step-name">Topping</p>
-        <p class="step-opts">Blueberry<br>Banana<br>None</p>
+        <p class="sn">03</p>
+        <p class="sname">Topping</p>
+        <p class="sopts">Blueberry<br>Banana<br>None</p>
       </div>
     </div>
     <p class="cust-note fade">9 combinations.</p>
@@ -523,28 +547,44 @@ footer{
 
 <!-- LOGO -->
 <section class="logo-sec">
-  <hr class="logo-divider">
+  <hr class="logo-hr">
   <img class="logo-img fade" src="matcha-vibes-assets/logo-official.png" alt="matcha vibes tokyo">
-  <hr class="logo-divider b">
+  <hr class="logo-hr b">
   <p class="logo-sub fade">matcha vibes tokyo</p>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <span class="f-brand">matcha vibes tokyo</span>
+  <span class="f-brand">Matcha Vibes Tokyo</span>
   <ul class="f-links">
-    <li><a href="#">drinks</a></li>
-    <li><a href="#">about</a></li>
-    <li><a href="#">instagram</a></li>
+    <li><a href="#">Drinks</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Instagram</a></li>
   </ul>
   <span class="f-ig">@matchavibes.tokyo</span>
 </footer>
 
 <script>
-const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
-(function raf(t){lenis.raf(t);requestAnimationFrame(raf)})(0);
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:0.04});
-document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+// Swiper (Rhode uses it for hero)
+const swiper = new Swiper('.hero-swiper', {
+  loop: true,
+  autoplay: { delay: 5000, disableOnInteraction: false },
+  pagination: { el: '.swiper-pagination', clickable: true },
+  speed: 800,
+  effect: 'fade',
+  fadeEffect: { crossFade: true },
+});
+
+// Lenis smooth scroll
+const lenis = new Lenis({ duration:1.2, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)) });
+(function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
+
+// Fade
+const io = new IntersectionObserver(
+  es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }),
+  { threshold: 0.04 }
+);
+document.querySelectorAll('.fade').forEach(el => io.observe(el));
 </script>
 </body>
 </html>

@@ -11,243 +11,203 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:#fff;color:#111;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#FAFAF8;
+  color:#111;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
 img{display:block;max-width:100%}
 
 /* ─── HEADER ─── */
 header{
   position:fixed;top:0;left:0;right:0;
-  height:52px;padding:0 5vw;
+  height:44px;padding:0 4vw;
   display:flex;align-items:center;justify-content:space-between;
-  background:#fff;
-  border-bottom:1px solid rgba(0,0,0,0.06);
+  background:#FAFAF8;
+  border-bottom:1px solid rgba(0,0,0,0.08);
   z-index:200;
 }
 .h-name{
   font-family:'DM Serif Display',serif;
-  font-style:italic;font-size:15px;color:#111;
-}
-.h-order{
-  background:#111;color:#fff;
-  font-size:10px;font-weight:500;
-  letter-spacing:0.06em;
-  padding:0.45rem 1.1rem;
-  border:none;cursor:pointer;
+  font-style:italic;font-size:14px;color:#111;
 }
 
 /* ─── HERO ─── */
 .hero{
-  margin-top:52px;
-  position:relative;
-  height:calc(100svh - 52px);
-  overflow:hidden;
-  background:#000;
+  margin-top:44px;
 }
-.hero img{
+.hero-img{
+  width:100%;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  background:#EEE;
+}
+@media(min-width:768px){
+  .hero-img{aspect-ratio:16/9;max-height:100svh}
+}
+.hero-img img{
   width:100%;height:100%;
   object-fit:cover;object-position:top center;
-  opacity:0.85;
 }
-.hero-text{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  padding:3rem 6vw 3.5rem;
-  background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+.hero-caption{
+  padding:1.5rem 4vw 2rem;
+}
+.hero-tag{
+  font-size:9px;font-weight:300;
+  color:#BBB;letter-spacing:0.4em;
+  text-transform:uppercase;
+  margin-bottom:0.8rem;
 }
 .hero-h{
   font-family:'DM Serif Display',serif;
   font-style:italic;
-  font-size:13vw;
-  line-height:0.87;
+  font-size:clamp(2rem,8vw,6rem);
+  line-height:1;
   letter-spacing:-0.02em;
-  color:#fff;
-}
-.hero-sub{
-  font-size:10px;font-weight:300;
-  color:rgba(255,255,255,0.5);
-  letter-spacing:0.35em;
-  margin-top:1.2rem;
-  text-transform:uppercase;
-}
-
-@media(min-width:768px){
-  .hero{height:calc(100svh - 52px)}
-  .hero-text{padding:4rem 8vw 5rem}
-  .hero-h{font-size:8vw}
-}
-
-/* ─── MENU SECTION ─── */
-.section-menu{
-  padding:4rem 5vw;
-  background:#fff;
-}
-.sec-title{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;
-  font-size:clamp(2.2rem,7vw,4.5rem);
   color:#111;
-  text-align:center;
-  margin-bottom:2rem;
 }
-.menu-grid{
+
+/* ─── PRODUCT ROW — Rhode style: 大きい画像 + テキスト交互 ─── */
+.product-row{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+  grid-template-columns:1fr;
+  border-top:1px solid rgba(0,0,0,0.08);
 }
 @media(min-width:768px){
-  .menu-grid{grid-template-columns:repeat(4,1fr);gap:16px}
+  .product-row{grid-template-columns:1fr 1fr}
+  .product-row.reverse .pr-img{order:2}
+  .product-row.reverse .pr-info{order:1}
 }
-.menu-card{
-  background:#fff;
-  border:1px solid rgba(0,0,0,0.07);
-  overflow:hidden;
+
+.pr-img{
+  aspect-ratio:3/4;overflow:hidden;
+  background:#F0EDE8;
 }
-.menu-card-img{
-  aspect-ratio:1/1;
-  overflow:hidden;
-  background:#F5F2EF;
-}
-.menu-card-img img{
+.pr-img img{
   width:100%;height:100%;
   object-fit:cover;object-position:top;
-  transition:transform 0.6s ease;
+  transition:transform 0.8s ease;
 }
-.menu-card:hover .menu-card-img img{transform:scale(1.06)}
-.menu-card-info{
-  padding:0.9rem 1rem 1.1rem;
-  border-top:1px solid rgba(0,0,0,0.06);
+.product-row:hover .pr-img img{transform:scale(1.03)}
+
+.pr-info{
+  padding:2.5rem 5vw;
+  display:flex;flex-direction:column;justify-content:center;
+  background:#FAFAF8;
+  border-top:1px solid rgba(0,0,0,0.08);
 }
-.menu-card-name{
-  font-size:10px;font-weight:500;
-  letter-spacing:0.06em;color:#111;
+@media(min-width:768px){
+  .pr-info{padding:4rem 5vw;border-top:none;border-left:1px solid rgba(0,0,0,0.08)}
+  .product-row.reverse .pr-info{border-left:none;border-right:1px solid rgba(0,0,0,0.08)}
+}
+.pr-label{
+  font-size:9px;font-weight:300;
+  color:#CCC;letter-spacing:0.4em;
+  text-transform:uppercase;margin-bottom:1rem;
+}
+.pr-name{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:clamp(1.5rem,4vw,2.5rem);
+  color:#111;line-height:1.15;
+  margin-bottom:0.8rem;
+}
+.pr-desc{
+  font-size:12px;font-weight:300;
+  color:#888;line-height:1.85;
+  margin-bottom:1.5rem;
+}
+.pr-price{
+  font-size:13px;font-weight:400;
+  color:#111;
+}
+.pr-badge{
+  display:inline-block;
+  font-size:8px;font-weight:500;
+  letter-spacing:0.1em;
+  background:#111;color:#fff;
+  padding:0.3rem 0.7rem;
+  margin-bottom:1rem;
   text-transform:uppercase;
-}
-.menu-card-sub{
-  font-size:10px;font-weight:300;
-  color:#AAA;margin-top:3px;
-}
-.menu-card-price{
-  font-size:11px;font-weight:400;
-  color:#444;margin-top:0.6rem;
 }
 
 /* ─── FULL BLEED ─── */
 .full-bleed{
-  height:60svh;overflow:hidden;
+  width:100%;
+  height:55svh;
+  overflow:hidden;
+  border-top:1px solid rgba(0,0,0,0.08);
 }
-@media(min-width:768px){.full-bleed{height:75svh}}
+@media(min-width:768px){.full-bleed{height:72svh}}
 .full-bleed img{
   width:100%;height:100%;
   object-fit:cover;object-position:center;
 }
 
-/* ─── DARK SECTION ─── */
-.section-dark{
-  background:#111;
-  padding:4rem 5vw;
+/* ─── CUSTOMIZE ─── */
+.customize{
+  border-top:1px solid rgba(0,0,0,0.08);
+  padding:3rem 4vw;
+  background:#fff;
 }
-.dark-title{
+.cust-label{
+  font-size:9px;font-weight:300;
+  letter-spacing:0.4em;color:#BBB;
+  text-transform:uppercase;margin-bottom:1.5rem;
+}
+.cust-h{
   font-family:'DM Serif Display',serif;
   font-style:italic;
-  font-size:clamp(2rem,7vw,4rem);
-  color:#fff;
-  margin-bottom:0.5rem;
+  font-size:clamp(1.6rem,5vw,3rem);
+  color:#111;margin-bottom:2rem;
 }
-.dark-sub{
-  font-size:10px;font-weight:300;
-  color:#555;letter-spacing:0.3em;
-  text-transform:uppercase;
-  margin-bottom:2.5rem;
-}
-.step-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:0;
-}
-@media(min-width:600px){.step-grid{grid-template-columns:repeat(3,1fr)}}
-.step-item{
+.steps{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:600px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{
   padding:1.5rem 0;
-  border-top:1px solid #222;
+  border-top:1px solid rgba(0,0,0,0.07);
 }
 @media(min-width:600px){
-  .step-item{
-    padding:2rem 2rem 2rem 0;
-    border-top:none;
-    border-right:1px solid #222;
-  }
-  .step-item:last-child{border-right:none;padding-right:0}
-  .step-item:not(:first-child){padding-left:2rem}
+  .step{padding:1.5rem 2rem 1.5rem 0;border-top:none;border-right:1px solid rgba(0,0,0,0.07)}
+  .step:last-child{border-right:none;padding-right:0}
+  .step:not(:first-child){padding-left:2rem}
 }
-.step-n{font-size:9px;color:#333;letter-spacing:0.3em;margin-bottom:0.6rem}
-.step-name{font-size:12px;font-weight:500;letter-spacing:0.1em;color:#fff;text-transform:uppercase}
-.step-items{font-size:11px;font-weight:300;color:#555;margin-top:0.5rem;line-height:1.8}
-.step-total{
-  font-size:9px;font-weight:300;
-  color:#333;letter-spacing:0.3em;
-  text-align:right;margin-top:2rem;
-}
-
-/* ─── 2-COL FEATURE ─── */
-.feature-2col{
-  display:grid;
-  grid-template-columns:1fr;
-}
-@media(min-width:768px){.feature-2col{grid-template-columns:1fr 1fr}}
-.feature-img{
-  aspect-ratio:1/1;overflow:hidden;
-}
-@media(min-width:768px){.feature-img{aspect-ratio:auto;min-height:400px}}
-.feature-img img{
-  width:100%;height:100%;
-  object-fit:cover;object-position:center;
-}
-.feature-body{
-  background:#F5F2EF;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:3rem 6vw;
-}
-@media(min-width:768px){.feature-body{padding:4rem 5vw}}
-.feature-label{
-  font-size:9px;font-weight:300;
-  color:#AAA;letter-spacing:0.5em;
-  text-transform:uppercase;margin-bottom:1.2rem;
-}
-.feature-title{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  color:#111;line-height:1.15;
-  margin-bottom:1.2rem;
-}
-.feature-text{
-  font-size:12px;font-weight:300;
-  color:#888;line-height:1.9;
+.step-n{font-size:8px;color:#CCC;letter-spacing:0.3em;margin-bottom:5px}
+.step-name{font-size:11px;font-weight:500;letter-spacing:0.08em;color:#111;text-transform:uppercase}
+.step-opts{font-size:11px;font-weight:300;color:#AAA;margin-top:6px;line-height:1.8}
+.cust-note{
+  font-size:9px;font-weight:300;color:#CCC;
+  text-align:right;margin-top:1.5rem;letter-spacing:0.3em;
 }
 
 /* ─── LOGO ─── */
 .logo-sec{
   background:#0A0A0A;
-  padding:5.5rem 4vw;
+  padding:5rem 4vw;
   text-align:center;
+  border-top:1px solid rgba(0,0,0,0.08);
 }
-.logo-hr{border:none;border-top:1px solid #191919;margin:0 0 3rem}
-.logo-hr.b{margin:3rem 0 0}
-.logo-mark{max-width:300px;width:65vw;margin:0 auto}
-.logo-label{font-size:9px;font-weight:300;color:#252525;letter-spacing:0.55em;margin-top:1.8rem}
+.logo-hr{border:none;border-top:1px solid #1A1A1A;margin-bottom:2.5rem}
+.logo-hr.b{margin:2.5rem 0 0}
+.logo-img{max-width:280px;width:60vw;margin:0 auto}
+.logo-sub{font-size:9px;font-weight:300;color:#222;letter-spacing:0.55em;margin-top:1.5rem}
 
 /* ─── FOOTER ─── */
 footer{
-  padding:2.5rem 5vw;
+  padding:2rem 4vw;
   border-top:1px solid rgba(0,0,0,0.07);
+  background:#FAFAF8;
   display:flex;justify-content:space-between;align-items:center;
 }
-.f-name{font-family:'DM Serif Display',serif;font-style:italic;font-size:14px;color:#111}
-.f-handle{font-size:9px;font-weight:300;color:#CCC;letter-spacing:0.1em}
+.f-n{font-family:'DM Serif Display',serif;font-style:italic;font-size:13px;color:#111}
+.f-h{font-size:9px;font-weight:300;color:#CCC;letter-spacing:0.1em}
 
 /* ─── FADE ─── */
-.fade{opacity:0;transform:translateY(16px);transition:opacity 0.85s ease,transform 0.85s ease}
+.fade{opacity:0;transform:translateY(14px);transition:opacity 0.9s ease,transform 0.9s ease}
 .fade.in{opacity:1;transform:none}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}
 </style>
 </head>
 <body>
@@ -255,124 +215,119 @@ footer{
 <!-- HEADER -->
 <header>
   <span class="h-name">matcha vibes tokyo</span>
-  <button class="h-order" onclick="void(0)">ORDER NOW</button>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="" loading="eager">
-  <div class="hero-text">
+  <div class="hero-img">
+    <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="" loading="eager">
+  </div>
+  <div class="hero-caption fade">
+    <p class="hero-tag">tokyo — est. 2026</p>
     <h1 class="hero-h">good vibes<br>start here.</h1>
-    <p class="hero-sub">matcha vibes tokyo — est. 2026</p>
   </div>
 </section>
 
-<!-- MENU -->
-<section class="section-menu">
-  <h2 class="sec-title fade">Menu</h2>
-  <div class="menu-grid">
-    <div class="menu-card fade">
-      <div class="menu-card-img">
-        <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="" loading="lazy">
-      </div>
-      <div class="menu-card-info">
-        <p class="menu-card-name">Blueberry Matcha</p>
-        <p class="menu-card-sub">Purple meets green.</p>
-        <p class="menu-card-price">¥850</p>
-      </div>
-    </div>
-    <div class="menu-card fade d1">
-      <div class="menu-card-img">
-        <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="" loading="lazy">
-      </div>
-      <div class="menu-card-info">
-        <p class="menu-card-name">Yogurt Smoothie</p>
-        <p class="menu-card-sub">Creamy. Always.</p>
-        <p class="menu-card-price">¥750</p>
-      </div>
-    </div>
-    <div class="menu-card fade">
-      <div class="menu-card-img">
-        <img src="matcha-vibes-assets/cup-banana.jpg" alt="" loading="lazy">
-      </div>
-      <div class="menu-card-info">
-        <p class="menu-card-name">Banana Recovery</p>
-        <p class="menu-card-sub">After the run.</p>
-        <p class="menu-card-price">¥700</p>
-      </div>
-    </div>
-    <div class="menu-card fade d1">
-      <div class="menu-card-img">
-        <img src="matcha-vibes-assets/cup-classic.jpg" alt="" loading="lazy">
-      </div>
-      <div class="menu-card-info">
-        <p class="menu-card-name">Classic Latte</p>
-        <p class="menu-card-sub">Where it starts.</p>
-        <p class="menu-card-price">¥650</p>
-      </div>
-    </div>
+<!-- PRODUCT ROW 1 -->
+<div class="product-row fade">
+  <div class="pr-img">
+    <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="" loading="lazy">
   </div>
-</section>
+  <div class="pr-info">
+    <span class="pr-badge">New</span>
+    <p class="pr-label">blueberry matcha</p>
+    <h2 class="pr-name">Purple meets<br>green.</h2>
+    <p class="pr-desc">Matcha as the base. Oats or yogurt for the milk. Blueberry on top — the colour that turns heads.</p>
+    <p class="pr-price">¥850</p>
+  </div>
+</div>
+
+<!-- PRODUCT ROW 2 -->
+<div class="product-row reverse fade">
+  <div class="pr-img">
+    <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="" loading="lazy">
+  </div>
+  <div class="pr-info">
+    <p class="pr-label">yogurt smoothie</p>
+    <h2 class="pr-name">Creamy.<br>Always.</h2>
+    <p class="pr-desc">Thick, smooth, and satisfying. Yogurt base meets matcha for a drink that feels like a reset.</p>
+    <p class="pr-price">¥750</p>
+  </div>
+</div>
 
 <!-- FULL BLEED -->
 <div class="full-bleed fade">
   <img src="matcha-vibes-assets/cup-duo.jpg" alt="" loading="lazy">
 </div>
 
-<!-- DARK: CUSTOMIZE -->
-<section class="section-dark">
-  <h2 class="dark-title fade">Customize</h2>
-  <p class="dark-sub fade">build your cup</p>
-  <div class="step-grid">
-    <div class="step-item fade d1">
-      <p class="step-n">01</p>
-      <p class="step-name">Base</p>
-      <p class="step-items">Matcha</p>
-    </div>
-    <div class="step-item fade d1">
-      <p class="step-n">02</p>
-      <p class="step-name">Milk</p>
-      <p class="step-items">Yogurt<br>Oats<br>Soy</p>
-    </div>
-    <div class="step-item fade d1">
-      <p class="step-n">03</p>
-      <p class="step-name">Topping</p>
-      <p class="step-items">Blueberry<br>Banana<br>None</p>
-    </div>
+<!-- PRODUCT ROW 3 -->
+<div class="product-row fade">
+  <div class="pr-img">
+    <img src="matcha-vibes-assets/cup-banana.jpg" alt="" loading="lazy">
   </div>
-  <p class="step-total fade">9 combinations.</p>
-</section>
-
-<!-- 2-COL FEATURE -->
-<div class="feature-2col">
-  <div class="feature-img fade">
-    <img src="matcha-vibes-assets/cup-signature.jpg" alt="" loading="lazy">
-  </div>
-  <div class="feature-body fade d1">
-    <p class="feature-label">our drink</p>
-    <h3 class="feature-title">Three layers.<br>One cup.</h3>
-    <p class="feature-text">Matcha. Your choice of milk. A topping. Layered together in a clear cup — so every combination looks as good as it tastes.</p>
+  <div class="pr-info">
+    <p class="pr-label">banana recovery</p>
+    <h2 class="pr-name">After the run.<br>Before the day.</h2>
+    <p class="pr-desc">For the morning people. Banana and matcha — energy that actually lasts.</p>
+    <p class="pr-price">¥700</p>
   </div>
 </div>
+
+<!-- PRODUCT ROW 4 -->
+<div class="product-row reverse fade">
+  <div class="pr-img">
+    <img src="matcha-vibes-assets/cup-classic.jpg" alt="" loading="lazy">
+  </div>
+  <div class="pr-info">
+    <p class="pr-label">classic latte</p>
+    <h2 class="pr-name">Where it<br>all starts.</h2>
+    <p class="pr-desc">Matcha and milk. Simple, clean, essential. The one you come back to.</p>
+    <p class="pr-price">¥650</p>
+  </div>
+</div>
+
+<!-- CUSTOMIZE -->
+<section class="customize">
+  <p class="cust-label fade">customize</p>
+  <h2 class="cust-h fade">Build your cup.</h2>
+  <div class="steps">
+    <div class="step fade d1">
+      <p class="step-n">01</p>
+      <p class="step-name">Base</p>
+      <p class="step-opts">Matcha</p>
+    </div>
+    <div class="step fade d1">
+      <p class="step-n">02</p>
+      <p class="step-name">Milk</p>
+      <p class="step-opts">Yogurt<br>Oats<br>Soy</p>
+    </div>
+    <div class="step fade d1">
+      <p class="step-n">03</p>
+      <p class="step-name">Topping</p>
+      <p class="step-opts">Blueberry<br>Banana<br>None</p>
+    </div>
+  </div>
+  <p class="cust-note fade">9 combinations.</p>
+</section>
 
 <!-- LOGO -->
 <section class="logo-sec">
   <hr class="logo-hr">
-  <img class="logo-mark fade" src="matcha-vibes-assets/logo-official.png" alt="matcha vibes tokyo">
+  <img class="logo-img fade" src="matcha-vibes-assets/logo-official.png" alt="matcha vibes tokyo">
   <hr class="logo-hr b">
-  <p class="logo-label fade">matcha vibes tokyo — est. 2026</p>
+  <p class="logo-sub fade">matcha vibes tokyo</p>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <span class="f-name">matcha vibes tokyo</span>
-  <span class="f-handle">@matchavibes.tokyo</span>
+  <span class="f-n">matcha vibes tokyo</span>
+  <span class="f-h">@matchavibes.tokyo</span>
 </footer>
 
 <script>
 const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
 (function raf(t){lenis.raf(t);requestAnimationFrame(raf)})(0);
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:0.05});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:0.04});
 document.querySelectorAll('.fade').forEach(el=>io.observe(el));
 </script>
 </body>

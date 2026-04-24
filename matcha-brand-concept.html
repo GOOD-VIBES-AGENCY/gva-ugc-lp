@@ -4,741 +4,453 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>matcha vibes tokyo</title>
-<meta name="description" content="The drink the world is obsessed with. Our version. Right here in Tokyo.">
-
-<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
-
-<!-- Swiper CSS -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: #fff; color: #111; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
-img { display: block; max-width: 100%; }
-a { text-decoration: none; color: inherit; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#000;
+  color:#fff;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
 
-/* Header */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5vw;
-  transition: background 0.3s, backdrop-filter 0.3s, border-bottom 0.3s;
+/* ─── HEADER ─── */
+header{
+  position:fixed;top:0;left:0;right:0;
+  height:52px;padding:0 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(0,0,0,0);
+  transition:background 0.4s ease,backdrop-filter 0.4s ease;
+  z-index:200;
 }
-.header-left { display: flex; align-items: center; gap: 2rem; }
-.header-nav { display: none; gap: 1.5rem; }
-.header-nav a { font-size: 13px; font-weight: 300; color: #fff; letter-spacing: 0.02em; transition: opacity 0.2s; }
-.header-nav a:hover { opacity: 0.7; }
-header.scrolled .header-nav a { color: #111; }
-.hamburger { width: 20px; height: 14px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
-.hamburger span { display: block; width: 100%; height: 1px; background: #fff; transition: background 0.3s; }
-header.scrolled .hamburger span { background: #111; }
-.header-logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
-  font-size: 16px;
-  color: #fff;
-  letter-spacing: -0.01em;
-  transition: color 0.3s;
+header.scrolled{
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
 }
-header.scrolled .header-logo { color: #111; }
-.header-right { display: flex; align-items: center; }
-.btn-order {
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 8px 16px;
-  border: 1px solid rgba(255,255,255,0.5);
-  border-radius: 2px;
-  color: #fff;
-  transition: all 0.3s;
-}
-.btn-order:hover { background: #fff; color: #111; }
-header.scrolled .btn-order { border-color: #111; color: #111; }
-header.scrolled .btn-order:hover { background: #111; color: #fff; }
-@media (min-width: 768px) {
-  .hamburger { display: none; }
-  .header-nav { display: flex; }
+.h-logo{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;font-size:15px;color:#fff;
+  letter-spacing:0;
 }
 
-/* Hero */
-.hero {
-  position: relative;
-  height: 100svh;
-  background-image: url(matcha-vibes-assets/scene-moody.jpg);
-  background-size: cover;
-  background-position: center;
+/* ─── 1. HERO — テキストのみ ─── */
+.hero{
+  height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:0 6vw 10vh;
+  background:#000;
 }
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.75) 100%);
+.hero-label{
+  font-size:10px;font-weight:300;
+  letter-spacing:0.5em;color:rgba(255,255,255,0.35);
+  text-transform:uppercase;margin-bottom:2rem;
 }
-.hero-text {
-  position: absolute;
-  bottom: 10vh;
-  left: 6vw;
-  z-index: 1;
+.hero-title{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:clamp(3.5rem,13vw,10rem);
+  line-height:0.88;
+  letter-spacing:-0.03em;
+  color:#fff;
 }
-.hero-text span {
-  display: block;
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
-  font-size: clamp(4rem, 14vw, 12rem);
-  line-height: 0.85;
-  letter-spacing: -0.02em;
+.hero-title span{display:block}
+
+/* ─── MARQUEE ─── */
+.marquee{
+  overflow:hidden;white-space:nowrap;
+  height:42px;display:flex;align-items:center;
+  border-top:1px solid #1a1a1a;
+  border-bottom:1px solid #1a1a1a;
+  background:#000;
 }
-.hero-text .line1 { color: #fff; }
-.hero-text .line2 { color: #F5F0E8; }
-.scroll-indicator {
-  position: absolute;
-  right: 5vw;
-  bottom: 5vh;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+.marquee-inner{
+  display:inline-flex;
+  animation:marquee 22s linear infinite;
 }
-.scroll-indicator .line {
-  width: 1px;
-  height: 40px;
-  background: rgba(255,255,255,0.4);
+.marquee-item{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;font-size:14px;
+  color:rgba(255,255,255,0.35);
+  letter-spacing:0.05em;
+  padding:0 2rem;
 }
-.scroll-indicator span {
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.6);
-  writing-mode: vertical-rl;
+.marquee-dot{color:#00E676;padding:0 1rem}
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
 }
 
-/* Marquee */
-.marquee {
-  height: 44px;
-  background: #000;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
+/* ─── 2. VISUAL FULLSCREEN ─── */
+.visual-full{
+  width:100%;
+  height:100svh;
+  overflow:hidden;
+  position:relative;
 }
-.marquee-inner {
-  display: flex;
-  animation: marquee 20s linear infinite;
-  white-space: nowrap;
-}
-.marquee-item {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
-  font-size: 14px;
-  color: #F5F0E8;
-  letter-spacing: 0.05em;
-  padding: 0 3rem;
-}
-.marquee-item::after {
-  content: '·';
-  margin-left: 3rem;
-  color: #00E676;
-}
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.visual-full img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
 }
 
-/* Product Grid */
-.products {
-  padding: 4rem 5vw;
-  background: #fff;
+/* ─── 3. COLLECTION GRID ─── */
+.collection{
+  padding:5rem 0;
+  background:#000;
 }
-.eyebrow {
-  font-size: 9px;
-  font-weight: 400;
-  letter-spacing: 0.5em;
-  text-transform: uppercase;
-  color: #AAA;
-  margin-bottom: 0.75rem;
+.collection-header{
+  padding:0 6vw 2.5rem;
 }
-.products h2 {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
-  font-size: clamp(2.5rem, 7vw, 5rem);
-  font-weight: 400;
-  color: #111;
-  margin-bottom: 2rem;
-  letter-spacing: -0.01em;
+.collection-eyebrow{
+  font-size:10px;font-weight:300;
+  letter-spacing:0.5em;color:rgba(255,255,255,0.35);
+  text-transform:uppercase;margin-bottom:0.8rem;
 }
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
-  background: #E8E5E0;
+.collection-title{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:clamp(2rem,5vw,4rem);
+  color:#fff;
 }
-@media (min-width: 768px) {
-  .product-grid { grid-template-columns: repeat(4, 1fr); }
+.collection-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+  background:#1a1a1a;
 }
-.product-card {
-  background: #fff;
-  overflow: hidden;
+@media(min-width:768px){
+  .collection-grid{grid-template-columns:repeat(4,1fr)}
 }
-.card-img {
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
+.col-card{
+  background:#000;overflow:hidden;
+  position:relative;cursor:pointer;
 }
-.card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-  transition: transform 0.6s ease;
+.col-img{
+  aspect-ratio:3/4;overflow:hidden;
 }
-.product-card:hover .card-img img {
-  transform: scale(1.04);
+.col-img img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top;
+  transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-.card-body {
-  padding: 1rem 1.2rem 1.4rem;
-}
-.card-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 9px;
-  color: #3d8b37;
-  margin-bottom: 6px;
-}
-.card-badge .dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #3d8b37;
-}
-.card-name {
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: #111;
-}
-.card-desc {
-  font-size: 10px;
-  color: #888;
-  margin-top: 3px;
-}
-.card-price {
-  font-size: 12px;
-  color: #111;
-  margin-top: 0.6rem;
+.col-card:hover .col-img img{transform:scale(1.05)}
+.col-name{
+  padding:1rem 1.2rem 1.5rem;
+  font-size:11px;font-weight:300;
+  letter-spacing:0.08em;
+  color:rgba(255,255,255,0.5);
+  text-transform:uppercase;
 }
 
-/* Full Bleed */
-.full-bleed {
-  width: 100%;
-  height: 55svh;
-  object-fit: cover;
-  object-position: center;
+/* ─── 4. PHILOSOPHY ─── */
+.philosophy{
+  padding:8rem 6vw;
+  background:#0a0a0a;
+}
+.phi-text{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:clamp(2rem,5vw,4.5rem);
+  color:rgba(255,255,255,0.9);
+  line-height:1.2;
+  max-width:800px;
+}
+.phi-rule{
+  width:36px;height:1px;
+  background:#00E676;
+  margin:3rem 0 2rem;
+}
+.phi-sub{
+  font-size:11px;font-weight:300;
+  letter-spacing:0.3em;
+  color:rgba(255,255,255,0.2);
+  text-transform:uppercase;
 }
 
-/* Brand Statement */
-.brand-statement {
-  background: #0A0A0A;
-  padding: 5rem 6vw;
+/* ─── 5. VISUAL 2 ─── */
+.visual-half{
+  display:grid;
+  grid-template-columns:1fr 1fr;
 }
-.brand-statement p {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
-  font-size: clamp(2rem, 5vw, 4rem);
-  color: #F5F0E8;
-  line-height: 1.3;
-  max-width: 700px;
+.vh-item{
+  aspect-ratio:1/1;overflow:hidden;
 }
-.brand-statement .accent-line {
-  width: 40px;
-  height: 1px;
-  background: #00E676;
-  margin-top: 3rem;
+.vh-item img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform 0.8s ease;
+}
+.vh-item:hover img{transform:scale(1.03)}
+
+/* ─── 6. POSTER SWIPER ─── */
+.poster-section{
+  padding:4rem 0 4rem 6vw;
+  background:#000;
+}
+.poster-header{
+  padding-right:6vw;margin-bottom:2rem;
+}
+.poster-swiper{overflow:visible!important}
+.poster-swiper .swiper-slide{
+  width:240px;flex-shrink:0;
+}
+@media(min-width:768px){
+  .poster-swiper .swiper-slide{width:300px}
+}
+.poster-card{border-radius:12px;overflow:hidden;cursor:pointer}
+.poster-card img{
+  width:100%;display:block;
+  transition:transform 0.6s ease;
+}
+.poster-card:hover img{transform:scale(1.03)}
+
+/* ─── 7. BUILD ─── */
+.build{
+  padding:6rem 6vw;
+  background:#0a0a0a;
+  border-top:1px solid #1a1a1a;
+}
+.build-eyebrow{
+  font-size:10px;font-weight:300;
+  letter-spacing:0.5em;color:rgba(255,255,255,0.3);
+  text-transform:uppercase;margin-bottom:1.5rem;
+}
+.build-title{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:clamp(2.5rem,6vw,5rem);
+  color:#fff;margin-bottom:3rem;
+}
+.steps{
+  display:grid;grid-template-columns:1fr;
+}
+@media(min-width:600px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{
+  padding:1.5rem 0;
+  border-top:1px solid #1a1a1a;
+}
+@media(min-width:600px){
+  .step{padding:1.5rem 2.5rem 1.5rem 0;border-top:none;border-right:1px solid #1a1a1a}
+  .step:last-child{border-right:none;padding-right:0}
+  .step:not(:first-child){padding-left:2.5rem}
+}
+.step-n{font-size:9px;color:#333;letter-spacing:0.3em;margin-bottom:5px}
+.step-label{font-size:12px;font-weight:400;letter-spacing:0.1em;color:#fff;text-transform:uppercase;margin-bottom:6px}
+.step-opts{font-size:11px;font-weight:300;color:#555;line-height:1.9}
+.build-note{
+  font-size:10px;font-weight:300;
+  color:#333;text-align:right;
+  margin-top:2rem;letter-spacing:0.2em;
 }
 
-/* Feature Split */
-.feature-split {
-  display: grid;
-  grid-template-columns: 1fr;
-  min-height: 80vw;
+/* ─── 8. LOGO ─── */
+.logo-section{
+  padding:7rem 4vw;
+  background:#000;
+  text-align:center;
+  border-top:1px solid #111;
 }
-@media (min-width: 768px) {
-  .feature-split { grid-template-columns: 1fr 1fr; min-height: 50vw; }
-}
-.feature-img {
-  aspect-ratio: 1 / 1;
-}
-.feature-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.feature-content {
-  background: #F5F0E8;
-  padding: 3rem 5vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.feature-content h3 {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 400;
-  color: #111;
-  line-height: 1.15;
-  white-space: pre-line;
-}
-.feature-content .line {
-  width: 30px;
-  height: 1px;
-  background: #00E676;
-  margin: 1.5rem 0;
-}
-.feature-content .desc {
-  font-size: 13px;
-  font-weight: 300;
-  color: #888;
-  line-height: 2;
-  white-space: pre-line;
+.logo-img{
+  max-width:300px;width:65vw;
+  margin:0 auto;
 }
 
-/* Scene */
-.scene-full {
-  width: 100%;
-  height: 65vw;
-  max-height: 600px;
-  object-fit: cover;
+/* ─── FOOTER ─── */
+footer{
+  padding:3rem 6vw 2.5rem;
+  border-top:1px solid #111;
+  background:#000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:1rem;
 }
+.f-brand{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;font-size:14px;color:#fff;
+}
+.f-ig{font-size:10px;font-weight:300;color:#333;letter-spacing:0.1em}
 
-/* Poster Swiper */
-.poster-section {
-  background: #FAFAF8;
-  padding: 3rem 0 3rem 5vw;
-}
-.poster-section .section-header {
-  margin-bottom: 1.5rem;
-}
-.poster-section h2 {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 400;
-  color: #111;
-}
-.poster-swiper .swiper-slide {
-  width: 240px;
-  flex-shrink: 0;
-}
-@media (min-width: 768px) {
-  .poster-swiper .swiper-slide { width: 300px; }
-}
-.poster-swiper img {
-  border-radius: 12px;
-  display: block;
-  width: 100%;
-}
-
-/* Customize */
-.customize {
-  background: #F5F0E8;
-  padding: 4rem 5vw;
-}
-.customize h2 {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
-  font-size: clamp(2rem, 6vw, 4rem);
-  font-weight: 400;
-  color: #111;
-  margin-bottom: 2.5rem;
-}
-.customize-steps {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-@media (min-width: 600px) {
-  .customize-steps { grid-template-columns: repeat(3, 1fr); }
-}
-.step {
-  padding: 1.5rem 0;
-  border-top: 1px solid rgba(0,0,0,0.1);
-}
-@media (min-width: 600px) {
-  .step { padding: 1.5rem 1rem 1.5rem 0; }
-  .step:first-child { padding-left: 0; }
-}
-.step-num {
-  font-size: 9px;
-  color: #CCC;
-  letter-spacing: 0.3em;
-  margin-bottom: 0.5rem;
-}
-.step-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #111;
-  margin-bottom: 0.4rem;
-}
-.step-opts {
-  font-size: 11px;
-  color: #888;
-  line-height: 1.9;
-}
-.customize-footer {
-  font-size: 9px;
-  color: #CCC;
-  text-align: right;
-  margin-top: 1.5rem;
-  letter-spacing: 0.05em;
-}
-
-/* Logo Section */
-.logo-section {
-  background: #000;
-  padding: 5rem 4rem;
-  text-align: center;
-}
-.logo-section hr {
-  border: none;
-  height: 1px;
-  background: #181818;
-  margin: 0 auto;
-  max-width: 400px;
-}
-.logo-section img {
-  max-width: 280px;
-  width: 65vw;
-  margin: 3rem auto;
-}
-
-/* Footer */
-footer {
-  background: #fff;
-  border-top: 1px solid #F0EDE8;
-  padding: 3rem 5vw;
-}
-.footer-main {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-@media (min-width: 768px) {
-  .footer-main {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-.footer-brand .name {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
-  font-size: 15px;
-  color: #111;
-}
-.footer-brand .tagline {
-  font-size: 10px;
-  color: #CCC;
-  margin-top: 4px;
-}
-.footer-nav {
-  display: flex;
-  gap: 1.5rem;
-}
-.footer-nav a {
-  font-size: 12px;
-  color: #888;
-  transition: color 0.2s;
-}
-.footer-nav a:hover { color: #111; }
-.footer-social {
-  font-size: 11px;
-  color: #CCC;
-}
-.footer-bottom {
-  border-top: 1px solid #F0EDE8;
-  padding-top: 1.5rem;
-  margin-top: 1.5rem;
-  font-size: 10px;
-  color: #CCC;
-}
-
-/* Fade Animation */
-.fade {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
-}
-.fade.in {
-  opacity: 1;
-  transform: none;
-}
+/* ─── FADE ─── */
+.fade{opacity:0;transform:translateY(20px);transition:opacity 0.9s ease,transform 0.9s ease}
+.fade.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 </style>
 </head>
 <body>
 
-<!-- Header -->
-<header>
-  <div class="header-left">
-    <div class="hamburger">
-      <span></span>
-      <span></span>
-    </div>
-    <nav class="header-nav">
-      <a href="#menu">DRINKS</a>
-      <a href="#customize">CUSTOMIZE</a>
-      <a href="#about">ABOUT</a>
-    </nav>
-  </div>
-  <a href="#" class="header-logo">matcha vibes tokyo</a>
-  <div class="header-right">
-    <a href="#" class="btn-order">ORDER</a>
-  </div>
+<!-- HEADER -->
+<header id="hdr">
+  <span class="h-logo">matcha vibes tokyo</span>
 </header>
 
-<!-- Hero -->
+<!-- 1. HERO — テキストのみ、画像なし -->
 <section class="hero">
-  <div class="hero-text">
-    <span class="line1">good vibes</span>
-    <span class="line2">start here.</span>
-  </div>
-  <div class="scroll-indicator">
-    <div class="line"></div>
-    <span>SCROLL</span>
-  </div>
+  <p class="hero-label">est. 2026 — tokyo</p>
+  <h1 class="hero-title">
+    <span>good vibes</span>
+    <span>start here.</span>
+  </h1>
 </section>
 
-<!-- Marquee -->
+<!-- MARQUEE -->
 <div class="marquee">
   <div class="marquee-inner">
     <span class="marquee-item">MATCHA VIBES TOKYO</span>
+    <span class="marquee-dot">✦</span>
     <span class="marquee-item">GOOD VIBES START HERE</span>
+    <span class="marquee-dot">✦</span>
     <span class="marquee-item">EST. 2026</span>
+    <span class="marquee-dot">✦</span>
     <span class="marquee-item">MATCHA VIBES TOKYO</span>
+    <span class="marquee-dot">✦</span>
     <span class="marquee-item">GOOD VIBES START HERE</span>
+    <span class="marquee-dot">✦</span>
     <span class="marquee-item">EST. 2026</span>
+    <span class="marquee-dot">✦</span>
     <span class="marquee-item">MATCHA VIBES TOKYO</span>
+    <span class="marquee-dot">✦</span>
     <span class="marquee-item">GOOD VIBES START HERE</span>
-    <span class="marquee-item">EST. 2026</span>
-    <span class="marquee-item">MATCHA VIBES TOKYO</span>
-    <span class="marquee-item">GOOD VIBES START HERE</span>
-    <span class="marquee-item">EST. 2026</span>
+    <span class="marquee-dot">✦</span>
   </div>
 </div>
 
-<!-- Products -->
-<section class="products fade" id="menu">
-  <p class="eyebrow">the menu</p>
-  <h2>Four drinks.</h2>
-  <div class="product-grid">
-    <div class="product-card">
-      <div class="card-img">
-        <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha">
-      </div>
-      <div class="card-body">
-        <div class="card-badge"><span class="dot"></span>MATCHA</div>
-        <p class="card-name">BLUEBERRY MATCHA SMOOTHIE</p>
-        <p class="card-desc">Purple meets green.</p>
-        <p class="card-price">¥850</p>
-      </div>
+<!-- 2. VISUAL FULLSCREEN -->
+<div class="visual-full fade">
+  <img src="matcha-vibes-assets/scene-moody.jpg" alt="">
+</div>
+
+<!-- 3. COLLECTION -->
+<section class="collection">
+  <div class="collection-header fade">
+    <p class="collection-eyebrow">the collection</p>
+    <h2 class="collection-title">Four drinks.</h2>
+  </div>
+  <div class="collection-grid">
+    <div class="col-card fade">
+      <div class="col-img"><img src="matcha-vibes-assets/cup-blueberry.jpg" alt="" loading="lazy"></div>
+      <p class="col-name">Blueberry Matcha</p>
     </div>
-    <div class="product-card">
-      <div class="card-img">
-        <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Matcha">
-      </div>
-      <div class="card-body">
-        <div class="card-badge"><span class="dot"></span>MATCHA</div>
-        <p class="card-name">BANANA MATCHA SMOOTHIE</p>
-        <p class="card-desc">After the run.</p>
-        <p class="card-price">¥700</p>
-      </div>
+    <div class="col-card fade d1">
+      <div class="col-img"><img src="matcha-vibes-assets/cup-banana.jpg" alt="" loading="lazy"></div>
+      <p class="col-name">Banana Matcha</p>
     </div>
-    <div class="product-card">
-      <div class="card-img">
-        <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Strawberry Matcha">
-      </div>
-      <div class="card-body">
-        <div class="card-badge"><span class="dot"></span>MATCHA</div>
-        <p class="card-name">STRAWBERRY MATCHA SMOOTHIE</p>
-        <p class="card-desc">Pink meets green.</p>
-        <p class="card-price">¥750</p>
-      </div>
+    <div class="col-card fade">
+      <div class="col-img"><img src="matcha-vibes-assets/cup-yogurt.jpg" alt="" loading="lazy"></div>
+      <p class="col-name">Strawberry Matcha</p>
     </div>
-    <div class="product-card">
-      <div class="card-img">
-        <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Matcha">
-      </div>
-      <div class="card-body">
-        <div class="card-badge"><span class="dot"></span>MATCHA</div>
-        <p class="card-name">CLASSIC MATCHA SMOOTHIE</p>
-        <p class="card-desc">Where it starts.</p>
-        <p class="card-price">¥650</p>
-      </div>
+    <div class="col-card fade d1">
+      <div class="col-img"><img src="matcha-vibes-assets/cup-classic.jpg" alt="" loading="lazy"></div>
+      <p class="col-name">Classic Matcha</p>
     </div>
   </div>
 </section>
 
-<!-- Full Bleed -->
-<img src="matcha-vibes-assets/scene-lineup.jpg" alt="Matcha lineup" class="full-bleed fade">
-
-<!-- Brand Statement -->
-<section class="brand-statement fade" id="about">
-  <p>The drink the world is obsessed with.</p>
-  <p>Our version.</p>
-  <p>Right here in Tokyo.</p>
-  <div class="accent-line"></div>
+<!-- 4. PHILOSOPHY -->
+<section class="philosophy fade">
+  <p class="phi-text">
+    We didn't invent matcha.<br>
+    We just made Tokyo<br>
+    obsessed with it.
+  </p>
+  <div class="phi-rule"></div>
+  <p class="phi-sub">Good vibes start here.</p>
 </section>
 
-<!-- Feature Split -->
-<section class="feature-split">
-  <div class="feature-img">
-    <img src="matcha-vibes-assets/flatlay-blueberry.jpg" alt="Three layers">
+<!-- 5. VISUAL 2 — フラットレイ2分割 -->
+<div class="visual-half fade">
+  <div class="vh-item">
+    <img src="matcha-vibes-assets/flatlay-blueberry.jpg" alt="" loading="lazy">
   </div>
-  <div class="feature-content fade">
-    <p class="eyebrow">three layers</p>
-    <h3>Three colors.
-One vibe.</h3>
-    <div class="line"></div>
-    <p class="desc">Matcha. Your milk. Your topping.
-Swirled in a clear cup.</p>
+  <div class="vh-item">
+    <img src="matcha-vibes-assets/flatlay-classic.jpg" alt="" loading="lazy">
   </div>
-</section>
+</div>
 
-<!-- Scene -->
-<img src="matcha-vibes-assets/hero-moody.jpg" alt="Matcha scene" class="scene-full fade">
-
-<!-- Poster Swiper -->
-<section class="poster-section fade">
-  <div class="section-header">
-    <p class="eyebrow">flavors</p>
-    <h2>All flavors.</h2>
+<!-- 6. POSTER SWIPER -->
+<section class="poster-section">
+  <div class="poster-header fade">
+    <p class="collection-eyebrow">all flavors</p>
+    <h2 class="collection-title">The menu.</h2>
   </div>
-  <div class="swiper poster-swiper">
+  <div class="poster-swiper swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="matcha-vibes-assets/poster-blueberry.jpg" alt="Blueberry poster">
-      </div>
-      <div class="swiper-slide">
-        <img src="matcha-vibes-assets/poster-banana.jpg" alt="Banana poster">
-      </div>
-      <div class="swiper-slide">
-        <img src="matcha-vibes-assets/poster-strawberry.jpg" alt="Strawberry poster">
-      </div>
-      <div class="swiper-slide">
-        <img src="matcha-vibes-assets/poster-classic.jpg" alt="Classic poster">
-      </div>
+      <div class="swiper-slide"><div class="poster-card"><img src="matcha-vibes-assets/poster-blueberry.jpg" alt="" loading="lazy"></div></div>
+      <div class="swiper-slide"><div class="poster-card"><img src="matcha-vibes-assets/poster-banana.jpg" alt="" loading="lazy"></div></div>
+      <div class="swiper-slide"><div class="poster-card"><img src="matcha-vibes-assets/poster-strawberry.jpg" alt="" loading="lazy"></div></div>
+      <div class="swiper-slide"><div class="poster-card"><img src="matcha-vibes-assets/poster-classic.jpg" alt="" loading="lazy"></div></div>
     </div>
   </div>
 </section>
 
-<!-- Customize -->
-<section class="customize fade" id="customize">
-  <p class="eyebrow">customize</p>
-  <h2>Build your cup.</h2>
-  <div class="customize-steps">
-    <div class="step">
-      <p class="step-num">01</p>
-      <p class="step-label">BASE</p>
+<!-- 7. BUILD -->
+<section class="build">
+  <p class="build-eyebrow fade">customize</p>
+  <h2 class="build-title fade">Build your vibe.</h2>
+  <div class="steps">
+    <div class="step fade d1">
+      <p class="step-n">01</p>
+      <p class="step-label">Base</p>
       <p class="step-opts">Matcha</p>
     </div>
-    <div class="step">
-      <p class="step-num">02</p>
-      <p class="step-label">MILK</p>
-      <p class="step-opts">Yogurt · Oats · Soy</p>
+    <div class="step fade d1">
+      <p class="step-n">02</p>
+      <p class="step-label">Milk</p>
+      <p class="step-opts">Yogurt<br>Oats<br>Soy</p>
     </div>
-    <div class="step">
-      <p class="step-num">03</p>
-      <p class="step-label">TOPPING</p>
-      <p class="step-opts">Blueberry · Banana · None</p>
+    <div class="step fade d1">
+      <p class="step-n">03</p>
+      <p class="step-label">Topping</p>
+      <p class="step-opts">Blueberry<br>Banana<br>Strawberry<br>None</p>
     </div>
   </div>
-  <p class="customize-footer">9 combinations.</p>
+  <p class="build-note fade">9+ combinations.</p>
 </section>
 
-<!-- Logo Section -->
+<!-- 8. LOGO -->
 <section class="logo-section">
-  <hr>
-  <img src="matcha-vibes-assets/logo-bubbly.png" alt="matcha vibes tokyo">
-  <hr>
+  <img class="logo-img fade" src="matcha-vibes-assets/logo-bubbly.png" alt="matcha vibes tokyo">
 </section>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-main">
-    <div class="footer-brand">
-      <p class="name">matcha vibes tokyo</p>
-      <p class="tagline">Good vibes start here.</p>
-    </div>
-    <nav class="footer-nav">
-      <a href="#menu">Drinks</a>
-      <a href="#customize">Customize</a>
-    </nav>
-    <p class="footer-social">@matchavibes.tokyo</p>
-  </div>
-  <p class="footer-bottom">© 2026 matcha vibes tokyo</p>
+  <span class="f-brand">matcha vibes tokyo</span>
+  <span class="f-ig">@matchavibes.tokyo</span>
 </footer>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<!-- Lenis Smooth Scroll -->
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-
 <script>
-// Lenis smooth scroll
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-});
-(function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-})(0);
+// Lenis
+const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
+(function raf(t){lenis.raf(t);requestAnimationFrame(raf)})(0);
 
-// Header scroll behavior
-const header = document.querySelector('header');
-window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY > 80;
-  header.classList.toggle('scrolled', scrolled);
-  header.style.background = scrolled ? 'rgba(255,255,255,0.95)' : 'transparent';
-  header.style.backdropFilter = scrolled ? 'blur(16px)' : 'none';
-  header.style.borderBottom = scrolled ? '1px solid rgba(0,0,0,0.07)' : 'none';
-}, { passive: true });
-
-// Fade in animation
-const fades = document.querySelectorAll('.fade');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-    }
-  });
-}, { threshold: 0.01, rootMargin: '0px 0px -50px 0px' });
-fades.forEach(el => observer.observe(el));
+// Header scroll
+const hdr=document.getElementById('hdr');
+window.addEventListener('scroll',()=>{
+  hdr.classList.toggle('scrolled',window.scrollY>80);
+},{passive:true});
 
 // Poster Swiper
-new Swiper('.poster-swiper', {
-  slidesPerView: 'auto',
-  spaceBetween: 12,
-  freeMode: true,
-  grabCursor: true
+new Swiper('.poster-swiper',{
+  slidesPerView:'auto',
+  spaceBetween:12,
+  freeMode:true,
+  grabCursor:true,
 });
-</script>
 
+// Fade
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:0.05});
+document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>

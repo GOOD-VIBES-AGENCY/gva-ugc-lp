@@ -135,13 +135,23 @@ header{position:sticky;top:0;background:#fff;border-bottom:1px solid #f1f0ed;z-i
 .logo-sub{font-size:10px;color:#222;letter-spacing:.4em;margin-top:18px}
 
 /* ─── FOOTER ─── */
-footer{border-top:1px solid #f1f0ed;padding:24px 16px;display:flex;flex-direction:column;gap:12px}
-@media(min-width:768px){footer{flex-direction:row;justify-content:space-between;align-items:center;padding:24px 32px}}
-.fn{font-family:'DM Serif Display',serif;font-style:italic;font-size:14px;color:#303030}
-.flinks{display:flex;gap:20px;list-style:none}
-.flinks a{font-size:12px;color:#67645e}
-.flinks a:hover{text-decoration:underline}
-.fig{font-size:12px;color:#B5B5B5}
+footer{background:#fff;border-top:1px solid #f1f0ed}
+.footer-inner{max-width:1440px;margin:0 auto;padding:48px 16px 32px;display:grid;grid-template-columns:1fr;gap:32px}
+@media(min-width:768px){.footer-inner{grid-template-columns:1fr 2fr;padding:64px 32px 48px;gap:64px}}
+.footer-brand{}
+.footer-logo{height:48px;width:auto;margin-bottom:16px}
+.footer-tagline{font-size:11px;color:#B5B5B5;letter-spacing:.1em}
+.footer-nav-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 32px}
+@media(min-width:640px){.footer-nav-grid{grid-template-columns:repeat(4,1fr)}}
+.footer-col{}
+.footer-col-title{font-size:11px;font-weight:500;letter-spacing:.08em;color:#303030;text-transform:uppercase;margin-bottom:12px}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:8px}
+.footer-links a{font-size:12px;color:#67645e;letter-spacing:.02em}
+.footer-links a:hover{color:#303030;text-decoration:underline}
+.footer-bottom{border-top:1px solid #f1f0ed;padding:16px 16px;display:flex;justify-content:space-between;align-items:center;max-width:1440px;margin:0 auto;width:100%}
+@media(min-width:768px){.footer-bottom{padding:16px 32px}}
+.footer-bottom p{font-size:11px;color:#B5B5B5;letter-spacing:.02em}
 
 /* ─── FADE ─── */
 .fade{opacity:0;transform:translateY(12px);transition:opacity .85s ease,transform .85s ease}
@@ -345,13 +355,51 @@ footer{border-top:1px solid #f1f0ed;padding:24px 16px;display:flex;flex-directio
 
 <!-- FOOTER -->
 <footer>
-  <span class="fn">matcha vibes tokyo</span>
-  <ul class="flinks">
-    <li><a href="#">Drinks</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Instagram</a></li>
-  </ul>
-  <span class="fig">@matchavibes.tokyo</span>
+  <div class="footer-inner">
+    <!-- Logo -->
+    <div class="footer-brand">
+      <img src="matcha-vibes-assets/logo-bubbly.png" alt="matcha vibes tokyo" class="footer-logo">
+      <p class="footer-tagline">Good vibes start here.</p>
+    </div>
+    <!-- Nav Grid -->
+    <div class="footer-nav-grid">
+      <div class="footer-col">
+        <p class="footer-col-title">Drinks</p>
+        <ul class="footer-links">
+          <li><a href="#">Blueberry Matcha</a></li>
+          <li><a href="#">Banana Matcha</a></li>
+          <li><a href="#">Strawberry Matcha</a></li>
+          <li><a href="#">Classic Matcha</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Customize</p>
+        <ul class="footer-links">
+          <li><a href="#">Build your cup</a></li>
+          <li><a href="#">9 combinations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Visit us</p>
+        <ul class="footer-links">
+          <li><a href="#">Imperial Palace</a></li>
+          <li><a href="#">Harajuku</a></li>
+          <li><a href="#">Shibuya</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Follow</p>
+        <ul class="footer-links">
+          <li><a href="#">@matchavibes.tokyo</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 matcha vibes tokyo. All rights reserved.</p>
+    <p>Tokyo, Japan</p>
+  </div>
 </footer>
 
 <script>

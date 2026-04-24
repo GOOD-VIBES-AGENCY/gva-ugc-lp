@@ -6,653 +6,508 @@
   <title>MATCHA VIBES — Good vibes start here.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,200;0,14..32,300;0,14..32,400;0,14..32,500;1,14..32,200;1,14..32,300&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg-primary: #FAFAF8;
-      --bg-secondary: #F0EDE6;
-      --text-primary: #111111;
-      --text-secondary: #999999;
-      --text-muted: #BBB;
-      --accent: #00E676;
-      --border: #E8E5E0;
-      --border-dark: #D8D5D0;
-      --footer-bg: #111111;
-      --footer-text: #F5F0E8;
-      --footer-muted: #666666;
+      --black: #0A0A0A;
+      --cream: #F5F0E8;
+      --off-white: #FAFAF8;
+      --green: #00E676;
+      --text: #111111;
+      --muted: #999999;
+      --border: rgba(0,0,0,0.07);
     }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      background: var(--off-white);
+      color: var(--text);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
-    /* ========================================
-       HEADER (fixed, 60px)
-    ======================================== */
-    .header {
+    /* HEADER */
+    header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: rgba(250, 250, 248, 0.95);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
+      top: 0; left: 0; right: 0;
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 8vw;
-      z-index: 1000;
+      padding: 0 5vw;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
     }
-
     .header-logo {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      color: var(--text-primary);
+      height: 34px;
+      width: auto;
     }
-
-    .header-location {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
+    .header-tag {
+      font-size: 10px;
       font-weight: 300;
-      color: var(--text-secondary);
+      letter-spacing: 0.38em;
+      color: var(--muted);
+      text-transform: uppercase;
     }
 
-    /* ========================================
-       SECTION 1: HERO (100vh)
-    ======================================== */
+    /* HERO */
     .hero {
-      min-height: 100vh;
-      min-height: 100dvh;
+      height: 100svh;
+      min-height: 600px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--black);
+      padding-top: 64px;
+    }
+    .hero-text {
       display: flex;
       flex-direction: column;
-      background: var(--bg-primary);
-      padding-top: 60px;
+      justify-content: center;
+      padding: 5rem 5vw 5rem 8vw;
     }
-
+    .hero-eyebrow {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.45em;
+      color: #484848;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+    .hero-title {
+      font-size: clamp(2.8rem, 5.5vw, 6rem);
+      font-weight: 200;
+      line-height: 1.06;
+      color: var(--cream);
+      letter-spacing: -0.03em;
+      margin-bottom: 3rem;
+    }
+    .hero-title em {
+      font-style: italic;
+    }
+    .hero-sub {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      color: #3a3a3a;
+      text-transform: uppercase;
+    }
     .hero-image {
-      height: 60vh;
-      height: 60dvh;
       overflow: hidden;
     }
-
     .hero-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center top;
     }
 
-    .hero-text {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 8vw;
+    /* BRAND STATEMENT */
+    .statement {
+      background: var(--cream);
+      padding: 10rem 8vw;
     }
-
-    .hero-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
+    .statement-inner {
+      max-width: 560px;
+    }
+    .statement-text {
+      font-size: clamp(1.15rem, 1.8vw, 1.45rem);
       font-weight: 300;
-      letter-spacing: 0.4em;
-      color: var(--text-secondary);
-      text-transform: uppercase;
+      line-height: 2.05;
+      color: #2a2a2a;
+      margin-bottom: 3.5rem;
+    }
+    .statement-rule {
+      width: 38px;
+      height: 1px;
+      background: var(--green);
       margin-bottom: 1.5rem;
     }
+    .statement-meta {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.42em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
 
-    .hero-title {
-      font-family: 'Inter', sans-serif;
+    /* SIGNATURE CUP */
+    .signature {
+      position: relative;
+      height: 82vh;
+      min-height: 480px;
+      background: var(--black);
+      overflow: hidden;
+    }
+    .signature img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .signature-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.2) 45%, transparent 70%);
+    }
+    .signature-caption {
+      position: absolute;
+      bottom: 4.5rem;
+      left: 8vw;
+      right: 8vw;
+    }
+    .signature-label {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.38em;
+      color: #555;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .signature-title {
+      font-size: clamp(2rem, 4.5vw, 5rem);
       font-weight: 200;
-      font-size: 6vw;
-      line-height: 1.1;
+      color: var(--cream);
       letter-spacing: -0.02em;
-      color: var(--text-primary);
+      line-height: 1.1;
     }
 
-    /* ========================================
-       SECTION 2: PHILOSOPHY (white)
-    ======================================== */
-    .philosophy {
-      background: var(--bg-primary);
+    /* LINEUP */
+    .lineup {
+      background: var(--off-white);
       padding: 8rem 8vw;
     }
-
-    .philosophy-content {
-      max-width: 700px;
-    }
-
-    .philosophy-text {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .philosophy-divider {
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .philosophy-tag {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 300;
-      letter-spacing: 0.3em;
-      color: var(--text-secondary);
-    }
-
-    /* ========================================
-       SECTION 3: MENU (#F0EDE6)
-    ======================================== */
-    .menu {
-      background: var(--bg-secondary);
-      padding: 8rem 8vw;
-    }
-
-    .menu-header {
+    .lineup-header {
       margin-bottom: 4rem;
     }
-
-    .menu-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
+    .lineup-eyebrow {
+      font-size: 10px;
       font-weight: 300;
-      letter-spacing: 0.4em;
-      color: var(--text-secondary);
+      letter-spacing: 0.45em;
+      color: var(--muted);
       text-transform: uppercase;
       margin-bottom: 1rem;
     }
-
-    .menu-title {
-      font-family: 'Inter', sans-serif;
+    .lineup-title {
+      font-size: clamp(2.5rem, 4.5vw, 5rem);
       font-weight: 200;
-      font-size: 4vw;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
+      letter-spacing: -0.03em;
     }
-
-    .menu-grid {
+    .lineup-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(0,0,0,0.06);
     }
-
-    .drink-card {
-      background: white;
-      border-radius: 2px;
+    .lineup-card {
+      background: #fff;
       overflow: hidden;
     }
-
-    .drink-card-image {
+    .lineup-card-img {
       aspect-ratio: 4 / 5;
       overflow: hidden;
     }
-
-    .drink-card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-
-    .drink-card:hover .drink-card-image img {
-      transform: scale(1.02);
-    }
-
-    .drink-card-info {
-      padding: 1.5rem;
-    }
-
-    .drink-name {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 400;
-      letter-spacing: 0.05em;
-      color: var(--text-primary);
-    }
-
-    .drink-price {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
-
-    .drink-copy {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 300;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* ========================================
-       SECTION 4: FULLSCREEN IMAGE
-    ======================================== */
-    .fullscreen-image {
-      width: 100vw;
-      height: 60vh;
-      overflow: hidden;
-    }
-
-    .fullscreen-image img {
+    .lineup-card-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
+      transition: transform 0.75s ease;
+      display: block;
     }
-
-    /* ========================================
-       SECTION 5: ABOUT (white)
-    ======================================== */
-    .about {
-      background: var(--bg-primary);
-      padding: 10rem 8vw;
+    .lineup-card:hover .lineup-card-img img {
+      transform: scale(1.05);
     }
-
-    .about-content {
-      max-width: 600px;
+    .lineup-card-body {
+      padding: 1.6rem 1.6rem 1.8rem;
     }
-
-    .about-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 300;
-      letter-spacing: 0.4em;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-
-    .about-text {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 300;
-      line-height: 2.0;
-      color: #444444;
-      white-space: pre-line;
-    }
-
-    .about-tagline {
-      margin-top: 2rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
+    .card-name {
+      font-size: 12px;
       font-weight: 400;
-      letter-spacing: 0.1em;
-      color: var(--accent);
+      letter-spacing: 0.08em;
+      color: var(--text);
+      margin-bottom: 10px;
     }
-
-    /* ========================================
-       SECTION 6: WHERE (#F0EDE6)
-    ======================================== */
-    .where {
-      background: var(--bg-secondary);
-      padding: 8rem 8vw;
+    .card-line {
+      width: 22px;
+      height: 1px;
+      background: #DDD;
+      margin-bottom: 10px;
     }
-
-    .where-label {
-      font-family: 'Inter', sans-serif;
+    .card-price {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .card-desc {
       font-size: 11px;
       font-weight: 300;
-      letter-spacing: 0.4em;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
+      color: #C0C0C0;
+      letter-spacing: 0.02em;
     }
 
-    .where-title {
-      font-family: 'Inter', sans-serif;
-      font-weight: 200;
-      font-size: 3.5vw;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      margin-bottom: 4rem;
-    }
-
-    .location-list {
-      list-style: none;
-    }
-
-    .location-item {
-      padding: 2rem 0;
-      border-top: 1px solid var(--border-dark);
+    /* LOGO FEATURE */
+    .logo-feature {
+      background: var(--black);
+      padding: 11rem 4rem;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
     }
-
-    .location-item:last-child {
-      border-bottom: 1px solid var(--border-dark);
+    .logo-feature img {
+      max-width: 460px;
+      width: 70vw;
+      height: auto;
+      display: block;
     }
-
-    .location-name {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--text-primary);
-    }
-
-    .location-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
+    .logo-feature-sub {
+      font-size: 12px;
       font-weight: 300;
-      color: var(--text-secondary);
+      letter-spacing: 0.32em;
+      color: #3a3a3a;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 3rem;
     }
 
-    /* ========================================
-       FOOTER (#111)
-    ======================================== */
-    .footer {
-      background: var(--footer-bg);
-      padding: 5rem 8vw;
+    /* WHERE */
+    .where {
+      background: var(--off-white);
+      padding: 8rem 8vw;
     }
-
-    .footer-logo {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
+    .where-eyebrow {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.45em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 3.5rem;
+    }
+    .where-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-top: 1px solid rgba(0,0,0,0.07);
+      padding: 2.6rem 0;
+    }
+    .where-item:last-child {
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .where-ja {
+      font-size: clamp(1.1rem, 2.2vw, 1.7rem);
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .where-en {
+      font-size: 10px;
       font-weight: 300;
       letter-spacing: 0.3em;
-      color: var(--footer-text);
-      margin-bottom: 1rem;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .where-vibe {
+      font-size: 12px;
+      font-weight: 300;
+      font-style: italic;
+      color: #C0C0C0;
     }
 
-    .footer-tagline {
-      font-family: 'Inter', sans-serif;
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      padding: 5rem 8vw 4rem;
+    }
+    .footer-logo {
+      height: 42px;
+      width: auto;
+      display: block;
+      margin-bottom: 2rem;
+    }
+    .footer-copy {
       font-size: 11px;
       font-weight: 300;
-      color: var(--footer-muted);
-      margin-bottom: 1rem;
+      color: #383838;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
     }
-
-    .footer-social {
-      font-family: 'Inter', sans-serif;
+    .footer-handle {
       font-size: 11px;
       font-weight: 300;
-      color: var(--footer-muted);
+      color: #2c2c2c;
+      letter-spacing: 0.1em;
     }
 
-    /* ========================================
-       ANIMATIONS
-    ======================================== */
+    /* FADE UP */
     .fade-up {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(26px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
     }
-
-    .fade-up.visible {
+    .fade-up.in {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Hero initial animation */
-    .hero-label,
-    .hero-title {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: heroFadeUp 0.8s ease-out forwards;
-    }
-
-    .hero-label { animation-delay: 0.2s; }
-    .hero-title { animation-delay: 0.4s; }
-
-    @keyframes heroFadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ========================================
-       MOBILE RESPONSIVE
-    ======================================== */
-    @media (max-width: 1024px) {
-      .menu-grid {
-        gap: 1rem;
-      }
-
-      .where-title {
-        font-size: 5vw;
-      }
-    }
-
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .header {
-        padding: 0 6vw;
-      }
-
-      .hero-image {
-        height: 50vh;
-        height: 50dvh;
-      }
-
-      .hero-text {
-        padding: 3rem 6vw;
-      }
-
-      .hero-title {
-        font-size: 10vw;
-      }
-
-      .philosophy {
-        padding: 6rem 6vw;
-      }
-
-      .philosophy-text {
-        font-size: 1.3rem;
-      }
-
-      .menu {
-        padding: 6rem 6vw;
-      }
-
-      .menu-title {
-        font-size: 8vw;
-      }
-
-      .menu-grid {
+      .hero {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-rows: 52vh auto;
+        height: auto;
+        min-height: auto;
       }
-
-      .fullscreen-image {
-        height: 50vh;
-      }
-
-      .about {
-        padding: 6rem 6vw;
-      }
-
-      .where {
-        padding: 6rem 6vw;
-      }
-
-      .where-title {
-        font-size: 7vw;
-      }
-
-      .location-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-
-      .footer {
-        padding: 4rem 6vw;
-      }
+      .hero-image { order: -1; height: 52vh; }
+      .hero-text { padding: 3.5rem 7vw 4rem; }
+      .lineup-grid { grid-template-columns: 1fr; }
+      .where-item { flex-direction: column; gap: 0.4rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <span class="header-logo">MATCHA VIBES</span>
-    <span class="header-location">TOKYO, JAPAN</span>
-  </header>
+<!-- HEADER -->
+<header>
+  <img class="header-logo" src="matcha-vibes-assets/logo-official.png" alt="MATCHA VIBES">
+  <span class="header-tag">Tokyo, Japan</span>
+</header>
 
-  <!-- SECTION 1: HERO -->
-  <section class="hero">
-    <div class="hero-image">
-      <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="MATCHA VIBES signature blueberry matcha">
-    </div>
-    <div class="hero-text">
-      <span class="hero-label">MATCHA VIBES</span>
-      <h1 class="hero-title">Good vibes<br>start here.</h1>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Good Vibes Agency presents</p>
+    <h1 class="hero-title">Good vibes<br><em>start here.</em></h1>
+    <p class="hero-sub">#matchavibes &nbsp;—&nbsp; Tokyo 2026</p>
+  </div>
+  <div class="hero-image">
+    <img src="matcha-vibes-assets/cup-signature.jpg" alt="MATCHA VIBES Signature Cup" loading="eager">
+  </div>
+</section>
 
-  <!-- SECTION 2: PHILOSOPHY -->
-  <section class="philosophy">
-    <div class="philosophy-content">
-      <p class="philosophy-text fade-up">The drink the world fell in love with.<br>Tokyo's way of doing it right.</p>
-      <div class="philosophy-divider fade-up">
-        <span class="philosophy-tag">MATCHA VIBES / EST. 2026 / TOKYO</span>
+<!-- BRAND STATEMENT -->
+<section class="statement">
+  <div class="statement-inner fade-up">
+    <p class="statement-text">
+      The drink the world is obsessed with.<br>
+      Our way of doing it right here in Tokyo.
+    </p>
+    <div class="statement-rule"></div>
+    <p class="statement-meta">Matcha Vibes &nbsp;/&nbsp; Est. 2026</p>
+  </div>
+</section>
+
+<!-- SIGNATURE CUP -->
+<section class="signature">
+  <img src="matcha-vibes-assets/cup-duo.jpg" alt="Signature Cup" loading="lazy">
+  <div class="signature-overlay"></div>
+  <div class="signature-caption fade-up">
+    <p class="signature-label">The Signature Cup</p>
+    <h2 class="signature-title">Three colors.<br>One vibe.</h2>
+  </div>
+</section>
+
+<!-- LINEUP -->
+<section class="lineup">
+  <div class="lineup-header fade-up">
+    <p class="lineup-eyebrow">The Menu</p>
+    <h2 class="lineup-title">Four drinks.</h2>
+  </div>
+  <div class="lineup-grid">
+    <div class="lineup-card">
+      <div class="lineup-card-img">
+        <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha" loading="lazy">
+      </div>
+      <div class="lineup-card-body">
+        <p class="card-name">BLUEBERRY MATCHA</p>
+        <div class="card-line"></div>
+        <p class="card-price">¥850</p>
+        <p class="card-desc">Purple meets green.</p>
       </div>
     </div>
-  </section>
-
-  <!-- SECTION 3: MENU -->
-  <section class="menu">
-    <div class="menu-header fade-up">
-      <span class="menu-label">THE LINEUP</span>
-      <h2 class="menu-title">Four drinks.</h2>
+    <div class="lineup-card">
+      <div class="lineup-card-img">
+        <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie" loading="lazy">
+      </div>
+      <div class="lineup-card-body">
+        <p class="card-name">YOGURT SMOOTHIE</p>
+        <div class="card-line"></div>
+        <p class="card-price">¥750</p>
+        <p class="card-desc">Creamy. Always.</p>
+      </div>
     </div>
-    <div class="menu-grid">
-      <article class="drink-card fade-up">
-        <div class="drink-card-image">
-          <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha">
-        </div>
-        <div class="drink-card-info">
-          <h3 class="drink-name">Blueberry Matcha</h3>
-          <p class="drink-price">¥850</p>
-          <p class="drink-copy">Matcha meets its match.</p>
-        </div>
-      </article>
-      <article class="drink-card fade-up">
-        <div class="drink-card-image">
-          <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie">
-        </div>
-        <div class="drink-card-info">
-          <h3 class="drink-name">Yogurt Smoothie</h3>
-          <p class="drink-price">¥750</p>
-          <p class="drink-copy">Smooth. Every time.</p>
-        </div>
-      </article>
-      <article class="drink-card fade-up">
-        <div class="drink-card-image">
-          <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery">
-        </div>
-        <div class="drink-card-info">
-          <h3 class="drink-name">Banana Recovery</h3>
-          <p class="drink-price">¥700</p>
-          <p class="drink-copy">The after-run essential.</p>
-        </div>
-      </article>
-      <article class="drink-card fade-up">
-        <div class="drink-card-image">
-          <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte">
-        </div>
-        <div class="drink-card-info">
-          <h3 class="drink-name">Classic Latte</h3>
-          <p class="drink-price">¥650</p>
-          <p class="drink-copy">The one that started it all.</p>
-        </div>
-      </article>
+    <div class="lineup-card">
+      <div class="lineup-card-img">
+        <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery" loading="lazy">
+      </div>
+      <div class="lineup-card-body">
+        <p class="card-name">BANANA RECOVERY</p>
+        <div class="card-line"></div>
+        <p class="card-price">¥700</p>
+        <p class="card-desc">After the run. Before the day.</p>
+      </div>
     </div>
-  </section>
-
-  <!-- SECTION 4: FULLSCREEN IMAGE -->
-  <section class="fullscreen-image">
-    <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="MATCHA VIBES yogurt smoothie">
-  </section>
-
-  <!-- SECTION 5: ABOUT -->
-  <section class="about">
-    <div class="about-content">
-      <span class="about-label fade-up">ABOUT</span>
-      <p class="about-text fade-up">MATCHA VIBES is not a tea ceremony.
-It is a cup that makes you feel something —
-before a run, between adventures,
-or when you just need a moment.
-
-Tokyo. 2026.</p>
-      <p class="about-tagline fade-up">Good vibes start here.</p>
+    <div class="lineup-card">
+      <div class="lineup-card-img">
+        <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte" loading="lazy">
+      </div>
+      <div class="lineup-card-body">
+        <p class="card-name">CLASSIC LATTE</p>
+        <div class="card-line"></div>
+        <p class="card-price">¥650</p>
+        <p class="card-desc">Where it all starts.</p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SECTION 6: WHERE -->
-  <section class="where">
-    <span class="where-label fade-up">FIND US</span>
-    <h2 class="where-title fade-up">Coming to Tokyo.</h2>
-    <ul class="location-list">
-      <li class="location-item fade-up">
-        <span class="location-name">皇居外苑 IMPERIAL PALACE</span>
-        <span class="location-sub">For the runners.</span>
-      </li>
-      <li class="location-item fade-up">
-        <span class="location-name">原宿 HARAJUKU</span>
-        <span class="location-sub">For the explorers.</span>
-      </li>
-      <li class="location-item fade-up">
-        <span class="location-name">渋谷 SHIBUYA</span>
-        <span class="location-sub">For everyone.</span>
-      </li>
-    </ul>
-  </section>
+<!-- LOGO FEATURE -->
+<section class="logo-feature">
+  <img src="matcha-vibes-assets/logo-official.png" alt="MATCHA VIBES" class="fade-up">
+  <p class="logo-feature-sub fade-up">Good vibes start here.</p>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p class="footer-logo">MATCHA VIBES</p>
-    <p class="footer-tagline">Good vibes start here. — Tokyo, Japan 2026</p>
-    <p class="footer-social">@matchavibes.tokyo</p>
-  </footer>
+<!-- WHERE -->
+<section class="where">
+  <p class="where-eyebrow fade-up">Find us in Tokyo</p>
+  <div class="where-item fade-up">
+    <div>
+      <p class="where-ja">皇居外苑</p>
+      <p class="where-en">Imperial Palace</p>
+    </div>
+    <p class="where-vibe">For the runners.</p>
+  </div>
+  <div class="where-item fade-up">
+    <div>
+      <p class="where-ja">原宿</p>
+      <p class="where-en">Harajuku</p>
+    </div>
+    <p class="where-vibe">For the explorers.</p>
+  </div>
+  <div class="where-item fade-up">
+    <div>
+      <p class="where-ja">渋谷</p>
+      <p class="where-en">Shibuya</p>
+    </div>
+    <p class="where-vibe">For everyone.</p>
+  </div>
+</section>
 
-  <script>
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
+<!-- FOOTER -->
+<footer>
+  <img class="footer-logo" src="matcha-vibes-assets/logo-official.png" alt="MATCHA VIBES">
+  <p class="footer-copy">Good vibes start here. — Tokyo, Japan 2026</p>
+  <p class="footer-handle">@matchavibes.tokyo</p>
+</footer>
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-up').forEach(el => {
-      observer.observe(el);
-    });
-  </script>
-
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>

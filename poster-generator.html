@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#eee; font-family:'Helvetica Neue', Arial, sans-serif; }
+
+.poster {
+  width: 800px;
+  height: 1000px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+}
+
+/* カラー別 */
+.poster-blueberry { background: #C8C0DC; }
+.poster-banana    { background: #F2D97C; }
+.poster-strawberry{ background: #F5B8C8; }
+.poster-classic   { background: #B8D8B0; }
+
+/* NEW バッジ（完全統一） */
+.new-badge {
+  position: absolute;
+  top: 44px; left: 44px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 10;
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+}
+.poster-blueberry .new-badge { background: #6B5B9B; }
+.poster-banana    .new-badge { background: #C4933A; }
+.poster-strawberry.new-badge, .poster-strawberry .new-badge { background: #C45A7A; }
+.poster-classic   .new-badge { background: #4A7A4A; }
+
+.badge-spark {
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-bottom: 2px;
+}
+.badge-bracket {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+/* 商品画像エリア */
+.product-area {
+  position: absolute;
+  top: 120px; left: 50%; transform: translateX(-50%);
+  width: 420px; height: 420px;
+}
+.product-img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* 浮遊食材 */
+.float-item {
+  position: absolute;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+/* テキストエリア */
+.text-area {
+  position: absolute;
+  bottom: 80px; left: 0; right: 0;
+  text-align: center;
+  padding: 0 40px;
+}
+.product-name-jp {
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.5);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+.product-name-en {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.poster-blueberry .product-name-en { color: #3A2A6A; }
+.poster-banana    .product-name-en { color: #7A4A10; }
+.poster-strawberry .product-name-en { color: #8A2A4A; }
+.poster-classic   .product-name-en { color: #2A5A2A; }
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(0,0,0,0.4);
+  text-transform: uppercase;
+}
+
+/* 価格 */
+.price-tag {
+  position: absolute;
+  bottom: 180px; right: 44px;
+  font-size: 28px;
+  font-weight: 900;
+  color: rgba(0,0,0,0.6);
+}
+</style>
+</head>
+<body>
+
+<!-- BLUEBERRY MATCHA SMOOTHIE -->
+<div class="poster poster-blueberry" id="poster-blueberry">
+  <div class="new-badge">
+    <span class="badge-spark">✦ ✦ ✦</span>
+    <span class="badge-bracket">[ NEW! ]</span>
+  </div>
+
+  <!-- 浮遊するブルーベリー -->
+  <img class="float-item" src="matcha-vibes-assets/cup-blueberry.jpg" style="width:55%;top:8%;left:50%;transform:translateX(-50%);border-radius:20px;">
+
+  <!-- 浮遊食材（CSS絵文字で代替） -->
+  <div style="position:absolute;font-size:80px;top:4%;left:8%;transform:rotate(-15deg);filter:drop-shadow(2px 4px 6px rgba(0,0,0,0.2));">🫐</div>
+  <div style="position:absolute;font-size:60px;top:2%;right:6%;transform:rotate(10deg);">🫐</div>
+  <div style="position:absolute;font-size:50px;top:20%;right:3%;transform:rotate(-20deg);">🫐</div>
+  <div style="position:absolute;font-size:40px;top:12%;left:2%;transform:rotate(25deg);">🌿</div>
+  <div style="position:absolute;font-size:55px;bottom:38%;left:4%;transform:rotate(-10deg);">🫐</div>
+  <div style="position:absolute;font-size:45px;bottom:40%;right:5%;transform:rotate(15deg);">🌿</div>
+
+  <div class="text-area">
+    <p class="product-name-jp">ブルーベリー抹茶スムージー</p>
+    <p class="product-name-en">BLUEBERRY<br>MATCHA SMOOTHIE</p>
+    <p class="brand-name">matcha vibes tokyo</p>
+  </div>
+  <div class="price-tag">¥850</div>
+</div>
+
+<!-- BANANA MATCHA SMOOTHIE -->
+<div class="poster poster-banana" id="poster-banana">
+  <div class="new-badge">
+    <span class="badge-spark">✦ ✦ ✦</span>
+    <span class="badge-bracket">[ NEW! ]</span>
+  </div>
+
+  <img class="float-item" src="matcha-vibes-assets/cup-banana.jpg" style="width:55%;top:8%;left:50%;transform:translateX(-50%);border-radius:20px;">
+
+  <div style="position:absolute;font-size:80px;top:3%;left:7%;transform:rotate(-12deg);">🍌</div>
+  <div style="position:absolute;font-size:65px;top:1%;right:5%;transform:rotate(8deg);">🍌</div>
+  <div style="position:absolute;font-size:50px;top:22%;right:2%;transform:rotate(-18deg);">🍌</div>
+  <div style="position:absolute;font-size:40px;top:10%;left:1%;transform:rotate(20deg);">🌿</div>
+  <div style="position:absolute;font-size:55px;bottom:37%;left:3%;transform:rotate(-8deg);">🍌</div>
+  <div style="position:absolute;font-size:45px;bottom:39%;right:4%;transform:rotate(12deg);">🌿</div>
+
+  <div class="text-area">
+    <p class="product-name-jp">バナナ抹茶スムージー</p>
+    <p class="product-name-en">BANANA<br>MATCHA SMOOTHIE</p>
+    <p class="brand-name">matcha vibes tokyo</p>
+  </div>
+  <div class="price-tag">¥700</div>
+</div>
+
+<!-- STRAWBERRY MATCHA SMOOTHIE -->
+<div class="poster poster-strawberry" id="poster-strawberry">
+  <div class="new-badge">
+    <span class="badge-spark">✦ ✦ ✦</span>
+    <span class="badge-bracket">[ NEW! ]</span>
+  </div>
+
+  <img class="float-item" src="matcha-vibes-assets/cup-yogurt.jpg" style="width:55%;top:8%;left:50%;transform:translateX(-50%);border-radius:20px;">
+
+  <div style="position:absolute;font-size:80px;top:3%;left:7%;transform:rotate(-15deg);">🍓</div>
+  <div style="position:absolute;font-size:65px;top:1%;right:5%;transform:rotate(10deg);">🍓</div>
+  <div style="position:absolute;font-size:50px;top:20%;right:2%;transform:rotate(-20deg);">🍓</div>
+  <div style="position:absolute;font-size:42px;top:12%;left:1%;transform:rotate(18deg);">🌿</div>
+  <div style="position:absolute;font-size:55px;bottom:37%;left:3%;transform:rotate(-10deg);">🍓</div>
+  <div style="position:absolute;font-size:45px;bottom:39%;right:4%;transform:rotate(14deg);">🌿</div>
+
+  <div class="text-area">
+    <p class="product-name-jp">ストロベリー抹茶スムージー</p>
+    <p class="product-name-en">STRAWBERRY<br>MATCHA SMOOTHIE</p>
+    <p class="brand-name">matcha vibes tokyo</p>
+  </div>
+  <div class="price-tag">¥750</div>
+</div>
+
+<!-- CLASSIC MATCHA SMOOTHIE -->
+<div class="poster poster-classic" id="poster-classic">
+  <div class="new-badge">
+    <span class="badge-spark">✦ ✦ ✦</span>
+    <span class="badge-bracket">[ NEW! ]</span>
+  </div>
+
+  <img class="float-item" src="matcha-vibes-assets/cup-classic.jpg" style="width:55%;top:8%;left:50%;transform:translateX(-50%);border-radius:20px;">
+
+  <div style="position:absolute;font-size:80px;top:3%;left:7%;transform:rotate(-12deg);">🍵</div>
+  <div style="position:absolute;font-size:65px;top:1%;right:5%;transform:rotate(8deg);">🌿</div>
+  <div style="position:absolute;font-size:50px;top:20%;right:2%;transform:rotate(-18deg);">🍃</div>
+  <div style="position:absolute;font-size:42px;top:12%;left:1%;transform:rotate(22deg);">🌿</div>
+  <div style="position:absolute;font-size:55px;bottom:37%;left:3%;transform:rotate(-8deg);">🍵</div>
+  <div style="position:absolute;font-size:45px;bottom:39%;right:4%;transform:rotate(15deg);">🍃</div>
+
+  <div class="text-area">
+    <p class="product-name-jp">クラシック抹茶スムージー</p>
+    <p class="product-name-en">CLASSIC<br>MATCHA SMOOTHIE</p>
+    <p class="brand-name">matcha vibes tokyo</p>
+  </div>
+  <div class="price-tag">¥650</div>
+</div>
+
+</body>
+</html>

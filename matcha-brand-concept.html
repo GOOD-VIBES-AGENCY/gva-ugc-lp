@@ -5,1231 +5,499 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>matcha vibes tokyo</title>
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-
-<!-- Swiper -->
+<!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
-<!-- Lenis -->
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
-
 <style>
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  :root {
-    --green: #3d8b37;
-    --black: #111;
-    --white: #fff;
-    --offwhite: #fafaf8;
-    --gray: #888;
-    --font-serif: 'DM Serif Display', serif;
-    --font-sans: 'DM Sans', sans-serif;
-  }
-
-  html {
-    font-size: 16px;
-    scroll-behavior: auto;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    color: var(--black);
-    background: var(--white);
-    overflow-x: hidden;
-  }
-
-  img {
-    display: block;
-    max-width: 100%;
-  }
-
-  /* ─────────────────────────────────────
-     HEADER
-  ───────────────────────────────────── */
-  #site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease, backdrop-filter 0.3s ease;
-  }
-
-  #site-header.scrolled {
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-
-  .header-logo {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1rem;
-    letter-spacing: 0.04em;
-    color: var(--black);
-    text-decoration: none;
-  }
-
-  .header-logo.light {
-    color: var(--white);
-  }
-
-  /* ─────────────────────────────────────
-     HERO
-  ───────────────────────────────────── */
-  #hero {
-    height: 100svh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .hero-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 5vw 0 8vw;
-  }
-
-  .hero-eyebrow {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 2rem;
-  }
-
-  .hero-headline {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(3.5rem, 8vw, 9rem);
-    line-height: 0.95;
-    color: var(--black);
-    margin-bottom: 2.5rem;
-  }
-
-  .hero-sub {
-    font-family: var(--font-sans);
-    font-size: clamp(0.85rem, 1.1vw, 1rem);
-    font-weight: 300;
-    color: #555;
-    line-height: 1.7;
-    max-width: 320px;
-    margin-bottom: 3rem;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--white);
-    background: var(--black);
-    padding: 0.9rem 2rem;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.25s ease;
-  }
-
-  .btn-primary:hover {
-    background: var(--green);
-  }
-
-  .btn-arrow {
-    font-size: 1rem;
-    transition: transform 0.25s ease;
-  }
-
-  .btn-primary:hover .btn-arrow {
-    transform: translateX(4px);
-  }
-
-  .hero-image {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .hero-image-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(255,255,255,0.08), transparent);
-  }
-
-  /* ─────────────────────────────────────
-     INTRO
-  ───────────────────────────────────── */
-  #intro {
-    background: var(--offwhite);
-    padding: 7rem 5vw;
-    display: flex;
-    align-items: flex-start;
-    gap: 4vw;
-  }
-
-  .intro-label {
-    flex-shrink: 0;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform: rotate(180deg);
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gray);
-    align-self: flex-end;
-  }
-
-  .intro-text {
-    flex: 1;
-  }
-
-  .intro-headline {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    line-height: 1.35;
-    color: var(--black);
-    max-width: 760px;
-    margin-bottom: 2.5rem;
-  }
-
-  .intro-body {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: #666;
-    line-height: 1.8;
-    max-width: 480px;
-  }
-
-  .intro-accent {
-    display: inline-block;
-    width: 32px;
-    height: 2px;
-    background: var(--green);
-    margin-bottom: 1.5rem;
-  }
-
-  /* ─────────────────────────────────────
-     PRODUCTS
-  ───────────────────────────────────── */
-  #products {
-    background: var(--white);
-    padding: 6rem 5vw;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 3.5rem;
-  }
-
-  .section-title {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 1;
-    color: var(--black);
-  }
-
-  .section-link {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gray);
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
-    padding-bottom: 2px;
-    transition: color 0.2s;
-  }
-
-  .section-link:hover {
-    color: var(--black);
-  }
-
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-  }
-
-  .product-card {
-    cursor: pointer;
-  }
-
-  .product-image-wrap {
-    position: relative;
-    aspect-ratio: 3/4;
-    overflow: hidden;
-    background: var(--offwhite);
-    margin-bottom: 1.2rem;
-  }
-
-  .product-image-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .product-card:hover .product-image-wrap img {
-    transform: scale(1.04);
-  }
-
-  .new-badge {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    width: 38px;
-    height: 38px;
-    background: var(--green);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.55rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--white);
-    z-index: 2;
-  }
-
-  .product-name {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--black);
-    margin-bottom: 0.4rem;
-  }
-
-  .product-desc {
-    font-size: 0.75rem;
-    font-weight: 300;
-    color: var(--gray);
-    margin-bottom: 0.6rem;
-  }
-
-  .product-price {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--black);
-    letter-spacing: 0.02em;
-  }
-
-  /* ─────────────────────────────────────
-     FULLBLEED
-  ───────────────────────────────────── */
-  #fullbleed {
-    height: 75svh;
-    position: relative;
-    overflow: hidden;
-  }
-
-  #fullbleed img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 40%;
-  }
-
-  .fullbleed-caption {
-    position: absolute;
-    bottom: 3rem;
-    left: 5vw;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.8rem, 3.5vw, 3rem);
-    color: var(--white);
-    line-height: 1.2;
-    text-shadow: 0 2px 30px rgba(0,0,0,0.35);
-  }
-
-  /* ─────────────────────────────────────
-     FEATURE (SPLIT)
-  ───────────────────────────────────── */
-  #feature {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 75svh;
-  }
-
-  .feature-image {
-    overflow: hidden;
-  }
-
-  .feature-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  #feature:hover .feature-image img {
-    transform: scale(1.03);
-  }
-
-  .feature-content {
-    background: var(--offwhite);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 6rem 6vw;
-  }
-
-  .feature-tag {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 1.5rem;
-  }
-
-  .feature-headline {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(2.5rem, 4.5vw, 5rem);
-    line-height: 1.05;
-    color: var(--black);
-    margin-bottom: 2rem;
-  }
-
-  .feature-body {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: #666;
-    line-height: 1.8;
-    max-width: 380px;
-    margin-bottom: 2.5rem;
-  }
-
-  .feature-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 3rem;
-  }
-
-  .feature-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: #444;
-    letter-spacing: 0.02em;
-  }
-
-  .feature-list li::before {
-    content: '';
-    width: 20px;
-    height: 1px;
-    background: var(--green);
-    flex-shrink: 0;
-  }
-
-  /* ─────────────────────────────────────
-     POSTER SWIPER
-  ───────────────────────────────────── */
-  #poster-section {
-    background: var(--white);
-    padding: 6rem 0 6rem 5vw;
-    overflow: hidden;
-  }
-
-  .poster-header {
-    padding-right: 5vw;
-    margin-bottom: 2.5rem;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-  }
-
-  .swiper-poster {
-    overflow: visible;
-  }
-
-  .swiper-poster .swiper-wrapper {
-    align-items: stretch;
-  }
-
-  .poster-slide {
-    width: clamp(240px, 28vw, 380px);
-    border-radius: 12px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .poster-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 3/4;
-    border-radius: 12px;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .poster-slide:hover img {
-    transform: scale(1.03);
-  }
-
-  .poster-nav {
-    display: flex;
-    gap: 0.75rem;
-    padding-right: 5vw;
-  }
-
-  .poster-nav-btn {
-    width: 44px;
-    height: 44px;
-    border: 1px solid #ddd;
-    background: transparent;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    transition: background 0.2s, border-color 0.2s;
-  }
-
-  .poster-nav-btn:hover {
-    background: var(--black);
-    border-color: var(--black);
-    color: var(--white);
-  }
-
-  /* ─────────────────────────────────────
-     CUSTOMIZE
-  ───────────────────────────────────── */
-  #customize {
-    background: var(--offwhite);
-    padding: 7rem 5vw;
-  }
-
-  .customize-header {
-    margin-bottom: 5rem;
-    max-width: 600px;
-  }
-
-  .customize-title {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 1;
-    color: var(--black);
-    margin-bottom: 1rem;
-  }
-
-  .customize-sub {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: #666;
-    line-height: 1.7;
-  }
-
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-  }
-
-  .step {
-    position: relative;
-  }
-
-  .step-number {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 5rem;
-    line-height: 1;
-    color: rgba(0,0,0,0.06);
-    margin-bottom: -1.5rem;
-  }
-
-  .step-icon {
-    font-size: 1.8rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .step-title {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.5rem;
-    color: var(--black);
-    margin-bottom: 0.75rem;
-  }
-
-  .step-body {
-    font-size: 0.85rem;
-    font-weight: 300;
-    color: #666;
-    line-height: 1.8;
-  }
-
-  .step-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1.2rem;
-  }
-
-  .step-tag {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.4rem 0.85rem;
-    border: 1px solid #ddd;
-    color: #555;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .step-tag:hover,
-  .step-tag.active {
-    background: var(--black);
-    border-color: var(--black);
-    color: var(--white);
-  }
-
-  .step-tag.green {
-    background: var(--green);
-    border-color: var(--green);
-    color: var(--white);
-  }
-
-  /* ─────────────────────────────────────
-     LOGO BLACK
-  ───────────────────────────────────── */
-  #logo-black {
-    background: var(--black);
-    padding: 7rem 5vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    text-align: center;
-  }
-
-  .logo-black-img {
-    width: clamp(120px, 20vw, 220px);
-    filter: invert(1);
-    opacity: 0.9;
-  }
-
-  .logo-black-tagline {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.2rem, 2.5vw, 2rem);
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 0.02em;
-  }
-
-  .logo-black-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--white);
-    border: 1px solid rgba(255,255,255,0.3);
-    padding: 0.9rem 2.2rem;
-    text-decoration: none;
-    transition: all 0.25s ease;
-    margin-top: 1rem;
-  }
-
-  .logo-black-cta:hover {
-    background: var(--white);
-    color: var(--black);
-  }
-
-  /* ─────────────────────────────────────
-     FOOTER
-  ───────────────────────────────────── */
-  #footer {
-    background: var(--offwhite);
-    padding: 5rem 5vw 3rem;
-    border-top: 1px solid rgba(0,0,0,0.08);
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 4rem;
-  }
-
-  .footer-brand .footer-logo {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--black);
-    margin-bottom: 1rem;
-    display: block;
-  }
-
-  .footer-brand p {
-    font-size: 0.8rem;
-    font-weight: 300;
-    color: #777;
-    line-height: 1.8;
-    max-width: 240px;
-  }
-
-  .footer-social {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-  }
-
-  .footer-social a {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #888;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .footer-social a:hover {
-    color: var(--black);
-  }
-
-  .footer-col h4 {
-    font-family: var(--font-sans);
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #aaa;
-    margin-bottom: 1.25rem;
-  }
-
-  .footer-col ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-  }
-
-  .footer-col ul a {
-    font-size: 0.85rem;
-    font-weight: 300;
-    color: #555;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .footer-col ul a:hover {
-    color: var(--black);
-  }
-
-  .footer-bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(0,0,0,0.08);
-  }
-
-  .footer-bottom p {
-    font-size: 0.75rem;
-    font-weight: 300;
-    color: #aaa;
-  }
-
-  .footer-bottom-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .footer-bottom-links a {
-    font-size: 0.7rem;
-    font-weight: 400;
-    color: #aaa;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .footer-bottom-links a:hover {
-    color: var(--black);
-  }
-
-  /* ─────────────────────────────────────
-     SCROLL ANIMATIONS
-  ───────────────────────────────────── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
-
-  /* ─────────────────────────────────────
-     RESPONSIVE
-  ───────────────────────────────────── */
-  @media (max-width: 1024px) {
-    .products-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .footer-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (max-width: 768px) {
-    #hero {
-      grid-template-columns: 1fr;
-    }
-    .hero-image {
-      display: none;
-    }
-    .hero-text {
-      padding: 0 5vw 0 6vw;
-    }
-    #intro {
-      flex-direction: column;
-      gap: 2rem;
-    }
-    .intro-label {
-      writing-mode: horizontal-tb;
-      transform: none;
-    }
-    #feature {
-      grid-template-columns: 1fr;
-    }
-    .steps-grid {
-      grid-template-columns: 1fr;
-    }
-    .footer-grid {
-      grid-template-columns: 1fr;
-    }
-    .footer-bottom {
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .products-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-  }
-
-  /* Swiper custom */
-  .swiper-poster {
-    cursor: grab;
-  }
-  .swiper-poster:active {
-    cursor: grabbing;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'Helvetica Neue', sans-serif; background: #fff; color: #111; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 52px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-logo {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 16px;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 100svh;
+  background-image: url(matcha-vibes-assets/scene-sizzle.jpg);
+  background-size: cover;
+  background-position: center;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+}
+.hero-text {
+  position: absolute;
+  bottom: 48px;
+  left: 24px;
+  z-index: 1;
+}
+.hero-text span {
+  display: block;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 14vw;
+  color: #fff;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+/* Announce */
+.announce {
+  background: #000;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+/* Menu */
+.menu {
+  padding: 48px 20px;
+  background: #fff;
+}
+.menu h2 {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 400;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (min-width: 768px) {
+  .menu-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.menu-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.menu-card-body {
+  padding: 12px 0;
+}
+.menu-badge {
+  display: inline-block;
+  background: #3d8b37;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.menu-name {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.menu-desc {
+  font-size: 11px;
+  color: #888;
+  margin-bottom: 4px;
+}
+.menu-price {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Fullbleed */
+.fullbleed img {
+  width: 100%;
+  height: 60vw;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+/* Story */
+.story {
+  background: #111;
+  padding: 48px 24px;
+  text-align: center;
+}
+.story p {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.5rem, 5vw, 2.8rem);
+  color: #f5f0e8;
+  line-height: 1.4;
+  max-width: 800px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+
+/* Flatlay 2-col */
+.flatlay-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.flatlay-duo img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Poster Swiper */
+.poster-section {
+  padding: 48px 0 48px 20px;
+  background: #fff;
+}
+.poster-section h2 {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 400;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+.poster-swiper {
+  overflow: visible;
+}
+.poster-swiper .swiper-slide {
+  width: 260px;
+}
+.poster-swiper img {
+  border-radius: 12px;
+  width: 100%;
+}
+
+/* Customize */
+.customize {
+  background: #f8f5ef;
+  padding: 48px 24px;
+}
+.customize h2 {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+.customize-grid {
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  .customize-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.customize-step {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+}
+.step-num {
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.step-title {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.step-options {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+}
+.customize-note {
+  margin-top: 24px;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 18px;
+  color: #3d8b37;
+  text-align: center;
+}
+
+/* Logo section */
+.logo-section {
+  background: #0a0a0a;
+  padding: 60px 20px;
+  text-align: center;
+}
+.logo-section img {
+  max-width: 280px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+/* Footer */
+.footer {
+  background: #fff;
+  border-top: 1px solid #f0f0f0;
+  padding: 40px 20px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+@media (min-width: 768px) {
+  .footer-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.footer-brand {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.footer-tagline {
+  font-size: 12px;
+  color: #888;
+}
+.footer-heading {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+.footer-links {
+  list-style: none;
+}
+.footer-links li {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+.footer-links a {
+  color: #111;
+  text-decoration: none;
+}
+.footer-social {
+  font-size: 13px;
+}
+.footer-bottom {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 20px;
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+}
+
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════
-     HEADER
-════════════════════════════════════ -->
-<header id="site-header">
-  <a href="#" class="header-logo" id="header-logo">matcha vibes tokyo</a>
+<!-- Header -->
+<header class="header">
+  <span class="header-logo">matcha vibes tokyo</span>
 </header>
 
-<!-- ═══════════════════════════════════
-     HERO
-════════════════════════════════════ -->
-<section id="hero">
+<!-- Hero -->
+<section class="hero">
   <div class="hero-text">
-    <p class="hero-eyebrow">抹茶スムージースタンド — 東京</p>
-    <h1 class="hero-headline">good vibes<br>start here.</h1>
-    <p class="hero-sub">Hand-crafted matcha smoothies made with ceremonial-grade powder, sourced fresh from Uji. Your daily ritual, reimagined.</p>
-    <a href="#products" class="btn-primary">
-      View the Menu <span class="btn-arrow">→</span>
-    </a>
-  </div>
-  <div class="hero-image">
-    <img src="matcha-vibes-assets/scene-sizzle.jpg" alt="matcha vibes tokyo" loading="eager">
-    <div class="hero-image-overlay"></div>
+    <span>good vibes</span>
+    <span>start here.</span>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     INTRO
-════════════════════════════════════ -->
-<section id="intro">
-  <span class="intro-label">Our Story</span>
-  <div class="intro-text">
-    <span class="intro-accent"></span>
-    <h2 class="intro-headline reveal">The matcha the world fell in love with.<br>Our version, right here in Tokyo.</h2>
-    <p class="intro-body reveal reveal-delay-1">We believe the best things are simple done extraordinarily well. Premium matcha, seasonal fruits, no shortcuts. Every cup built by hand, one vibe at a time.</p>
-  </div>
-</section>
+<!-- Announce -->
+<div class="announce">
+  Now open — matcha smoothies in Tokyo
+</div>
 
-<!-- ═══════════════════════════════════
-     PRODUCTS
-════════════════════════════════════ -->
-<section id="products">
-  <div class="section-header reveal">
-    <h2 class="section-title">The Menu.</h2>
-    <a href="#" class="section-link">All items</a>
-  </div>
-
-  <div class="products-grid">
-    <!-- Blueberry -->
-    <div class="product-card reveal">
-      <div class="product-image-wrap">
-        <span class="new-badge">New</span>
-        <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Matcha Blueberry" loading="lazy">
+<!-- Menu -->
+<section class="menu fade-in">
+  <h2>The Menu.</h2>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha">
+      <div class="menu-card-body">
+        <span class="menu-badge">Popular</span>
+        <div class="menu-name">Blueberry Matcha</div>
+        <div class="menu-desc">Antioxidant boost</div>
+        <div class="menu-price">¥850</div>
       </div>
-      <p class="product-name">Matcha Blueberry</p>
-      <p class="product-desc">Wild blueberry · Oat milk · Ceremonial grade</p>
-      <p class="product-price">¥780</p>
     </div>
-
-    <!-- Banana -->
-    <div class="product-card reveal reveal-delay-1">
-      <div class="product-image-wrap">
-        <img src="matcha-vibes-assets/cup-banana.jpg" alt="Matcha Banana" loading="lazy">
+    <div class="menu-card">
+      <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Matcha">
+      <div class="menu-card-body">
+        <span class="menu-badge">Smooth</span>
+        <div class="menu-name">Banana Matcha</div>
+        <div class="menu-desc">Creamy & sweet</div>
+        <div class="menu-price">¥700</div>
       </div>
-      <p class="product-name">Matcha Banana</p>
-      <p class="product-desc">Cavendish banana · Almond milk · Honey</p>
-      <p class="product-price">¥750</p>
     </div>
-
-    <!-- Yogurt -->
-    <div class="product-card reveal reveal-delay-2">
-      <div class="product-image-wrap">
-        <span class="new-badge">New</span>
-        <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Matcha Yogurt" loading="lazy">
+    <div class="menu-card">
+      <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Strawberry Matcha">
+      <div class="menu-card-body">
+        <span class="menu-badge">Fresh</span>
+        <div class="menu-name">Strawberry Matcha</div>
+        <div class="menu-desc">Berry bliss</div>
+        <div class="menu-price">¥750</div>
       </div>
-      <p class="product-name">Matcha Yogurt</p>
-      <p class="product-desc">Greek yogurt · Granola · Uji matcha</p>
-      <p class="product-price">¥820</p>
     </div>
-
-    <!-- Classic -->
-    <div class="product-card reveal reveal-delay-3">
-      <div class="product-image-wrap">
-        <img src="matcha-vibes-assets/cup-classic.jpg" alt="Matcha Classic" loading="lazy">
+    <div class="menu-card">
+      <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Matcha">
+      <div class="menu-card-body">
+        <span class="menu-badge">Pure</span>
+        <div class="menu-name">Classic Matcha</div>
+        <div class="menu-desc">Original taste</div>
+        <div class="menu-price">¥650</div>
       </div>
-      <p class="product-name">Matcha Classic</p>
-      <p class="product-desc">Pure matcha · Coconut milk · A touch of agave</p>
-      <p class="product-price">¥680</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     FULLBLEED
-════════════════════════════════════ -->
-<section id="fullbleed">
-  <img src="matcha-vibes-assets/scene-imperial.jpg" alt="Imperial Garden" loading="lazy">
-  <p class="fullbleed-caption">Tokyo roots.<br>World-class taste.</p>
+<!-- Fullbleed -->
+<section class="fullbleed fade-in">
+  <img src="matcha-vibes-assets/scene-imperial.jpg" alt="Scene">
 </section>
 
-<!-- ═══════════════════════════════════
-     FEATURE (SPLIT)
-════════════════════════════════════ -->
-<section id="feature">
-  <div class="feature-image">
-    <img src="matcha-vibes-assets/flatlay-blueberry.jpg" alt="Three layers" loading="lazy">
-  </div>
-  <div class="feature-content">
-    <p class="feature-tag reveal">Our Craft</p>
-    <h2 class="feature-headline reveal reveal-delay-1">Three layers.<br>One vibe.</h2>
-    <p class="feature-body reveal reveal-delay-2">Every smoothie is built in three deliberate layers — base, blend, and crown. The result is a visual and flavour experience unlike anything else in the city.</p>
-    <ul class="feature-list reveal reveal-delay-3">
-      <li>Ceremonial-grade Uji matcha, whisked fresh</li>
-      <li>Seasonal fruits, sourced weekly from local markets</li>
-      <li>Plant-based milks, no artificial anything</li>
-      <li>Zero compromise on texture or taste</li>
-    </ul>
-    <a href="#customize" class="btn-primary reveal reveal-delay-4">
-      Build your cup <span class="btn-arrow">→</span>
-    </a>
-  </div>
+<!-- Story -->
+<section class="story fade-in">
+  <p>We did not invent matcha. We just made Tokyo obsessed.</p>
 </section>
 
-<!-- ═══════════════════════════════════
-     POSTER SWIPER
-════════════════════════════════════ -->
-<section id="poster-section">
-  <div class="poster-header">
-    <h2 class="section-title reveal">Vibes.</h2>
-    <div class="poster-nav">
-      <button class="poster-nav-btn swiper-poster-prev">←</button>
-      <button class="poster-nav-btn swiper-poster-next">→</button>
-    </div>
-  </div>
+<!-- Flatlay 2-col -->
+<section class="flatlay-duo fade-in">
+  <img src="matcha-vibes-assets/flatlay-blueberry.jpg" alt="Flatlay Blueberry">
+  <img src="matcha-vibes-assets/flatlay-classic.jpg" alt="Flatlay Classic">
+</section>
 
-  <div class="swiper swiper-poster">
+<!-- Poster Swiper -->
+<section class="poster-section fade-in">
+  <h2>All flavors.</h2>
+  <div class="swiper poster-swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide poster-slide">
-        <img src="matcha-vibes-assets/poster-blueberry.jpg" alt="Blueberry Poster" loading="lazy">
-      </div>
-      <div class="swiper-slide poster-slide">
-        <img src="matcha-vibes-assets/poster-banana.jpg" alt="Banana Poster" loading="lazy">
-      </div>
-      <div class="swiper-slide poster-slide">
-        <img src="matcha-vibes-assets/poster-strawberry.jpg" alt="Strawberry Poster" loading="lazy">
-      </div>
-      <div class="swiper-slide poster-slide">
-        <img src="matcha-vibes-assets/poster-classic.jpg" alt="Classic Poster" loading="lazy">
-      </div>
+      <div class="swiper-slide"><img src="matcha-vibes-assets/poster-blueberry.jpg" alt="Blueberry"></div>
+      <div class="swiper-slide"><img src="matcha-vibes-assets/poster-banana.jpg" alt="Banana"></div>
+      <div class="swiper-slide"><img src="matcha-vibes-assets/poster-strawberry.jpg" alt="Strawberry"></div>
+      <div class="swiper-slide"><img src="matcha-vibes-assets/poster-classic.jpg" alt="Classic"></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     CUSTOMIZE
-════════════════════════════════════ -->
-<section id="customize">
-  <div class="customize-header reveal">
-    <h2 class="customize-title">Build your cup.</h2>
-    <p class="customize-sub">Three simple choices. One perfect smoothie. Tell us how you vibe.</p>
-  </div>
-
-  <div class="steps-grid">
-    <!-- Step 1 -->
-    <div class="step reveal">
-      <div class="step-number">01</div>
-      <div class="step-icon">🌿</div>
-      <h3 class="step-title">Choose your base</h3>
-      <p class="step-body">Start with the foundation. Select a milk that complements your matcha — creamy, light, or nutty.</p>
-      <div class="step-options">
-        <span class="step-tag active green">Oat Milk</span>
-        <span class="step-tag">Almond Milk</span>
-        <span class="step-tag">Coconut Milk</span>
-        <span class="step-tag">Soy Milk</span>
-      </div>
+<!-- Customize -->
+<section class="customize fade-in">
+  <h2>Build your cup.</h2>
+  <div class="customize-grid">
+    <div class="customize-step">
+      <div class="step-num">Step 01</div>
+      <div class="step-title">Base</div>
+      <div class="step-options">Matcha</div>
     </div>
-
-    <!-- Step 2 -->
-    <div class="step reveal reveal-delay-1">
-      <div class="step-number">02</div>
-      <div class="step-icon">🍓</div>
-      <h3 class="step-title">Pick your fruit</h3>
-      <p class="step-body">Fresh, seasonal, and sourced locally. Pick one to layer into your build.</p>
-      <div class="step-options">
-        <span class="step-tag">Blueberry</span>
-        <span class="step-tag active green">Strawberry</span>
-        <span class="step-tag">Banana</span>
-        <span class="step-tag">Mango</span>
-        <span class="step-tag">Peach</span>
-      </div>
+    <div class="customize-step">
+      <div class="step-num">Step 02</div>
+      <div class="step-title">Milk</div>
+      <div class="step-options">Yogurt / Oats / Soy</div>
     </div>
-
-    <!-- Step 3 -->
-    <div class="step reveal reveal-delay-2">
-      <div class="step-number">03</div>
-      <div class="step-icon">✨</div>
-      <h3 class="step-title">Add your crown</h3>
-      <p class="step-body">The finishing touch. A little extra on top that makes every cup unmistakably yours.</p>
-      <div class="step-options">
-        <span class="step-tag">Granola</span>
-        <span class="step-tag active green">Coconut Flakes</span>
-        <span class="step-tag">Chia Seeds</span>
-        <span class="step-tag">Cacao Nibs</span>
-      </div>
+    <div class="customize-step">
+      <div class="step-num">Step 03</div>
+      <div class="step-title">Topping</div>
+      <div class="step-options">Blueberry / Banana / Strawberry / None</div>
     </div>
   </div>
+  <div class="customize-note">9+ combinations.</div>
 </section>
 
-<!-- ═══════════════════════════════════
-     LOGO BLACK
-════════════════════════════════════ -->
-<section id="logo-black">
-  <img src="matcha-vibes-assets/logo-bubbly.png" alt="matcha vibes tokyo" class="logo-black-img">
-  <p class="logo-black-tagline">Good vibes start here.</p>
-  <a href="#products" class="logo-black-cta">
-    Order Now →
-  </a>
+<!-- Logo -->
+<section class="logo-section fade-in">
+  <img src="matcha-vibes-assets/logo-bubbly.png" alt="matcha vibes tokyo">
 </section>
 
-<!-- ═══════════════════════════════════
-     FOOTER
-════════════════════════════════════ -->
-<footer id="footer">
+<!-- Footer -->
+<footer class="footer">
   <div class="footer-grid">
-    <div class="footer-brand">
-      <span class="footer-logo">matcha vibes tokyo</span>
-      <p>A smoothie stand with soul. Born in Tokyo, inspired by the ancient ritual of matcha. Every cup, a good vibe.</p>
-      <div class="footer-social">
-        <a href="#">Instagram</a>
-        <a href="#">Twitter</a>
-        <a href="#">TikTok</a>
-      </div>
+    <div>
+      <div class="footer-brand">matcha vibes tokyo</div>
+      <div class="footer-tagline">Good vibes start here.</div>
     </div>
-
-    <div class="footer-col">
-      <h4>Menu</h4>
-      <ul>
-        <li><a href="#">Matcha Classic</a></li>
-        <li><a href="#">Matcha Blueberry</a></li>
-        <li><a href="#">Matcha Banana</a></li>
-        <li><a href="#">Matcha Yogurt</a></li>
-        <li><a href="#">Seasonal Special</a></li>
+    <div>
+      <div class="footer-heading">Drinks</div>
+      <ul class="footer-links">
+        <li>Blueberry Matcha</li>
+        <li>Banana Matcha</li>
+        <li>Strawberry Matcha</li>
+        <li>Classic Matcha</li>
       </ul>
     </div>
-
-    <div class="footer-col">
-      <h4>Info</h4>
-      <ul>
-        <li><a href="#">Our Story</a></li>
-        <li><a href="#">Ingredients</a></li>
-        <li><a href="#">Locations</a></li>
-        <li><a href="#">Catering</a></li>
-        <li><a href="#">Press</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Visit</h4>
-      <ul>
-        <li><a href="#">店 — </a></li>
-        <li><a href="#">店 — </a></li>
-        <li><a href="#">表参道店 — Omotesando</a></li>
-        <li><a href="#">Hours</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+    <div>
+      <div class="footer-heading">Follow</div>
+      <div class="footer-social">@matchavibes.tokyo</div>
     </div>
   </div>
-
   <div class="footer-bottom">
-    <p>© 2025 matcha vibes tokyo. All rights reserved.</p>
-    <div class="footer-bottom-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Service</a>
-      <a href="#">Sitemap</a>
-    </div>
+    &copy; 2026 matcha vibes tokyo
   </div>
 </footer>
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+<!-- Lenis -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
 <script>
-  // ─── Lenis Smooth Scroll ───────────────────────────
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    smooth: true,
-  });
+// Swiper
+new Swiper('.poster-swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 12,
+  freeMode: true,
+  grabCursor: true
+});
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
+// Lenis smooth scroll
+const lenis = new Lenis();
+function raf(time) {
+  lenis.raf(time);
   requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
 
-  // ─── Header scroll behavior ────────────────────────
-  const header = document.getElementById('site-header');
-  const headerLogo = document.getElementById('header-logo');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) {
-      header.classList.add('scrolled');
-      headerLogo.classList.remove('light');
-    } else {
-      header.classList.remove('scrolled');
+// Intersection Observer fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
     }
-  }, { passive: true });
-
-  // ─── Swiper (Poster) ───────────────────────────────
-  const posterSwiper = new Swiper('.swiper-poster', {
-    slidesPerView: 'auto',
-    spaceBetween: 20,
-    freeMode: true,
-    grabCursor: true,
-    navigation: {
-      nextEl: '.swiper-poster-next',
-      prevEl: '.swiper-poster-prev',
-    },
   });
+}, { threshold: 0.01, rootMargin: '0px 0px -50px 0px' });
 
-  // ─── Scroll Reveal ────────────────────────────────
-  const revealEls = document.querySelectorAll('.reveal');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
-  });
-
-  revealEls.forEach(el => observer.observe(el));
-
-  // ─── Step tags toggle ─────────────────────────────
-  document.querySelectorAll('.step-options').forEach(group => {
-    group.querySelectorAll('.step-tag').forEach(tag => {
-      tag.addEventListener('click', () => {
-        group.querySelectorAll('.step-tag').forEach(t => {
-          t.classList.remove('active', 'green');
-        });
-        tag.classList.add('active', 'green');
-      });
-    });
-  });
-
-  // ─── Subtle parallax on hero image ────────────────
-  const heroImg = document.querySelector('.hero-image img');
-  if (heroImg) {
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (y < window.innerHeight) {
-        heroImg.style.transform = `translateY(${y * 0.18}px)`;
-      }
-    }, { passive: true });
-  }
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 
 </body>

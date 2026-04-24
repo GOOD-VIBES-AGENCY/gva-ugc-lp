@@ -19,7 +19,6 @@
       --green:     #00E676;
       --text:      #111111;
       --muted:     #999999;
-      --border:    rgba(0,0,0,0.08);
     }
 
     html { scroll-behavior: smooth; }
@@ -34,392 +33,425 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [1] HEADER — sticky white
+       [1] HEADER — transparent → white on scroll
     ═══════════════════════════════════════════════════════════════ */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: 64px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 5vw;
-      background: rgba(255,255,255,0.95);
+      z-index: 200;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    header.scrolled {
+      background: rgba(255,255,255,0.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0,0,0,0.07);
-      z-index: 200;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
-    .header-logo {
+    .logo-text {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: 18px;
-      color: var(--text);
+      font-size: 17px;
+      color: #F5F0E8;
       letter-spacing: -0.01em;
+      transition: color 0.4s ease;
     }
     .header-tag {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 300;
-      letter-spacing: 0.4em;
-      color: #AAA;
+      letter-spacing: 0.5em;
+      color: #555;
       text-transform: uppercase;
+      transition: color 0.4s ease;
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [2] HERO — 100svh 白背景
+       [2] HERO — 100svh black bg
     ═══════════════════════════════════════════════════════════════ */
     .hero {
+      position: relative;
       height: 100svh;
-      min-height: 640px;
-      display: grid;
-      grid-template-columns: 50% 50%;
-      background: var(--off-white);
-      padding-top: 64px;
+      min-height: 700px;
+      background: var(--black);
       overflow: hidden;
     }
-    .hero-text {
+    .hero-bg {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 55%;
+      height: 100%;
+      object-fit: cover;
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, #0A0A0A 30%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 6vw 0 10vw;
+      padding: 0 0 0 10vw;
     }
     .hero-eyebrow {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 300;
-      letter-spacing: 0.5em;
-      color: #CCC;
+      letter-spacing: 0.6em;
+      color: #444;
       text-transform: uppercase;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
     .hero-title {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: clamp(3.5rem, 6.5vw, 8rem);
-      line-height: 0.92;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      margin-bottom: 4rem;
+      font-size: clamp(5rem, 9vw, 11rem);
+      line-height: 0.88;
+      color: #F5F0E8;
+      letter-spacing: -0.03em;
+      max-width: 55vw;
     }
-    .hero-title span { display: block; }
-    .hero-sep {
+    .hero-scroll {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 4rem;
+    }
+    .hero-scroll-line {
       width: 40px;
       height: 1px;
-      background: #E0E0E0;
-      margin-bottom: 2rem;
+      background: #333;
     }
-    .hero-hashtag {
-      font-size: 11px;
+    .hero-scroll-text {
+      font-size: 9px;
       font-weight: 300;
-      letter-spacing: 0.2em;
-      color: #BBB;
-    }
-    .hero-image {
-      overflow: hidden;
-      position: relative;
-    }
-    .hero-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      transform: scale(1.04);
-      transition: transform 0.1s linear;
+      letter-spacing: 0.3em;
+      color: #333;
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [3] INTRO TEXT — 白背景
+       [3] MARQUEE
     ═══════════════════════════════════════════════════════════════ */
-    .intro {
-      background: var(--white);
-      padding: 8rem 10vw;
+    .marquee {
+      background: var(--cream);
+      height: 56px;
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
     }
-    .intro-quote {
+    .marquee-inner {
+      display: inline-flex;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-text {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: clamp(1.8rem, 2.8vw, 3rem);
-      line-height: 1.4;
-      color: var(--text);
-      max-width: 600px;
-    }
-    .intro-attr {
-      font-size: 11px;
-      font-weight: 300;
-      font-style: italic;
+      font-size: 18px;
       color: #BBB;
-      margin-top: 2.5rem;
+      letter-spacing: 0.05em;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [4] FULL BLEED IMAGE — 100vw 70vh
+       [4] STATEMENT
     ═══════════════════════════════════════════════════════════════ */
-    .full-bleed {
-      width: 100vw;
-      height: 70vh;
-      min-height: 400px;
-      overflow: hidden;
+    .statement {
+      position: relative;
+      padding: 10rem 10vw;
+      background: var(--white);
     }
-    .full-bleed img {
+    .statement-quote {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(2.5rem, 4vw, 5rem);
+      line-height: 1.25;
+      color: var(--text);
+      max-width: 700px;
+    }
+    .statement-tag {
+      position: absolute;
+      bottom: 4rem;
+      right: 10vw;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 12px;
+      color: #CCC;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [5] FULL BLEED
+    ═══════════════════════════════════════════════════════════════ */
+    .bleed {
+      position: relative;
+    }
+    .bleed-img {
       width: 100%;
-      height: 100%;
+      height: 90vh;
       object-fit: cover;
       object-position: center;
+      display: block;
+    }
+    .bleed-caption {
+      margin-top: -8rem;
+      position: relative;
+      z-index: 2;
+      padding: 0 8vw 6rem;
+      background: linear-gradient(to bottom, transparent, #fff 60%);
+    }
+    .bleed-title {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(3rem, 6vw, 7rem);
+      line-height: 1;
+      color: var(--text);
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [5] MENU — 白背景
+       [6] MENU
     ═══════════════════════════════════════════════════════════════ */
     .menu {
+      padding: 6rem 8vw 8rem;
       background: var(--white);
-      padding: 8rem 8vw;
     }
     .menu-header {
-      margin-bottom: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
     }
     .menu-title {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: clamp(2.5rem, 4.5vw, 5.5rem);
-      letter-spacing: -0.02em;
+      font-size: clamp(3rem, 5vw, 6rem);
       color: var(--text);
     }
-    .menu-sub {
-      font-size: 13px;
+    .menu-subtitle {
       font-weight: 300;
+      font-size: 13px;
       color: #BBB;
-      margin-top: 0.8rem;
     }
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
     }
     .menu-card {
       background: var(--off-white);
-      border: 1px solid rgba(0,0,0,0.05);
       overflow: hidden;
     }
     .menu-card-img {
-      aspect-ratio: 4/5;
-      overflow: hidden;
-    }
-    .menu-card-img img {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 3/4;
       object-fit: cover;
-      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
       display: block;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .menu-card:hover .menu-card-img img {
-      transform: scale(1.04);
+    .menu-card:hover .menu-card-img {
+      transform: scale(1.05);
     }
     .menu-card-body {
-      padding: 1.5rem 1.8rem 2rem;
+      padding: 1.2rem 1.4rem 1.6rem;
     }
-    .card-num {
+    .menu-card-num {
       font-size: 10px;
-      font-weight: 300;
       color: #DDD;
-      letter-spacing: 0.2em;
     }
-    .card-name {
-      font-size: 12px;
+    .menu-card-name {
+      font-size: 11px;
       font-weight: 400;
       letter-spacing: 0.08em;
       color: var(--text);
-      margin-top: 0.5rem;
+      margin-top: 0.4rem;
+      text-transform: uppercase;
     }
-    .card-sep {
-      width: 18px;
-      height: 1px;
-      background: rgba(0,0,0,0.1);
-      margin: 0.8rem 0;
-    }
-    .card-price {
-      font-size: 13px;
+    .menu-card-price {
+      font-size: 12px;
       font-weight: 300;
       color: #AAA;
-    }
-    .card-desc {
-      font-size: 11px;
-      font-weight: 300;
-      color: #C8C8C8;
-      margin-top: 0.3rem;
+      margin-top: 0.8rem;
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [6] SIGNATURE — クリーム背景
+       [7] PHILOSOPHY
+    ═══════════════════════════════════════════════════════════════ */
+    .philosophy {
+      padding: 9rem 8vw;
+      background: var(--cream);
+    }
+    .philosophy-eyebrow {
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.5em;
+      color: #CCC;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .philosophy-title {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      color: var(--text);
+      margin-bottom: 5rem;
+    }
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .philosophy-pillar {
+      padding: 0 3vw;
+      border-right: 1px solid rgba(0,0,0,0.1);
+    }
+    .philosophy-pillar:first-child {
+      padding-left: 0;
+    }
+    .philosophy-pillar:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+    .pillar-num {
+      font-size: 9px;
+      color: #CCC;
+      margin-bottom: 1.5rem;
+    }
+    .pillar-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+    .pillar-text {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 2.0;
+      color: #888;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [8] LOGO SECTION
+    ═══════════════════════════════════════════════════════════════ */
+    .logo-section {
+      padding: 12rem 4rem;
+      background: var(--black);
+      border-top: 1px solid #181818;
+      border-bottom: 1px solid #181818;
+      text-align: center;
+    }
+    .logo-img {
+      max-width: 440px;
+      width: 65vw;
+    }
+    .logo-tagline {
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.6em;
+      color: #2a2a2a;
+      text-transform: uppercase;
+      margin-top: 2.5rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [9] SIGNATURE FEATURE
     ═══════════════════════════════════════════════════════════════ */
     .signature {
-      background: var(--cream);
-      padding: 10rem 10vw;
       display: grid;
-      grid-template-columns: 60% 40%;
-      align-items: center;
-      gap: 4rem;
+      grid-template-columns: 45% 55%;
+      min-height: 80vh;
+      background: var(--white);
     }
-    .sig-text {}
-    .sig-label {
-      font-size: 10px;
+    .signature-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 6vw 6rem 10vw;
+    }
+    .signature-eyebrow {
+      font-size: 9px;
       font-weight: 300;
       letter-spacing: 0.45em;
-      color: #BBB;
+      color: #CCC;
       text-transform: uppercase;
       margin-bottom: 2rem;
     }
-    .sig-title {
+    .signature-title {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
       font-size: clamp(2.5rem, 4vw, 5rem);
       line-height: 1.05;
       color: var(--text);
-      margin-bottom: 2.5rem;
     }
-    .sig-rule {
+    .signature-line {
       width: 36px;
       height: 1px;
       background: var(--green);
-      margin-bottom: 2rem;
+      margin: 2rem 0;
     }
-    .sig-desc {
-      font-size: 14px;
+    .signature-desc {
       font-weight: 300;
-      line-height: 2;
-      color: #888;
-    }
-    .sig-image {
-      display: flex;
-      justify-content: center;
-    }
-    .sig-image img {
-      max-height: 520px;
-      width: auto;
-      display: block;
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       [7] PHILOSOPHY — 白背景
-    ═══════════════════════════════════════════════════════════════ */
-    .philosophy {
-      background: var(--white);
-      padding: 8rem 8vw;
-      border-top: 1px solid rgba(0,0,0,0.07);
-    }
-    .philosophy-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .pillar {
-      padding: 3rem 3vw;
-      border-right: 1px solid rgba(0,0,0,0.07);
-    }
-    .pillar:first-child {
-      padding-left: 0;
-    }
-    .pillar:last-child {
-      border-right: none;
-      padding-right: 0;
-    }
-    .pillar-num {
-      font-size: 10px;
-      font-weight: 300;
-      color: #CCC;
-      letter-spacing: 0.3em;
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-    .pillar-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.6rem;
-      line-height: 1.2;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-    .pillar-text {
       font-size: 13px;
-      font-weight: 300;
-      line-height: 1.9;
-      color: #888;
+      line-height: 2.1;
+      color: #AAA;
+    }
+    .signature-img {
+      height: 80vh;
+      width: 100%;
+      object-fit: cover;
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [8] LOGO SECTION — 黒背景
-    ═══════════════════════════════════════════════════════════════ */
-    .logo-section {
-      background: var(--black);
-      padding: 10rem 4rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .logo-section::before,
-    .logo-section::after {
-      content: '';
-      position: absolute;
-      left: 8vw; right: 8vw;
-      height: 1px;
-      background: #1a1a1a;
-    }
-    .logo-section::before { top: 4rem; }
-    .logo-section::after  { bottom: 4rem; }
-    .logo-img {
-      max-width: 440px;
-      width: 65vw;
-      height: auto;
-      display: block;
-    }
-    .logo-tag {
-      font-size: 10px;
-      font-weight: 300;
-      letter-spacing: 0.5em;
-      color: #333;
-      text-transform: uppercase;
-      text-align: center;
-      margin-top: 2.5rem;
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       [9] WHERE — クリーム背景
+       [10] WHERE
     ═══════════════════════════════════════════════════════════════ */
     .where {
-      background: var(--cream);
       padding: 8rem 8vw;
-    }
-    .where-header {
-      margin-bottom: 4rem;
+      background: var(--white);
     }
     .where-title {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: clamp(2.5rem, 4.5vw, 5rem);
+      font-size: clamp(3rem, 5vw, 5.5rem);
       color: var(--text);
-      letter-spacing: -0.02em;
+      margin-bottom: 4rem;
     }
-    .where-list {}
+    .where-list {
+      list-style: none;
+    }
     .where-item {
       display: flex;
-      align-items: baseline;
       justify-content: space-between;
-      border-top: 1px solid rgba(0,0,0,0.1);
+      align-items: baseline;
       padding: 2.5rem 0;
-      gap: 2rem;
+      border-top: 1px solid rgba(0,0,0,0.07);
     }
-    .where-left {}
-    .where-ja {
+    .where-item:last-child {
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .where-name-jp {
       font-size: 1.5rem;
       font-weight: 300;
       color: var(--text);
-      margin-bottom: 0.3rem;
     }
-    .where-en {
-      font-size: 10px;
+    .where-name-en {
+      font-size: 9px;
       font-weight: 300;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.2em;
       color: #BBB;
       text-transform: uppercase;
+      margin-left: 1rem;
     }
-    .where-vibe {
+    .where-status {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
       font-size: 13px;
@@ -427,96 +459,108 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [10] FOOTER — 白背景
+       [11] FOOTER
     ═══════════════════════════════════════════════════════════════ */
     footer {
-      background: var(--white);
       border-top: 1px solid rgba(0,0,0,0.07);
       padding: 4rem 8vw;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
-    .footer-left {}
     .footer-brand {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
       font-size: 16px;
       color: var(--text);
     }
-    .footer-copy {
+    .footer-location {
+      font-size: 9px;
+      font-weight: 300;
+      color: #CCC;
+      margin-top: 3px;
+    }
+    .footer-social {
       font-size: 10px;
       font-weight: 300;
       color: #CCC;
-      margin-top: 0.3rem;
+      text-decoration: none;
     }
-    .footer-handle {
-      font-size: 11px;
-      font-weight: 300;
-      color: #CCC;
+    .footer-social:hover {
+      color: var(--text);
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       FADE ANIMATION
+       SCROLL ANIMATIONS
     ═══════════════════════════════════════════════════════════════ */
     .fade {
       opacity: 0;
       transform: translateY(28px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
+      transition: opacity 1s ease, transform 1s ease;
     }
     .fade.in {
       opacity: 1;
       transform: translateY(0);
     }
-    .fade-d1 { transition-delay: 0.12s; }
-    .fade-d2 { transition-delay: 0.24s; }
-    .fade-d3 { transition-delay: 0.36s; }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
 
     /* ═══════════════════════════════════════════════════════════════
-       RESPONSIVE (768px以下)
+       MOBILE (768px)
     ═══════════════════════════════════════════════════════════════ */
     @media (max-width: 768px) {
       .hero {
-        grid-template-columns: 1fr;
-        height: auto;
-        min-height: auto;
+        position: relative;
       }
-      .hero-image {
-        order: -1;
-        height: 55vh;
+      .hero-bg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
       }
-      .hero-text {
-        padding: 4rem 6vw 5rem;
+      .hero-overlay {
+        background: linear-gradient(to bottom, rgba(10,10,10,0.7), rgba(10,10,10,0.5));
+      }
+      .hero-content {
+        padding: 0 8vw;
+        align-items: center;
+        text-align: center;
       }
       .hero-title {
-        font-size: clamp(2.8rem, 10vw, 4rem);
+        max-width: 100%;
+        font-size: clamp(3.5rem, 12vw, 6rem);
+      }
+      .hero-scroll {
+        justify-content: center;
       }
 
-      .intro {
-        padding: 5rem 6vw;
+      .statement {
+        padding: 6rem 8vw;
+      }
+      .statement-tag {
+        position: static;
+        margin-top: 2rem;
       }
 
-      .full-bleed {
-        height: 50vh;
+      .bleed-img {
+        height: 60vh;
+      }
+      .bleed-caption {
+        margin-top: -4rem;
+        padding: 0 6vw 4rem;
       }
 
       .menu {
-        padding: 5rem 5vw;
+        padding: 4rem 6vw 5rem;
+      }
+      .menu-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
       }
       .menu-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .signature {
-        grid-template-columns: 1fr;
-        padding: 6rem 6vw;
-        gap: 3rem;
-      }
-      .sig-image {
-        order: -1;
-      }
-      .sig-image img {
-        max-height: 400px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
       }
 
       .philosophy {
@@ -524,22 +568,34 @@
       }
       .philosophy-grid {
         grid-template-columns: 1fr;
+        gap: 3rem;
       }
-      .pillar {
+      .philosophy-pillar {
+        padding: 0;
         border-right: none;
-        border-bottom: 1px solid rgba(0,0,0,0.07);
-        padding: 2rem 0;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        padding-bottom: 3rem;
       }
-      .pillar:first-child {
-        padding-top: 0;
-      }
-      .pillar:last-child {
+      .philosophy-pillar:last-child {
         border-bottom: none;
         padding-bottom: 0;
       }
 
       .logo-section {
-        padding: 6rem 4rem;
+        padding: 8rem 2rem;
+      }
+
+      .signature {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .signature-content {
+        padding: 4rem 6vw;
+        order: 2;
+      }
+      .signature-img {
+        height: 55vh;
+        order: 1;
       }
 
       .where {
@@ -547,13 +603,17 @@
       }
       .where-item {
         flex-direction: column;
-        gap: 0.6rem;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .where-name-en {
+        margin-left: 0;
       }
 
       footer {
         flex-direction: column;
-        align-items: flex-start;
         gap: 1.5rem;
+        text-align: center;
         padding: 3rem 6vw;
       }
     }
@@ -561,208 +621,209 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     [1] HEADER
-═══════════════════════════════════════════════════════════════ -->
-<header>
-  <span class="header-logo">MATCHA VIBES</span>
-  <span class="header-tag">Tokyo &mdash; Japan</span>
-</header>
+  <!-- [1] HEADER -->
+  <header>
+    <span class="logo-text">MATCHA VIBES</span>
+    <span class="header-tag">TOKYO</span>
+  </header>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     [2] HERO
-═══════════════════════════════════════════════════════════════ -->
-<section class="hero">
-  <div class="hero-text">
-    <p class="hero-eyebrow">EST. 2026</p>
-    <h1 class="hero-title">
-      <span>Good vibes</span>
-      <span>start here.</span>
-    </h1>
-    <div class="hero-sep"></div>
-    <p class="hero-hashtag">#matchavibes</p>
-  </div>
-  <div class="hero-image" id="heroImg">
-    <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="MATCHA VIBES Signature Cup" loading="eager">
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     [3] INTRO TEXT
-═══════════════════════════════════════════════════════════════ -->
-<section class="intro">
-  <p class="intro-quote fade">The drink the world fell in love with.<br>Our version of it, made for Tokyo.</p>
-  <p class="intro-attr fade fade-d1">&mdash; Matcha Vibes, Tokyo 2026</p>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     [4] FULL BLEED IMAGE
-═══════════════════════════════════════════════════════════════ -->
-<section class="full-bleed">
-  <img src="matcha-vibes-assets/cup-duo.jpg" alt="Matcha Vibes Cups" loading="lazy">
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     [5] MENU
-═══════════════════════════════════════════════════════════════ -->
-<section class="menu">
-  <div class="menu-header fade">
-    <h2 class="menu-title">The Menu</h2>
-    <p class="menu-sub">Four drinks. One vibe.</p>
-  </div>
-  <div class="menu-grid">
-    <div class="menu-card fade">
-      <div class="menu-card-img">
-        <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha" loading="lazy">
-      </div>
-      <div class="menu-card-body">
-        <p class="card-num">01</p>
-        <p class="card-name">BLUEBERRY MATCHA</p>
-        <div class="card-sep"></div>
-        <p class="card-price">¥850</p>
-        <p class="card-desc">Purple meets green.</p>
+  <!-- [2] HERO -->
+  <section class="hero">
+    <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="Matcha Vibes signature drink" class="hero-bg">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">EST. 2026 — TOKYO</p>
+      <h1 class="hero-title">Good vibes<br>start here.</h1>
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        <span class="hero-scroll-text">SCROLL ↓</span>
       </div>
     </div>
-    <div class="menu-card fade fade-d1">
-      <div class="menu-card-img">
-        <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie" loading="lazy">
-      </div>
-      <div class="menu-card-body">
-        <p class="card-num">02</p>
-        <p class="card-name">YOGURT SMOOTHIE</p>
-        <div class="card-sep"></div>
-        <p class="card-price">¥750</p>
-        <p class="card-desc">Creamy. Always.</p>
-      </div>
-    </div>
-    <div class="menu-card fade">
-      <div class="menu-card-img">
-        <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery" loading="lazy">
-      </div>
-      <div class="menu-card-body">
-        <p class="card-num">03</p>
-        <p class="card-name">BANANA RECOVERY</p>
-        <div class="card-sep"></div>
-        <p class="card-price">¥700</p>
-        <p class="card-desc">After the run. Before the day.</p>
-      </div>
-    </div>
-    <div class="menu-card fade fade-d1">
-      <div class="menu-card-img">
-        <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte" loading="lazy">
-      </div>
-      <div class="menu-card-body">
-        <p class="card-num">04</p>
-        <p class="card-name">CLASSIC LATTE</p>
-        <div class="card-sep"></div>
-        <p class="card-price">¥650</p>
-        <p class="card-desc">Where it all starts.</p>
-      </div>
+  </section>
+
+  <!-- [3] MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-inner">
+      <span class="marquee-text">MATCHA VIBES &nbsp;—&nbsp; GOOD VIBES START HERE &nbsp;—&nbsp; TOKYO 2026 &nbsp;—&nbsp; MATCHA VIBES &nbsp;—&nbsp; GOOD VIBES START HERE &nbsp;—&nbsp; TOKYO 2026 &nbsp;—&nbsp; MATCHA VIBES &nbsp;—&nbsp; GOOD VIBES START HERE &nbsp;—&nbsp; TOKYO 2026 &nbsp;—&nbsp; MATCHA VIBES &nbsp;—&nbsp; GOOD VIBES START HERE &nbsp;—&nbsp; TOKYO 2026 &nbsp;—&nbsp; </span>
     </div>
   </div>
-</section>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     [6] SIGNATURE
-═══════════════════════════════════════════════════════════════ -->
-<section class="signature">
-  <div class="sig-text">
-    <p class="sig-label fade">THE SIGNATURE CUP</p>
-    <h2 class="sig-title fade fade-d1">Three colors.<br>One vibe.</h2>
-    <div class="sig-rule fade fade-d2"></div>
-    <p class="sig-desc fade fade-d2">Matcha. Yogurt. Blueberry.<br>Swirled, not stirred.</p>
-  </div>
-  <div class="sig-image fade">
-    <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="The Signature Cup" loading="lazy">
-  </div>
-</section>
+  <!-- [4] STATEMENT -->
+  <section class="statement">
+    <p class="statement-quote fade">We didn't invent matcha.<br>We just made<br>Tokyo obsessed.</p>
+    <span class="statement-tag">— Good vibes start here.</span>
+  </section>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     [7] PHILOSOPHY
-═══════════════════════════════════════════════════════════════ -->
-<section class="philosophy">
-  <div class="philosophy-grid">
-    <div class="pillar fade">
-      <span class="pillar-num">01</span>
-      <h3 class="pillar-title">The Drink</h3>
-      <p class="pillar-text">Matcha meets the world in one cup.</p>
+  <!-- [5] FULL BLEED -->
+  <section class="bleed">
+    <img src="matcha-vibes-assets/cup-duo.jpg" alt="Matcha drinks duo" class="bleed-img">
+    <div class="bleed-caption">
+      <h2 class="bleed-title fade">Three colors. One vibe.</h2>
     </div>
-    <div class="pillar fade fade-d1">
-      <span class="pillar-num">02</span>
-      <h3 class="pillar-title">The Place</h3>
-      <p class="pillar-text">Tokyo streets. We come to you.</p>
-    </div>
-    <div class="pillar fade fade-d2">
-      <span class="pillar-num">03</span>
-      <h3 class="pillar-title">The Vibe</h3>
-      <p class="pillar-text">Good vibes are made, not found.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     [8] LOGO SECTION — 黒背景
-═══════════════════════════════════════════════════════════════ -->
-<section class="logo-section">
-  <img class="logo-img fade" src="matcha-vibes-assets/logo-official.png" alt="MATCHA VIBES" loading="lazy">
-  <p class="logo-tag fade fade-d1">MATCHA VIBES TOKYO &mdash; EST. 2026</p>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     [9] WHERE
-═══════════════════════════════════════════════════════════════ -->
-<section class="where">
-  <div class="where-header fade">
-    <h2 class="where-title">Find us.</h2>
-  </div>
-  <div class="where-list">
-    <div class="where-item fade">
-      <div class="where-left">
-        <p class="where-ja">皇居外苑</p>
-        <p class="where-en">IMPERIAL PALACE</p>
+  <!-- [6] MENU -->
+  <section class="menu">
+    <div class="menu-header">
+      <h2 class="menu-title fade">The Menu</h2>
+      <p class="menu-subtitle fade d1">Four drinks. One vibe.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card fade d1">
+        <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Matcha" class="menu-card-img">
+        <div class="menu-card-body">
+          <span class="menu-card-num">01</span>
+          <p class="menu-card-name">Classic Matcha</p>
+          <p class="menu-card-price">¥680</p>
+        </div>
       </div>
-      <p class="where-vibe">For the runners.</p>
-    </div>
-    <div class="where-item fade fade-d1">
-      <div class="where-left">
-        <p class="where-ja">原宿</p>
-        <p class="where-en">HARAJUKU</p>
+      <div class="menu-card fade d2">
+        <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Matcha" class="menu-card-img">
+        <div class="menu-card-body">
+          <span class="menu-card-num">02</span>
+          <p class="menu-card-name">Yogurt Matcha</p>
+          <p class="menu-card-price">¥780</p>
+        </div>
       </div>
-      <p class="where-vibe">For the explorers.</p>
-    </div>
-    <div class="where-item fade fade-d2">
-      <div class="where-left">
-        <p class="where-ja">渋谷</p>
-        <p class="where-en">SHIBUYA</p>
+      <div class="menu-card fade d3">
+        <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha" class="menu-card-img">
+        <div class="menu-card-body">
+          <span class="menu-card-num">03</span>
+          <p class="menu-card-name">Blueberry Matcha</p>
+          <p class="menu-card-price">¥780</p>
+        </div>
       </div>
-      <p class="where-vibe">For everyone.</p>
+      <div class="menu-card fade d3">
+        <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Matcha" class="menu-card-img">
+        <div class="menu-card-body">
+          <span class="menu-card-num">04</span>
+          <p class="menu-card-name">Banana Matcha</p>
+          <p class="menu-card-price">¥780</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     [10] FOOTER
-═══════════════════════════════════════════════════════════════ -->
-<footer>
-  <div class="footer-left">
-    <p class="footer-brand">MATCHA VIBES</p>
-    <p class="footer-copy">Tokyo, Japan 2026</p>
-  </div>
-  <p class="footer-handle">@matchavibes.tokyo</p>
-</footer>
+  <!-- [7] PHILOSOPHY -->
+  <section class="philosophy">
+    <p class="philosophy-eyebrow fade">What we stand for</p>
+    <h2 class="philosophy-title fade d1">The idea.</h2>
+    <div class="philosophy-grid">
+      <div class="philosophy-pillar fade d1">
+        <span class="pillar-num">01</span>
+        <h3 class="pillar-title">Real Matcha</h3>
+        <p class="pillar-text">No shortcuts. Uji-sourced, ceremonial grade. The same quality monks have trusted for centuries.</p>
+      </div>
+      <div class="philosophy-pillar fade d2">
+        <span class="pillar-num">02</span>
+        <h3 class="pillar-title">Tokyo Energy</h3>
+        <p class="pillar-text">Ancient ritual meets Shibuya pace. A drink that moves with you, not against you.</p>
+      </div>
+      <div class="philosophy-pillar fade d3">
+        <span class="pillar-num">03</span>
+        <h3 class="pillar-title">Good Vibes</h3>
+        <p class="pillar-text">Colors that pop. Flavors that hit. An experience worth sharing — and resharing.</p>
+      </div>
+    </div>
+  </section>
 
-<script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+  <!-- [8] LOGO SECTION -->
+  <section class="logo-section">
+    <img src="matcha-vibes-assets/logo-official.png" alt="Matcha Vibes Official Logo" class="logo-img fade">
+    <p class="logo-tagline fade d1">MATCHA VIBES TOKYO</p>
+  </section>
 
-  const heroImg = document.querySelector('#heroImg img');
-  window.addEventListener('scroll', () => {
-    if (heroImg && window.scrollY < window.innerHeight) {
-      heroImg.style.transform = `scale(1.04) translateY(${window.scrollY * 0.08}px)`;
+  <!-- [9] SIGNATURE FEATURE -->
+  <section class="signature">
+    <div class="signature-content">
+      <p class="signature-eyebrow fade">SIGNATURE</p>
+      <h2 class="signature-title fade d1">Three colors.<br>One vibe.</h2>
+      <div class="signature-line fade d2"></div>
+      <p class="signature-desc fade d3">Matcha. Yogurt. Blueberry.<br>Swirled, not stirred.</p>
+    </div>
+    <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="Signature drink" class="signature-img">
+  </section>
+
+  <!-- [10] WHERE -->
+  <section class="where">
+    <h2 class="where-title fade">Find us.</h2>
+    <ul class="where-list">
+      <li class="where-item fade d1">
+        <div>
+          <span class="where-name-jp">原宿</span>
+          <span class="where-name-en">Harajuku</span>
+        </div>
+        <span class="where-status">Opening 2026</span>
+      </li>
+      <li class="where-item fade d2">
+        <div>
+          <span class="where-name-jp">渋谷</span>
+          <span class="where-name-en">Shibuya</span>
+        </div>
+        <span class="where-status">Coming Soon</span>
+      </li>
+      <li class="where-item fade d3">
+        <div>
+          <span class="where-name-jp">表参道</span>
+          <span class="where-name-en">Omotesando</span>
+        </div>
+        <span class="where-status">2027</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- [11] FOOTER -->
+  <footer>
+    <div>
+      <p class="footer-brand">MATCHA VIBES</p>
+      <p class="footer-location">Tokyo, Japan 2026</p>
+    </div>
+    <a href="#" class="footer-social">@matchavibes.tokyo</a>
+  </footer>
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+    const lenis = new Lenis({
+      duration: 1.4,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
-  }, { passive: true });
-</script>
+    requestAnimationFrame(raf);
+
+    // Header scroll behavior
+    const header = document.querySelector('header');
+    const heroSection = document.querySelector('.hero');
+    const logoText = document.querySelector('.logo-text');
+    const headerTag = document.querySelector('.header-tag');
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      header.classList.toggle('scrolled', scrollY > 60);
+      const isOnHero = scrollY < heroSection.offsetHeight - 60;
+      logoText.style.color = isOnHero ? '#F5F0E8' : '#111';
+      headerTag.style.color = isOnHero ? '#555' : '#AAA';
+    }, { passive: true });
+
+    // Hero parallax
+    const heroImg = document.querySelector('.hero-bg');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < window.innerHeight * 1.5) {
+        heroImg.style.transform = `scale(1.06) translateY(${window.scrollY * 0.12}px)`;
+      }
+    }, { passive: true });
+
+    // Fade-in animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('in');
+      });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>

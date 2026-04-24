@@ -25,7 +25,7 @@
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--white);
+      background: var(--off-white);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -33,30 +33,24 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [1] HEADER — transparent → white on scroll
+       [1] HEADER — 56px mobile / 64px PC
     ═══════════════════════════════════════════════════════════════ */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: 60px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 5vw;
+      padding: 0 6vw;
       z-index: 200;
-      transition: background 0.4s ease, backdrop-filter 0.4s ease;
-    }
-    header.scrolled {
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease;
     }
     .logo-text {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: 17px;
-      color: #F5F0E8;
+      font-size: 16px;
+      color: var(--cream);
       letter-spacing: -0.01em;
       transition: color 0.4s ease;
     }
@@ -67,83 +61,123 @@
       color: #555;
       text-transform: uppercase;
       transition: color 0.4s ease;
+      display: none;
+    }
+    .header-hamburger {
+      width: 20px;
+      height: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .header-hamburger span {
+      display: block;
+      width: 100%;
+      height: 1.5px;
+      background: var(--cream);
+      transition: background 0.4s ease;
+    }
+
+    @media (min-width: 768px) {
+      header { height: 64px; padding: 0 5vw; }
+      .logo-text { font-size: 17px; }
+      .header-tag { display: block; }
+      .header-hamburger { display: none; }
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [2] HERO — 100svh black bg
+       [2] HERO — 100svh モバイルファースト
     ═══════════════════════════════════════════════════════════════ */
     .hero {
       position: relative;
       height: 100svh;
-      min-height: 700px;
-      background: var(--black);
       overflow: hidden;
     }
     .hero-bg {
       position: absolute;
-      right: 0;
-      top: 0;
-      width: 55%;
+      inset: 0;
+    }
+    .hero-bg img {
+      width: 100%;
       height: 100%;
       object-fit: cover;
-      will-change: transform;
+      object-position: top center;
     }
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, #0A0A0A 30%, transparent 65%);
+      background: linear-gradient(to bottom, rgba(250,250,248,0) 40%, rgba(250,250,248,0.95) 80%, var(--off-white) 100%);
       pointer-events: none;
     }
     .hero-content {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 0 0 10vw;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0 6vw 4rem;
     }
     .hero-eyebrow {
       font-size: 9px;
       font-weight: 300;
-      letter-spacing: 0.6em;
-      color: #444;
+      letter-spacing: 0.5em;
+      color: #888;
       text-transform: uppercase;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
     .hero-title {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: clamp(5rem, 9vw, 11rem);
-      line-height: 0.88;
-      color: #F5F0E8;
-      letter-spacing: -0.03em;
-      max-width: 55vw;
+      font-size: 13vw;
+      line-height: 0.9;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
     }
-    .hero-scroll {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 4rem;
-    }
-    .hero-scroll-line {
-      width: 40px;
-      height: 1px;
-      background: #333;
-    }
-    .hero-scroll-text {
-      font-size: 9px;
+    .hero-tag {
+      font-size: 10px;
       font-weight: 300;
-      letter-spacing: 0.3em;
-      color: #333;
+      color: #BBB;
+      letter-spacing: 0.2em;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        display: grid;
+        grid-template-columns: 55% 45%;
+        min-height: 700px;
+      }
+      .hero-bg {
+        position: relative;
+        order: 2;
+      }
+      .hero-overlay {
+        display: none;
+      }
+      .hero-content {
+        position: relative;
+        order: 1;
+        padding: 0 5vw 0 10vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: var(--off-white);
+      }
+      .hero-eyebrow {
+        color: #CCC;
+        margin-bottom: 2rem;
+      }
+      .hero-title {
+        font-size: clamp(3.5rem, 7vw, 8.5rem);
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [3] MARQUEE
+       [3] MARQUEE — 黒背景
     ═══════════════════════════════════════════════════════════════ */
     .marquee {
-      background: var(--cream);
-      height: 56px;
+      background: var(--black);
+      height: 48px;
       overflow: hidden;
       white-space: nowrap;
       display: flex;
@@ -151,14 +185,15 @@
     }
     .marquee-inner {
       display: inline-flex;
-      animation: marquee 20s linear infinite;
+      animation: marquee 18s linear infinite;
     }
     .marquee-text {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: 18px;
-      color: #BBB;
+      font-size: 14px;
+      color: var(--cream);
       letter-spacing: 0.05em;
+      padding: 0 0.5rem;
     }
     @keyframes marquee {
       from { transform: translateX(0); }
@@ -166,129 +201,254 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [4] STATEMENT
+       [4] VISUAL STORY — ライフスタイル画像
+    ═══════════════════════════════════════════════════════════════ */
+    .visual-story {
+      background: var(--white);
+    }
+    .story-block {
+      display: flex;
+      flex-direction: column;
+    }
+    .story-img {
+      width: 100%;
+      height: 100vw;
+      object-fit: cover;
+    }
+    .story-img.short {
+      height: 80vw;
+    }
+    .story-text {
+      padding: 2rem 6vw;
+    }
+    .story-title {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .story-sub {
+      font-size: 12px;
+      font-weight: 300;
+      color: #BBB;
+      letter-spacing: 0.05em;
+    }
+
+    @media (min-width: 768px) {
+      .visual-story {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+      }
+      .story-block {
+        position: relative;
+      }
+      .story-img {
+        height: 60vh;
+      }
+      .story-img.short {
+        height: 60vh;
+      }
+      .story-text {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+      }
+      .story-title {
+        color: var(--white);
+      }
+      .story-sub {
+        color: rgba(255,255,255,0.7);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [5] STATEMENT — 白背景
     ═══════════════════════════════════════════════════════════════ */
     .statement {
-      position: relative;
-      padding: 10rem 10vw;
+      padding: 5rem 6vw;
       background: var(--white);
     }
     .statement-quote {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: clamp(2.5rem, 4vw, 5rem);
-      line-height: 1.25;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      line-height: 1.3;
       color: var(--text);
-      max-width: 700px;
     }
     .statement-tag {
-      position: absolute;
-      bottom: 4rem;
-      right: 10vw;
       font-style: italic;
       font-weight: 300;
       font-size: 12px;
       color: #CCC;
+      margin-top: 2rem;
+      display: block;
+    }
+
+    @media (min-width: 768px) {
+      .statement {
+        padding: 10rem 10vw;
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [5] FULL BLEED
+       [6] FULL BLEED — 75vh
     ═══════════════════════════════════════════════════════════════ */
     .bleed {
       position: relative;
     }
     .bleed-img {
       width: 100%;
-      height: 90vh;
+      height: 75vh;
       object-fit: cover;
       object-position: center;
       display: block;
     }
-    .bleed-caption {
-      margin-top: -8rem;
-      position: relative;
-      z-index: 2;
-      padding: 0 8vw 6rem;
-      background: linear-gradient(to bottom, transparent, #fff 60%);
-    }
-    .bleed-title {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: clamp(3rem, 6vw, 7rem);
-      line-height: 1;
-      color: var(--text);
-    }
 
     /* ═══════════════════════════════════════════════════════════════
-       [6] MENU
+       [7] MENU — スマホ横カード / PC 2x2グリッド
     ═══════════════════════════════════════════════════════════════ */
     .menu {
-      padding: 6rem 8vw 8rem;
+      padding: 4rem 5vw;
       background: var(--white);
     }
     .menu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
       margin-bottom: 3rem;
     }
     .menu-title {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: clamp(3rem, 5vw, 6rem);
+      font-size: clamp(2.5rem, 8vw, 5rem);
       color: var(--text);
+      margin-bottom: 0.5rem;
     }
     .menu-subtitle {
       font-weight: 300;
-      font-size: 13px;
+      font-size: 12px;
       color: #BBB;
     }
+
     .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      display: flex;
+      flex-direction: column;
     }
     .menu-card {
-      background: var(--off-white);
+      display: flex;
+      gap: 0;
+      border-top: 1px solid rgba(0,0,0,0.07);
+      padding: 1.2rem 0;
+    }
+    .menu-card:last-child {
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .menu-card-img-wrap {
+      width: 80px;
+      height: 100px;
+      flex-shrink: 0;
       overflow: hidden;
     }
-    .menu-card-img {
+    .menu-card-img-wrap img {
       width: 100%;
-      aspect-ratio: 3/4;
+      height: 100%;
       object-fit: cover;
-      display: block;
-      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .menu-card:hover .menu-card-img {
-      transform: scale(1.05);
     }
     .menu-card-body {
-      padding: 1.2rem 1.4rem 1.6rem;
-    }
-    .menu-card-num {
-      font-size: 10px;
-      color: #DDD;
+      padding: 0 0 0 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .menu-card-name {
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 400;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
       color: var(--text);
-      margin-top: 0.4rem;
       text-transform: uppercase;
+    }
+    .menu-card-desc {
+      font-size: 11px;
+      font-weight: 300;
+      color: #AAA;
+      margin-top: 0.3rem;
     }
     .menu-card-price {
       font-size: 12px;
       font-weight: 300;
-      color: #AAA;
-      margin-top: 0.8rem;
+      color: #888;
+      margin-top: 0.6rem;
+    }
+
+    @media (min-width: 768px) {
+      .menu {
+        padding: 7rem 8vw;
+      }
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+      .menu-card {
+        flex-direction: column;
+        border: none;
+        padding: 0;
+        background: var(--off-white);
+        overflow: hidden;
+      }
+      .menu-card:last-child {
+        border: none;
+      }
+      .menu-card-img-wrap {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3/4;
+      }
+      .menu-card-img-wrap img {
+        transition: transform 0.7s ease;
+      }
+      .menu-card:hover .menu-card-img-wrap img {
+        transform: scale(1.05);
+      }
+      .menu-card-body {
+        padding: 1.5rem;
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [7] PHILOSOPHY
+       [8] FLATLAY FEATURE
+    ═══════════════════════════════════════════════════════════════ */
+    .flatlay {
+      background: var(--white);
+    }
+    .flatlay-img {
+      width: 100%;
+      height: 100vw;
+      object-fit: cover;
+    }
+    .flatlay-text {
+      padding: 3rem 6vw;
+    }
+    .flatlay-title {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      color: var(--text);
+    }
+
+    @media (min-width: 768px) {
+      .flatlay-img {
+        height: 70vh;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       [9] PHILOSOPHY — クリーム背景
     ═══════════════════════════════════════════════════════════════ */
     .philosophy {
-      padding: 9rem 8vw;
+      padding: 5rem 6vw;
       background: var(--cream);
     }
     .philosophy-eyebrow {
@@ -302,192 +462,197 @@
     .philosophy-title {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-size: clamp(2.5rem, 6vw, 5rem);
       color: var(--text);
-      margin-bottom: 5rem;
+      margin-bottom: 3rem;
     }
     .philosophy-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
+      display: flex;
+      flex-direction: column;
     }
     .philosophy-pillar {
-      padding: 0 3vw;
-      border-right: 1px solid rgba(0,0,0,0.1);
-    }
-    .philosophy-pillar:first-child {
-      padding-left: 0;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
     }
     .philosophy-pillar:last-child {
-      border-right: none;
-      padding-right: 0;
+      border-bottom: none;
     }
     .pillar-num {
       font-size: 9px;
       color: #CCC;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.8rem;
     }
     .pillar-title {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--text);
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
     }
     .pillar-text {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 300;
-      line-height: 2.0;
+      line-height: 1.9;
       color: #888;
     }
 
+    @media (min-width: 768px) {
+      .philosophy {
+        padding: 9rem 8vw;
+      }
+      .philosophy-title {
+        margin-bottom: 5rem;
+      }
+      .philosophy-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+      }
+      .philosophy-pillar {
+        padding: 0 3vw;
+        border-bottom: none;
+        border-right: 1px solid rgba(0,0,0,0.1);
+      }
+      .philosophy-pillar:first-child {
+        padding-left: 0;
+      }
+      .philosophy-pillar:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+    }
+
     /* ═══════════════════════════════════════════════════════════════
-       [8] LOGO SECTION
+       [10] LOGO — 黒背景（ロゴ唯一の使用場所）
     ═══════════════════════════════════════════════════════════════ */
     .logo-section {
-      padding: 12rem 4rem;
+      padding: 8rem 4rem;
       background: var(--black);
       border-top: 1px solid #181818;
       border-bottom: 1px solid #181818;
       text-align: center;
     }
     .logo-img {
-      max-width: 440px;
-      width: 65vw;
+      max-width: 320px;
+      width: 70vw;
     }
     .logo-tagline {
       font-size: 9px;
       font-weight: 300;
-      letter-spacing: 0.6em;
+      letter-spacing: 0.5em;
       color: #2a2a2a;
       text-transform: uppercase;
-      margin-top: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .logo-img {
+        max-width: 440px;
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       [9] SIGNATURE FEATURE
-    ═══════════════════════════════════════════════════════════════ */
-    .signature {
-      display: grid;
-      grid-template-columns: 45% 55%;
-      min-height: 80vh;
-      background: var(--white);
-    }
-    .signature-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 6rem 6vw 6rem 10vw;
-    }
-    .signature-eyebrow {
-      font-size: 9px;
-      font-weight: 300;
-      letter-spacing: 0.45em;
-      color: #CCC;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-    .signature-title {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: clamp(2.5rem, 4vw, 5rem);
-      line-height: 1.05;
-      color: var(--text);
-    }
-    .signature-line {
-      width: 36px;
-      height: 1px;
-      background: var(--green);
-      margin: 2rem 0;
-    }
-    .signature-desc {
-      font-weight: 300;
-      font-size: 13px;
-      line-height: 2.1;
-      color: #AAA;
-    }
-    .signature-img {
-      height: 80vh;
-      width: 100%;
-      object-fit: cover;
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       [10] WHERE
+       [11] WHERE — 白背景
     ═══════════════════════════════════════════════════════════════ */
     .where {
-      padding: 8rem 8vw;
+      padding: 5rem 6vw;
       background: var(--white);
     }
     .where-title {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-size: clamp(2.5rem, 7vw, 5rem);
       color: var(--text);
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
     }
     .where-list {
       list-style: none;
     }
     .where-item {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 2.5rem 0;
-      border-top: 1px solid rgba(0,0,0,0.07);
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0,0,0,0.08);
     }
     .where-item:last-child {
-      border-bottom: 1px solid rgba(0,0,0,0.07);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
     .where-name-jp {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 300;
       color: var(--text);
     }
     .where-name-en {
       font-size: 9px;
       font-weight: 300;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.3em;
       color: #BBB;
       text-transform: uppercase;
-      margin-left: 1rem;
     }
     .where-status {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: 13px;
+      font-size: 12px;
       color: #C0B89A;
     }
 
+    @media (min-width: 768px) {
+      .where {
+        padding: 8rem 8vw;
+      }
+      .where-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 2.5rem 0;
+      }
+      .where-name-en {
+        margin-left: 1rem;
+      }
+    }
+
     /* ═══════════════════════════════════════════════════════════════
-       [11] FOOTER
+       [12] FOOTER
     ═══════════════════════════════════════════════════════════════ */
     footer {
       border-top: 1px solid rgba(0,0,0,0.07);
-      padding: 4rem 8vw;
+      padding: 3rem 6vw;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 0.5rem;
     }
     .footer-brand {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
-      font-size: 16px;
+      font-size: 18px;
       color: var(--text);
     }
     .footer-location {
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 300;
       color: #CCC;
-      margin-top: 3px;
     }
     .footer-social {
       font-size: 10px;
       font-weight: 300;
       color: #CCC;
       text-decoration: none;
+      margin-top: 1.5rem;
     }
     .footer-social:hover {
       color: var(--text);
+    }
+
+    @media (min-width: 768px) {
+      footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4rem 8vw;
+      }
+      .footer-social {
+        margin-top: 0;
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -495,8 +660,8 @@
     ═══════════════════════════════════════════════════════════════ */
     .fade {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 1s ease, transform 1s ease;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
     }
     .fade.in {
       opacity: 1;
@@ -505,118 +670,6 @@
     .d1 { transition-delay: 0.1s; }
     .d2 { transition-delay: 0.2s; }
     .d3 { transition-delay: 0.3s; }
-
-    /* ═══════════════════════════════════════════════════════════════
-       MOBILE (768px)
-    ═══════════════════════════════════════════════════════════════ */
-    @media (max-width: 768px) {
-      .hero {
-        position: relative;
-      }
-      .hero-bg {
-        width: 100%;
-        height: 100%;
-        opacity: 0.5;
-      }
-      .hero-overlay {
-        background: linear-gradient(to bottom, rgba(10,10,10,0.7), rgba(10,10,10,0.5));
-      }
-      .hero-content {
-        padding: 0 8vw;
-        align-items: center;
-        text-align: center;
-      }
-      .hero-title {
-        max-width: 100%;
-        font-size: clamp(3.5rem, 12vw, 6rem);
-      }
-      .hero-scroll {
-        justify-content: center;
-      }
-
-      .statement {
-        padding: 6rem 8vw;
-      }
-      .statement-tag {
-        position: static;
-        margin-top: 2rem;
-      }
-
-      .bleed-img {
-        height: 60vh;
-      }
-      .bleed-caption {
-        margin-top: -4rem;
-        padding: 0 6vw 4rem;
-      }
-
-      .menu {
-        padding: 4rem 6vw 5rem;
-      }
-      .menu-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-      .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-      }
-
-      .philosophy {
-        padding: 5rem 6vw;
-      }
-      .philosophy-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-      .philosophy-pillar {
-        padding: 0;
-        border-right: none;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-        padding-bottom: 3rem;
-      }
-      .philosophy-pillar:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-      }
-
-      .logo-section {
-        padding: 8rem 2rem;
-      }
-
-      .signature {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-      .signature-content {
-        padding: 4rem 6vw;
-        order: 2;
-      }
-      .signature-img {
-        height: 55vh;
-        order: 1;
-      }
-
-      .where {
-        padding: 5rem 6vw;
-      }
-      .where-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-      .where-name-en {
-        margin-left: 0;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
-        padding: 3rem 6vw;
-      }
-    }
   </style>
 </head>
 <body>
@@ -625,86 +678,128 @@
   <header>
     <span class="logo-text">MATCHA VIBES</span>
     <span class="header-tag">TOKYO</span>
+    <div class="header-hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
 
   <!-- [2] HERO -->
   <section class="hero">
-    <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="Matcha Vibes signature drink" class="hero-bg">
+    <div class="hero-bg">
+      <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="Matcha Vibes signature drink" class="hero-img">
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">EST. 2026 — TOKYO</p>
+      <p class="hero-eyebrow">EST. 2026</p>
       <h1 class="hero-title">Good vibes<br>start here.</h1>
-      <div class="hero-scroll">
-        <div class="hero-scroll-line"></div>
-        <span class="hero-scroll-text">SCROLL ↓</span>
-      </div>
+      <span class="hero-tag">#matchavibes</span>
     </div>
   </section>
 
   <!-- [3] MARQUEE -->
   <div class="marquee">
     <div class="marquee-inner">
-      <span class="marquee-text">MATCHA VIBES &nbsp;—&nbsp; GOOD VIBES START HERE &nbsp;—&nbsp; TOKYO 2026 &nbsp;—&nbsp; MATCHA VIBES &nbsp;—&nbsp; GOOD VIBES START HERE &nbsp;—&nbsp; TOKYO 2026 &nbsp;—&nbsp; MATCHA VIBES &nbsp;—&nbsp; GOOD VIBES START HERE &nbsp;—&nbsp; TOKYO 2026 &nbsp;—&nbsp; MATCHA VIBES &nbsp;—&nbsp; GOOD VIBES START HERE &nbsp;—&nbsp; TOKYO 2026 &nbsp;—&nbsp; </span>
+      <span class="marquee-text">MATCHA VIBES — GOOD VIBES START HERE — TOKYO 2026 — MATCHA VIBES — GOOD VIBES START HERE — TOKYO 2026 — MATCHA VIBES — GOOD VIBES START HERE — TOKYO 2026 — MATCHA VIBES — GOOD VIBES START HERE — TOKYO 2026 — </span>
     </div>
   </div>
 
-  <!-- [4] STATEMENT -->
-  <section class="statement">
-    <p class="statement-quote fade">We didn't invent matcha.<br>We just made<br>Tokyo obsessed.</p>
-    <span class="statement-tag">— Good vibes start here.</span>
-  </section>
-
-  <!-- [5] FULL BLEED -->
-  <section class="bleed">
-    <img src="matcha-vibes-assets/cup-duo.jpg" alt="Matcha drinks duo" class="bleed-img">
-    <div class="bleed-caption">
-      <h2 class="bleed-title fade">Three colors. One vibe.</h2>
+  <!-- [4] VISUAL STORY -->
+  <section class="visual-story">
+    <div class="story-block fade">
+      <img src="matcha-vibes-assets/lifestyle-runner.jpg" alt="Runner with matcha" class="story-img">
+      <div class="story-text">
+        <h2 class="story-title">For the runners.</h2>
+        <p class="story-sub">5:30 AM. Imperial Palace.</p>
+      </div>
+    </div>
+    <div class="story-block fade d1">
+      <img src="matcha-vibes-assets/lifestyle-street.jpg" alt="Street style matcha" class="story-img">
+      <div class="story-text">
+        <h2 class="story-title">For the explorers.</h2>
+        <p class="story-sub">Harajuku. Any time.</p>
+      </div>
+    </div>
+    <div class="story-block fade d2">
+      <img src="matcha-vibes-assets/detail-flatlay.jpg" alt="Matcha detail" class="story-img short">
+      <div class="story-text">
+        <h2 class="story-title">Three colors. One vibe.</h2>
+        <p class="story-sub">Swirled, not stirred.</p>
+      </div>
     </div>
   </section>
 
-  <!-- [6] MENU -->
+  <!-- [5] STATEMENT -->
+  <section class="statement">
+    <p class="statement-quote fade">We didn't invent matcha.<br>We just made<br>Tokyo obsessed.</p>
+    <span class="statement-tag fade d1">— Good vibes start here.</span>
+  </section>
+
+  <!-- [6] FULL BLEED -->
+  <section class="bleed">
+    <img src="matcha-vibes-assets/lifestyle-table.jpg" alt="Matcha table setting" class="bleed-img">
+  </section>
+
+  <!-- [7] MENU -->
   <section class="menu">
     <div class="menu-header">
-      <h2 class="menu-title fade">The Menu</h2>
-      <p class="menu-subtitle fade d1">Four drinks. One vibe.</p>
+      <h2 class="menu-title fade">The Menu.</h2>
+      <p class="menu-subtitle fade d1">Four drinks.</p>
     </div>
     <div class="menu-grid">
       <div class="menu-card fade d1">
-        <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Matcha" class="menu-card-img">
+        <div class="menu-card-img-wrap">
+          <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha">
+        </div>
         <div class="menu-card-body">
-          <span class="menu-card-num">01</span>
-          <p class="menu-card-name">Classic Matcha</p>
-          <p class="menu-card-price">¥680</p>
+          <p class="menu-card-name">Blueberry Matcha</p>
+          <p class="menu-card-desc">Purple meets green.</p>
+          <p class="menu-card-price">¥850</p>
         </div>
       </div>
       <div class="menu-card fade d2">
-        <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Matcha" class="menu-card-img">
+        <div class="menu-card-img-wrap">
+          <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie">
+        </div>
         <div class="menu-card-body">
-          <span class="menu-card-num">02</span>
-          <p class="menu-card-name">Yogurt Matcha</p>
-          <p class="menu-card-price">¥780</p>
+          <p class="menu-card-name">Yogurt Smoothie</p>
+          <p class="menu-card-desc">Creamy. Always.</p>
+          <p class="menu-card-price">¥750</p>
         </div>
       </div>
       <div class="menu-card fade d3">
-        <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha" class="menu-card-img">
+        <div class="menu-card-img-wrap">
+          <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery">
+        </div>
         <div class="menu-card-body">
-          <span class="menu-card-num">03</span>
-          <p class="menu-card-name">Blueberry Matcha</p>
-          <p class="menu-card-price">¥780</p>
+          <p class="menu-card-name">Banana Recovery</p>
+          <p class="menu-card-desc">After the run.</p>
+          <p class="menu-card-price">¥700</p>
         </div>
       </div>
       <div class="menu-card fade d3">
-        <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Matcha" class="menu-card-img">
+        <div class="menu-card-img-wrap">
+          <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte">
+        </div>
         <div class="menu-card-body">
-          <span class="menu-card-num">04</span>
-          <p class="menu-card-name">Banana Matcha</p>
-          <p class="menu-card-price">¥780</p>
+          <p class="menu-card-name">Classic Latte</p>
+          <p class="menu-card-desc">Where it starts.</p>
+          <p class="menu-card-price">¥650</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- [7] PHILOSOPHY -->
+  <!-- [8] FLATLAY FEATURE -->
+  <section class="flatlay">
+    <img src="matcha-vibes-assets/flatlay-top.jpg" alt="Matcha flatlay" class="flatlay-img">
+    <div class="flatlay-text">
+      <h2 class="flatlay-title fade">Swirled, not stirred.</h2>
+    </div>
+  </section>
+
+  <!-- [9] PHILOSOPHY -->
   <section class="philosophy">
     <p class="philosophy-eyebrow fade">What we stand for</p>
     <h2 class="philosophy-title fade d1">The idea.</h2>
@@ -727,24 +822,13 @@
     </div>
   </section>
 
-  <!-- [8] LOGO SECTION -->
+  <!-- [10] LOGO SECTION -->
   <section class="logo-section">
     <img src="matcha-vibes-assets/logo-official.png" alt="Matcha Vibes Official Logo" class="logo-img fade">
-    <p class="logo-tagline fade d1">MATCHA VIBES TOKYO</p>
+    <p class="logo-tagline fade d1">MATCHA VIBES TOKYO — EST. 2026</p>
   </section>
 
-  <!-- [9] SIGNATURE FEATURE -->
-  <section class="signature">
-    <div class="signature-content">
-      <p class="signature-eyebrow fade">SIGNATURE</p>
-      <h2 class="signature-title fade d1">Three colors.<br>One vibe.</h2>
-      <div class="signature-line fade d2"></div>
-      <p class="signature-desc fade d3">Matcha. Yogurt. Blueberry.<br>Swirled, not stirred.</p>
-    </div>
-    <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="Signature drink" class="signature-img">
-  </section>
-
-  <!-- [10] WHERE -->
+  <!-- [11] WHERE -->
   <section class="where">
     <h2 class="where-title fade">Find us.</h2>
     <ul class="where-list">
@@ -772,7 +856,7 @@
     </ul>
   </section>
 
-  <!-- [11] FOOTER -->
+  <!-- [12] FOOTER -->
   <footer>
     <div>
       <p class="footer-brand">MATCHA VIBES</p>
@@ -796,32 +880,41 @@
 
     // Header scroll behavior
     const header = document.querySelector('header');
-    const heroSection = document.querySelector('.hero');
-    const logoText = document.querySelector('.logo-text');
-    const headerTag = document.querySelector('.header-tag');
+    const logoText = header.querySelector('.logo-text');
+    const headerTag = header.querySelector('.header-tag');
+    const hamburgerLines = header.querySelectorAll('.header-hamburger span');
 
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      header.classList.toggle('scrolled', scrollY > 60);
-      const isOnHero = scrollY < heroSection.offsetHeight - 60;
-      logoText.style.color = isOnHero ? '#F5F0E8' : '#111';
-      headerTag.style.color = isOnHero ? '#555' : '#AAA';
-    }, { passive: true });
+    function updateHeader() {
+      const scrolled = window.scrollY > 80;
+      header.style.background = scrolled ? 'rgba(255,255,255,0.95)' : 'transparent';
+      header.style.backdropFilter = scrolled ? 'blur(16px)' : 'none';
+      header.style.webkitBackdropFilter = scrolled ? 'blur(16px)' : 'none';
+      header.style.borderBottom = scrolled ? '1px solid rgba(0,0,0,0.07)' : 'none';
+      logoText.style.color = scrolled ? '#111' : '#F5F0E8';
+      if (headerTag) headerTag.style.color = scrolled ? '#AAA' : '#555';
+      hamburgerLines.forEach(line => {
+        line.style.background = scrolled ? '#111' : '#F5F0E8';
+      });
+    }
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
 
-    // Hero parallax
-    const heroImg = document.querySelector('.hero-bg');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY < window.innerHeight * 1.5) {
-        heroImg.style.transform = `scale(1.06) translateY(${window.scrollY * 0.12}px)`;
-      }
-    }, { passive: true });
+    // Hero parallax (PC only)
+    const heroImg = document.querySelector('.hero-img');
+    if (heroImg && window.innerWidth > 768) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY < window.innerHeight * 1.5) {
+          heroImg.style.transform = `scale(1.06) translateY(${window.scrollY * 0.1}px)`;
+        }
+      }, { passive: true });
+    }
 
     // Fade-in animations
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add('in');
       });
-    }, { threshold: 0.06 });
+    }, { threshold: 0.05 });
     document.querySelectorAll('.fade').forEach(el => observer.observe(el));
   </script>
 

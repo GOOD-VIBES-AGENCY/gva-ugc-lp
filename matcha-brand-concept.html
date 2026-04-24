@@ -1,542 +1,380 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>matcha vibes tokyo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
-  <style>
-    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:smooth; }
-    body {
-      font-family:"DM Sans",sans-serif;
-      background:#fff;
-      color:#111;
-      -webkit-font-smoothing:antialiased;
-      overflow-x:hidden;
-    }
-    img { display:block; max-width:100%; }
-    .fade { opacity:0; transform:translateY(20px); transition:opacity 0.9s ease,transform 0.9s ease; }
-    .fade.in { opacity:1; transform:none; }
-    .d1 { transition-delay:.1s; }
-    .d2 { transition-delay:.2s; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>matcha vibes tokyo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:#111;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
 
-    /* HEADER */
-    header {
-      position:fixed; top:0; left:0; right:0; height:56px;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:0 5vw;
-      background:#fff;
-      border-bottom:1px solid rgba(0,0,0,0.07);
-      z-index:100;
-    }
-    .header-logo {
-      font-family:"DM Serif Display",serif;
-      font-style:italic;
-      font-size:15px;
-      color:#111;
-      text-decoration:none;
-    }
-    .header-tokyo {
-      font-size:9px;
-      letter-spacing:0.5em;
-      color:#AAA;
-      display:none;
-    }
-    @media(min-width:768px) {
-      .header-tokyo { display:block; }
-    }
+/* HEADER */
+header{
+  position:fixed;top:0;left:0;right:0;
+  height:52px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;
+  background:#fff;
+  border-bottom:1px solid rgba(0,0,0,0.07);
+  z-index:100;
+}
+.site-name{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:15px;
+  color:#111;
+  letter-spacing:0;
+}
 
-    /* HERO */
-    .hero {
-      height:100svh;
-      display:grid;
-      grid-template-columns:1fr;
-      grid-template-rows:1fr auto;
-      padding-top:56px;
-    }
-    .hero-img {
-      height:65svh;
-      overflow:hidden;
-    }
-    .hero-img img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:top center;
-    }
-    .hero-text {
-      padding:2.5rem 6vw 3rem;
-      background:#fff;
-    }
-    .hero-copy {
-      font-family:"DM Serif Display",serif;
-      font-style:italic;
-      font-size:13vw;
-      line-height:0.88;
-      color:#111;
-    }
-    .hero-line {
-      width:24px;
-      height:1px;
-      background:#E0E0E0;
-      margin:1.5rem 0;
-    }
-    .hero-brand {
-      font-size:10px;
-      font-weight:300;
-      color:#AAA;
-      letter-spacing:0.3em;
-    }
-    @media(min-width:768px) {
-      .hero {
-        grid-template-columns:1fr 1fr;
-        grid-template-rows:1fr;
-      }
-      .hero-img {
-        height:100%;
-        order:2;
-      }
-      .hero-text {
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        padding:0 6vw 0 10vw;
-      }
-      .hero-copy {
-        font-size:clamp(3.5rem,6.5vw,8rem);
-      }
-    }
+/* HERO */
+.hero{
+  margin-top:52px;
+  display:grid;
+  grid-template-rows:60svh auto;
+}
+.hero-img{
+  overflow:hidden;
+}
+.hero-img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:top center;
+}
+.hero-text{
+  padding:2.5rem 6vw 3rem;
+  background:#fff;
+}
+.hero-title{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:15vw;
+  line-height:0.88;
+  color:#111;
+  letter-spacing:-0.02em;
+}
+.hero-sub{
+  font-size:10px;
+  font-weight:300;
+  color:#AAA;
+  letter-spacing:0.3em;
+  margin-top:1.5rem;
+}
 
-    /* PRODUCT HERO */
-    .product-hero {
-      width:100%;
-      height:80svh;
-      overflow:hidden;
-    }
-    .product-hero img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center;
-    }
+/* FULL BLEED */
+.bleed{
+  width:100%;
+  height:70svh;
+  overflow:hidden;
+}
+.bleed img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center;
+}
 
-    /* MENU */
-    .menu {
-      padding:5rem 6vw;
-    }
-    @media(min-width:768px) {
-      .menu { padding:8rem 8vw; }
-    }
-    .menu-header {
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      margin-bottom:3rem;
-      padding-bottom:1.5rem;
-      border-bottom:1px solid rgba(0,0,0,0.08);
-    }
-    .menu-title {
-      font-family:"DM Serif Display",serif;
-      font-style:italic;
-      font-size:clamp(2rem,5vw,4rem);
-      color:#111;
-    }
-    .menu-count {
-      font-size:10px;
-      font-weight:300;
-      color:#AAA;
-      letter-spacing:0.2em;
-      display:none;
-    }
-    @media(min-width:768px) {
-      .menu-count { display:block; }
-    }
-    .menu-list {
-      list-style:none;
-    }
-    .menu-item {
-      display:flex;
-      gap:1.2rem;
-      padding:1.5rem 0;
-      border-bottom:1px solid rgba(0,0,0,0.07);
-      align-items:center;
-    }
-    .menu-item-img {
-      width:72px;
-      height:88px;
-      overflow:hidden;
-      flex-shrink:0;
-    }
-    .menu-item-img img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .menu-item-info {
-      flex:1;
-    }
-    .menu-item-name {
-      font-size:12px;
-      font-weight:400;
-      letter-spacing:0.08em;
-      color:#111;
-    }
-    .menu-item-desc {
-      font-size:11px;
-      font-weight:300;
-      color:#AAA;
-      margin-top:4px;
-    }
-    .menu-item-price {
-      font-size:12px;
-      font-weight:300;
-      color:#888;
-      margin-top:10px;
-    }
-    @media(min-width:768px) {
-      .menu-list {
-        display:grid;
-        grid-template-columns:repeat(4,1fr);
-        gap:1px;
-        background:rgba(0,0,0,0.07);
-      }
-      .menu-item {
-        flex-direction:column;
-        gap:0;
-        padding:0;
-        background:#fff;
-        border-bottom:none;
-        align-items:stretch;
-      }
-      .menu-item-img {
-        width:100%;
-        height:auto;
-        aspect-ratio:3/4;
-      }
-      .menu-item-info {
-        padding:1.2rem 1.4rem 1.6rem;
-      }
-    }
+/* MENU */
+.menu{
+  padding:4rem 6vw;
+}
+.menu-title{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:9vw;
+  color:#111;
+  margin-bottom:0.5rem;
+}
+.menu-count{
+  font-size:10px;
+  font-weight:300;
+  color:#AAA;
+  letter-spacing:0.2em;
+  margin-bottom:2.5rem;
+}
+.menu-list{list-style:none}
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+  padding:1.4rem 0;
+  border-top:1px solid rgba(0,0,0,0.07);
+}
+.menu-item:last-child{border-bottom:1px solid rgba(0,0,0,0.07)}
+.menu-img{
+  width:72px;height:88px;
+  overflow:hidden;flex-shrink:0;
+  background:#f5f5f5;
+}
+.menu-img img{width:100%;height:100%;object-fit:cover}
+.menu-info{}
+.menu-name{
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:0.08em;
+  color:#111;
+}
+.menu-desc{
+  font-size:11px;
+  font-weight:300;
+  color:#BBB;
+  margin-top:3px;
+}
+.menu-price{
+  font-size:12px;
+  font-weight:300;
+  color:#888;
+  margin-top:10px;
+}
 
-    /* CUSTOMIZE */
-    .customize {
-      padding:5rem 6vw;
-      border-top:1px solid rgba(0,0,0,0.08);
-    }
-    @media(min-width:768px) {
-      .customize { padding:8rem 8vw; }
-    }
-    .customize-title {
-      font-family:"DM Serif Display",serif;
-      font-style:italic;
-      font-size:clamp(1.8rem,4vw,3.5rem);
-      color:#111;
-      margin-bottom:2.5rem;
-    }
-    .steps {
-      list-style:none;
-    }
-    .step {
-      padding:1.5rem 0;
-      border-top:1px solid rgba(0,0,0,0.08);
-      display:flex;
-      gap:1.5rem;
-      align-items:baseline;
-    }
-    .step-num {
-      font-size:9px;
-      color:#CCC;
-      letter-spacing:0.3em;
-      flex-shrink:0;
-      width:2rem;
-    }
-    .step-content {}
-    .step-label {
-      font-size:11px;
-      font-weight:400;
-      letter-spacing:0.1em;
-      color:#111;
-    }
-    .step-options {
-      font-size:11px;
-      font-weight:300;
-      color:#AAA;
-      margin-top:4px;
-    }
-    .customize-note {
-      font-size:11px;
-      font-weight:300;
-      color:#CCC;
-      text-align:right;
-      margin-top:1.5rem;
-    }
+/* CUSTOMIZE */
+.customize{
+  padding:4rem 6vw;
+  border-top:1px solid rgba(0,0,0,0.07);
+}
+.customize-title{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:8vw;
+  color:#111;
+  margin-bottom:2.5rem;
+}
+.step{
+  padding:1.5rem 0;
+  border-top:1px solid rgba(0,0,0,0.07);
+  display:flex;
+  gap:1.5rem;
+  align-items:flex-start;
+}
+.step:last-child{border-bottom:1px solid rgba(0,0,0,0.07)}
+.step-num{
+  font-size:9px;
+  color:#CCC;
+  letter-spacing:0.3em;
+  flex-shrink:0;
+  width:2rem;
+  padding-top:2px;
+}
+.step-body{}
+.step-label{
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:0.1em;
+  color:#111;
+}
+.step-options{
+  font-size:11px;
+  font-weight:300;
+  color:#AAA;
+  margin-top:5px;
+  line-height:1.6;
+}
+.customize-note{
+  font-size:10px;
+  font-weight:300;
+  color:#CCC;
+  text-align:right;
+  margin-top:1.5rem;
+}
 
-    /* LOGO SECTION */
-    .logo-section {
-      background:#0A0A0A;
-      padding:8rem 4rem;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-    }
-    .logo-section hr {
-      width:calc(100% - 4rem);
-      max-width:600px;
-      height:1px;
-      background:#181818;
-      border:none;
-    }
-    .logo-section-img {
-      max-width:380px;
-      width:70vw;
-      margin:3rem 0;
-    }
-    .logo-section-text {
-      font-size:9px;
-      color:#282828;
-      letter-spacing:0.5em;
-      text-align:center;
-      margin-top:2rem;
-    }
+/* LOGO */
+.logo-section{
+  background:#0A0A0A;
+  padding:7rem 4rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2rem;
+}
+.logo-rule{width:calc(100% - 4rem);height:1px;background:#1A1A1A}
+.logo-img{
+  max-width:320px;
+  width:70vw;
+}
+.logo-tag{
+  font-size:9px;
+  font-weight:300;
+  color:#282828;
+  letter-spacing:0.5em;
+  text-align:center;
+}
 
-    /* WHERE */
-    .where {
-      padding:5rem 6vw;
-    }
-    @media(min-width:768px) {
-      .where { padding:8rem 8vw; }
-    }
-    .where-title {
-      font-family:"DM Serif Display",serif;
-      font-style:italic;
-      font-size:clamp(2rem,5vw,4.5rem);
-      color:#111;
-      margin-bottom:3rem;
-    }
-    .locations {
-      list-style:none;
-    }
-    .location {
-      padding:1.8rem 0;
-      border-top:1px solid rgba(0,0,0,0.08);
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-    }
-    .location:last-child {
-      border-bottom:1px solid rgba(0,0,0,0.08);
-    }
-    .location-info {}
-    .location-name {
-      font-size:clamp(1rem,2.5vw,1.4rem);
-      font-weight:300;
-      color:#111;
-    }
-    .location-sub {
-      font-size:9px;
-      letter-spacing:0.3em;
-      color:#BBB;
-      margin-top:3px;
-    }
-    .location-tag {
-      font-family:"DM Serif Display",serif;
-      font-style:italic;
-      font-size:12px;
-      color:#C0B89A;
-    }
+/* FOOTER */
+footer{
+  padding:2.5rem 5vw;
+  border-top:1px solid rgba(0,0,0,0.07);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.footer-brand{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:13px;
+  color:#111;
+}
+.footer-handle{
+  font-size:10px;
+  font-weight:300;
+  color:#CCC;
+}
 
-    /* FOOTER */
-    footer {
-      padding:3rem 6vw;
-      border-top:1px solid rgba(0,0,0,0.07);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-    .footer-logo {
-      font-family:"DM Serif Display",serif;
-      font-style:italic;
-      font-size:14px;
-      color:#111;
-    }
-    .footer-ig {
-      font-size:10px;
-      font-weight:300;
-      color:#CCC;
-    }
-  </style>
+/* FADE */
+.fade{opacity:0;transform:translateY(18px);transition:opacity 0.85s ease,transform 0.85s ease}
+.fade.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}
+.d2{transition-delay:.2s}
+
+/* PC */
+@media(min-width:768px){
+  .hero{
+    grid-template-rows:unset;
+    grid-template-columns:1fr 1fr;
+    height:calc(100svh - 52px);
+  }
+  .hero-img{height:100%}
+  .hero-text{
+    display:flex;flex-direction:column;justify-content:center;
+    padding:0 6vw 0 10vw;
+    order:-1;
+  }
+  .hero-title{font-size:clamp(3.5rem,6.5vw,8rem)}
+  .menu-title{font-size:clamp(2rem,4vw,4rem)}
+  .menu-list{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:rgba(0,0,0,0.07);
+  }
+  .menu-item{
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:0;
+    border:none;
+    background:#fff;
+  }
+  .menu-item:last-child{border:none}
+  .menu-img{width:100%;height:auto;aspect-ratio:3/4}
+  .menu-info{padding:1.2rem 1.2rem 1.5rem}
+  .customize-title{font-size:clamp(2rem,3.5vw,3.5rem)}
+  .step-options{max-width:280px}
+}
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <a href="#" class="header-logo">matcha vibes tokyo</a>
-    <span class="header-tokyo">TOKYO</span>
-  </header>
+<header>
+  <span class="site-name">matcha vibes tokyo</span>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-img">
-      <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="matcha vibes">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img">
+    <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="" loading="eager">
+  </div>
+  <div class="hero-text">
+    <h1 class="hero-title">good<br>vibes<br>start<br>here.</h1>
+    <p class="hero-sub">matcha vibes tokyo</p>
+  </div>
+</section>
+
+<!-- FULL BLEED -->
+<div class="bleed fade">
+  <img src="matcha-vibes-assets/cup-duo.jpg" alt="" loading="lazy">
+</div>
+
+<!-- MENU -->
+<section class="menu">
+  <h2 class="menu-title fade">the menu.</h2>
+  <p class="menu-count fade d1">four drinks</p>
+  <ul class="menu-list">
+    <li class="menu-item fade">
+      <div class="menu-img"><img src="matcha-vibes-assets/cup-blueberry.jpg" alt="" loading="lazy"></div>
+      <div class="menu-info">
+        <p class="menu-name">BLUEBERRY MATCHA</p>
+        <p class="menu-desc">Purple meets green.</p>
+        <p class="menu-price">¥850</p>
+      </div>
+    </li>
+    <li class="menu-item fade d1">
+      <div class="menu-img"><img src="matcha-vibes-assets/cup-yogurt.jpg" alt="" loading="lazy"></div>
+      <div class="menu-info">
+        <p class="menu-name">YOGURT SMOOTHIE</p>
+        <p class="menu-desc">Creamy. Always.</p>
+        <p class="menu-price">¥750</p>
+      </div>
+    </li>
+    <li class="menu-item fade">
+      <div class="menu-img"><img src="matcha-vibes-assets/cup-banana.jpg" alt="" loading="lazy"></div>
+      <div class="menu-info">
+        <p class="menu-name">BANANA RECOVERY</p>
+        <p class="menu-desc">After the run.</p>
+        <p class="menu-price">¥700</p>
+      </div>
+    </li>
+    <li class="menu-item fade d1">
+      <div class="menu-img"><img src="matcha-vibes-assets/cup-classic.jpg" alt="" loading="lazy"></div>
+      <div class="menu-info">
+        <p class="menu-name">CLASSIC LATTE</p>
+        <p class="menu-desc">Where it starts.</p>
+        <p class="menu-price">¥650</p>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CUSTOMIZE -->
+<section class="customize">
+  <h2 class="customize-title fade">build<br>your cup.</h2>
+  <div class="step fade d1">
+    <span class="step-num">01</span>
+    <div class="step-body">
+      <p class="step-label">BASE</p>
+      <p class="step-options">MATCHA</p>
     </div>
-    <div class="hero-text">
-      <h1 class="hero-copy fade">good vibes<br>start here.</h1>
-      <div class="hero-line fade d1"></div>
-      <p class="hero-brand fade d2">matcha vibes tokyo</p>
+  </div>
+  <div class="step fade d1">
+    <span class="step-num">02</span>
+    <div class="step-body">
+      <p class="step-label">MILK</p>
+      <p class="step-options">YOGURT · OATS · SOY</p>
     </div>
-  </section>
-
-  <!-- PRODUCT HERO -->
-  <section class="product-hero fade">
-    <img src="matcha-vibes-assets/cup-duo.jpg" alt="matcha vibes duo">
-  </section>
-
-  <!-- MENU -->
-  <section class="menu">
-    <div class="menu-header fade">
-      <h2 class="menu-title">the menu</h2>
-      <span class="menu-count">four drinks</span>
+  </div>
+  <div class="step fade d1">
+    <span class="step-num">03</span>
+    <div class="step-body">
+      <p class="step-label">TOPPING</p>
+      <p class="step-options">BLUEBERRY · BANANA · NONE</p>
     </div>
-    <ul class="menu-list">
-      <li class="menu-item fade">
-        <div class="menu-item-img">
-          <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="Blueberry Matcha">
-        </div>
-        <div class="menu-item-info">
-          <p class="menu-item-name">BLUEBERRY MATCHA</p>
-          <p class="menu-item-desc">Purple meets green.</p>
-          <p class="menu-item-price">&yen;850</p>
-        </div>
-      </li>
-      <li class="menu-item fade d1">
-        <div class="menu-item-img">
-          <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="Yogurt Smoothie">
-        </div>
-        <div class="menu-item-info">
-          <p class="menu-item-name">YOGURT SMOOTHIE</p>
-          <p class="menu-item-desc">Creamy. Always.</p>
-          <p class="menu-item-price">&yen;750</p>
-        </div>
-      </li>
-      <li class="menu-item fade d2">
-        <div class="menu-item-img">
-          <img src="matcha-vibes-assets/cup-banana.jpg" alt="Banana Recovery">
-        </div>
-        <div class="menu-item-info">
-          <p class="menu-item-name">BANANA RECOVERY</p>
-          <p class="menu-item-desc">After the run.</p>
-          <p class="menu-item-price">&yen;700</p>
-        </div>
-      </li>
-      <li class="menu-item fade">
-        <div class="menu-item-img">
-          <img src="matcha-vibes-assets/cup-classic.jpg" alt="Classic Latte">
-        </div>
-        <div class="menu-item-info">
-          <p class="menu-item-name">CLASSIC LATTE</p>
-          <p class="menu-item-desc">Where it starts.</p>
-          <p class="menu-item-price">&yen;650</p>
-        </div>
-      </li>
-    </ul>
-  </section>
+  </div>
+  <p class="customize-note fade">9 combinations.</p>
+</section>
 
-  <!-- CUSTOMIZE -->
-  <section class="customize">
-    <h2 class="customize-title fade">build your cup</h2>
-    <ul class="steps">
-      <li class="step fade">
-        <span class="step-num">01</span>
-        <div class="step-content">
-          <p class="step-label">BASE</p>
-          <p class="step-options">MATCHA</p>
-        </div>
-      </li>
-      <li class="step fade d1">
-        <span class="step-num">02</span>
-        <div class="step-content">
-          <p class="step-label">MILK</p>
-          <p class="step-options">YOGURT &middot; OATS &middot; SOY</p>
-        </div>
-      </li>
-      <li class="step fade d2">
-        <span class="step-num">03</span>
-        <div class="step-content">
-          <p class="step-label">TOPPING</p>
-          <p class="step-options">BLUEBERRY &middot; BANANA &middot; NONE</p>
-        </div>
-      </li>
-    </ul>
-    <p class="customize-note fade">9 combinations.</p>
-  </section>
+<!-- LOGO -->
+<section class="logo-section">
+  <div class="logo-rule"></div>
+  <img class="logo-img fade" src="matcha-vibes-assets/logo-official.png" alt="matcha vibes tokyo">
+  <div class="logo-rule"></div>
+  <p class="logo-tag fade">matcha vibes tokyo — est. 2026</p>
+</section>
 
-  <!-- LOGO SECTION -->
-  <section class="logo-section">
-    <hr>
-    <img src="matcha-vibes-assets/logo-official.png" alt="matcha vibes tokyo" class="logo-section-img fade">
-    <hr>
-    <p class="logo-section-text fade">matcha vibes tokyo</p>
-  </section>
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">matcha vibes tokyo</span>
+  <span class="footer-handle">@matchavibes.tokyo</span>
+</footer>
 
-  <!-- WHERE -->
-  <section class="where">
-    <h2 class="where-title fade">find us.</h2>
-    <ul class="locations">
-      <li class="location fade">
-        <div class="location-info">
-          <p class="location-name">皇居外苑</p>
-          <p class="location-sub">IMPERIAL PALACE</p>
-        </div>
-        <span class="location-tag">For the runners.</span>
-      </li>
-      <li class="location fade d1">
-        <div class="location-info">
-          <p class="location-name">原宿</p>
-          <p class="location-sub">HARAJUKU</p>
-        </div>
-        <span class="location-tag">For the explorers.</span>
-      </li>
-      <li class="location fade d2">
-        <div class="location-info">
-          <p class="location-name">渋谷</p>
-          <p class="location-sub">SHIBUYA</p>
-        </div>
-        <span class="location-tag">For everyone.</span>
-      </li>
-    </ul>
-  </section>
+<script>
+const lenis=new Lenis({duration:1.2,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
+(function raf(t){lenis.raf(t);requestAnimationFrame(raf)})(0);
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-logo">matcha vibes tokyo</span>
-    <span class="footer-ig">@matchavibes.tokyo</span>
-  </footer>
-
-  <!-- SCRIPTS -->
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script>
-    // Lenis smooth scroll
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-    });
-    (function raf(t) {
-      lenis.raf(t);
-      requestAnimationFrame(raf);
-    })(0);
-
-    // Fade on scroll
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add("in");
-      });
-    }, { threshold: 0.06 });
-    document.querySelectorAll(".fade").forEach(el => io.observe(el));
-  </script>
-
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:0.06});
+document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>

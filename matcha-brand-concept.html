@@ -6,175 +6,245 @@
 <title>matcha vibes tokyo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:#fff;color:#111;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{display:block;width:100%;height:100%;object-fit:cover}
+img{display:block;max-width:100%}
 
-/* HEADER */
+/* ─── HEADER ─── */
 header{
-  position:fixed;top:0;left:0;right:0;height:52px;
-  padding:0 5vw;
+  position:fixed;top:0;left:0;right:0;
+  height:52px;padding:0 5vw;
   display:flex;align-items:center;justify-content:space-between;
   background:#fff;
   border-bottom:1px solid rgba(0,0,0,0.06);
   z-index:200;
 }
-.h-brand{font-family:'DM Serif Display',serif;font-style:italic;font-size:15px;color:#111}
+.h-name{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;font-size:15px;color:#111;
+}
+.h-order{
+  background:#111;color:#fff;
+  font-size:10px;font-weight:500;
+  letter-spacing:0.06em;
+  padding:0.45rem 1.1rem;
+  border:none;cursor:pointer;
+}
 
-/* HERO — fullscreen split */
+/* ─── HERO ─── */
 .hero{
   margin-top:52px;
+  position:relative;
   height:calc(100svh - 52px);
-  display:grid;
-  grid-template-columns:1fr;
-  grid-template-rows:1fr auto;
   overflow:hidden;
+  background:#000;
 }
-.hero-visual{overflow:hidden;position:relative}
-.hero-visual img{object-position:top center}
-.hero-copy{
-  padding:2rem 6vw 2.5rem;
-  background:#fff;
+.hero img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+  opacity:0.85;
 }
-.hero-h1{
+.hero-text{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:3rem 6vw 3.5rem;
+  background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+}
+.hero-h{
   font-family:'DM Serif Display',serif;
   font-style:italic;
-  font-size:13.5vw;
+  font-size:13vw;
   line-height:0.87;
   letter-spacing:-0.02em;
-  color:#111;
+  color:#fff;
 }
-.hero-tagline{
-  font-size:10px;font-weight:300;color:#BEBEBE;
-  letter-spacing:0.3em;margin-top:1.2rem;
+.hero-sub{
+  font-size:10px;font-weight:300;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:0.35em;
+  margin-top:1.2rem;
+  text-transform:uppercase;
 }
 
 @media(min-width:768px){
-  .hero{
-    grid-template-columns:50% 50%;
-    grid-template-rows:1fr;
-  }
-  .hero-visual{order:2}
-  .hero-copy{
-    order:1;
-    display:flex;flex-direction:column;justify-content:center;
-    padding:0 6vw 0 10vw;
-  }
-  .hero-h1{font-size:clamp(3rem,6.5vw,8rem)}
+  .hero{height:calc(100svh - 52px)}
+  .hero-text{padding:4rem 8vw 5rem}
+  .hero-h{font-size:8vw}
 }
 
-/* PRODUCT STRIP — 3枚横並び */
-.pstrip{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:2px;
-  background:#E8E5E0;
-  height:42vw;
+/* ─── MENU SECTION ─── */
+.section-menu{
+  padding:4rem 5vw;
+  background:#fff;
 }
-@media(min-width:768px){.pstrip{height:28vw}}
-.pstrip-item{overflow:hidden}
-.pstrip-item img{object-position:top center;transition:transform 0.7s ease}
-.pstrip-item:hover img{transform:scale(1.05)}
-
-/* TAGLINE BLOCK */
-.tagline-block{
-  padding:3.5rem 6vw;
-  background:#0A0A0A;
-}
-.tagline-block p{
+.sec-title{
   font-family:'DM Serif Display',serif;
   font-style:italic;
-  font-size:clamp(1.6rem,5vw,3.5rem);
-  color:#F5F0E8;
-  line-height:1.15;
-  max-width:700px;
+  font-size:clamp(2.2rem,7vw,4.5rem);
+  color:#111;
+  text-align:center;
+  margin-bottom:2rem;
 }
-
-/* DRINKS — 2×2 grid */
-.drinks{padding:3.5rem 5vw}
-.drinks-label{
-  font-size:9px;font-weight:300;letter-spacing:0.5em;
-  color:#BBB;text-transform:uppercase;margin-bottom:1.5rem;
-}
-.drinks-grid{
+.menu-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:2px;
-  background:rgba(0,0,0,0.07);
+  gap:12px;
 }
-@media(min-width:768px){.drinks-grid{grid-template-columns:repeat(4,1fr)}}
-.drink-card{background:#fff;overflow:hidden}
-.drink-img{
-  aspect-ratio:3/4;overflow:hidden;
+@media(min-width:768px){
+  .menu-grid{grid-template-columns:repeat(4,1fr);gap:16px}
 }
-.drink-img img{object-position:top;transition:transform 0.6s ease}
-.drink-card:hover .drink-img img{transform:scale(1.05)}
-.drink-info{padding:0.9rem 1rem 1.2rem}
-.drink-name{font-size:10px;font-weight:400;letter-spacing:0.07em;color:#111}
-.drink-note{font-size:9px;font-weight:300;color:#BEBEBE;margin-top:3px}
-.drink-price{font-size:10px;font-weight:300;color:#999;margin-top:0.6rem}
+.menu-card{
+  background:#fff;
+  border:1px solid rgba(0,0,0,0.07);
+  overflow:hidden;
+}
+.menu-card-img{
+  aspect-ratio:1/1;
+  overflow:hidden;
+  background:#F5F2EF;
+}
+.menu-card-img img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top;
+  transition:transform 0.6s ease;
+}
+.menu-card:hover .menu-card-img img{transform:scale(1.06)}
+.menu-card-info{
+  padding:0.9rem 1rem 1.1rem;
+  border-top:1px solid rgba(0,0,0,0.06);
+}
+.menu-card-name{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.06em;color:#111;
+  text-transform:uppercase;
+}
+.menu-card-sub{
+  font-size:10px;font-weight:300;
+  color:#AAA;margin-top:3px;
+}
+.menu-card-price{
+  font-size:11px;font-weight:400;
+  color:#444;margin-top:0.6rem;
+}
 
-/* FULL IMAGE */
-.full-img{height:65svh;overflow:hidden}
-@media(min-width:768px){.full-img{height:75svh}}
+/* ─── FULL BLEED ─── */
+.full-bleed{
+  height:60svh;overflow:hidden;
+}
+@media(min-width:768px){.full-bleed{height:75svh}}
+.full-bleed img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+}
 
-/* COMBO — カスタマイズ */
-.combo{
-  padding:3.5rem 5vw;
-  background:#F7F5F2;
+/* ─── DARK SECTION ─── */
+.section-dark{
+  background:#111;
+  padding:4rem 5vw;
 }
-.combo-label{
-  font-size:9px;font-weight:300;letter-spacing:0.5em;
-  color:#BBB;text-transform:uppercase;margin-bottom:2rem;
+.dark-title{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:clamp(2rem,7vw,4rem);
+  color:#fff;
+  margin-bottom:0.5rem;
 }
-.combo-steps{
+.dark-sub{
+  font-size:10px;font-weight:300;
+  color:#555;letter-spacing:0.3em;
+  text-transform:uppercase;
+  margin-bottom:2.5rem;
+}
+.step-grid{
   display:grid;
   grid-template-columns:1fr;
   gap:0;
 }
-@media(min-width:600px){.combo-steps{grid-template-columns:repeat(3,1fr);gap:0;}}
-.combo-step{
+@media(min-width:600px){.step-grid{grid-template-columns:repeat(3,1fr)}}
+.step-item{
   padding:1.5rem 0;
-  border-top:1px solid rgba(0,0,0,0.08);
+  border-top:1px solid #222;
 }
 @media(min-width:600px){
-  .combo-step{padding:1.5rem 2rem 1.5rem 0;border-right:1px solid rgba(0,0,0,0.08);border-top:none}
-  .combo-step:last-child{border-right:none;padding-right:0}
-  .combo-step:first-child{padding-left:0}
+  .step-item{
+    padding:2rem 2rem 2rem 0;
+    border-top:none;
+    border-right:1px solid #222;
+  }
+  .step-item:last-child{border-right:none;padding-right:0}
+  .step-item:not(:first-child){padding-left:2rem}
 }
-.step-num{font-size:9px;color:#CCC;letter-spacing:0.3em;margin-bottom:0.5rem}
-.step-name{font-size:11px;font-weight:400;letter-spacing:0.1em;color:#111}
-.step-items{font-size:11px;font-weight:300;color:#AAA;margin-top:6px;line-height:1.7}
-.combo-total{
-  font-size:9px;font-weight:300;color:#CCC;
-  text-align:right;margin-top:1.5rem;letter-spacing:0.2em;
+.step-n{font-size:9px;color:#333;letter-spacing:0.3em;margin-bottom:0.6rem}
+.step-name{font-size:12px;font-weight:500;letter-spacing:0.1em;color:#fff;text-transform:uppercase}
+.step-items{font-size:11px;font-weight:300;color:#555;margin-top:0.5rem;line-height:1.8}
+.step-total{
+  font-size:9px;font-weight:300;
+  color:#333;letter-spacing:0.3em;
+  text-align:right;margin-top:2rem;
 }
 
-/* LOGO */
+/* ─── 2-COL FEATURE ─── */
+.feature-2col{
+  display:grid;
+  grid-template-columns:1fr;
+}
+@media(min-width:768px){.feature-2col{grid-template-columns:1fr 1fr}}
+.feature-img{
+  aspect-ratio:1/1;overflow:hidden;
+}
+@media(min-width:768px){.feature-img{aspect-ratio:auto;min-height:400px}}
+.feature-img img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+}
+.feature-body{
+  background:#F5F2EF;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:3rem 6vw;
+}
+@media(min-width:768px){.feature-body{padding:4rem 5vw}}
+.feature-label{
+  font-size:9px;font-weight:300;
+  color:#AAA;letter-spacing:0.5em;
+  text-transform:uppercase;margin-bottom:1.2rem;
+}
+.feature-title{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  color:#111;line-height:1.15;
+  margin-bottom:1.2rem;
+}
+.feature-text{
+  font-size:12px;font-weight:300;
+  color:#888;line-height:1.9;
+}
+
+/* ─── LOGO ─── */
 .logo-sec{
   background:#0A0A0A;
-  padding:5rem 4vw;
+  padding:5.5rem 4vw;
   text-align:center;
 }
-.logo-hr{border:none;border-top:1px solid #1A1A1A;margin:0 0 3rem}
+.logo-hr{border:none;border-top:1px solid #191919;margin:0 0 3rem}
 .logo-hr.b{margin:3rem 0 0}
 .logo-mark{max-width:300px;width:65vw;margin:0 auto}
-.logo-est{font-size:9px;font-weight:300;color:#252525;letter-spacing:0.55em;margin-top:1.8rem}
+.logo-label{font-size:9px;font-weight:300;color:#252525;letter-spacing:0.55em;margin-top:1.8rem}
 
-/* FOOTER */
+/* ─── FOOTER ─── */
 footer{
   padding:2.5rem 5vw;
   border-top:1px solid rgba(0,0,0,0.07);
   display:flex;justify-content:space-between;align-items:center;
 }
-.f-brand{font-family:'DM Serif Display',serif;font-style:italic;font-size:14px;color:#111}
-.f-ig{font-size:9px;font-weight:300;color:#CCC;letter-spacing:0.1em}
+.f-name{font-family:'DM Serif Display',serif;font-style:italic;font-size:14px;color:#111}
+.f-handle{font-size:9px;font-weight:300;color:#CCC;letter-spacing:0.1em}
 
-/* FADE */
+/* ─── FADE ─── */
 .fade{opacity:0;transform:translateY(16px);transition:opacity 0.85s ease,transform 0.85s ease}
 .fade.in{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
@@ -182,118 +252,121 @@ footer{
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <span class="h-brand">matcha vibes tokyo</span>
+  <span class="h-name">matcha vibes tokyo</span>
+  <button class="h-order" onclick="void(0)">ORDER NOW</button>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-visual">
-    <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="" loading="eager">
-  </div>
-  <div class="hero-copy">
-    <h1 class="hero-h1">good<br>vibes<br>start<br>here.</h1>
-    <p class="hero-tagline">matcha vibes tokyo</p>
+  <img src="matcha-vibes-assets/cup-hero-final.jpg" alt="" loading="eager">
+  <div class="hero-text">
+    <h1 class="hero-h">good vibes<br>start here.</h1>
+    <p class="hero-sub">matcha vibes tokyo — est. 2026</p>
   </div>
 </section>
 
-<!-- PRODUCT STRIP -->
-<div class="pstrip">
-  <div class="pstrip-item fade">
-    <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="" loading="lazy">
-  </div>
-  <div class="pstrip-item fade d1">
-    <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="" loading="lazy">
-  </div>
-  <div class="pstrip-item fade d2">
-    <img src="matcha-vibes-assets/cup-banana.jpg" alt="" loading="lazy">
-  </div>
-</div>
-
-<!-- TAGLINE -->
-<div class="tagline-block fade">
-  <p>Three layers.<br>Nine combinations.<br>One vibe.</p>
-</div>
-
-<!-- DRINKS -->
-<section class="drinks">
-  <p class="drinks-label fade">drinks</p>
-  <div class="drinks-grid">
-    <div class="drink-card fade">
-      <div class="drink-img"><img src="matcha-vibes-assets/cup-blueberry.jpg" alt="" loading="lazy"></div>
-      <div class="drink-info">
-        <p class="drink-name">BLUEBERRY MATCHA</p>
-        <p class="drink-note">Purple meets green.</p>
-        <p class="drink-price">¥850</p>
+<!-- MENU -->
+<section class="section-menu">
+  <h2 class="sec-title fade">Menu</h2>
+  <div class="menu-grid">
+    <div class="menu-card fade">
+      <div class="menu-card-img">
+        <img src="matcha-vibes-assets/cup-blueberry.jpg" alt="" loading="lazy">
+      </div>
+      <div class="menu-card-info">
+        <p class="menu-card-name">Blueberry Matcha</p>
+        <p class="menu-card-sub">Purple meets green.</p>
+        <p class="menu-card-price">¥850</p>
       </div>
     </div>
-    <div class="drink-card fade d1">
-      <div class="drink-img"><img src="matcha-vibes-assets/cup-yogurt.jpg" alt="" loading="lazy"></div>
-      <div class="drink-info">
-        <p class="drink-name">YOGURT SMOOTHIE</p>
-        <p class="drink-note">Creamy. Always.</p>
-        <p class="drink-price">¥750</p>
+    <div class="menu-card fade d1">
+      <div class="menu-card-img">
+        <img src="matcha-vibes-assets/cup-yogurt.jpg" alt="" loading="lazy">
+      </div>
+      <div class="menu-card-info">
+        <p class="menu-card-name">Yogurt Smoothie</p>
+        <p class="menu-card-sub">Creamy. Always.</p>
+        <p class="menu-card-price">¥750</p>
       </div>
     </div>
-    <div class="drink-card fade">
-      <div class="drink-img"><img src="matcha-vibes-assets/cup-banana.jpg" alt="" loading="lazy"></div>
-      <div class="drink-info">
-        <p class="drink-name">BANANA RECOVERY</p>
-        <p class="drink-note">After the run.</p>
-        <p class="drink-price">¥700</p>
+    <div class="menu-card fade">
+      <div class="menu-card-img">
+        <img src="matcha-vibes-assets/cup-banana.jpg" alt="" loading="lazy">
+      </div>
+      <div class="menu-card-info">
+        <p class="menu-card-name">Banana Recovery</p>
+        <p class="menu-card-sub">After the run.</p>
+        <p class="menu-card-price">¥700</p>
       </div>
     </div>
-    <div class="drink-card fade d1">
-      <div class="drink-img"><img src="matcha-vibes-assets/cup-classic.jpg" alt="" loading="lazy"></div>
-      <div class="drink-info">
-        <p class="drink-name">CLASSIC LATTE</p>
-        <p class="drink-note">Where it starts.</p>
-        <p class="drink-price">¥650</p>
+    <div class="menu-card fade d1">
+      <div class="menu-card-img">
+        <img src="matcha-vibes-assets/cup-classic.jpg" alt="" loading="lazy">
+      </div>
+      <div class="menu-card-info">
+        <p class="menu-card-name">Classic Latte</p>
+        <p class="menu-card-sub">Where it starts.</p>
+        <p class="menu-card-price">¥650</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FULL IMAGE -->
-<div class="full-img fade">
+<!-- FULL BLEED -->
+<div class="full-bleed fade">
   <img src="matcha-vibes-assets/cup-duo.jpg" alt="" loading="lazy">
 </div>
 
-<!-- CUSTOMIZE -->
-<section class="combo">
-  <p class="combo-label fade">customize</p>
-  <div class="combo-steps">
-    <div class="combo-step fade d1">
-      <p class="step-num">01</p>
-      <p class="step-name">BASE</p>
+<!-- DARK: CUSTOMIZE -->
+<section class="section-dark">
+  <h2 class="dark-title fade">Customize</h2>
+  <p class="dark-sub fade">build your cup</p>
+  <div class="step-grid">
+    <div class="step-item fade d1">
+      <p class="step-n">01</p>
+      <p class="step-name">Base</p>
       <p class="step-items">Matcha</p>
     </div>
-    <div class="combo-step fade d1">
-      <p class="step-num">02</p>
-      <p class="step-name">MILK</p>
+    <div class="step-item fade d1">
+      <p class="step-n">02</p>
+      <p class="step-name">Milk</p>
       <p class="step-items">Yogurt<br>Oats<br>Soy</p>
     </div>
-    <div class="combo-step fade d1">
-      <p class="step-num">03</p>
-      <p class="step-name">TOPPING</p>
+    <div class="step-item fade d1">
+      <p class="step-n">03</p>
+      <p class="step-name">Topping</p>
       <p class="step-items">Blueberry<br>Banana<br>None</p>
     </div>
   </div>
-  <p class="combo-total fade">9 combinations.</p>
+  <p class="step-total fade">9 combinations.</p>
 </section>
+
+<!-- 2-COL FEATURE -->
+<div class="feature-2col">
+  <div class="feature-img fade">
+    <img src="matcha-vibes-assets/cup-signature.jpg" alt="" loading="lazy">
+  </div>
+  <div class="feature-body fade d1">
+    <p class="feature-label">our drink</p>
+    <h3 class="feature-title">Three layers.<br>One cup.</h3>
+    <p class="feature-text">Matcha. Your choice of milk. A topping. Layered together in a clear cup — so every combination looks as good as it tastes.</p>
+  </div>
+</div>
 
 <!-- LOGO -->
 <section class="logo-sec">
   <hr class="logo-hr">
   <img class="logo-mark fade" src="matcha-vibes-assets/logo-official.png" alt="matcha vibes tokyo">
   <hr class="logo-hr b">
-  <p class="logo-est fade">est. 2026 — tokyo</p>
+  <p class="logo-label fade">matcha vibes tokyo — est. 2026</p>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <span class="f-brand">matcha vibes tokyo</span>
-  <span class="f-ig">@matchavibes.tokyo</span>
+  <span class="f-name">matcha vibes tokyo</span>
+  <span class="f-handle">@matchavibes.tokyo</span>
 </footer>
 
 <script>

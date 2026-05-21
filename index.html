@@ -268,6 +268,33 @@ h2{font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:clamp(26px,5.
 /* ── COMIC BURST SVG ── */
 .burst-svg{position:absolute;inset:0;pointer-events:none;z-index:2;opacity:0;}
 
+/* ── WHY NANO ── */
+.nano{background:var(--white);border-bottom:4px solid var(--black);}
+.nano h2{color:var(--black);}
+.nano .sl{color:#555;}
+.nano-def{border:3px solid var(--black);background:var(--black);box-shadow:6px 6px 0 rgba(0,0,0,.5);overflow:hidden;margin-bottom:32px;}
+.nano-def-head{background:var(--black);padding:12px 20px;border-bottom:3px solid var(--yellow);}
+.nano-def-head span{font-family:'Bangers',cursive;font-size:13px;letter-spacing:.12em;color:var(--yellow);}
+.nano-def-body{background:var(--white);padding:20px 24px;}
+.nano-def-title{font-family:'Bangers',cursive;font-size:18px;color:var(--black);letter-spacing:.08em;margin-bottom:10px;}
+.nano-def-text{font-size:14px;color:#444;line-height:1.8;}
+.nano-def-text strong{color:var(--red);font-size:16px;}
+.nano-vs{border:3px solid var(--black);overflow:hidden;}
+.nano-vs-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--black);}
+.nano-vs-head>div{padding:12px 16px;font-size:13px;color:rgba(255,255,255,.4);border-right:2px solid rgba(255,255,255,.1);}
+.nano-vs-head>div:last-child{border-right:none;}
+.nvh{font-family:'Bangers',cursive;letter-spacing:.08em;font-size:14px;}
+.nvh-nano{color:var(--yellow)!important;}
+.nvh-big{color:rgba(255,255,255,.35)!important;}
+.nano-vs-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:2px solid rgba(0,0,0,.08);}
+.nano-vs-row:last-child{border-bottom:none;}
+.nano-vs-row>div{padding:14px 16px;font-size:13px;border-right:2px solid rgba(0,0,0,.06);line-height:1.6;vertical-align:middle;}
+.nano-vs-row>div:last-child{border-right:none;}
+.nvr-item{font-weight:900;color:var(--black);background:rgba(0,0,0,.03);}
+.nvr-nano{color:#333;background:#fffff5;}
+.nvr-nano strong{color:var(--red);}
+.nvr-big{color:#bbb;background:#fafafa;}
+
 /* ── FOOTER ── */
 footer{background:var(--black);border-top:4px solid var(--yellow);padding:28px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
 .flogo{font-family:'Bangers',cursive;font-size:18px;color:var(--yellow);letter-spacing:.1em;}
@@ -331,7 +358,7 @@ footer{background:var(--black);border-top:4px solid var(--yellow);padding:28px 3
       <span class="hero-word"><span class="yl">口コミ</span>が</span>
       <span class="hero-word"><span class="rd">売れる。</span></span>
     </h1>
-    <p class="hsub">「広告っぽい」と思われた瞬間、その投稿は終わる。GVAは1,000名以上のリアルなSNSクリエイターネットワークで、広告感ゼロの本物の口コミをワンストップで創出します。</p>
+    <p class="hsub">「広告っぽい」と思われた瞬間、その投稿は終わる。GVAは1,000名以上のリアルなナノインフルエンサーネットワークで、広告感ゼロの本物の口コミをワンストップで創出します。</p>
     <a href="#contact" class="hbtn"><span class="hbtn-shine"></span>無料で相談する →</a>
     <div class="hstats">
       <div class="hs"><span class="hsn">1,000+</span><span class="hsl">Creator Network</span></div>
@@ -345,13 +372,13 @@ footer{background:var(--black);border-top:4px solid var(--yellow);padding:28px 3
 <div class="marquee">
   <div class="mq-inner">
     <span class="mi"><span>★</span>UGC口コミ施策</span>
-    <span class="mi"><span>★</span>1,000名以上のクリエイターネットワーク</span>
+    <span class="mi"><span>★</span>1,000名以上のナノインフルエンサーネットワーク</span>
     <span class="mi"><span>★</span>Instagram / TikTok / X</span>
     <span class="mi"><span>★</span>ステマ規制対応</span>
     <span class="mi"><span>★</span>ワンストップ対応</span>
     <span class="mi"><span>★</span>月次媒体ミックス最適化</span>
     <span class="mi"><span>★</span>UGC口コミ施策</span>
-    <span class="mi"><span>★</span>1,000名以上のクリエイターネットワーク</span>
+    <span class="mi"><span>★</span>1,000名以上のナノインフルエンサーネットワーク</span>
     <span class="mi"><span>★</span>Instagram / TikTok / X</span>
     <span class="mi"><span>★</span>ステマ規制対応</span>
     <span class="mi"><span>★</span>ワンストップ対応</span>
@@ -371,6 +398,61 @@ footer{background:var(--black);border-top:4px solid var(--yellow);padding:28px 3
       <div class="pi gsap-left"><div class="pix">✗</div><div><div class="pit">費用対効果が読めない</div><div class="pis">フォロワーが多くても「広告投稿」と見抜かれたら購買には繋がらない。</div></div></div>
       <div class="pi gsap-left"><div class="pix">✗</div><div><div class="pit">ステマ規制が怖い</div><div class="pis">2023年の規制以降、PR表記の管理工数が増えてスピードが落ちている。</div></div></div>
       <div class="pi gsap-left"><div class="pix">✗</div><div><div class="pit">媒体管理が追いつかない</div><div class="pis">Instagram・TikTok・X——媒体横断の口コミ設計と管理が追いついていない。</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NANO -->
+<section class="sec nano" data-section="nano">
+  <div class="si">
+    <div class="lbl lbl-r gsap-pop">WHY NANO?</div>
+    <h2 class="gsap-up">なぜ「大型インフルエンサー」より<br><span style="color:var(--red)">ナノインフルエンサー</span>なのか？</h2>
+    <p class="sl gsap-up">フォロワー100万人より、フォロワー1万人が10人いる方が売れる。</p>
+
+    <div class="nano-def gsap-left">
+      <div class="nano-def-head"><span>★ DEFINITION — ナノインフルエンサーとは</span></div>
+      <div class="nano-def-body">
+        <div class="nano-def-title">フォロワー1,000〜10,000人の「身近な人」</div>
+        <div class="nano-def-text">テレビや雑誌で活躍するタレントではなく、SNSのコミュニティ内で信頼を積み上げた<strong>一般人に近い存在</strong>のインフルエンサー。フォロワーとの距離が近く、「友達の口コミ」として受け取られるため、大型インフルエンサーでは得られない<strong>高い共感と購買転換力</strong>を持つ。</div>
+      </div>
+    </div>
+
+    <div class="nano-vs gsap-up">
+      <div class="nano-vs-head">
+        <div></div>
+        <div class="nvh nvh-nano">ナノインフルエンサー</div>
+        <div class="nvh nvh-big">大型インフルエンサー</div>
+      </div>
+      <div class="nano-vs-row">
+        <div class="nvr-item">フォロワー数</div>
+        <div class="nvr-nano">1,000〜10,000人</div>
+        <div class="nvr-big">10万〜100万人以上</div>
+      </div>
+      <div class="nano-vs-row">
+        <div class="nvr-item">エンゲージメント率</div>
+        <div class="nvr-nano">最大 <strong>×8倍</strong> 高い</div>
+        <div class="nvr-big">低下傾向（規模が大きいほど下がる）</div>
+      </div>
+      <div class="nano-vs-row">
+        <div class="nvr-item">消費者からの見られ方</div>
+        <div class="nvr-nano">身近な人の<strong>本音の口コミ</strong></div>
+        <div class="nvr-big">広告・宣伝と認識されやすい</div>
+      </div>
+      <div class="nano-vs-row">
+        <div class="nvr-item">購買への影響力</div>
+        <div class="nvr-nano"><strong>高い</strong>（共感・信頼が購買を動かす）</div>
+        <div class="nvr-big">低下（憧れはあるが購買に繋がりにくい）</div>
+      </div>
+      <div class="nano-vs-row">
+        <div class="nvr-item">コスト</div>
+        <div class="nvr-nano">大型の <strong>1/5以下</strong></div>
+        <div class="nvr-big">高額になるケースが多い</div>
+      </div>
+      <div class="nano-vs-row">
+        <div class="nvr-item">同時展開</div>
+        <div class="nvr-nano"><strong>100〜150名</strong>を同時稼働、口コミを量産</div>
+        <div class="nvr-big">単発・少数の起用が中心</div>
+      </div>
     </div>
   </div>
 </section>
@@ -416,9 +498,9 @@ footer{background:var(--black);border-top:4px solid var(--yellow);padding:28px 3
   <div class="si">
     <div class="lbl lbl-b gsap-pop">SERVICE!</div>
     <h2 class="gsap-up">GVA UGC口コミ施策とは</h2>
-    <p class="sl gsap-up">1,000名以上のクリエイターネットワークで、広告感ゼロの口コミを量産する。</p>
+    <p class="sl gsap-up">1,000名以上のナノインフルエンサーネットワークで、広告感ゼロの口コミを量産する。</p>
     <div class="spnl">
-      <div class="sp gsap-up"><div class="spn">01</div><h3>クリエイター選定</h3><p>商品・ターゲットに最適なクリエイターをAI×人力でキャスティング。エンゲージメント率・親和性・品質・コンプライアンスを4軸で審査。</p><div class="stags"><span class="stag">Instagram</span><span class="stag">TikTok</span><span class="stag">X</span></div></div>
+      <div class="sp gsap-up"><div class="spn">01</div><h3>ナノインフルエンサー選定</h3><p>商品・ターゲットに最適なナノインフルエンサーをAI×人力でキャスティング。エンゲージメント率・親和性・品質・コンプライアンスを4軸で審査。</p><div class="stags"><span class="stag">Instagram</span><span class="stag">TikTok</span><span class="stag">X</span></div></div>
       <div class="sp gsap-up"><div class="spn">02</div><h3>投稿設計・管理</h3><p>ステマ規制対応のディレクション、投稿原稿確認、スケジュール管理まで一括対応。PR表記を遵守しながら最大の自然感を引き出す。</p><div class="stags"><span class="stag">ステマ規制対応</span><span class="stag">原稿確認</span></div></div>
       <div class="sp gsap-up"><div class="spn">03</div><h3>効果測定・レポート</h3><p>投稿後のインプレッション・エンゲージメント・UGC二次利用を含む効果測定レポートを月次で提供。</p><div class="stags"><span class="stag">効果測定</span><span class="stag">月次レポート</span></div></div>
     </div>
@@ -433,8 +515,8 @@ footer{background:var(--black);border-top:4px solid var(--yellow);padding:28px 3
     <p class="sl gsap-up">GVAがワンストップで対応するから、クライアントの負担はほぼゼロ。</p>
     <div class="fl">
       <div class="fs gsap-left"><div class="fsn">STEP 01</div><div class="fsc"><h3>無料ヒアリング</h3><p>商品・ターゲット・予算感をオンラインで（30分）。</p></div><div class="fsnote">30分</div></div>
-      <div class="fs gsap-left"><div class="fsn">STEP 02</div><div class="fsc"><h3>クリエイター選定・提案</h3><p>最適な候補と施策プランを提案（3営業日以内）。</p></div><div class="fsnote">3営業日</div></div>
-      <div class="fs gsap-left"><div class="fsn">STEP 03</div><div class="fsc"><h3>投稿設計・クリエイター手配</h3><p>PR表記対応ディレクション・原稿確認・スケジュール管理。</p></div><div class="fsnote">全て込み</div></div>
+      <div class="fs gsap-left"><div class="fsn">STEP 02</div><div class="fsc"><h3>ナノインフルエンサー選定・提案</h3><p>最適な候補と施策プランを提案（3営業日以内）。</p></div><div class="fsnote">3営業日</div></div>
+      <div class="fs gsap-left"><div class="fsn">STEP 03</div><div class="fsc"><h3>投稿設計・ナノインフルエンサー手配</h3><p>PR表記対応ディレクション・原稿確認・スケジュール管理。</p></div><div class="fsnote">全て込み</div></div>
       <div class="fs gsap-left"><div class="fsn">STEP 04</div><div class="fsc"><h3>拡散・モニタリング</h3><p>投稿後のエンゲージメントをリアルタイムで追跡。</p></div><div class="fsnote">常時監視</div></div>
       <div class="fs gsap-left"><div class="fsn">STEP 05</div><div class="fsc"><h3>効果測定・レポート</h3><p>月次レポートで可視化。次回施策の改善案を提案。</p></div><div class="fsnote">月次</div></div>
     </div>
@@ -446,7 +528,7 @@ footer{background:var(--black);border-top:4px solid var(--yellow);padding:28px 3
 <section class="sec criteria" data-section="criteria">
   <div class="si">
     <div class="lbl lbl-b gsap-pop">SELECTION!</div>
-    <h2 class="gsap-up">GVA独自<br>クリエイター選定基準</h2>
+    <h2 class="gsap-up">GVA独自<br>ナノインフルエンサー選定基準</h2>
     <p class="sl gsap-up">数を集めるだけじゃない。「売れる口コミ」を生む人を、4基準で絞り込む。</p>
     <div class="cl">
       <div class="ci gsap-right"><div class="cib">ENG RATE</div><div class="cic"><h3>エンゲージメント率 3%以上</h3><p>フォロワー数より「反応率」を重視。実際に購買行動に繋がるアカウントを選定。</p></div></div>
@@ -462,9 +544,9 @@ footer{background:var(--black);border-top:4px solid var(--yellow);padding:28px 3
   <div class="si">
     <div class="lbl lbl-y gsap-pop">WHAT WE DO!</div>
     <h2 class="gsap-up">GVAがワンストップで対応</h2>
-    <p class="sl gsap-up">クリエイター探しから効果測定まで全てGVAに任せてください。</p>
+    <p class="sl gsap-up">ナノインフルエンサー選定から効果測定まで全てGVAに任せてください。</p>
     <ul class="wl">
-      <li class="wi gsap-left">クリエイター選定・キャスティング（1,000名以上から厳選）</li>
+      <li class="wi gsap-left">ナノインフルエンサー選定・キャスティング（1,000名以上から厳選）</li>
       <li class="wi gsap-left">投稿設計・原稿ディレクション（ステマ規制対応・PR表記遵守）</li>
       <li class="wi gsap-left">スケジュール・納品物管理（投稿日時・内容確認・修正対応）</li>
       <li class="wi gsap-left">効果測定・レポーティング（インプレッション・ENG可視化）</li>
@@ -491,10 +573,10 @@ footer{background:var(--black);border-top:4px solid var(--yellow);padding:28px 3
       <div class="pc gsap-left">
         <div class="pt">Standard</div>
         <div class="pp">56<span>万円〜/月</span></div>
-        <div class="pcnt">クリエイター 100名アサイン</div>
+        <div class="pcnt">ナノインフルエンサー 100名アサイン</div>
         <div class="pn">媒体を横断して口コミを量産したい方向け</div>
         <ul class="pclist">
-          <li>100名クリエイターアサイン</li><li>Instagram / X / TikTok 対応</li><li>媒体比率の月次調整</li><li>投稿ディレクション・PR表記対応</li><li>月次詳細レポート</li><li>UGC二次利用サポート</li>
+          <li>100名ナノインフルエンサーアサイン</li><li>Instagram / X / TikTok 対応</li><li>媒体比率の月次調整</li><li>投稿ディレクション・PR表記対応</li><li>月次詳細レポート</li><li>UGC二次利用サポート</li>
         </ul>
         <p class="pnote">※単価の目安：約5,600円 / 名<br>※リール特化の場合は別途相談</p>
       </div>
@@ -502,10 +584,10 @@ footer{background:var(--black);border-top:4px solid var(--yellow);padding:28px 3
         <span class="pb">POPULAR!</span>
         <div class="pt">Premium</div>
         <div class="pp">85<span>万円〜/月</span></div>
-        <div class="pcnt">クリエイター 150名アサイン</div>
+        <div class="pcnt">ナノインフルエンサー 150名アサイン</div>
         <div class="pn">最大規模でインプレッションを刈り取りたい方向け</div>
         <ul class="pclist">
-          <li>150名クリエイターアサイン</li><li>Instagram / X / TikTok 対応</li><li>媒体比率の月次最適化（専任設計）</li><li>投稿ディレクション・PR表記対応</li><li>月次詳細レポート</li><li>UGC二次利用サポート</li><li>専任担当者アサイン</li><li>広告配信との連動提案</li>
+          <li>150名ナノインフルエンサーアサイン</li><li>Instagram / X / TikTok 対応</li><li>媒体比率の月次最適化（専任設計）</li><li>投稿ディレクション・PR表記対応</li><li>月次詳細レポート</li><li>UGC二次利用サポート</li><li>専任担当者アサイン</li><li>広告配信との連動提案</li>
         </ul>
         <p class="pnote">※単価の目安：約5,600円 / 名<br>※GVA所属タレントとの組み合わせも対応可</p>
       </div>

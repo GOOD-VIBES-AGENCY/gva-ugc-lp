@@ -4,414 +4,1494 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UGC口コミ施策 | GOOD VIBES AGENCY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif; color: #1a1a1a; background: #fff; }
+:root {
+  --gold: #e8c96d;
+  --gold-dim: rgba(232,201,109,0.15);
+  --dark: #0a0a0a;
+  --dark2: #111;
+  --dark3: #1a1a1a;
+  --gray: #888;
+  --light: #f7f7f7;
+  --text: #1a1a1a;
+  --white: #ffffff;
+}
 
-  /* Hero */
-  .hero {
-    background: #0a0a0a;
-    color: #fff;
-    padding: 100px 40px;
-    text-align: center;
-  }
-  .hero .label {
-    font-size: 12px;
-    letter-spacing: 4px;
-    color: #888;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-  }
-  .hero h1 {
-    font-size: clamp(28px, 5vw, 52px);
-    font-weight: 800;
-    line-height: 1.3;
-    margin-bottom: 20px;
-    letter-spacing: -0.5px;
-  }
-  .hero h1 span { color: #e8c96d; }
-  .hero .sub {
-    font-size: 16px;
-    color: #aaa;
-    max-width: 600px;
-    margin: 0 auto 40px;
-    line-height: 1.8;
-  }
-  .hero .cta-btn {
-    display: inline-block;
-    background: #e8c96d;
-    color: #0a0a0a;
-    padding: 18px 48px;
-    border-radius: 4px;
-    font-size: 15px;
-    font-weight: 700;
-    text-decoration: none;
-    letter-spacing: 1px;
-  }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+  color: var(--text);
+  background: #fff;
+  overflow-x: hidden;
+}
 
-  /* Section */
-  section { padding: 80px 40px; max-width: 900px; margin: 0 auto; }
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: #888;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 800; margin-bottom: 16px; line-height: 1.4; }
-  h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
-  p { font-size: 15px; line-height: 1.9; color: #444; }
+/* ===================== SCROLL PROGRESS ===================== */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: var(--gold);
+  z-index: 9999;
+  width: 0%;
+  transition: width 0.1s linear;
+}
 
-  /* Divider */
-  .divider { border: none; border-top: 1px solid #eee; max-width: 900px; margin: 0 auto; }
+/* ===================== NAV ===================== */
+nav {
+  position: fixed;
+  top: 3px; left: 0; right: 0;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.nav-cta {
+  background: var(--gold);
+  color: var(--dark);
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.85; }
 
-  /* Pain Section */
-  .pain { background: #f7f7f7; padding: 80px 40px; }
-  .pain-inner { max-width: 900px; margin: 0 auto; }
-  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 40px; }
-  .pain-card { background: #fff; border-left: 4px solid #e8c96d; padding: 24px; border-radius: 0 8px 8px 0; }
-  .pain-card h3 { font-size: 15px; margin-bottom: 8px; }
-  .pain-card p { font-size: 14px; color: #666; }
+/* ===================== HERO ===================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  background: var(--dark);
+  padding: 120px 40px 80px;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('hero-bg.jpg') center/cover no-repeat;
+  opacity: 0.25;
+  filter: saturate(0.7);
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, rgba(232,201,109,0.08) 0%, transparent 70%),
+              linear-gradient(to bottom, transparent 60%, var(--dark) 100%);
+}
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+  animation: float-up var(--dur) var(--delay) infinite ease-in-out;
+}
+@keyframes float-up {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 0.4; }
+  90%  { opacity: 0.1; }
+  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+}
+.hero-inner { position: relative; z-index: 2; max-width: 820px; }
+.hero-label {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  padding: 6px 16px;
+  border: 1px solid rgba(232,201,109,0.4);
+  border-radius: 20px;
+}
+.hero h1 {
+  font-size: clamp(32px, 5.5vw, 64px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--gold);
+  position: relative;
+}
+.hero h1 em::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: underline-in 0.8s 1.2s forwards ease-out;
+}
+@keyframes underline-in {
+  to { transform: scaleX(1); }
+}
+.hero-sub {
+  font-size: 16px;
+  color: #aaa;
+  max-width: 560px;
+  margin: 0 auto 40px;
+  line-height: 1.9;
+}
+.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--dark);
+  padding: 18px 48px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(232,201,109,0.4);
+}
+.btn-secondary {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 18px 40px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-secondary:hover { border-color: var(--gold); background: rgba(232,201,109,0.08); }
 
-  /* Data Section */
-  .data-highlight { background: #0a0a0a; color: #fff; padding: 80px 40px; }
-  .data-highlight-inner { max-width: 900px; margin: 0 auto; }
-  .data-highlight h2 { color: #fff; }
-  .data-highlight .section-label { color: #666; }
-  .data-table { width: 100%; border-collapse: collapse; margin: 40px 0; }
-  .data-table th { background: #1a1a1a; color: #888; font-size: 12px; letter-spacing: 2px; padding: 12px 16px; text-align: left; }
-  .data-table td { padding: 16px; border-bottom: 1px solid #222; font-size: 15px; color: #ddd; }
-  .data-table tr.top td { color: #e8c96d; font-weight: 700; }
-  .big-stat { display: flex; gap: 48px; margin: 48px 0; flex-wrap: wrap; }
-  .big-stat .stat { }
-  .big-stat .num { font-size: 48px; font-weight: 800; color: #e8c96d; }
-  .big-stat .unit { font-size: 16px; color: #e8c96d; }
-  .big-stat .desc { font-size: 13px; color: #888; margin-top: 4px; }
-  .quote-box { border-left: 3px solid #e8c96d; padding: 20px 24px; background: #111; margin: 40px 0; }
-  .quote-box p { color: #aaa; font-size: 14px; line-height: 1.9; }
+/* Hero stats ticker */
+.hero-stats {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  z-index: 2;
+}
+.hero-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 48px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.hero-stat-item:last-child { border-right: none; }
+.hero-stat-num {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 1px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
 
-  /* Service */
-  .sns-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0; }
-  .sns-card { border: 1px solid #eee; border-radius: 8px; padding: 24px; text-align: center; }
-  .sns-card .icon { font-size: 28px; margin-bottom: 12px; }
-  .sns-card h3 { font-size: 15px; margin-bottom: 8px; }
-  .sns-card p { font-size: 13px; color: #666; }
-  .adjust-box { background: #f7f7f7; border-radius: 8px; padding: 24px 32px; margin: 24px 0; }
-  .adjust-box p { font-size: 14px; margin-bottom: 8px; }
-  .adjust-box .arrow { color: #e8c96d; font-weight: 700; margin-right: 8px; }
+/* ===================== MARQUEE ===================== */
+.marquee-wrap {
+  background: var(--gold);
+  overflow: hidden;
+  padding: 12px 0;
+}
+.marquee-inner {
+  display: flex;
+  gap: 48px;
+  animation: marquee-scroll 20s linear infinite;
+  white-space: nowrap;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-item {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.marquee-dot {
+  width: 4px; height: 4px;
+  background: var(--dark);
+  border-radius: 50%;
+  opacity: 0.4;
+}
 
-  /* Criteria */
-  .criteria-table { width: 100%; border-collapse: collapse; margin: 32px 0; }
-  .criteria-table th { background: #f0f0f0; padding: 12px 16px; text-align: left; font-size: 13px; letter-spacing: 1px; color: #555; }
-  .criteria-table td { padding: 16px; border-bottom: 1px solid #eee; font-size: 14px; }
-  .criteria-table td:first-child { font-weight: 700; width: 100px; }
+/* ===================== SECTION BASE ===================== */
+.section { padding: 100px 40px; }
+.section-inner { max-width: 960px; margin: 0 auto; }
+.section-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.section-desc {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.9;
+  max-width: 680px;
+}
 
-  /* Simulation */
-  .sim-bg { background: #f7f7f7; padding: 80px 40px; }
-  .sim-inner { max-width: 900px; margin: 0 auto; }
-  .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 40px 0; }
-  .sim-card { background: #fff; border-radius: 12px; padding: 32px; border-top: 4px solid #e8c96d; }
-  .sim-card .plan-name { font-size: 12px; letter-spacing: 3px; color: #888; text-transform: uppercase; margin-bottom: 8px; }
-  .sim-card .plan-price { font-size: 28px; font-weight: 800; margin-bottom: 24px; }
-  .sim-card .plan-price span { font-size: 14px; font-weight: 400; color: #888; }
-  .sim-card table { width: 100%; }
-  .sim-card table td { padding: 8px 0; font-size: 14px; border-bottom: 1px solid #f0f0f0; }
-  .sim-card table td:first-child { color: #888; }
-  .sim-card table td:last-child { font-weight: 700; text-align: right; }
-  .sim-note { font-size: 12px; color: #999; line-height: 1.8; margin-top: 16px; }
+/* ===================== REVEAL ANIMATION ===================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
 
-  /* Deliverables */
-  .check-list { list-style: none; margin: 32px 0; }
-  .check-list li { padding: 14px 0; border-bottom: 1px solid #eee; font-size: 15px; display: flex; align-items: center; gap: 12px; }
-  .check-list li::before { content: "✓"; color: #e8c96d; font-weight: 800; font-size: 16px; }
+/* ===================== PROBLEM ===================== */
+.problem-section { background: var(--light); }
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+}
+.problem-card {
+  background: #fff;
+  border-left: 3px solid var(--gold);
+  padding: 28px 24px;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.problem-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.problem-icon { font-size: 24px; margin-bottom: 12px; }
+.problem-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+.problem-card p { font-size: 14px; color: #666; line-height: 1.8; }
 
-  /* Pricing */
-  .price-bg { background: #0a0a0a; padding: 80px 40px; }
-  .price-inner { max-width: 900px; margin: 0 auto; }
-  .price-bg h2 { color: #fff; }
-  .price-bg .section-label { color: #666; }
-  .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 40px 0; }
-  .price-card { border: 1px solid #333; border-radius: 12px; padding: 40px 32px; }
-  .price-card.featured { border-color: #e8c96d; background: #111; }
-  .price-card .badge { display: inline-block; background: #e8c96d; color: #0a0a0a; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; letter-spacing: 1px; margin-bottom: 16px; }
-  .price-card .plan { font-size: 12px; letter-spacing: 3px; color: #666; text-transform: uppercase; margin-bottom: 8px; }
-  .price-card .price { font-size: 36px; font-weight: 800; color: #fff; margin-bottom: 4px; }
-  .price-card .price-sub { font-size: 13px; color: #666; margin-bottom: 24px; }
-  .price-card .imp { font-size: 14px; color: #e8c96d; margin-bottom: 24px; }
-  .price-card .features { list-style: none; }
-  .price-card .features li { font-size: 14px; color: #aaa; padding: 8px 0; border-bottom: 1px solid #222; }
-  .price-card .features li::before { content: "—  "; color: #555; }
+/* ===================== DATA ===================== */
+.data-section {
+  background: var(--dark);
+  color: #fff;
+}
+.data-section .section-label { color: #555; }
+.data-section .section-title { color: #fff; }
+.data-section .section-desc { color: #888; }
 
-  /* FAQ */
-  .faq-list { margin: 40px 0; }
-  .faq-item { border-bottom: 1px solid #eee; padding: 24px 0; }
-  .faq-item .q { font-weight: 700; font-size: 15px; margin-bottom: 10px; }
-  .faq-item .q::before { content: "Q.  "; color: #e8c96d; }
-  .faq-item .a { font-size: 14px; color: #666; line-height: 1.8; padding-left: 22px; }
+.big-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0;
+  margin: 56px 0;
+  border: 1px solid #222;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.big-stat {
+  padding: 40px 32px;
+  border-right: 1px solid #222;
+  transition: background 0.3s;
+}
+.big-stat:last-child { border-right: none; }
+.big-stat:hover { background: rgba(232,201,109,0.05); }
+.big-stat .num {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.big-stat .unit { font-size: 20px; font-weight: 700; color: var(--gold); }
+.big-stat .desc { font-size: 13px; color: #666; margin-top: 8px; line-height: 1.6; }
 
-  /* CTA */
-  .cta-section { background: #e8c96d; padding: 80px 40px; text-align: center; }
-  .cta-section h2 { color: #0a0a0a; font-size: 28px; margin-bottom: 12px; }
-  .cta-section p { color: #333; margin-bottom: 32px; font-size: 15px; }
-  .cta-section .btn { display: inline-block; background: #0a0a0a; color: #fff; padding: 18px 56px; border-radius: 4px; font-size: 15px; font-weight: 700; text-decoration: none; }
-  .cta-section .contact-info { margin-top: 32px; font-size: 14px; color: #555; }
+.data-bars { margin: 48px 0; }
+.data-bar-item { margin-bottom: 20px; }
+.data-bar-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.data-bar-label { font-size: 14px; color: #aaa; }
+.data-bar-val { font-size: 14px; font-weight: 700; color: var(--gold); }
+.data-bar-track {
+  height: 6px;
+  background: #222;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.data-bar-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 3px;
+  width: 0%;
+  transition: width 1.2s ease;
+}
 
-  /* Footer */
-  footer { background: #0a0a0a; color: #555; text-align: center; padding: 32px; font-size: 12px; }
+.case-box {
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 40px;
+  margin: 48px 0;
+  background: var(--dark2);
+  position: relative;
+  overflow: hidden;
+}
+.case-box::before {
+  content: 'CASE STUDY';
+  position: absolute;
+  top: 24px; right: 24px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #333;
+  font-weight: 700;
+}
+.case-box-tag {
+  display: inline-block;
+  background: rgba(232,201,109,0.15);
+  border: 1px solid rgba(232,201,109,0.3);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.case-box h3 {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+.case-box .case-meta {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 28px;
+}
+.case-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.case-kpi {
+  background: #111;
+  border-radius: 8px;
+  padding: 20px;
+  border-top: 2px solid var(--gold);
+}
+.case-kpi .kpi-num {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+.case-kpi .kpi-label {
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+.case-insight {
+  background: #111;
+  border-left: 3px solid var(--gold);
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+}
+.case-insight p {
+  font-size: 14px;
+  color: #999;
+  line-height: 1.8;
+}
+.case-insight strong { color: var(--gold); }
+.case-ongoing {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #4ade80;
+}
+.case-ongoing::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(74,222,128,0.2);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(74,222,128,0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(74,222,128,0.1); }
+}
 
-  @media (max-width: 640px) {
-    .sns-grid { grid-template-columns: 1fr; }
-    .sim-grid, .price-grid { grid-template-columns: 1fr; }
-    .big-stat { gap: 24px; }
-    section, .pain, .sim-bg, .data-highlight, .price-bg { padding: 60px 20px; }
-  }
+/* ===================== SERVICE ===================== */
+.sns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+.sns-card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.sns-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 8px 32px rgba(232,201,109,0.12);
+  transform: translateY(-4px);
+}
+.sns-icon { font-size: 32px; margin-bottom: 12px; }
+.sns-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+.sns-card p { font-size: 13px; color: #666; line-height: 1.7; }
+
+.adjust-box {
+  background: var(--dark);
+  border-radius: 12px;
+  padding: 32px;
+  margin: 28px 0;
+  border: 1px solid #222;
+}
+.adjust-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.adjust-title::before {
+  content: '';
+  display: inline-block;
+  width: 3px; height: 14px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+.adjust-items { display: flex; flex-direction: column; gap: 10px; }
+.adjust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #111;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #aaa;
+}
+.adjust-item::before {
+  content: '→';
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ===================== CRITERIA ===================== */
+.criteria-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+.criteria-card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 28px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.criteria-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.criteria-tag {
+  display: inline-block;
+  background: var(--gold-dim);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.criteria-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+.criteria-card p { font-size: 14px; color: #666; line-height: 1.7; }
+
+/* ===================== WORKFLOW ===================== */
+.workflow-section { background: var(--dark); }
+.workflow-section .section-title { color: #fff; }
+.workflow-section .section-label { color: #555; }
+.workflow-section .section-desc { color: #888; }
+.workflow-steps {
+  position: relative;
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.workflow-steps::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+.workflow-step {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 24px 0;
+  position: relative;
+  transition: opacity 0.3s;
+}
+.workflow-step:hover { opacity: 0.9; }
+.step-num {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #111;
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--gold);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.step-content { padding-top: 12px; }
+.step-content h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.step-content p { font-size: 14px; color: #666; line-height: 1.7; }
+.step-badge {
+  display: inline-block;
+  background: rgba(232,201,109,0.12);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+/* ===================== PRICING ===================== */
+.pricing-section { background: var(--dark); }
+.pricing-section .section-title { color: #fff; }
+.pricing-section .section-label { color: #555; }
+.pricing-section .section-desc { color: #888; }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+.price-card {
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 44px 36px;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  background: var(--dark2);
+}
+.price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+}
+.price-card.featured {
+  border-color: var(--gold);
+  background: #111;
+  position: relative;
+}
+.price-card.featured::before {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--dark);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  padding: 4px 16px;
+  border-radius: 0 0 8px 8px;
+}
+.price-plan { font-size: 11px; letter-spacing: 4px; color: #555; text-transform: uppercase; margin-bottom: 8px; }
+.price-amount { font-size: 44px; font-weight: 900; color: #fff; line-height: 1; margin-bottom: 4px; }
+.price-amount span { font-size: 16px; font-weight: 400; color: #555; }
+.price-count {
+  font-size: 14px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.price-imp { font-size: 13px; color: #555; margin-bottom: 32px; }
+.price-divider { border: none; border-top: 1px solid #222; margin: 24px 0; }
+.price-features { list-style: none; }
+.price-features li {
+  font-size: 14px;
+  color: #aaa;
+  padding: 9px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #1a1a1a;
+}
+.price-features li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.price-note { font-size: 12px; color: #444; margin-top: 20px; line-height: 1.7; }
+.price-cta {
+  display: block;
+  text-align: center;
+  margin-top: 28px;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.price-cta-primary {
+  background: var(--gold);
+  color: var(--dark);
+}
+.price-cta-primary:hover {
+  box-shadow: 0 8px 24px rgba(232,201,109,0.4);
+  transform: translateY(-1px);
+}
+.price-cta-outline {
+  border: 1px solid #333;
+  color: #888;
+}
+.price-cta-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.option-box {
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 24px;
+  background: #111;
+}
+.option-tag {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.option-box h3 { font-size: 18px; color: #fff; font-weight: 800; margin-bottom: 8px; }
+.option-box p { font-size: 14px; color: #666; line-height: 1.8; }
+
+.pricing-note {
+  font-size: 12px;
+  color: #444;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* ===================== DELIVERABLES ===================== */
+.check-list { list-style: none; margin-top: 40px; }
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 15px;
+  color: #333;
+}
+.check-list li .check-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--gold-dim);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ===================== FAQ ===================== */
+.faq-section { background: var(--light); }
+.faq-list { margin-top: 40px; }
+.faq-item {
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: box-shadow 0.3s;
+}
+.faq-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.faq-q {
+  padding: 22px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  user-select: none;
+}
+.faq-q::before { content: 'Q.'; color: var(--gold); font-weight: 900; flex-shrink: 0; }
+.faq-toggle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: transform 0.3s, background 0.3s;
+}
+.faq-item.open .faq-toggle {
+  transform: rotate(45deg);
+  background: var(--gold);
+  color: var(--dark);
+}
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.faq-a-inner {
+  padding: 0 28px 22px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.9;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 16px;
+}
+.faq-item.open .faq-a { max-height: 300px; }
+
+/* ===================== CTA ===================== */
+.cta-section {
+  background: var(--gold);
+  padding: 100px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(0,0,0,0.02) 10px,
+    rgba(0,0,0,0.02) 20px
+  );
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: rgba(0,0,0,0.5);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.cta-section h2 {
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 900;
+  color: var(--dark);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.cta-section p {
+  font-size: 16px;
+  color: rgba(0,0,0,0.6);
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+.cta-btn-dark {
+  display: inline-block;
+  background: var(--dark);
+  color: #fff;
+  padding: 20px 60px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cta-btn-dark:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+}
+.cta-badges {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.cta-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cta-badge::before { content: '✓'; color: var(--dark); font-weight: 900; }
+.cta-mail {
+  margin-top: 28px;
+  font-size: 14px;
+  color: rgba(0,0,0,0.5);
+}
+.cta-mail a { color: var(--dark); font-weight: 700; text-decoration: none; }
+
+/* ===================== FOOTER ===================== */
+footer {
+  background: var(--dark);
+  color: #444;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { color: #444; text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-logo { color: var(--gold); font-weight: 800; font-size: 13px; letter-spacing: 2px; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .hero { padding: 100px 24px 80px; }
+  .hero-stats { flex-wrap: wrap; }
+  .hero-stat-item { flex: 1 1 40%; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .section { padding: 60px 24px; }
+  .sns-grid { grid-template-columns: 1fr; }
+  .criteria-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .case-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .big-stats { grid-template-columns: repeat(2, 1fr); }
+  .big-stat { border-bottom: 1px solid #222; }
+  footer { flex-direction: column; text-align: center; }
+  .workflow-steps::before { left: 20px; }
+  .step-num { width: 40px; height: 40px; font-size: 12px; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 28px; }
+  .hero-stat-item { padding: 16px 20px; }
+  .hero-stat-num { font-size: 22px; }
+}
 </style>
 </head>
 <body>
 
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">GVA</a>
+  <a href="#contact" class="nav-cta">無料で相談する</a>
+</nav>
+
 <!-- HERO -->
 <div class="hero">
-  <p class="label">GOOD VIBES AGENCY — UGC Marketing</p>
-  <h1>インフルエンサーより、<br><span>口コミが売れる</span>時代へ。</h1>
-  <p class="sub">「広告っぽい」と思われた瞬間、その投稿は終わる。<br>GVAは1,000名以上のリアルなSNSクリエイターネットワークで、<br>広告感ゼロの本物の口コミをワンストップで創出します。</p>
-  <a href="#contact" class="cta-btn">無料で相談する</a>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles" id="particles"></div>
+
+  <div class="hero-inner">
+    <div class="hero-label">GOOD VIBES AGENCY — UGC Marketing</div>
+    <h1>インフルエンサーより、<br><em>口コミが売れる。</em></h1>
+    <p class="hero-sub">「広告っぽい」と思われた瞬間、その投稿は終わる。<br>GVAは1,000名以上のリアルなSNSクリエイターネットワークで、<br>広告感ゼロの本物の口コミをワンストップで創出します。</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">無料で相談する →</a>
+      <a href="#service" class="btn-secondary">サービスを見る</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">1,000<span style="font-size:16px;">+</span></div>
+      <div class="hero-stat-label">Creator Network</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">×8</div>
+      <div class="hero-stat-label">Impression Multiplier</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">74<span style="font-size:16px;">%</span></div>
+      <div class="hero-stat-label">UGC Impact Rate</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">3</div>
+      <div class="hero-stat-label">SNS Platforms</div>
+    </div>
+  </div>
 </div>
 
-<!-- PAIN -->
-<div class="pain">
-  <div class="pain-inner">
-    <p class="section-label">Problem</p>
-    <h2>こんなお悩みはありませんか？</h2>
-    <div class="pain-grid">
-      <div class="pain-card">
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner" id="marquee">
+    <span class="marquee-item">UGC口コミ施策 <span class="marquee-dot"></span></span>
+    <span class="marquee-item">1,000名以上のクリエイターネットワーク <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Instagram / TikTok / X <span class="marquee-dot"></span></span>
+    <span class="marquee-item">ステマ規制対応 <span class="marquee-dot"></span></span>
+    <span class="marquee-item">ワンストップ対応 <span class="marquee-dot"></span></span>
+    <span class="marquee-item">月次媒体ミックス最適化 <span class="marquee-dot"></span></span>
+    <span class="marquee-item">UGC口コミ施策 <span class="marquee-dot"></span></span>
+    <span class="marquee-item">1,000名以上のクリエイターネットワーク <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Instagram / TikTok / X <span class="marquee-dot"></span></span>
+    <span class="marquee-item">ステマ規制対応 <span class="marquee-dot"></span></span>
+    <span class="marquee-item">ワンストップ対応 <span class="marquee-dot"></span></span>
+    <span class="marquee-item">月次媒体ミックス最適化 <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<div class="problem-section section">
+  <div class="section-inner">
+    <p class="section-label reveal">Problem</p>
+    <h2 class="section-title reveal reveal-delay-1">こんなお悩み、ありませんか？</h2>
+    <p class="section-desc reveal reveal-delay-2">インフルエンサーPRの課題が、年々大きくなっている。</p>
+    <div class="problem-grid">
+      <div class="problem-card reveal reveal-delay-2">
+        <div class="problem-icon">💸</div>
         <h3>費用対効果が読めない</h3>
         <p>フォロワーが多いほど単価は高くなる。でも「広告投稿」と見抜かれたら、どんなに有名なインフルエンサーでも購買には繋がらない。</p>
       </div>
-      <div class="pain-card">
+      <div class="problem-card reveal reveal-delay-3">
+        <div class="problem-icon">⚠️</div>
         <h3>ステマ規制が怖い</h3>
-        <p>2023年のステマ規制以降、PR表記の義務化により投稿ディレクションはより慎重さが求められる。管理工数が増えて施策のスピードが落ちている。</p>
+        <p>2023年の規制以降、PR表記の管理工数が急増。ディレクションが複雑になり、施策スピードが著しく低下している。</p>
       </div>
-      <div class="pain-card">
+      <div class="problem-card reveal reveal-delay-4">
+        <div class="problem-icon">🔀</div>
         <h3>媒体管理が追いつかない</h3>
-        <p>アフィリエイト月はInstagram、キャンペーン月はX、認知拡大月はTikTok——媒体を横断した口コミ設計と管理が追いついていない。</p>
+        <p>アフィ月はInstagram、キャンペーン月はX、認知拡大月はTikTok——媒体横断の口コミ設計と管理が追いついていない。</p>
       </div>
     </div>
   </div>
 </div>
 
 <!-- DATA -->
-<div class="data-highlight">
-  <div class="data-highlight-inner">
-    <p class="section-label">Data</p>
-    <h2>データが証明する。<br>「小さな口コミ」が最もインプレッションを生む。</h2>
-    <p style="color:#888; margin-top:12px;">GVAが実際に支援するブランドの施策データより（2026年1月 実績）</p>
+<div class="data-section section" id="data">
+  <div class="section-inner">
+    <p class="section-label reveal">Data</p>
+    <h2 class="section-title reveal reveal-delay-1">データが証明する。<br>「小さな口コミ」が最もインプレッションを生む。</h2>
+    <p class="section-desc reveal reveal-delay-2">GVA支援ブランドの施策データより（2026年1月 実績）</p>
 
-    <div class="big-stat">
-      <div class="stat">
-        <div class="num">59<span class="unit">%</span></div>
-        <div class="desc">UGCが全施策インプレッションに占める割合</div>
+    <div class="big-stats reveal reveal-delay-2">
+      <div class="big-stat">
+        <div class="num"><span class="counter" data-target="340936" data-format="comma">0</span></div>
+        <div class="desc">月間合計インプレッション数<br>（1ヶ月・145本の投稿）</div>
       </div>
-      <div class="stat">
-        <div class="num">8<span class="unit">倍</span></div>
-        <div class="desc">FW6,481人のクリエイターが獲得した<br>インプレッション（FW比）</div>
+      <div class="big-stat">
+        <div class="num"><span class="counter" data-target="74">0</span><span class="unit">%</span></div>
+        <div class="desc">UGCが全施策の<br>インプレッションに占める割合</div>
       </div>
-      <div class="stat">
-        <div class="num">251,982</div>
-        <div class="desc">UGC施策単体のインプレッション数<br>（1ヶ月）</div>
+      <div class="big-stat">
+        <div class="num">×<span class="counter" data-target="8">0</span></div>
+        <div class="desc">FW6,500人のクリエイターが<br>フォロワー比8倍のimpを獲得</div>
+      </div>
+      <div class="big-stat">
+        <div class="num"><span class="counter" data-target="107">0</span></div>
+        <div class="desc">月間UGC獲得件数<br>（自然発生型口コミ）</div>
       </div>
     </div>
 
-    <table class="data-table">
-      <tr><th>施策</th><th>インプレッション</th><th>構成比</th><th>評価</th></tr>
-      <tr class="top"><td>UGC口コミ投稿</td><td>251,982</td><td>59%</td><td>◎</td></tr>
-      <tr><td>公式TikTok</td><td>93,352</td><td>22%</td><td>△</td></tr>
-      <tr><td>公式Instagram</td><td>79,288</td><td>19%</td><td>△</td></tr>
-    </table>
+    <div class="data-bars reveal">
+      <div class="data-bar-item">
+        <div class="data-bar-header">
+          <span class="data-bar-label">UGC口コミ投稿（ギフティング）</span>
+          <span class="data-bar-val">251,982 imp — 74%</span>
+        </div>
+        <div class="data-bar-track"><div class="data-bar-fill" data-width="74"></div></div>
+      </div>
+      <div class="data-bar-item">
+        <div class="data-bar-header">
+          <span class="data-bar-label">公式Instagram</span>
+          <span class="data-bar-val">79,288 imp — 23%</span>
+        </div>
+        <div class="data-bar-track"><div class="data-bar-fill" data-width="23"></div></div>
+      </div>
+      <div class="data-bar-item">
+        <div class="data-bar-header">
+          <span class="data-bar-label">その他施策</span>
+          <span class="data-bar-val">9,666 imp — 3%</span>
+        </div>
+        <div class="data-bar-track"><div class="data-bar-fill" data-width="3"></div></div>
+      </div>
+    </div>
 
-    <div class="quote-box">
-      <p>「他社製品も含めた自然なルーティーン形式で商品を取り入れており、過度な広告感を抑えた構成。その結果、視聴者にとってリアリティのあるコンテンツとして受け入れられやすく、視聴維持率やエンゲージメントの向上につながり、再生数の伸長に寄与した」<br><br>— GVA施策レポートより</p>
+    <!-- CASE STUDY -->
+    <div class="case-box reveal">
+      <div class="case-box-tag">継続稼働中</div>
+      <h3>大手ブランドA社 — 月次UGC施策</h3>
+      <p class="case-meta">業種：アパレル / 規模：大手 / 稼働期間：複数月継続中</p>
+      <div class="case-kpi-grid">
+        <div class="case-kpi">
+          <div class="kpi-num">340,936</div>
+          <div class="kpi-label">月間合計インプレッション</div>
+        </div>
+        <div class="case-kpi">
+          <div class="kpi-num">107件</div>
+          <div class="kpi-label">UGC獲得数 / 月</div>
+        </div>
+        <div class="case-kpi">
+          <div class="kpi-num">52,000</div>
+          <div class="kpi-label">単一クリエイター最高imp<br>（FW6,500人）</div>
+        </div>
+        <div class="case-kpi">
+          <div class="kpi-num">40,131</div>
+          <div class="kpi-label">1投稿あたり<br>平均リーチ数</div>
+        </div>
+      </div>
+      <div class="case-insight">
+        <p>広告配信と並走させることで「<strong>広告っぽく見えない本物の口コミ</strong>」としてCVRブーストに貢献。アフィリエイト強化月はInstagram集中、Xキャンペーン月はX集中と、<strong>媒体ミックスを月次で最適化</strong>できる点を高く評価。複数月継続採用中。</p>
+      </div>
+      <div class="case-ongoing">現在も継続稼働中</div>
     </div>
   </div>
 </div>
 
 <!-- SERVICE -->
-<section>
-  <p class="section-label">Service</p>
-  <h2>GVA UGC口コミ施策とは</h2>
-  <p style="margin-top:16px;">GVAが独自に構築した<strong>1,000名以上のSNSクリエイターリスト</strong>から、ブランド親和性・リーチ力・エンゲージメントを精査してアサイン。「フォロワーが少ない＝影響力がない」は昔の話。GVAが選ぶのは、フォロワーの何倍ものインプレッションを稼ぐ"本物のUGCクリエイター"です。</p>
+<div class="section" id="service">
+  <div class="section-inner">
+    <p class="section-label reveal">Service</p>
+    <h2 class="section-title reveal reveal-delay-1">GVA UGC口コミ施策とは</h2>
+    <p class="section-desc reveal reveal-delay-2">GVAが独自に構築した1,000名以上のSNSクリエイターリストから、ブランド親和性・リーチ力・エンゲージメントを精査してアサイン。フォロワー数ではなく「本物の届く力」で選びます。</p>
 
-  <div class="sns-grid" style="margin-top:40px;">
-    <div class="sns-card">
-      <div class="icon">📸</div>
-      <h3>Instagram</h3>
-      <p>ストーリーズ（リンク設置可）・フィード・リールから選択。導線設計に強い。</p>
+    <div class="sns-grid">
+      <div class="sns-card reveal reveal-delay-2">
+        <div class="sns-icon">📸</div>
+        <h3>Instagram</h3>
+        <p>ストーリーズ（リンク設置可）・フィード・リールを使い分け。導線設計とリーチ拡大に最適。</p>
+      </div>
+      <div class="sns-card reveal reveal-delay-3">
+        <div class="sns-icon">🐦</div>
+        <h3>X（旧Twitter）</h3>
+        <p>拡散力×キャンペーン連動に最適。話題を瞬間的に広げるスピード施策が得意。</p>
+      </div>
+      <div class="sns-card reveal reveal-delay-4">
+        <div class="sns-icon">🎵</div>
+        <h3>TikTok</h3>
+        <p>若年層リーチ・バイラル設計。フォロワー以上のリーチが狙え、視聴完了率でアルゴリズムに乗せる。</p>
+      </div>
     </div>
-    <div class="sns-card">
-      <div class="icon">🐦</div>
-      <h3>X（旧Twitter）</h3>
-      <p>拡散力×キャンペーン連動に最適。話題を瞬間的に広げる。</p>
-    </div>
-    <div class="sns-card">
-      <div class="icon">🎵</div>
-      <h3>TikTok</h3>
-      <p>若年層リーチ・バイラル設計。フォロワー以上のリーチが狙える。</p>
+
+    <div class="adjust-box reveal">
+      <div class="adjust-title">月ごとに媒体の内訳を柔軟に調整できます</div>
+      <div class="adjust-items">
+        <div class="adjust-item">アフィリエイト強化月はInstagramに集中して導線を最大化</div>
+        <div class="adjust-item">Xキャンペーン月はXに集中して拡散力をブースト</div>
+        <div class="adjust-item">新規認知拡大月はTikTokで若年層リーチを狙う</div>
+      </div>
     </div>
   </div>
-
-  <div class="adjust-box">
-    <p style="font-weight:700; margin-bottom:16px;">月ごとに媒体の内訳を調整できます</p>
-    <p><span class="arrow">→</span>アフィリエイト強化月：Instagram多め</p>
-    <p><span class="arrow">→</span>Xキャンペーン月：X集中</p>
-    <p><span class="arrow">→</span>新規認知拡大月：TikTok多め</p>
-  </div>
-</section>
-
-<hr class="divider">
+</div>
 
 <!-- CRITERIA -->
-<section>
-  <p class="section-label">Selection</p>
-  <h2>クリエイター選定基準（GVA独自）</h2>
-  <p style="margin-top:16px;">フォロワー数だけでは選ばない。<strong>実際の"届く力"</strong>で判断します。</p>
-  <table class="criteria-table">
-    <tr><th>媒体</th><th>選定基準</th></tr>
-    <tr><td>X</td><td>フォロワー2,000人以上 / またはインプがフォロワー数以上</td></tr>
-    <tr><td>Instagram</td><td>フォロワー1,000人以上 / またはリール再生数がFWの5倍以上</td></tr>
-    <tr><td>TikTok</td><td>フォロワー500人以上＋定期投稿＋平均再生1,000以上</td></tr>
-  </table>
-</section>
-
-<!-- SIMULATION -->
-<div class="sim-bg">
-  <div class="sim-inner">
-    <p class="section-label">Simulation</p>
-    <h2>数値シミュレーション</h2>
-    <p style="margin-top:16px; color:#555;">実績データ（2026年1月）の平均値をもとに算出した保守的な試算です。</p>
-    <div class="sim-grid">
-      <div class="sim-card">
-        <p class="plan-name">Light Plan</p>
-        <p class="plan-price">¥400,000 <span>税抜 / 50名</span></p>
-        <table>
-          <tr><td>想定インプレッション（保守）</td><td>約10万 imp</td></tr>
-          <tr><td>想定インプレッション（標準）</td><td>約15万 imp</td></tr>
-          <tr><td>1impあたり単価</td><td>約¥2.7〜4</td></tr>
-          <tr><td>Instagram広告比較</td><td>約2〜6倍の効率</td></tr>
-        </table>
+<div class="problem-section section">
+  <div class="section-inner">
+    <p class="section-label reveal">Selection</p>
+    <h2 class="section-title reveal reveal-delay-1">クリエイター選定基準（GVA独自）</h2>
+    <p class="section-desc reveal reveal-delay-2">フォロワー数だけでは選ばない。<br>実際の「届く力」と「広告感のなさ」で厳選します。</p>
+    <div class="criteria-grid">
+      <div class="criteria-card reveal reveal-delay-2">
+        <span class="criteria-tag">ENG RATE</span>
+        <h3>エンゲージメント率 3%以上</h3>
+        <p>フォロワー数よりも「反応率」を重視。実際に購買行動に繋がるアカウントのみ選定。</p>
       </div>
-      <div class="sim-card">
-        <p class="plan-name">Standard Plan</p>
-        <p class="plan-price">¥600,000 <span>税抜 / 100名</span></p>
-        <table>
-          <tr><td>想定インプレッション（保守）</td><td>約20万 imp</td></tr>
-          <tr><td>想定インプレッション（標準）</td><td>約30万 imp</td></tr>
-          <tr><td>1impあたり単価</td><td>約¥2〜3</td></tr>
-          <tr><td>Instagram広告比較</td><td>約3〜8倍の効率</td></tr>
-        </table>
+      <div class="criteria-card reveal reveal-delay-3">
+        <span class="criteria-tag">MATCH</span>
+        <h3>ターゲット親和性</h3>
+        <p>商品カテゴリとフォロワー属性（年代・性別・興味）のマッチング度で判断。ブランドの世界観に合う人を選ぶ。</p>
+      </div>
+      <div class="criteria-card reveal reveal-delay-4">
+        <span class="criteria-tag">QUALITY</span>
+        <h3>コンテンツ品質</h3>
+        <p>投稿のリアリティ・文章力・撮影クオリティを人の目で審査。AIスコアと組み合わせて厳選。</p>
+      </div>
+      <div class="criteria-card reveal reveal-delay-5">
+        <span class="criteria-tag">COMPLY</span>
+        <h3>コンプライアンス</h3>
+        <p>ステマ規制対応の実績があり、PR表記ガイドラインを遵守できるアカウントのみ採用。安心して任せられる。</p>
       </div>
     </div>
-    <p class="sim-note">※インプレッション単価比較：Instagram広告 ¥5〜15/imp、有名インフルエンサー ¥10〜30/imp<br>※上記は参考値です。業種・商材・投稿クオリティにより変動します</p>
+  </div>
+</div>
+
+<!-- WORKFLOW -->
+<div class="workflow-section section">
+  <div class="section-inner">
+    <p class="section-label reveal">Workflow</p>
+    <h2 class="section-title reveal reveal-delay-1">依頼から納品まで<br>GVAがワンストップで対応</h2>
+    <p class="section-desc reveal reveal-delay-2">クライアントの負担はほぼゼロ。5ステップで完結します。</p>
+    <div class="workflow-steps">
+      <div class="workflow-step reveal">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <span class="step-badge">30分 / オンライン</span>
+          <h3>無料ヒアリング</h3>
+          <p>商品・ターゲット・予算感をオンラインでお聞かせください。方向性をすり合わせます。</p>
+        </div>
+      </div>
+      <div class="workflow-step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <span class="step-badge">3営業日以内</span>
+          <h3>クリエイター選定・提案</h3>
+          <p>最適な候補と施策プランをご提案。媒体ミックス・人数・スケジュールを確定します。</p>
+        </div>
+      </div>
+      <div class="workflow-step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <span class="step-badge">全て込み</span>
+          <h3>投稿設計・クリエイター手配</h3>
+          <p>PR表記対応ディレクション・原稿確認・スケジュール管理・住所回収まで一括対応。</p>
+        </div>
+      </div>
+      <div class="workflow-step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <span class="step-badge">常時監視</span>
+          <h3>拡散・モニタリング</h3>
+          <p>投稿後のエンゲージメントをリアルタイムで追跡。問題があれば即対応します。</p>
+        </div>
+      </div>
+      <div class="workflow-step reveal reveal-delay-4">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <span class="step-badge">月次</span>
+          <h3>効果測定・レポート</h3>
+          <p>インプレッション・エンゲージメント・UGC二次利用を含む詳細レポートを月次で提供。次回改善案も提案します。</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- DELIVERABLES -->
-<section>
-  <p class="section-label">What We Do</p>
-  <h2>GVAがワンストップで対応</h2>
-  <p style="margin-top:16px;">問い合わせから納品まで、すべてGVAが一括で担当します。</p>
-  <ul class="check-list">
-    <li>投稿オリエンテーション資料の作成</li>
-    <li>ブランド親和性に基づくクリエイターの選定・アサイン</li>
-    <li>住所回収・商品配送先リストの作成（商品発送は貴社対応）</li>
-    <li>投稿スケジュール管理</li>
-    <li>投稿内容のディレクション・チェック</li>
-    <li>施策終了後のレポーティング</li>
-  </ul>
-</section>
+<div class="section">
+  <div class="section-inner">
+    <p class="section-label reveal">What We Do</p>
+    <h2 class="section-title reveal reveal-delay-1">GVAが全てを担当します</h2>
+    <p class="section-desc reveal reveal-delay-2">問い合わせから納品まで、全てGVAが一括で対応。クライアントが動くのは商品の発送だけです。</p>
+    <ul class="check-list reveal reveal-delay-2">
+      <li><span class="check-icon">✓</span>投稿オリエンテーション資料の作成</li>
+      <li><span class="check-icon">✓</span>ブランド親和性に基づくクリエイターの選定・アサイン（1,000名超のリストから厳選）</li>
+      <li><span class="check-icon">✓</span>住所回収・商品配送先リストの作成（商品発送は貴社対応）</li>
+      <li><span class="check-icon">✓</span>投稿スケジュール管理・クリエイターとのやり取り</li>
+      <li><span class="check-icon">✓</span>投稿内容のディレクション・PR表記確認・修正対応</li>
+      <li><span class="check-icon">✓</span>エンゲージメントのリアルタイム監視</li>
+      <li><span class="check-icon">✓</span>施策終了後の詳細レポーティング</li>
+      <li><span class="check-icon">✓</span>UGC二次利用サポート（許諾取得・広告素材転用支援）</li>
+    </ul>
+  </div>
+</div>
 
 <!-- PRICING -->
-<div class="price-bg">
-  <div class="price-inner">
-    <p class="section-label">Pricing</p>
-    <h2 style="color:#fff;">料金プラン</h2>
-    <div class="price-grid">
-      <div class="price-card">
-        <p class="plan">Light</p>
-        <p class="price">¥400,000</p>
-        <p class="price-sub">税抜 / 50名アサイン</p>
-        <p class="imp">想定 約15万 imp</p>
-        <ul class="features">
-          <li>50名クリエイターアサイン</li>
-          <li>Instagram / X / TikTok 対応</li>
-          <li>投稿ディレクション</li>
-          <li>レポーティング</li>
-        </ul>
-      </div>
-      <div class="price-card featured">
-        <span class="badge">POPULAR</span>
-        <p class="plan">Standard</p>
-        <p class="price">¥600,000</p>
-        <p class="price-sub">税抜 / 100名アサイン</p>
-        <p class="imp">想定 約25万 imp</p>
-        <ul class="features">
+<div class="pricing-section section" id="pricing">
+  <div class="section-inner">
+    <p class="section-label reveal">Pricing</p>
+    <h2 class="section-title reveal reveal-delay-1">料金プラン</h2>
+    <p class="section-desc reveal reveal-delay-2">人数で選ぶ、シンプルな2プラン。<br>まず1ヶ月から。成果を見て継続を判断できます。</p>
+
+    <div class="pricing-grid">
+      <div class="price-card reveal reveal-delay-2">
+        <p class="price-plan">Standard</p>
+        <p class="price-amount">¥560,000<span>〜 / 月</span></p>
+        <p class="price-count">クリエイター 100名アサイン</p>
+        <p class="price-imp">想定インプレッション 約22〜34万 imp / 月</p>
+        <hr class="price-divider">
+        <ul class="price-features">
           <li>100名クリエイターアサイン</li>
           <li>Instagram / X / TikTok 対応</li>
-          <li>投稿ディレクション</li>
-          <li>レポーティング</li>
           <li>媒体比率の月次調整</li>
+          <li>投稿ディレクション・PR表記対応</li>
+          <li>月次詳細レポート</li>
+          <li>UGC二次利用サポート</li>
         </ul>
+        <a href="#contact" class="price-cta price-cta-outline">相談してみる</a>
+        <p class="price-note">※単価の目安：約5,600円 / 名<br>※リール特化の場合は別途相談</p>
+      </div>
+
+      <div class="price-card featured reveal reveal-delay-3">
+        <p class="price-plan">Premium</p>
+        <p class="price-amount">¥850,000<span>〜 / 月</span></p>
+        <p class="price-count">クリエイター 150名アサイン</p>
+        <p class="price-imp">想定インプレッション 約34万 imp / 月</p>
+        <hr class="price-divider">
+        <ul class="price-features">
+          <li>150名クリエイターアサイン</li>
+          <li>Instagram / X / TikTok 対応</li>
+          <li>媒体比率の月次最適化（専任設計）</li>
+          <li>投稿ディレクション・PR表記対応</li>
+          <li>月次詳細レポート</li>
+          <li>UGC二次利用サポート</li>
+          <li>専任担当者アサイン</li>
+          <li>広告配信との連動提案</li>
+        </ul>
+        <a href="#contact" class="price-cta price-cta-primary">無料で相談する →</a>
+        <p class="price-note">※単価の目安：約5,600円 / 名<br>※GVA所属タレントとの組み合わせ施策も対応可</p>
       </div>
     </div>
-    <p style="color:#555; font-size:13px;">※商品のギフティングコストは別途ご負担ください</p>
-    <div style="margin-top:32px; border:1px solid #333; border-radius:12px; padding:28px 32px;">
-      <p style="color:#e8c96d; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px;">Option</p>
-      <p style="color:#fff; font-size:18px; font-weight:800; margin-bottom:8px;">UGC素材の二次利用</p>
-      <p style="color:#aaa; font-size:14px; line-height:1.8;">投稿素材（画像・動画）をWeb広告・SNS広告・自社サイト等への転用が可能です。<br>二次利用範囲・期間に応じてお見積もりします。詳細はご相談ください。</p>
+
+    <div class="option-box reveal">
+      <p class="option-tag">Option</p>
+      <h3>UGC素材の二次利用</h3>
+      <p>投稿素材（画像・動画）をMeta広告・Google広告・X広告・自社ECサイトへの転用が可能です。利用媒体・期間・範囲に応じてお見積もりします。</p>
     </div>
+    <p class="pricing-note">※商品のギフティングコストは別途ご負担ください</p>
   </div>
 </div>
 
 <!-- FAQ -->
-<section>
-  <p class="section-label">FAQ</p>
-  <h2>よくあるご質問</h2>
-  <div class="faq-list">
-    <div class="faq-item">
-      <p class="q">商品を何個用意すればいいですか？</p>
-      <p class="a">アサイン人数分＋予備分（5〜10%）をご準備ください。</p>
+<div class="faq-section section">
+  <div class="section-inner">
+    <p class="section-label reveal">FAQ</p>
+    <h2 class="section-title reveal reveal-delay-1">よくあるご質問</h2>
+    <div class="faq-list reveal reveal-delay-2">
+      <div class="faq-item">
+        <div class="faq-q">商品を何個用意すればいいですか？<div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">アサイン人数分＋予備分（5〜10%程度）をご準備ください。事前にご相談いただければ最適な数量をご案内します。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">どの媒体に何名アサインするか指定できますか？<div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">はい。ご予算・施策目的・広告配信の状況に合わせて媒体ごとの人数を月次で調整できます。アフィリエイト月やキャンペーン月に合わせた最適化も得意です。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">投稿内容はどこまでチェックできますか？<div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">全投稿を公開前にスクリーンショットにてご確認いただけます。修正指示にも対応しますのでご安心ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">PR表記の対応はどうなりますか？<div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">2023年のステマ規制に準拠した対応をご案内します。クリエイターへのガイドライン説明・投稿確認まで全てGVAが対応します。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">最短どのくらいで実施できますか？<div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">クリエイター選定〜初回投稿まで、最短3〜4週間を目安にお考えください。商材・規模によって変動しますので、まずはご相談ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">GVAのタレントと組み合わせることはできますか？<div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">はい。GVA所属タレント（9名）との組み合わせ施策も提案できます。インフルエンサーPRとUGCの相乗効果で、認知拡大と口コミを同時に最大化します。</div></div>
+      </div>
     </div>
-    <div class="faq-item">
-      <p class="q">どの媒体に何名アサインするか指定できますか？</p>
-      <p class="a">はい。ご予算・施策目的に合わせて媒体ごとの人数を調整できます。</p>
-    </div>
-    <div class="faq-item">
-      <p class="q">投稿内容はどこまでチェックできますか？</p>
-      <p class="a">投稿前にスクリーンショットにてご確認いただけます。</p>
-    </div>
-    <div class="faq-item">
-      <p class="q">PR表記はどうなりますか？</p>
-      <p class="a">ステマ規制に沿った対応をご案内します。詳細はご相談ください。</p>
-    </div>
-    <div class="faq-item">
-      <p class="q">最短どのくらいで実施できますか？</p>
-      <p class="a">クリエイター選定〜投稿まで、最短3〜4週間を目安にお考えください。</p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="cta-section" id="contact">
-  <h2>まずは無料でご相談ください</h2>
-  <p>施策のご相談・見積もりは無料です。<br>予算感や媒体・商材をお聞かせいただければ、GVAから最適なプランをご提案します。</p>
-  <a href="mailto:toru.t@goodvibesagency.tokyo" class="btn">お問い合わせする</a>
-  <div class="contact-info">
-    GOOD VIBES AGENCY Inc. ／ 担当：高橋 徹<br>
-    toru.t@goodvibesagency.tokyo
   </div>
 </div>
 
+<!-- CTA -->
+<div class="cta-section" id="contact">
+  <div class="cta-inner">
+    <p class="cta-label">Free Consultation</p>
+    <h2>まずは無料で<br>作戦会議しましょう。</h2>
+    <p>「費用感だけ知りたい」でもOK。<br>30分のオンライン相談で、あなたの商品に最適な口コミ施策をご提案します。</p>
+    <a href="mailto:info@goodvibesagency.tokyo?subject=【UGC口コミ施策】無料相談希望" class="cta-btn-dark">無料で相談する →</a>
+    <div class="cta-badges">
+      <span class="cta-badge">完全無料</span>
+      <span class="cta-badge">ノーリスク</span>
+      <span class="cta-badge">30分で完了</span>
+      <span class="cta-badge">翌営業日以内にご返信</span>
+    </div>
+    <p class="cta-mail">またはメールで → <a href="mailto:info@goodvibesagency.tokyo">info@goodvibesagency.tokyo</a></p>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-  © 2026 GOOD VIBES AGENCY Inc. All rights reserved.
+  <span class="footer-logo">GOOD VIBES AGENCY</span>
+  <div class="footer-links">
+    <a href="https://goodvibesagency.tokyo/">Corporate</a>
+    <a href="https://good-vibes-agency.github.io/gva-ai-ugc-factory-lp/">AI UGC Factory</a>
+    <a href="/gva-ugc-lp/privacy.html">プライバシーポリシー</a>
+  </div>
+  <span>© 2026 GOOD VIBES AGENCY</span>
 </footer>
 
+<script>
+/* ===================== SCROLL PROGRESS ===================== */
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  progressBar.style.width = scrolled + '%';
+});
+
+/* ===================== PARTICLES ===================== */
+(function() {
+  const container = document.getElementById('particles');
+  const count = 20;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 1;
+    p.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      --dur: ${Math.random() * 10 + 8}s;
+      --delay: ${Math.random() * 10}s;
+    `;
+    container.appendChild(p);
+  }
+})();
+
+/* ===================== REVEAL ON SCROLL ===================== */
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => revealObserver.observe(el));
+
+/* ===================== COUNTER ANIMATION ===================== */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const format = el.dataset.format;
+  const duration = 1800;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const value = Math.floor(eased * target);
+    el.textContent = format === 'comma' ? value.toLocaleString('ja-JP') : value;
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = format === 'comma' ? target.toLocaleString('ja-JP') : target;
+  }
+  requestAnimationFrame(update);
+}
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+/* ===================== DATA BARS ===================== */
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.data-bar-fill').forEach(fill => {
+        setTimeout(() => {
+          fill.style.width = fill.dataset.width + '%';
+        }, 200);
+      });
+      barObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.data-bars').forEach(el => barObserver.observe(el));
+
+/* ===================== FAQ ACCORDION ===================== */
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* ===================== NAV HIDE ON SCROLL UP ===================== */
+let lastScroll = 0;
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  const current = window.scrollY;
+  if (current < 100) { nav.style.transform = 'translateY(0)'; }
+  else if (current > lastScroll) { nav.style.transform = 'translateY(-100%)'; }
+  else { nav.style.transform = 'translateY(0)'; }
+  lastScroll = current;
+}, { passive: true });
+nav.style.transition = 'transform 0.3s ease';
+</script>
 </body>
 </html>

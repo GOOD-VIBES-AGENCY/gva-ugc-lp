@@ -4,414 +4,612 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UGC口コミ施策 | GOOD VIBES AGENCY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif; color: #1a1a1a; background: #fff; }
+:root {
+  --red: #D42B2B;
+  --red2: #B52020;
+  --yellow: #FFD600;
+  --black: #0E0E0E;
+  --white: #FFFFFF;
+  --bdr: 3px solid #0E0E0E;
+}
 
-  /* Hero */
-  .hero {
-    background: #0a0a0a;
-    color: #fff;
-    padding: 100px 40px;
-    text-align: center;
-  }
-  .hero .label {
-    font-size: 12px;
-    letter-spacing: 4px;
-    color: #888;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-  }
-  .hero h1 {
-    font-size: clamp(28px, 5vw, 52px);
-    font-weight: 800;
-    line-height: 1.3;
-    margin-bottom: 20px;
-    letter-spacing: -0.5px;
-  }
-  .hero h1 span { color: #e8c96d; }
-  .hero .sub {
-    font-size: 16px;
-    color: #aaa;
-    max-width: 600px;
-    margin: 0 auto 40px;
-    line-height: 1.8;
-  }
-  .hero .cta-btn {
-    display: inline-block;
-    background: #e8c96d;
-    color: #0a0a0a;
-    padding: 18px 48px;
-    border-radius: 4px;
-    font-size: 15px;
-    font-weight: 700;
-    text-decoration: none;
-    letter-spacing: 1px;
-  }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { background: var(--black); color: var(--white); font-family: 'Noto Sans JP', sans-serif; overflow-x: hidden; max-width: 100vw; }
+.sec, .hero, .cta, footer, nav { max-width: 100vw; overflow-x: hidden; }
+.si { width: 100%; overflow-x: hidden; }
 
-  /* Section */
-  section { padding: 80px 40px; max-width: 900px; margin: 0 auto; }
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: #888;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 800; margin-bottom: 16px; line-height: 1.4; }
-  h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
-  p { font-size: 15px; line-height: 1.9; color: #444; }
+/* ─ ANIMATION ─ */
+.up { opacity: 0; transform: translateY(44px); transition: opacity .6s ease, transform .6s ease; }
+.up.in { opacity: 1; transform: none; }
+.up.d1 { transition-delay: .1s; } .up.d2 { transition-delay: .2s; } .up.d3 { transition-delay: .3s; } .up.d4 { transition-delay: .4s; }
 
-  /* Divider */
-  .divider { border: none; border-top: 1px solid #eee; max-width: 900px; margin: 0 auto; }
+/* ─ NAV ─ */
+nav {
+  background: var(--black); border-bottom: 4px solid var(--yellow);
+  padding: 0 24px; display: flex; justify-content: space-between; align-items: stretch;
+  position: sticky; top: 0; z-index: 999;
+}
+.nl { font-family: 'Bangers', cursive; font-size: 20px; letter-spacing: .1em; color: var(--yellow); display: flex; align-items: center; gap: 8px; padding: 14px 0; }
+.nl em { font-style: normal; color: var(--white); font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 700; }
+.nc { background: var(--yellow); color: var(--black); font-weight: 900; font-size: 13px; padding: 0 24px; text-decoration: none; display: flex; align-items: center; border-left: var(--bdr); transition: background .15s; }
+.nc:hover { background: #fff; }
 
-  /* Pain Section */
-  .pain { background: #f7f7f7; padding: 80px 40px; }
-  .pain-inner { max-width: 900px; margin: 0 auto; }
-  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 40px; }
-  .pain-card { background: #fff; border-left: 4px solid #e8c96d; padding: 24px; border-radius: 0 8px 8px 0; }
-  .pain-card h3 { font-size: 15px; margin-bottom: 8px; }
-  .pain-card p { font-size: 14px; color: #666; }
+/* ─ HERO ─ */
+.hero { position: relative; background: #080000; min-height: 88vh; display: flex; align-items: center; overflow: hidden; border-bottom: 5px solid var(--yellow); }
+.hbg { position: absolute; inset: 0; background: url('./hero-v3.jpg') center/cover no-repeat; opacity: .3; }
+.hgrad { position: absolute; inset: 0; background: linear-gradient(135deg,rgba(8,0,0,.95) 0%,rgba(180,20,20,.55) 55%,rgba(8,0,0,.9) 100%); }
+.hray { position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 65% 55%, rgba(212,43,43,.1) 0deg, transparent 1.5deg, transparent 5deg); }
+.hi { position: relative; z-index: 1; padding: 100px 32px 80px; max-width: 760px; overflow: hidden; }
+.hbadge { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; padding: 6px 16px; margin-bottom: 24px; border: 2px solid var(--black); box-shadow: 3px 3px 0 var(--black); transform: rotate(-1deg); }
+h1 { font-family: 'Noto Sans JP', sans-serif; font-weight: 900; font-size: clamp(28px, 7vw, 84px); color: var(--white); line-height: 1.1; margin-bottom: 24px; word-break: break-all; overflow-wrap: break-word; text-shadow: 3px 3px 0 rgba(0,0,0,.6); max-width: 100%; }
+h1 .yl { color: var(--yellow); }
+h1 .rd { color: var(--red); }
+.hsub { background: rgba(255,255,255,.1); border-left: 4px solid var(--yellow); padding: 12px 18px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,.85); line-height: 1.75; max-width: 540px; margin-bottom: 28px; word-break: break-word; overflow-wrap: break-word; }
+.hbtn { display: inline-flex; align-items: center; gap: 10px; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 18px; padding: 16px 44px; text-decoration: none; border: 3px solid var(--black); box-shadow: 5px 5px 0 var(--black); transition: all .15s; }
+.hbtn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--black); }
+.hstats { display: flex; margin-top: 44px; border: 3px solid rgba(255,214,0,.5); width: fit-content; background: rgba(0,0,0,.5); }
+.hs { padding: 16px 28px; text-align: center; border-right: 2px solid rgba(255,214,0,.3); }
+.hs:last-child { border-right: none; }
+.hsn { font-family: 'Bangers', cursive; font-size: 38px; color: var(--yellow); line-height: 1; display: block; }
+.hsl { font-size: 10px; color: rgba(255,255,255,.45); letter-spacing: .1em; text-transform: uppercase; display: block; margin-top: 4px; }
 
-  /* Data Section */
-  .data-highlight { background: #0a0a0a; color: #fff; padding: 80px 40px; }
-  .data-highlight-inner { max-width: 900px; margin: 0 auto; }
-  .data-highlight h2 { color: #fff; }
-  .data-highlight .section-label { color: #666; }
-  .data-table { width: 100%; border-collapse: collapse; margin: 40px 0; }
-  .data-table th { background: #1a1a1a; color: #888; font-size: 12px; letter-spacing: 2px; padding: 12px 16px; text-align: left; }
-  .data-table td { padding: 16px; border-bottom: 1px solid #222; font-size: 15px; color: #ddd; }
-  .data-table tr.top td { color: #e8c96d; font-weight: 700; }
-  .big-stat { display: flex; gap: 48px; margin: 48px 0; flex-wrap: wrap; }
-  .big-stat .stat { }
-  .big-stat .num { font-size: 48px; font-weight: 800; color: #e8c96d; }
-  .big-stat .unit { font-size: 16px; color: #e8c96d; }
-  .big-stat .desc { font-size: 13px; color: #888; margin-top: 4px; }
-  .quote-box { border-left: 3px solid #e8c96d; padding: 20px 24px; background: #111; margin: 40px 0; }
-  .quote-box p { color: #aaa; font-size: 14px; line-height: 1.9; }
+/* ─ SECTION ─ */
+.sec { padding: 72px 32px; }
+.si { max-width: 960px; margin: 0 auto; }
 
-  /* Service */
-  .sns-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0; }
-  .sns-card { border: 1px solid #eee; border-radius: 8px; padding: 24px; text-align: center; }
-  .sns-card .icon { font-size: 28px; margin-bottom: 12px; }
-  .sns-card h3 { font-size: 15px; margin-bottom: 8px; }
-  .sns-card p { font-size: 13px; color: #666; }
-  .adjust-box { background: #f7f7f7; border-radius: 8px; padding: 24px 32px; margin: 24px 0; }
-  .adjust-box p { font-size: 14px; margin-bottom: 8px; }
-  .adjust-box .arrow { color: #e8c96d; font-weight: 700; margin-right: 8px; }
+/* ── レジャーラボ忐実再現 背景リズム ──
+   ヒーロー(黒) → 白(課題・データ) → 赤(サービス・フロー・選定) → 黒(シミュ・実績) → 黄(比較・料金) → 赤(CTA)
+*/
 
-  /* Criteria */
-  .criteria-table { width: 100%; border-collapse: collapse; margin: 32px 0; }
-  .criteria-table th { background: #f0f0f0; padding: 12px 16px; text-align: left; font-size: 13px; letter-spacing: 1px; color: #555; }
-  .criteria-table td { padding: 16px; border-bottom: 1px solid #eee; font-size: 14px; }
-  .criteria-table td:first-child { font-weight: 700; width: 100px; }
+/* ── 背景リズム：leisure-lab忐実再現
+   黒(ヒーロー) → 白(課題) → 黒(データ) → 赤ドット(サービスエリア) → 黒(実績) → 黄(比較・料金) → 白(FAQ) → 赤ドット(CTA)
+── */
 
-  /* Simulation */
-  .sim-bg { background: #f7f7f7; padding: 80px 40px; }
-  .sim-inner { max-width: 900px; margin: 0 auto; }
-  .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 40px 0; }
-  .sim-card { background: #fff; border-radius: 12px; padding: 32px; border-top: 4px solid #e8c96d; }
-  .sim-card .plan-name { font-size: 12px; letter-spacing: 3px; color: #888; text-transform: uppercase; margin-bottom: 8px; }
-  .sim-card .plan-price { font-size: 28px; font-weight: 800; margin-bottom: 24px; }
-  .sim-card .plan-price span { font-size: 14px; font-weight: 400; color: #888; }
-  .sim-card table { width: 100%; }
-  .sim-card table td { padding: 8px 0; font-size: 14px; border-bottom: 1px solid #f0f0f0; }
-  .sim-card table td:first-child { color: #888; }
-  .sim-card table td:last-child { font-weight: 700; text-align: right; }
-  .sim-note { font-size: 12px; color: #999; line-height: 1.8; margin-top: 16px; }
+/* 共通 */
+.sec { background: var(--white); border-bottom: 4px solid var(--black); position: relative; }
+.sec h2 { color: var(--black); }
+.sec .sl { color: #555; }
 
-  /* Deliverables */
-  .check-list { list-style: none; margin: 32px 0; }
-  .check-list li { padding: 14px 0; border-bottom: 1px solid #eee; font-size: 15px; display: flex; align-items: center; gap: 12px; }
-  .check-list li::before { content: "✓"; color: #e8c96d; font-weight: 800; font-size: 16px; }
+/* 赤ドット mixin */
+.red-dots {
+  background: var(--red) !important;
+  position: relative;
+}
+.red-dots::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,.2) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+.red-dots .si, .red-dots > * { position: relative; z-index: 1; }
+.red-dots h2, .red-dots .sl { color: var(--white) !important; }
+.red-dots .sl { color: rgba(255,255,255,.75) !important; }
 
-  /* Pricing */
-  .price-bg { background: #0a0a0a; padding: 80px 40px; }
-  .price-inner { max-width: 900px; margin: 0 auto; }
-  .price-bg h2 { color: #fff; }
-  .price-bg .section-label { color: #666; }
-  .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 40px 0; }
-  .price-card { border: 1px solid #333; border-radius: 12px; padding: 40px 32px; }
-  .price-card.featured { border-color: #e8c96d; background: #111; }
-  .price-card .badge { display: inline-block; background: #e8c96d; color: #0a0a0a; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; letter-spacing: 1px; margin-bottom: 16px; }
-  .price-card .plan { font-size: 12px; letter-spacing: 3px; color: #666; text-transform: uppercase; margin-bottom: 8px; }
-  .price-card .price { font-size: 36px; font-weight: 800; color: #fff; margin-bottom: 4px; }
-  .price-card .price-sub { font-size: 13px; color: #666; margin-bottom: 24px; }
-  .price-card .imp { font-size: 14px; color: #e8c96d; margin-bottom: 24px; }
-  .price-card .features { list-style: none; }
-  .price-card .features li { font-size: 14px; color: #aaa; padding: 8px 0; border-bottom: 1px solid #222; }
-  .price-card .features li::before { content: "—  "; color: #555; }
+/* 白ベース（PAIN・データ） */
+.pain { background: var(--white); border-bottom: 4px solid var(--black); }
+.pain h2 { color: var(--black); }
+.pain .sl { color: #555; }
 
-  /* FAQ */
-  .faq-list { margin: 40px 0; }
-  .faq-item { border-bottom: 1px solid #eee; padding: 24px 0; }
-  .faq-item .q { font-weight: 700; font-size: 15px; margin-bottom: 10px; }
-  .faq-item .q::before { content: "Q.  "; color: #e8c96d; }
-  .faq-item .a { font-size: 14px; color: #666; line-height: 1.8; padding-left: 22px; }
+.data { background: var(--black); border-bottom: 4px solid var(--yellow); }
+.data h2 { color: var(--white); }
+.data .sl { color: rgba(255,255,255,.55); }
 
-  /* CTA */
-  .cta-section { background: #e8c96d; padding: 80px 40px; text-align: center; }
-  .cta-section h2 { color: #0a0a0a; font-size: 28px; margin-bottom: 12px; }
-  .cta-section p { color: #333; margin-bottom: 32px; font-size: 15px; }
-  .cta-section .btn { display: inline-block; background: #0a0a0a; color: #fff; padding: 18px 56px; border-radius: 4px; font-size: 15px; font-weight: 700; text-decoration: none; }
-  .cta-section .contact-info { margin-top: 32px; font-size: 14px; color: #555; }
+/* 赤ドット（SERVICE・FLOW・CRITERIA） */
+.service { background: var(--red); border-bottom: 4px solid var(--black); }
+.service h2 { color: var(--white); }
+.service .sl { color: rgba(255,255,255,.75); }
 
-  /* Footer */
-  footer { background: #0a0a0a; color: #555; text-align: center; padding: 32px; font-size: 12px; }
+.flow { background: var(--red); border-bottom: 4px solid var(--black); }
+.flow h2 { color: var(--white); }
+.flow .sl { color: rgba(255,255,255,.75); }
 
-  @media (max-width: 640px) {
-    .sns-grid { grid-template-columns: 1fr; }
-    .sim-grid, .price-grid { grid-template-columns: 1fr; }
-    .big-stat { gap: 24px; }
-    section, .pain, .sim-bg, .data-highlight, .price-bg { padding: 60px 20px; }
-  }
+.criteria { background: var(--red); border-bottom: 4px solid var(--black); }
+.criteria h2 { color: var(--white); }
+.criteria .sl { color: rgba(255,255,255,.75); }
+
+/* 黒（WWD） */
+.wwd { background: var(--black); border-bottom: 4px solid var(--yellow); }
+.wwd h2 { color: var(--white); }
+.wwd .sl { color: rgba(255,255,255,.45); }
+.wwd .wi { color: var(--white); }
+
+/* 黄（COMPARE・PRICING） */
+.cmp { background: var(--yellow); border-bottom: 4px solid var(--black); }
+.cmp h2 { color: var(--black); }
+.cmp .sl { color: rgba(0,0,0,.65); }
+
+.prc { background: var(--yellow); border-bottom: 4px solid var(--black); }
+.prc h2 { color: var(--black); }
+.prc .sl { color: rgba(0,0,0,.6); }
+
+/* 白（FAQ） */
+.faq { background: var(--white); border-bottom: 4px solid var(--black); }
+.faq h2 { color: var(--black); }
+.faq .sl { color: #555; }
+
+/* SERVICE・FLOW・CRITERIA ドットパターン */
+.service::before, .flow::before, .criteria::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,.18) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+.service .si, .flow .si, .criteria .si { position: relative; z-index: 1; }
+
+/* PAIN カード */
+.pain-wrap { border: 3px solid var(--black); background: var(--black); box-shadow: 6px 6px 0 rgba(0,0,0,.5); overflow: hidden; }
+.pain-wrap-head { background: var(--black); padding: 12px 20px; border-bottom: 3px solid var(--yellow); }
+.pain-wrap-head span { font-family: 'Bangers', cursive; font-size: 13px; letter-spacing: .12em; color: var(--yellow); }
+.pi { border: none; border-bottom: 2px solid rgba(0,0,0,.12); background: var(--white); padding: 16px 20px; }
+.pi:last-child { border-bottom: none; }
+.pi:hover { background: #FAFAFA; }
+.pit { color: var(--black) !important; font-size: 15px; font-weight: 900; line-height: 1.3; margin-bottom: 3px; }
+.pis { color: #555 !important; font-size: 13px; line-height: 1.5; }
+.pix { background: var(--red); border: 2px solid var(--black); color: var(--white); font-family: 'Bangers', cursive; font-size: 16px; width: 32px; height: 32px; min-width: 32px; }
+
+/* LABEL */
+.lbl { display: inline-block; font-family: 'Bangers', cursive; font-size: 13px; letter-spacing: .15em; padding: 5px 16px; margin-bottom: 20px; border: 2px solid var(--black); box-shadow: 2px 2px 0 rgba(0,0,0,.4); transform: rotate(-1.2deg); }
+.lbl-r { background: var(--red); color: var(--white); }
+.lbl-y { background: var(--yellow); color: var(--black); }
+.lbl-b { background: var(--black); color: var(--yellow); }
+.lbl-w { background: var(--white); color: var(--black); }
+
+h2 { font-family: 'Noto Sans JP', sans-serif; font-weight: 900; font-size: clamp(26px, 5.5vw, 52px); line-height: 1.1; margin-bottom: 14px; word-break: break-all; overflow-wrap: break-word; overflow: hidden; }
+.sl { font-size: 14px; line-height: 1.75; margin-bottom: 44px; max-width: 640px; }
+
+/* PAIN ITEMS */
+.pi { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; border: none; border-bottom: 2px solid rgba(0,0,0,.1); background: var(--white); transition: background .15s; }
+.pi:first-child { border-top: none; }
+.pi:hover { background: rgba(255,255,255,.08); }
+.pix { font-family: 'Bangers', cursive; font-size: 18px; color: var(--black); background: var(--red); width: 34px; height: 34px; min-width: 34px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid rgba(255,255,255,.3); }
+.pit { font-size: 15px; font-weight: 900; color: var(--black); line-height: 1.4; margin-bottom: 4px; }
+.pis { font-size: 13px; color: #555; line-height: 1.6; }
+.pain-wrap { border: 3px solid rgba(255,255,255,.12); }
+
+/* DATA */
+.dbubble { background: var(--yellow); border: 3px solid var(--black); padding: 20px 24px; margin-bottom: 24px; box-shadow: 4px 4px 0 var(--black); }
+.dbubble p { font-weight: 900; font-size: 16px; color: var(--black); line-height: 1.65; }
+.dbubble strong { color: var(--red); font-size: 20px; }
+.dgrid { display: grid; grid-template-columns: repeat(3,1fr); border: 3px solid rgba(255,214,0,.3); }
+.di { padding: 24px 12px; text-align: center; border-right: 3px solid rgba(255,214,0,.3); }
+.di:last-child { border-right: none; }
+.din { font-family: 'Bangers', cursive; font-size: 68px; color: var(--yellow); line-height: 1; display: block; margin-bottom: 6px; text-shadow: 2px 2px 0 rgba(0,0,0,.6); }
+.dil { font-size: 13px; font-weight: 900; color: var(--white); margin-bottom: 4px; display: block; }
+.did { font-size: 11px; color: rgba(255,255,255,.5); line-height: 1.5; display: block; }
+
+/* SERVICE */
+.spnl { display: grid; grid-template-columns: repeat(3,1fr); border: 3px solid var(--black); background: var(--black); margin-top: 8px; }
+.sp { background: var(--white); padding: 28px 24px; border-right: 3px solid var(--black); }
+.sp:last-child { border-right: none; }
+.spn { font-family: 'Bangers', cursive; font-size: 60px; color: rgba(212,43,43,.15); line-height: 1; margin-bottom: 10px; }
+.sp h3 { font-weight: 900; font-size: 17px; color: var(--black); border-bottom: 2px solid var(--yellow); padding-bottom: 10px; margin-bottom: 12px; }
+.sp p { font-size: 13px; color: #444; line-height: 1.7; margin-bottom: 12px; }
+.stags { display: flex; flex-wrap: wrap; gap: 5px; }
+.stag { background: var(--black); color: var(--yellow); font-size: 10px; font-weight: 900; padding: 3px 9px; }
+
+/* FLOW */
+.fl { display: flex; flex-direction: column; gap: 0; }
+.fs { display: flex; align-items: center; gap: 16px; padding: 20px 22px; border: 2px solid rgba(255,255,255,.2); border-bottom: none; background: rgba(0,0,0,.25); }
+.fs:first-child { border-top: 2px solid rgba(255,255,255,.2); }
+.fs:hover { background: rgba(0,0,0,.35); }
+.fsn { font-family: 'Bangers', cursive; font-size: 12px; letter-spacing: .1em; color: var(--black); background: var(--yellow); border: 2px solid var(--black); padding: 4px 12px; white-space: nowrap; flex-shrink: 0; }
+.fsc h3 { font-weight: 900; font-size: 16px; color: var(--white); margin-bottom: 3px; }
+.fsc p { font-size: 12px; color: rgba(255,255,255,.6); line-height: 1.55; }
+.fsnote { margin-left: auto; font-family: 'Bangers', cursive; font-size: 12px; color: var(--black); background: var(--yellow); padding: 4px 12px; border: 2px solid var(--black); white-space: nowrap; flex-shrink: 0; }
+.fgoal { background: var(--yellow); border: 3px solid var(--black); padding: 22px; text-align: center; border-top: none; box-shadow: 0 5px 0 var(--black); }
+.fgt { font-family: 'Bangers', cursive; font-size: 52px; letter-spacing: .1em; color: var(--black); line-height: 1; }
+.fgs { font-size: 13px; font-weight: 700; color: rgba(0,0,0,.5); margin-top: 4px; }
+
+/* CRITERIA */
+.cl { display: flex; flex-direction: column; gap: 0; }
+.ci { background: var(--white); border: 3px solid var(--black); border-bottom: none; padding: 22px 26px; display: flex; gap: 18px; align-items: flex-start; box-shadow: 4px 4px 0 rgba(0,0,0,.4); }
+.cl .ci:last-child { border-bottom: 3px solid var(--black); }
+.ci:hover { background: #FFFFF5; }
+.cib { background: var(--black); color: var(--yellow); font-family: 'Bangers', cursive; font-size: 12px; padding: 4px 12px; white-space: nowrap; flex-shrink: 0; margin-top: 3px; letter-spacing: .1em; }
+.cic h3 { font-weight: 900; font-size: 17px; color: var(--black); margin-bottom: 6px; }
+.cic p { font-size: 13px; color: #444; line-height: 1.7; }
+
+/* SIMULATION */
+.sg { display: grid; grid-template-columns: 1fr 1fr; border: 3px solid var(--black); background: var(--black); }
+.sc { background: var(--white); padding: 32px 28px; border-right: 3px solid var(--black); }
+.sc:last-child { border-right: none; }
+.sc .sbdg { display: inline-block; font-family: 'Bangers', cursive; font-size: 13px; letter-spacing: .1em; padding: 4px 14px; margin-bottom: 10px; border: 2px solid var(--black); box-shadow: 2px 2px 0 var(--black); }
+.sbdg-b { background: var(--black); color: var(--yellow); }
+.sbdg-r { background: var(--red); color: var(--white); }
+.sc .splan { font-size: 11px; color: #888; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+.sc .sprice { font-family: 'Bangers', cursive; font-size: 64px; color: var(--black); line-height: 1; margin-bottom: 4px; }
+.sprice span { font-family: 'Noto Sans JP', sans-serif; font-size: 15px; color: #888; font-weight: 400; }
+.stb { width: 100%; margin-top: 20px; table-layout: fixed; }
+.stb td { padding: 9px 4px; font-size: 13px; border-bottom: 1px solid #eee; word-break: break-all; overflow-wrap: break-word; }
+.stb td:first-child { color: #888; width: 50%; }
+.stb td:last-child { font-weight: 900; text-align: right; width: 50%; color: var(--black); }
+
+/* WHAT WE DO */
+.wl { list-style: none; margin-bottom: 44px; }
+.wi { display: flex; align-items: flex-start; gap: 14px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.1); font-size: 15px; color: var(--white); line-height: 1.6; font-weight: 500; }
+.wi::before { content: '✓'; font-family: 'Bangers', cursive; font-size: 18px; color: var(--black); background: var(--yellow); width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--black); flex-shrink: 0; margin-top: 2px; }
+.af { display: flex; align-items: stretch; border: 3px solid var(--yellow); overflow: hidden; }
+.afs { flex: 1; padding: 20px 14px; text-align: center; border-right: 2px solid rgba(255,214,0,.25); background: rgba(255,255,255,.04); }
+.afs:last-of-type { border-right: none; }
+.afsn { font-family: 'Bangers', cursive; font-size: 28px; color: var(--yellow); display: block; line-height: 1; }
+.afsm { font-size: 12px; color: rgba(255,255,255,.6); margin-top: 4px; display: block; font-weight: 700; }
+.afg { background: var(--yellow); color: var(--black); font-family: 'Bangers', cursive; font-size: 24px; letter-spacing: .06em; display: flex; align-items: center; padding: 0 22px; border-left: 3px solid var(--black); flex-shrink: 0; }
+
+/* COMPARE CARDS */
+.cmp-cards { display: flex; flex-direction: column; gap: 12px; }
+.cmp-card { border: 3px solid var(--black); background: var(--white); box-shadow: 4px 4px 0 var(--black); }
+.cmp-card.gva { background: var(--black); box-shadow: 4px 4px 0 rgba(0,0,0,.5); }
+.cmp-card-head { font-family: 'Bangers', cursive; font-size: 18px; letter-spacing: .06em; padding: 14px 20px; background: var(--black); color: var(--yellow); border-bottom: 2px solid var(--black); }
+.cmp-card.gva .cmp-card-head { background: var(--yellow); color: var(--black); }
+.cmp-list { list-style: none; }
+.cmp-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-bottom: 1px solid rgba(0,0,0,.08); font-size: 13px; }
+.cmp-card.gva .cmp-list li { border-bottom-color: rgba(255,255,255,.08); }
+.cmp-list li:last-child { border-bottom: none; }
+.cmp-list span { color: #888; font-size: 12px; }
+.cmp-card.gva .cmp-list span { color: rgba(255,255,255,.45); }
+.cmp-list strong { color: var(--black); font-weight: 900; font-size: 13px; text-align: right; }
+.cmp-card.gva .cmp-list strong { color: var(--yellow); }
+
+/* COMPARE OLD TABLE (hidden) */
+.cmptb { display: none; }
+.cmptb_hidden { width: 100%; border-collapse: collapse; border: 3px solid var(--black); }
+.cmptb th { padding: 14px 18px; font-weight: 900; font-size: 14px; border-bottom: 3px solid var(--black); border-right: 2px solid var(--black); text-align: center; background: var(--black); color: var(--yellow); border-top: 3px solid var(--black); }
+.cmptb th:first-child { text-align: left; }
+.cmptb th.hl { background: var(--black); color: var(--yellow); }
+.cmptb td { padding: 14px 18px; font-size: 13px; font-weight: 500; border-bottom: 2px solid rgba(0,0,0,.1); border-right: 2px solid rgba(0,0,0,.1); text-align: center; color: #555; background: var(--white); }
+.cmptb td:first-child { text-align: left; font-weight: 900; font-size: 12px; color: var(--black); letter-spacing: .04em; background: #F5F5F5; }
+.cmptb td.hl { background: #FFFDE0; color: var(--black); font-weight: 900; }
+.cmptb tr:last-child td { border-bottom: none; }
+
+/* PRICING */
+.pcg { display: grid; grid-template-columns: 1fr 1fr; border: 3px solid var(--black); background: var(--black); }
+.pc { padding: 40px 32px; border-right: 2px solid rgba(0,0,0,.2); background: var(--white); }
+.pc:last-child { border-right: none; }
+.pc.pop { background: var(--black); border: 1px solid var(--yellow); }
+.pc .pt { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #888; margin-bottom: 8px; }
+.pc.pop .pt { color: rgba(255,255,255,.45); }
+.pc .pb { display: inline-block; font-family: 'Bangers', cursive; font-size: 13px; letter-spacing: .1em; background: var(--red); color: var(--white); padding: 3px 14px; margin-bottom: 8px; border: 2px solid var(--black); box-shadow: 2px 2px 0 var(--black); }
+.pc .pp { font-family: 'Bangers', cursive; font-size: 64px; color: var(--black); line-height: 1; margin-bottom: 4px; }
+.pc.pop .pp { color: var(--yellow); }
+.pc .pp span { font-family: 'Noto Sans JP', sans-serif; font-size: 15px; font-weight: 400; color: #888; }
+.pc.pop .pp span { color: rgba(255,255,255,.4); }
+.pc .pn { font-size: 13px; color: var(--red); font-weight: 900; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid rgba(0,0,0,.1); }
+.pc.pop .pn { color: var(--red2); border-bottom-color: rgba(0,0,0,.12); }
+.pclist { list-style: none; }
+.pclist li { font-size: 14px; padding: 9px 0; border-bottom: 1px solid rgba(0,0,0,.07); display: flex; gap: 9px; line-height: 1.5; font-weight: 500; color: rgba(0,0,0,.65); }
+.pc.pop .pclist li { color: rgba(255,255,255,.65); border-bottom-color: rgba(255,255,255,.08); }
+.pclist li::before { content: '—'; color: var(--red); flex-shrink: 0; }
+.pc.pop .pclist li::before { color: var(--yellow); }
+
+/* FAQ */
+.fi { border: 3px solid var(--black); border-bottom: none; background: #FAFAFA; }
+.fi:last-child { border-bottom: 3px solid var(--black); }
+.fq { padding: 18px 22px; font-weight: 900; font-size: 15px; color: var(--black); display: flex; align-items: flex-start; gap: 14px; border-bottom: 2px solid var(--black); line-height: 1.4; cursor: pointer; }
+.fqi { font-family: 'Bangers', cursive; font-size: 16px; color: var(--white); background: var(--black); width: 30px; height: 30px; min-width: 30px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.fa { padding: 14px 22px 14px 66px; font-size: 14px; color: #555; line-height: 1.8; }
+
+/* CTA */
+.cta { background: var(--red); padding: 88px 32px; position: relative; overflow: hidden; border-bottom: 5px solid var(--black); }
+.cray { position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(0,0,0,.07) 0deg, transparent 2deg, transparent 6deg); }
+.cdots { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(0,0,0,.12) 1px, transparent 1px); background-size: 18px 18px; }
+.cin { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; text-align: center; }
+.cbubble { display: inline-block; background: var(--yellow); border: 3px solid var(--black); padding: 9px 28px; font-family: 'Bangers', cursive; font-size: 16px; letter-spacing: .12em; margin-bottom: 24px; transform: rotate(-1.5deg); box-shadow: 4px 4px 0 var(--black); }
+.cta h2 { font-weight: 900; font-size: clamp(34px, 8vw, 62px); color: var(--white); line-height: 1.05; margin-bottom: 18px; text-shadow: 3px 3px 0 rgba(0,0,0,.35); word-break: keep-all; }
+.cta h2 .yl { color: var(--yellow); }
+.ctasub { font-size: 15px; color: rgba(255,255,255,.8); margin-bottom: 36px; line-height: 1.8; font-weight: 500; }
+.pows { display: flex; gap: 10px; justify-content: center; margin-bottom: 36px; flex-wrap: wrap; }
+.pw { font-family: 'Bangers', cursive; font-size: 18px; letter-spacing: .1em; background: var(--black); color: var(--yellow); padding: 6px 16px; border: 2px solid var(--black); box-shadow: 3px 3px 0 rgba(0,0,0,.3); }
+.pw:nth-child(1) { transform: rotate(-2deg); }
+.pw:nth-child(2) { transform: rotate(1deg); }
+.pw:nth-child(3) { transform: rotate(-1.5deg); }
+.cf { background: var(--white); border: 3px solid var(--black); padding: 36px 32px; text-align: left; box-shadow: 6px 6px 0 var(--black); }
+.flb { font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; color: #888; display: block; margin-bottom: 7px; }
+.finp { width: 100%; padding: 13px 16px; border: 2px solid var(--black); background: #F8F8F8; font-family: 'Noto Sans JP', sans-serif; font-size: 14px; outline: none; margin-bottom: 14px; display: block; transition: border-color .15s; }
+.finp:focus { border-color: var(--red); background: #fff; }
+.finp::placeholder { color: #bbb; }
+textarea.finp { min-height: 88px; resize: none; }
+.fsub { width: 100%; background: var(--black); color: var(--yellow); border: 3px solid var(--black); font-family: 'Bangers', cursive; font-size: 24px; letter-spacing: .1em; padding: 16px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,.4); transition: all .15s; }
+.fsub:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 rgba(0,0,0,.4); }
+
+/* FOOTER */
+footer { background: var(--black); border-top: 4px solid var(--yellow); padding: 28px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.flogo { font-family: 'Bangers', cursive; font-size: 18px; color: var(--yellow); letter-spacing: .1em; }
+.flinks { display: flex; gap: 24px; }
+.flinks a { font-size: 12px; color: rgba(255,255,255,.3); text-decoration: none; transition: color .15s; }
+.flinks a:hover { color: var(--yellow); }
+.fcopy { font-size: 11px; color: rgba(255,255,255,.2); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 0 16px; }
+  .sec { padding: 56px 16px; }
+  .hi { padding: 80px 16px 60px; }
+  h1 { font-size: 32px; line-height: 1.15; }
+  h2 { font-size: 28px; }
+  .sl { font-size: 14px; margin-bottom: 32px; }
+  .sec { padding: 52px 20px; }
+  .hi { padding: 80px 20px 56px; }
+  .hstats { flex-direction: column; width: 100%; border: none; }
+  .hs { border: 2px solid rgba(255,214,0,.3); border-bottom: none; padding: 14px 20px; }
+  .hs:last-child { border-bottom: 2px solid rgba(255,214,0,.3); }
+  .dgrid { grid-template-columns: 1fr; }
+  .di { border-right: none; border-bottom: 3px solid rgba(255,214,0,.2); }
+  .di:last-child { border-bottom: none; }
+  .din { font-size: 80px; }
+  .di:last-child { border-bottom: none; }
+  .spnl { grid-template-columns: 1fr; background: none; border: none; gap: 0; }
+  .sp { border: 3px solid var(--black); border-bottom: none; }
+  .sp:last-child { border-bottom: 3px solid var(--black); }
+  .sg { grid-template-columns: 1fr; }
+  .sc { border-right: none; border-bottom: 3px solid var(--black); }
+  .sc:last-child { border-bottom: none; }
+  .pcg { grid-template-columns: 1fr; }
+  .pc { border-right: none; border-bottom: 2px solid rgba(255,214,0,.2); }
+  .pc:last-child { border-bottom: none; }
+  /* FLOW STEP mobile fix */
+  .fs { flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+  .fsn { order: 1; flex-shrink: 0; }
+  .fsnote { order: 2; margin-left: auto; }
+  .fsc { order: 3; flex: 0 0 100%; padding-top: 4px; }
+  .fsc h3 { font-size: 17px; }
+  /* ACTION FLOW mobile fix */
+  .af { flex-wrap: wrap; }
+  .afg { width: 100%; justify-content: center; padding: 14px; border-left: none; border-top: 3px solid var(--black); }
+  .cf { padding: 24px 16px; }
+  footer { justify-content: center; text-align: center; }
+  .flinks { justify-content: center; }
+  .cta { padding: 64px 16px; }
+}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
+<nav>
+  <div class="nl">GVA <em>UGC口コミ施策</em></div>
+  <a href="#contact" class="nc">無料で相談する</a>
+</nav>
+
 <!-- HERO -->
-<div class="hero">
-  <p class="label">GOOD VIBES AGENCY — UGC Marketing</p>
-  <h1>インフルエンサーより、<br><span>口コミが売れる</span>時代へ。</h1>
-  <p class="sub">「広告っぽい」と思われた瞬間、その投稿は終わる。<br>GVAは1,000名以上のリアルなSNSクリエイターネットワークで、<br>広告感ゼロの本物の口コミをワンストップで創出します。</p>
-  <a href="#contact" class="cta-btn">無料で相談する</a>
-</div>
-
-<!-- PAIN -->
-<div class="pain">
-  <div class="pain-inner">
-    <p class="section-label">Problem</p>
-    <h2>こんなお悩みはありませんか？</h2>
-    <div class="pain-grid">
-      <div class="pain-card">
-        <h3>費用対効果が読めない</h3>
-        <p>フォロワーが多いほど単価は高くなる。でも「広告投稿」と見抜かれたら、どんなに有名なインフルエンサーでも購買には繋がらない。</p>
-      </div>
-      <div class="pain-card">
-        <h3>ステマ規制が怖い</h3>
-        <p>2023年のステマ規制以降、PR表記の義務化により投稿ディレクションはより慎重さが求められる。管理工数が増えて施策のスピードが落ちている。</p>
-      </div>
-      <div class="pain-card">
-        <h3>媒体管理が追いつかない</h3>
-        <p>アフィリエイト月はInstagram、キャンペーン月はX、認知拡大月はTikTok——媒体を横断した口コミ設計と管理が追いついていない。</p>
-      </div>
+<section class="hero">
+  <div class="hbg"></div>
+  <div class="hgrad"></div>
+  <div class="hray"></div>
+  <div class="hi">
+    <div class="hbadge up">GOOD VIBES AGENCY — UGC Marketing</div>
+    <h1 class="up d1">インフルエンサーより、<br><span class="yl">口コミ</span>が<span class="rd">売れる。</span></h1>
+    <p class="hsub up d2">「広告っぽい」と思われた瞬間、その投稿は終わる。GVAは1,000名以上のリアルなSNSクリエイターネットワークで、広告感ゼロの本物の口コミをワンストップで創出します。</p>
+    <a href="#contact" class="hbtn up d3">無料で相談する →</a>
+    <div class="hstats up d4">
+      <div class="hs"><span class="hsn">1,000+</span><span class="hsl">Creator Network</span></div>
+      <div class="hs"><span class="hsn">100+</span><span class="hsl">PR Cases</span></div>
+      <div class="hs"><span class="hsn">3SNS</span><span class="hsl">IG / TikTok / X</span></div>
     </div>
-  </div>
-</div>
-
-<!-- DATA -->
-<div class="data-highlight">
-  <div class="data-highlight-inner">
-    <p class="section-label">Data</p>
-    <h2>データが証明する。<br>「小さな口コミ」が最もインプレッションを生む。</h2>
-    <p style="color:#888; margin-top:12px;">GVAが実際に支援するブランドの施策データより（2026年1月 実績）</p>
-
-    <div class="big-stat">
-      <div class="stat">
-        <div class="num">59<span class="unit">%</span></div>
-        <div class="desc">UGCが全施策インプレッションに占める割合</div>
-      </div>
-      <div class="stat">
-        <div class="num">8<span class="unit">倍</span></div>
-        <div class="desc">FW6,481人のクリエイターが獲得した<br>インプレッション（FW比）</div>
-      </div>
-      <div class="stat">
-        <div class="num">251,982</div>
-        <div class="desc">UGC施策単体のインプレッション数<br>（1ヶ月）</div>
-      </div>
-    </div>
-
-    <table class="data-table">
-      <tr><th>施策</th><th>インプレッション</th><th>構成比</th><th>評価</th></tr>
-      <tr class="top"><td>UGC口コミ投稿</td><td>251,982</td><td>59%</td><td>◎</td></tr>
-      <tr><td>公式TikTok</td><td>93,352</td><td>22%</td><td>△</td></tr>
-      <tr><td>公式Instagram</td><td>79,288</td><td>19%</td><td>△</td></tr>
-    </table>
-
-    <div class="quote-box">
-      <p>「他社製品も含めた自然なルーティーン形式で商品を取り入れており、過度な広告感を抑えた構成。その結果、視聴者にとってリアリティのあるコンテンツとして受け入れられやすく、視聴維持率やエンゲージメントの向上につながり、再生数の伸長に寄与した」<br><br>— GVA施策レポートより</p>
-    </div>
-  </div>
-</div>
-
-<!-- SERVICE -->
-<section>
-  <p class="section-label">Service</p>
-  <h2>GVA UGC口コミ施策とは</h2>
-  <p style="margin-top:16px;">GVAが独自に構築した<strong>1,000名以上のSNSクリエイターリスト</strong>から、ブランド親和性・リーチ力・エンゲージメントを精査してアサイン。「フォロワーが少ない＝影響力がない」は昔の話。GVAが選ぶのは、フォロワーの何倍ものインプレッションを稼ぐ"本物のUGCクリエイター"です。</p>
-
-  <div class="sns-grid" style="margin-top:40px;">
-    <div class="sns-card">
-      <div class="icon">📸</div>
-      <h3>Instagram</h3>
-      <p>ストーリーズ（リンク設置可）・フィード・リールから選択。導線設計に強い。</p>
-    </div>
-    <div class="sns-card">
-      <div class="icon">🐦</div>
-      <h3>X（旧Twitter）</h3>
-      <p>拡散力×キャンペーン連動に最適。話題を瞬間的に広げる。</p>
-    </div>
-    <div class="sns-card">
-      <div class="icon">🎵</div>
-      <h3>TikTok</h3>
-      <p>若年層リーチ・バイラル設計。フォロワー以上のリーチが狙える。</p>
-    </div>
-  </div>
-
-  <div class="adjust-box">
-    <p style="font-weight:700; margin-bottom:16px;">月ごとに媒体の内訳を調整できます</p>
-    <p><span class="arrow">→</span>アフィリエイト強化月：Instagram多め</p>
-    <p><span class="arrow">→</span>Xキャンペーン月：X集中</p>
-    <p><span class="arrow">→</span>新規認知拡大月：TikTok多め</p>
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- CRITERIA -->
-<section>
-  <p class="section-label">Selection</p>
-  <h2>クリエイター選定基準（GVA独自）</h2>
-  <p style="margin-top:16px;">フォロワー数だけでは選ばない。<strong>実際の"届く力"</strong>で判断します。</p>
-  <table class="criteria-table">
-    <tr><th>媒体</th><th>選定基準</th></tr>
-    <tr><td>X</td><td>フォロワー2,000人以上 / またはインプがフォロワー数以上</td></tr>
-    <tr><td>Instagram</td><td>フォロワー1,000人以上 / またはリール再生数がFWの5倍以上</td></tr>
-    <tr><td>TikTok</td><td>フォロワー500人以上＋定期投稿＋平均再生1,000以上</td></tr>
-  </table>
-</section>
-
-<!-- SIMULATION -->
-<div class="sim-bg">
-  <div class="sim-inner">
-    <p class="section-label">Simulation</p>
-    <h2>数値シミュレーション</h2>
-    <p style="margin-top:16px; color:#555;">実績データ（2026年1月）の平均値をもとに算出した保守的な試算です。</p>
-    <div class="sim-grid">
-      <div class="sim-card">
-        <p class="plan-name">Light Plan</p>
-        <p class="plan-price">¥400,000 <span>税抜 / 50名</span></p>
-        <table>
-          <tr><td>想定インプレッション（保守）</td><td>約10万 imp</td></tr>
-          <tr><td>想定インプレッション（標準）</td><td>約15万 imp</td></tr>
-          <tr><td>1impあたり単価</td><td>約¥2.7〜4</td></tr>
-          <tr><td>Instagram広告比較</td><td>約2〜6倍の効率</td></tr>
-        </table>
-      </div>
-      <div class="sim-card">
-        <p class="plan-name">Standard Plan</p>
-        <p class="plan-price">¥600,000 <span>税抜 / 100名</span></p>
-        <table>
-          <tr><td>想定インプレッション（保守）</td><td>約20万 imp</td></tr>
-          <tr><td>想定インプレッション（標準）</td><td>約30万 imp</td></tr>
-          <tr><td>1impあたり単価</td><td>約¥2〜3</td></tr>
-          <tr><td>Instagram広告比較</td><td>約3〜8倍の効率</td></tr>
-        </table>
-      </div>
+<!-- PAIN ─ BLACK -->
+<section class="sec pain">
+  <div class="si">
+    <div class="lbl lbl-r up">PROBLEM!</div>
+    <h2 class="up">こんな悩み、<br>ありませんか？</h2>
+    <p class="sl up">インフルエンサーPRの課題が、年々大きくなっている。</p>
+    <div class="pain-wrap"><div class="pain-wrap-head"><span>✗ PROBLEMS</span></div>
+      <div class="pi up"><div class="pix">✗</div><div><div class="pit">費用対効果が読めない</div><div class="pis">フォロワーが多くても「広告投稿」と見抜かれたら購買には繋がらない。</div></div></div>
+      <div class="pi up d1"><div class="pix">✗</div><div><div class="pit">ステマ規制が怖い</div><div class="pis">2023年のステマ規制以降、PR表記の管理工数が増えてスピードが落ちている。</div></div></div>
+      <div class="pi up d2"><div class="pix">✗</div><div><div class="pit">媒体管理が追いつかない</div><div class="pis">Instagram・TikTok・X——媒体横断の口コミ設計と管理が追いついていない。</div></div></div>
     </div>
-    <p class="sim-note">※インプレッション単価比較：Instagram広告 ¥5〜15/imp、有名インフルエンサー ¥10〜30/imp<br>※上記は参考値です。業種・商材・投稿クオリティにより変動します</p>
   </div>
-</div>
-
-<!-- DELIVERABLES -->
-<section>
-  <p class="section-label">What We Do</p>
-  <h2>GVAがワンストップで対応</h2>
-  <p style="margin-top:16px;">問い合わせから納品まで、すべてGVAが一括で担当します。</p>
-  <ul class="check-list">
-    <li>投稿オリエンテーション資料の作成</li>
-    <li>ブランド親和性に基づくクリエイターの選定・アサイン</li>
-    <li>住所回収・商品配送先リストの作成（商品発送は貴社対応）</li>
-    <li>投稿スケジュール管理</li>
-    <li>投稿内容のディレクション・チェック</li>
-    <li>施策終了後のレポーティング</li>
-  </ul>
 </section>
 
-<!-- PRICING -->
-<div class="price-bg">
-  <div class="price-inner">
-    <p class="section-label">Pricing</p>
-    <h2 style="color:#fff;">料金プラン</h2>
-    <div class="price-grid">
-      <div class="price-card">
-        <p class="plan">Light</p>
-        <p class="price">¥400,000</p>
-        <p class="price-sub">税抜 / 50名アサイン</p>
-        <p class="imp">想定 約15万 imp</p>
-        <ul class="features">
-          <li>50名クリエイターアサイン</li>
-          <li>Instagram / X / TikTok 対応</li>
-          <li>投稿ディレクション</li>
-          <li>レポーティング</li>
+<!-- DATA ─ YELLOW -->
+<section class="sec data">
+  <div class="si">
+    <div class="lbl lbl-b up">DATA!</div>
+    <h2 class="up">「小さな口コミ」が<br>最もインプレッションを生む</h2>
+    <p class="sl up">データが証明する。フォロワー数より「反応率」の時代へ。</p>
+    <div class="dbubble up">
+      <p>フォロワー1,000〜10,000人のナノインフルエンサーは、大型インフルエンサーの<strong>最大×8倍</strong>のエンゲージメント率を誇る。</p>
+    </div>
+    <div class="dgrid up">
+      <div class="di"><span class="din">×8</span><span class="dil">エンゲージメント率</span><span class="did">ナノ vs 大型インフルエンサー</span></div>
+      <div class="di"><span class="din">92%</span><span class="dil">口コミへの信頼</span><span class="did">Nielsen調査：最も信頼する情報源</span></div>
+      <div class="di"><span class="din">1/5</span><span class="dil">コスト比</span><span class="did">大型インフルエンサーPR比</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE ─ RED -->
+<section class="sec service">
+  <div class="si">
+    <div class="lbl lbl-b up">SERVICE!</div>
+    <h2 class="up">GVA UGC口コミ施策とは</h2>
+    <p class="sl up">1,000名以上のクリエイターネットワークで、広告感ゼロの口コミを量産する。</p>
+    <div class="spnl up">
+      <div class="sp"><div class="spn">01</div><h3>クリエイター選定</h3><p>商品・ターゲットに最適なクリエイターをAI×人力でキャスティング。エンゲージメント率・親和性・品質・コンプライアンスを4軸で審査。</p><div class="stags"><span class="stag">Instagram</span><span class="stag">TikTok</span><span class="stag">X</span></div></div>
+      <div class="sp"><div class="spn">02</div><h3>投稿設計・管理</h3><p>ステマ規制対応のディレクション、投稿原稿確認、スケジュール管理まで一括対応。PR表記を遵守しながら最大の自然感を引き出す。</p><div class="stags"><span class="stag">ステマ規制対応</span><span class="stag">原稿確認</span></div></div>
+      <div class="sp"><div class="spn">03</div><h3>効果測定・レポート</h3><p>投稿後のインプレッション・エンゲージメント・UGC二次利用を含む効果測定レポートを月次で提供。</p><div class="stags"><span class="stag">効果測定</span><span class="stag">月次レポート</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW ─ BLACK -->
+<section class="sec flow">
+  <div class="si">
+    <div class="lbl lbl-y up">WORKFLOW!</div>
+    <h2 class="up">依頼から納品まで5ステップ</h2>
+    <p class="sl up">GVAがワンストップで対応するから、クライアントの負担はほぼゼロ。</p>
+    <div class="fl">
+      <div class="fs up"><div class="fsn">STEP 01</div><div class="fsc"><h3>無料ヒアリング</h3><p>商品・ターゲット・予算感をオンラインで（30分）。</p></div><div class="fsnote">30分</div></div>
+      <div class="fs up d1"><div class="fsn">STEP 02</div><div class="fsc"><h3>クリエイター選定・提案</h3><p>最適な候補と施策プランを提案（3営業日以内）。</p></div><div class="fsnote">3営業日</div></div>
+      <div class="fs up d2"><div class="fsn">STEP 03</div><div class="fsc"><h3>投稿設計・クリエイター手配</h3><p>PR表記対応ディレクション・原稿確認・スケジュール管理。</p></div><div class="fsnote">全て込み</div></div>
+      <div class="fs up d3"><div class="fsn">STEP 04</div><div class="fsc"><h3>拡散・モニタリング</h3><p>投稿後のエンゲージメントをリアルタイムで追跡。</p></div><div class="fsnote">常時監視</div></div>
+      <div class="fs up d4"><div class="fsn">STEP 05</div><div class="fsc"><h3>効果測定・レポート</h3><p>月次レポートで可視化。次回施策の改善案を提案。</p></div><div class="fsnote">月次</div></div>
+    </div>
+    <div class="fgoal up"><div class="fgt">GOAL!</div><div class="fgs">口コミが購買を動かす</div></div>
+  </div>
+</section>
+
+<!-- CRITERIA ─ YELLOW -->
+<section class="sec criteria">
+  <div class="si">
+    <div class="lbl lbl-b up">SELECTION!</div>
+    <h2 class="up" style="word-break:keep-all;">GVA独自<br>クリエイター選定基準</h2>
+    <p class="sl up">数を集めるだけじゃない。「売れる口コミ」を生む人を、4基準で絞り込む。</p>
+    <div class="cl">
+      <div class="ci up"><div class="cib">ENG RATE</div><div class="cic"><h3>エンゲージメント率 3%以上</h3><p>フォロワー数より「反応率」を重視。実際に購買行動に繋がるアカウントを選定。</p></div></div>
+      <div class="ci up d1"><div class="cib">MATCH</div><div class="cic"><h3>ターゲット親和性</h3><p>商品カテゴリとフォロワー属性（年代・性別・興味）のマッチング度で判断。</p></div></div>
+      <div class="ci up d2"><div class="cib">QUALITY</div><div class="cic"><h3>コンテンツ品質</h3><p>投稿のリアリティ・文章力・撮影クオリティを人の目で審査。AIスコアと組み合わせ厳選。</p></div></div>
+      <div class="ci up d3"><div class="cib">COMPLY</div><div class="cic"><h3>コンプライアンス</h3><p>ステマ規制対応の実績があり、PR表記ガイドラインを遵守できるアカウントのみ採用。</p></div></div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- WHAT WE DO ─ BLACK -->
+<section class="sec wwd">
+  <div class="si">
+    <div class="lbl lbl-y up">WHAT WE DO!</div>
+    <h2 class="up">GVAがワンストップで対応</h2>
+    <p class="sl up">クリエイター探しから効果測定まで全てGVAに任せてください。</p>
+    <ul class="wl">
+      <li class="wi up">クリエイター選定・キャスティング（1,000名以上から厳選）</li>
+      <li class="wi up d1">投稿設計・原稿ディレクション（ステマ規制対応・PR表記遵守）</li>
+      <li class="wi up d2">スケジュール・納品物管理（投稿日時・内容確認・修正対応）</li>
+      <li class="wi up d3">効果測定・レポーティング（インプレッション・ENG可視化）</li>
+      <li class="wi up d4">UGC二次利用サポート（許諾取得・広告素材転用支援）</li>
+    </ul>
+    <div class="af up">
+      <div class="afs"><span class="afsn">01</span><span class="afsm">ヒアリング</span></div>
+      <div class="afs"><span class="afsn">02</span><span class="afsm">選定・提案</span></div>
+      <div class="afs"><span class="afsn">03</span><span class="afsm">投稿管理</span></div>
+      <div class="afs"><span class="afsn">04</span><span class="afsm">効果測定</span></div>
+      <div class="afg">GOAL!</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING ─ BLACK -->
+<section class="sec prc">
+  <div class="si">
+    <div class="lbl lbl-y up">PRICING!</div>
+    <h2 class="up">料金プラン</h2>
+    <p class="sl up">まず1ヶ月から。成果を見てから継続を判断できる。</p>
+    <div class="pcg up">
+      <div class="pc">
+        <div class="pt">Light</div>
+        <div class="pp">20<span>万円〜/月</span></div>
+        <div class="pn">まず試したい方向けのエントリープラン</div>
+        <ul class="pclist">
+          <li>投稿10〜15本/月</li>
+          <li>想定リーチ30〜50万imp</li>
+          <li>クリエイター10〜15名</li>
+          <li>Instagram中心の運用</li>
+          <li>月次レポート・ステマ規制対応</li>
         </ul>
       </div>
-      <div class="price-card featured">
-        <span class="badge">POPULAR</span>
-        <p class="plan">Standard</p>
-        <p class="price">¥600,000</p>
-        <p class="price-sub">税抜 / 100名アサイン</p>
-        <p class="imp">想定 約25万 imp</p>
-        <ul class="features">
-          <li>100名クリエイターアサイン</li>
-          <li>Instagram / X / TikTok 対応</li>
-          <li>投稿ディレクション</li>
-          <li>レポーティング</li>
-          <li>媒体比率の月次調整</li>
+      <div class="pc pop">
+        <span class="pb">POPULAR!</span>
+        <div class="pt">Standard</div>
+        <div class="pp">40<span>万円〜/月</span></div>
+        <div class="pn">最も選ばれているプラン</div>
+        <ul class="pclist">
+          <li>投稿25〜40本/月</li>
+          <li>想定リーチ80〜150万imp</li>
+          <li>IG / TikTok / X 横断</li>
+          <li>クリエイター25〜40名</li>
+          <li>詳細効果測定レポート</li>
+          <li>専任担当者付き</li>
         </ul>
       </div>
     </div>
-    <p style="color:#555; font-size:13px;">※商品のギフティングコストは別途ご負担ください</p>
-    <div style="margin-top:32px; border:1px solid #333; border-radius:12px; padding:28px 32px;">
-      <p style="color:#e8c96d; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px;">Option</p>
-      <p style="color:#fff; font-size:18px; font-weight:800; margin-bottom:8px;">UGC素材の二次利用</p>
-      <p style="color:#aaa; font-size:14px; line-height:1.8;">投稿素材（画像・動画）をWeb広告・SNS広告・自社サイト等への転用が可能です。<br>二次利用範囲・期間に応じてお見積もりします。詳細はご相談ください。</p>
-    </div>
   </div>
-</div>
+</section>
 
-<!-- FAQ -->
-<section>
-  <p class="section-label">FAQ</p>
-  <h2>よくあるご質問</h2>
-  <div class="faq-list">
-    <div class="faq-item">
-      <p class="q">商品を何個用意すればいいですか？</p>
-      <p class="a">アサイン人数分＋予備分（5〜10%）をご準備ください。</p>
-    </div>
-    <div class="faq-item">
-      <p class="q">どの媒体に何名アサインするか指定できますか？</p>
-      <p class="a">はい。ご予算・施策目的に合わせて媒体ごとの人数を調整できます。</p>
-    </div>
-    <div class="faq-item">
-      <p class="q">投稿内容はどこまでチェックできますか？</p>
-      <p class="a">投稿前にスクリーンショットにてご確認いただけます。</p>
-    </div>
-    <div class="faq-item">
-      <p class="q">PR表記はどうなりますか？</p>
-      <p class="a">ステマ規制に沿った対応をご案内します。詳細はご相談ください。</p>
-    </div>
-    <div class="faq-item">
-      <p class="q">最短どのくらいで実施できますか？</p>
-      <p class="a">クリエイター選定〜投稿まで、最短3〜4週間を目安にお考えください。</p>
+<!-- OPTION ─ BLACK -->
+<section class="sec" style="background:var(--black);border-bottom:4px solid var(--yellow);">
+  <div class="si">
+    <div class="lbl lbl-y up">Option!</div>
+    <h2 class="up" style="color:var(--white)">UGC素材の二次利用</h2>
+    <p class="sl up" style="color:rgba(255,255,255,.5)">口コミ投稿で制作したUGC素材は、広告・マーケティング素材として転用できます。</p>
+    <div style="border:3px solid rgba(255,214,0,.3);padding:28px 28px;" class="up">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <span style="background:var(--yellow);color:var(--black);font-family:'Bangers',cursive;font-size:12px;padding:4px 12px;letter-spacing:.1em;white-space:nowrap;flex-shrink:0;">WEB広告</span>
+          <span style="font-size:14px;color:rgba(255,255,255,.8);font-weight:500;">Meta広告・Google広告・X広告等への転用</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <span style="background:var(--yellow);color:var(--black);font-family:'Bangers',cursive;font-size:12px;padding:4px 12px;letter-spacing:.1em;white-space:nowrap;flex-shrink:0;">SNS運用</span>
+          <span style="font-size:14px;color:rgba(255,255,255,.8);font-weight:500;">自社SNSアカウントへの投稿素材として活用</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <span style="background:var(--yellow);color:var(--black);font-family:'Bangers',cursive;font-size:12px;padding:4px 12px;letter-spacing:.1em;white-space:nowrap;flex-shrink:0;">自社サイト</span>
+          <span style="font-size:14px;color:rgba(255,255,255,.8);font-weight:500;">ECサイト・LPへの口コミ掲載・埋め込み</span>
+        </div>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,214,0,.2);">
+        <p style="font-size:13px;color:rgba(255,255,255,.45);line-height:1.7;">※ 二次利用には別途オプション料金が発生します。利用媒体・期間・範囲により異なります。</p>
+        <div style="margin-top:16px;display:inline-flex;align-items:center;gap:10px;background:var(--yellow);color:var(--black);font-weight:900;font-size:15px;padding:14px 32px;border:3px solid var(--black);box-shadow:4px 4px 0 var(--black);">詳細はご相談ください</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<div class="cta-section" id="contact">
-  <h2>まずは無料でご相談ください</h2>
-  <p>施策のご相談・見積もりは無料です。<br>予算感や媒体・商材をお聞かせいただければ、GVAから最適なプランをご提案します。</p>
-  <a href="mailto:toru.t@goodvibesagency.tokyo" class="btn">お問い合わせする</a>
-  <div class="contact-info">
-    GOOD VIBES AGENCY Inc. ／ 担当：高橋 徹<br>
-    toru.t@goodvibesagency.tokyo
+<!-- FAQ ─ WHITE -->
+<section class="sec faq">
+  <div class="si">
+    <div class="lbl lbl-r up">FAQ!</div>
+    <h2 class="up">よくある質問</h2>
+    <div class="up">
+      <div class="fi"><div class="fq"><div class="fqi">Q</div>最低何ヶ月から依頼できますか？</div><div class="fa">1ヶ月からご依頼いただけます。ただし口コミ施策の効果を実感するには3ヶ月以上の継続をおすすめしています。</div></div>
+      <div class="fi"><div class="fq"><div class="fqi">Q</div>ステマ規制への対応は大丈夫ですか？</div><div class="fa">すべての投稿でPR表記を徹底しており、クリエイターへのガイドライン説明・確認まで対応します。</div></div>
+      <div class="fi"><div class="fq"><div class="fqi">Q</div>特定のSNSだけに絞れますか？</div><div class="fa">はい、Instagram・TikTok・Xの単体、または任意の組み合わせでご依頼いただけます。</div></div>
+      <div class="fi"><div class="fq"><div class="fqi">Q</div>投稿内容の確認・修正はできますか？</div><div class="fa">はい、全投稿を公開前にご確認いただけます。修正指示にも対応しますのでご安心ください。</div></div>
+      <div class="fi"><div class="fq"><div class="fqi">Q</div>GVAのタレントと組み合わせられますか？</div><div class="fa">はい、GVA所属タレント（9名）との組み合わせ施策も提案できます。インフルエンサーPRとUGCの相乗効果を最大化します。</div></div>
+    </div>
   </div>
-</div>
+</section>
 
+<!-- CTA ─ RED -->
+<section class="cta" id="contact">
+  <div class="cray"></div>
+  <div class="cdots"></div>
+  <div class="cin">
+    <div class="cbubble up">FREE CONSULTATION!</div>
+    <h2 class="up">まずは無料で<br><span class="yl">作戦会議</span>だ!!</h2>
+    <p class="ctasub up">「費用感だけ知りたい」でもOK。30分のオンライン相談で、あなたの商品に最適な口コミ施策をご提案します。</p>
+    <div class="pows up"><div class="pw">FREE!!</div><div class="pw">NO RISK!</div><div class="pw">30MIN!</div></div>
+    <div class="cf up">
+      <label class="flb">お名前・会社名</label>
+      <input type="text" class="finp" placeholder="山田太郎 / 株式会社〇〇">
+      <label class="flb">メールアドレス</label>
+      <input type="email" class="finp" placeholder="hello@example.com">
+      <label class="flb">ご相談内容</label>
+      <textarea class="finp" placeholder="商品・ターゲット・ご予算など何でも"></textarea>
+      <button class="fsub">無料で作戦会議を<br>申し込む →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  © 2026 GOOD VIBES AGENCY Inc. All rights reserved.
+  <div class="flogo">GOOD VIBES AGENCY</div>
+  <div class="flinks">
+    <a href="https://goodvibesagency.tokyo/">Corporate</a>
+    <a href="https://good-vibes-agency.github.io/gva-ai-ugc-factory-lp/">AI UGC Factory</a>
+  </div>
+  <div class="fcopy">© 2026 GOOD VIBES AGENCY</div>
 </footer>
 
+<script>
+const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('in'); }), { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+document.querySelectorAll('.up').forEach(el => io.observe(el));
+// hero immediate
+setTimeout(() => document.querySelectorAll('.hero .up').forEach((el,i) => setTimeout(() => el.classList.add('in'), i*120)), 100);
+</script>
 </body>
 </html>

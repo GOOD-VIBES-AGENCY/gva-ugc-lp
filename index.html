@@ -5,447 +5,451 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UGC口コミ施策 | GOOD VIBES AGENCY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --gold: #e8c96d;
-  --gold-dim: rgba(232,201,109,0.15);
-  --dark: #0a0a0a;
-  --dark2: #111;
-  --gray: #888;
-  --light: #f7f7f7;
-  --text: #1a1a1a;
+  --red: #D42B2B;
+  --red2: #B52020;
+  --yellow: #FFD600;
+  --black: #0E0E0E;
+  --white: #FFFFFF;
+  --bdr: 3px solid #0E0E0E;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { font-family:'Inter','Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif; color:var(--text); background:#fff; overflow-x:hidden; }
 
-/* SCROLL PROGRESS */
-#sp { position:fixed; top:0; left:0; height:3px; background:var(--gold); z-index:9999; width:0%; transition:width .1s linear; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { background: var(--black); color: var(--white); font-family: 'Noto Sans JP', sans-serif; overflow-x: hidden; max-width: 100vw; }
+.sec, .hero, .cta, footer, nav { max-width: 100vw; overflow-x: hidden; }
+.si { width: 100%; overflow-x: hidden; }
 
-/* NAV */
-nav { position:fixed; top:3px; left:0; right:0; background:rgba(10,10,10,.92); backdrop-filter:blur(12px); z-index:999; display:flex; align-items:center; justify-content:space-between; padding:0 40px; height:60px; border-bottom:1px solid rgba(255,255,255,.06); transition:transform .3s; }
-.nav-logo { font-size:13px; font-weight:800; color:var(--gold); letter-spacing:2px; text-decoration:none; }
-.nav-cta { background:var(--gold); color:var(--dark); padding:8px 20px; border-radius:4px; font-size:12px; font-weight:700; text-decoration:none; transition:opacity .2s; }
-.nav-cta:hover { opacity:.85; }
+/* ─ ANIMATION ─ */
+.up { opacity: 0; transform: translateY(44px); transition: opacity .6s ease, transform .6s ease; }
+.up.in { opacity: 1; transform: none; }
+.up.d1 { transition-delay: .1s; } .up.d2 { transition-delay: .2s; } .up.d3 { transition-delay: .3s; } .up.d4 { transition-delay: .4s; }
 
-/* HERO */
-.hero { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow:hidden; background:var(--dark); padding:120px 40px 80px; }
-.hero-bg { position:absolute; inset:0; background:url('hero-bg.jpg') center/cover no-repeat; opacity:.22; }
-.hero-overlay { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 60%,rgba(232,201,109,.08) 0%,transparent 70%),linear-gradient(to bottom,transparent 60%,var(--dark) 100%); }
-.particles { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
-.p { position:absolute; border-radius:50%; background:var(--gold); opacity:0; animation:fup var(--d) var(--dl) infinite ease-in-out; }
-@keyframes fup { 0%{transform:translateY(100vh) scale(0);opacity:0} 10%{opacity:.4} 90%{opacity:.1} 100%{transform:translateY(-20vh) scale(1);opacity:0} }
-.hero-inner { position:relative; z-index:2; max-width:820px; }
-.hero-lbl { display:inline-block; font-size:11px; letter-spacing:4px; color:var(--gold); text-transform:uppercase; margin-bottom:28px; padding:6px 16px; border:1px solid rgba(232,201,109,.4); border-radius:20px; }
-.hero h1 { font-size:clamp(32px,5.5vw,64px); font-weight:900; line-height:1.2; color:#fff; margin-bottom:24px; letter-spacing:-1px; }
-.hero h1 em { font-style:normal; color:var(--gold); }
-.hero-sub { font-size:16px; color:#aaa; max-width:560px; margin:0 auto 40px; line-height:1.9; }
-.hero-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-.btn-p { display:inline-block; background:var(--gold); color:var(--dark); padding:18px 48px; border-radius:4px; font-size:15px; font-weight:800; text-decoration:none; transition:transform .2s,box-shadow .2s; }
-.btn-p:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(232,201,109,.4); }
-.btn-s { display:inline-block; border:1px solid rgba(255,255,255,.3); color:#fff; padding:18px 40px; border-radius:4px; font-size:15px; font-weight:600; text-decoration:none; transition:border-color .2s,background .2s; }
-.btn-s:hover { border-color:var(--gold); background:rgba(232,201,109,.08); }
-
-/* HERO STATS BAR */
-.hstats { position:absolute; bottom:0; left:0; right:0; background:rgba(255,255,255,.04); border-top:1px solid rgba(255,255,255,.08); display:flex; justify-content:center; z-index:2; }
-.hstat { display:flex; flex-direction:column; align-items:center; padding:20px 48px; border-right:1px solid rgba(255,255,255,.06); }
-.hstat:last-child { border-right:none; }
-.hstat-n { font-size:28px; font-weight:900; color:var(--gold); line-height:1; }
-.hstat-l { font-size:11px; color:#555; letter-spacing:1px; margin-top:4px; text-transform:uppercase; }
-
-/* MARQUEE */
-.mq { background:var(--gold); overflow:hidden; padding:12px 0; }
-.mq-inner { display:flex; gap:48px; animation:mscroll 22s linear infinite; white-space:nowrap; }
-@keyframes mscroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.mq-item { font-size:12px; font-weight:700; color:var(--dark); letter-spacing:2px; text-transform:uppercase; display:inline-flex; align-items:center; gap:12px; flex-shrink:0; }
-.mq-dot { width:4px; height:4px; background:var(--dark); border-radius:50%; opacity:.4; }
-
-/* SECTION */
-.sec { padding:100px 40px; }
-.sec-inner { max-width:960px; margin:0 auto; }
-.sec-lbl { font-size:11px; letter-spacing:4px; color:var(--gray); text-transform:uppercase; margin-bottom:12px; }
-.sec-ttl { font-size:clamp(24px,3vw,36px); font-weight:900; line-height:1.3; margin-bottom:16px; letter-spacing:-.5px; }
-.sec-desc { font-size:16px; color:#555; line-height:1.9; max-width:680px; }
-
-/* REVEAL */
-.rv { opacity:0; transform:translateY(28px); transition:opacity .7s ease,transform .7s ease; }
-.rv.on { opacity:1; transform:translateY(0); }
-.d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s} .d5{transition-delay:.5s}
-
-/* PROBLEM */
-.prob { background:var(--light); }
-.prob-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:48px; }
-.prob-card { background:#fff; border-left:3px solid var(--gold); padding:28px 24px; border-radius:0 8px 8px 0; box-shadow:0 2px 16px rgba(0,0,0,.04); transition:transform .3s,box-shadow .3s; }
-.prob-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,.08); }
-.prob-icon { font-size:24px; margin-bottom:12px; }
-.prob-card h3 { font-size:16px; font-weight:800; margin-bottom:8px; }
-.prob-card p { font-size:14px; color:#666; line-height:1.8; }
-
-/* DATA */
-.data { background:var(--dark); color:#fff; }
-.data .sec-lbl { color:#444; }
-.data .sec-ttl { color:#fff; }
-.data .sec-desc { color:#777; }
-.bigstats { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); margin:56px 0; border:1px solid #1e1e1e; border-radius:12px; overflow:hidden; }
-.bstat { padding:40px 32px; border-right:1px solid #1e1e1e; transition:background .3s; }
-.bstat:last-child { border-right:none; }
-.bstat:hover { background:rgba(232,201,109,.04); }
-.bstat .num { font-size:48px; font-weight:900; color:var(--gold); line-height:1; letter-spacing:-2px; }
-.bstat .unit { font-size:20px; font-weight:700; color:var(--gold); }
-.bstat .desc { font-size:13px; color:#555; margin-top:8px; line-height:1.6; }
-
-/* BAR CHARTS */
-.bars { margin:48px 0; }
-.bar-item { margin-bottom:20px; }
-.bar-hd { display:flex; justify-content:space-between; margin-bottom:8px; }
-.bar-lbl { font-size:14px; color:#aaa; }
-.bar-val { font-size:14px; font-weight:700; color:var(--gold); }
-.bar-track { height:6px; background:#1e1e1e; border-radius:3px; overflow:hidden; }
-.bar-fill { height:100%; background:var(--gold); border-radius:3px; width:0%; transition:width 1.2s ease; }
-
-/* CASE STUDY */
-.case { border:1px solid #1e1e1e; border-radius:12px; padding:40px; margin:48px 0; background:var(--dark2); position:relative; overflow:hidden; }
-.case::after { content:'CASE STUDY'; position:absolute; top:24px; right:24px; font-size:10px; letter-spacing:3px; color:#2a2a2a; font-weight:700; }
-.case-tag { display:inline-block; background:rgba(232,201,109,.12); border:1px solid rgba(232,201,109,.25); color:var(--gold); font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px; letter-spacing:1px; margin-bottom:16px; }
-.case h3 { font-size:20px; color:#fff; margin-bottom:6px; font-weight:800; }
-.case-meta { font-size:13px; color:#444; margin-bottom:28px; }
-.case-kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:16px; margin-bottom:28px; }
-.ck { background:#0f0f0f; border-radius:8px; padding:20px; border-top:2px solid var(--gold); }
-.ck-n { font-size:26px; font-weight:900; color:var(--gold); line-height:1; }
-.ck-l { font-size:12px; color:#555; margin-top:6px; line-height:1.5; }
-.case-insight { background:#0f0f0f; border-left:3px solid var(--gold); padding:16px 20px; border-radius:0 8px 8px 0; }
-.case-insight p { font-size:14px; color:#888; line-height:1.9; }
-.case-insight strong { color:var(--gold); }
-.ongoing { display:inline-flex; align-items:center; gap:6px; margin-top:20px; font-size:13px; color:#4ade80; }
-.ongoing::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; animation:pulse 2s infinite; }
-@keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(74,222,128,.2)} 50%{box-shadow:0 0 0 6px rgba(74,222,128,.08)} }
-
-/* SERVICE */
-.sns-g { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:40px; }
-.sns-c { border:1px solid #eee; border-radius:12px; padding:28px 24px; text-align:center; transition:border-color .3s,box-shadow .3s,transform .3s; }
-.sns-c:hover { border-color:var(--gold); box-shadow:0 8px 32px rgba(232,201,109,.1); transform:translateY(-4px); }
-.sns-icon { font-size:32px; margin-bottom:12px; }
-.sns-c h3 { font-size:16px; font-weight:800; margin-bottom:8px; }
-.sns-c p { font-size:13px; color:#666; line-height:1.7; }
-.adj { background:var(--dark); border-radius:12px; padding:32px; margin:28px 0; border:1px solid #1e1e1e; }
-.adj-ttl { font-size:14px; font-weight:700; color:#fff; margin-bottom:20px; display:flex; align-items:center; gap:8px; }
-.adj-ttl::before { content:''; display:inline-block; width:3px; height:14px; background:var(--gold); border-radius:2px; }
-.adj-items { display:flex; flex-direction:column; gap:10px; }
-.adj-item { display:flex; align-items:center; gap:12px; padding:12px 16px; background:#0f0f0f; border-radius:8px; font-size:14px; color:#888; }
-.adj-item::before { content:'→'; color:var(--gold); font-weight:700; flex-shrink:0; }
-
-/* CRITERIA */
-.crit-g { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:40px; }
-.crit-c { border:1px solid #eee; border-radius:12px; padding:28px; transition:border-color .3s,transform .3s; }
-.crit-c:hover { border-color:var(--gold); transform:translateY(-2px); }
-.crit-tag { display:inline-block; background:var(--gold-dim); color:var(--gold); font-size:10px; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
-.crit-c h3 { font-size:17px; font-weight:800; margin-bottom:8px; }
-.crit-c p { font-size:14px; color:#666; line-height:1.7; }
-
-/* WORKFLOW */
-.wf { background:var(--dark); }
-.wf .sec-ttl { color:#fff; }
-.wf .sec-lbl { color:#444; }
-.wf .sec-desc { color:#777; }
-.wf-steps { position:relative; margin-top:56px; display:flex; flex-direction:column; }
-.wf-steps::before { content:''; position:absolute; left:27px; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,var(--gold),transparent); }
-.wf-step { display:flex; gap:32px; align-items:flex-start; padding:24px 0; }
-.step-n { width:56px; height:56px; border-radius:50%; background:#111; border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; color:var(--gold); flex-shrink:0; position:relative; z-index:1; }
-.step-c { padding-top:10px; }
-.step-c h3 { font-size:17px; font-weight:800; color:#fff; margin-bottom:6px; }
-.step-c p { font-size:14px; color:#555; line-height:1.7; }
-.step-bdg { display:inline-block; background:rgba(232,201,109,.1); color:var(--gold); font-size:11px; font-weight:600; padding:2px 10px; border-radius:20px; margin-bottom:8px; }
-
-/* PRICING */
-.pricing { background:var(--dark); }
-.pricing .sec-ttl { color:#fff; }
-.pricing .sec-lbl { color:#444; }
-.pricing .sec-desc { color:#777; }
-.price-g { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:48px; }
-.pc { border:1px solid #222; border-radius:16px; padding:44px 36px; background:#111; transition:transform .3s,box-shadow .3s; }
-.pc:hover { transform:translateY(-4px); box-shadow:0 24px 64px rgba(0,0,0,.5); }
-.pc.feat { border-color:var(--gold); position:relative; }
-.pc.feat::before { content:'MOST POPULAR'; position:absolute; top:-1px; left:50%; transform:translateX(-50%); background:var(--gold); color:var(--dark); font-size:10px; font-weight:900; letter-spacing:2px; padding:4px 16px; border-radius:0 0 8px 8px; white-space:nowrap; }
-.pc-plan { font-size:11px; letter-spacing:4px; color:#444; text-transform:uppercase; margin-bottom:8px; }
-.pc-price { font-size:44px; font-weight:900; color:#fff; line-height:1; margin-bottom:4px; }
-.pc-price span { font-size:16px; font-weight:400; color:#444; }
-.pc-cnt { font-size:14px; color:var(--gold); font-weight:700; margin-bottom:6px; }
-.pc-imp { font-size:13px; color:#444; margin-bottom:32px; }
-.pc hr { border:none; border-top:1px solid #1e1e1e; margin:24px 0; }
-.pc-feats { list-style:none; }
-.pc-feats li { font-size:14px; color:#888; padding:9px 0; display:flex; align-items:center; gap:10px; border-bottom:1px solid #161616; }
-.pc-feats li::before { content:'✓'; color:var(--gold); font-weight:800; font-size:13px; flex-shrink:0; }
-.pc-note { font-size:12px; color:#333; margin-top:20px; line-height:1.7; }
-.pc-cta { display:block; text-align:center; margin-top:28px; padding:15px; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; transition:all .2s; }
-.cta-gold { background:var(--gold); color:var(--dark); }
-.cta-gold:hover { box-shadow:0 8px 24px rgba(232,201,109,.4); transform:translateY(-1px); }
-.cta-out { border:1px solid #2a2a2a; color:#555; }
-.cta-out:hover { border-color:var(--gold); color:var(--gold); }
-.opt-box { border:1px solid #1e1e1e; border-radius:12px; padding:32px; margin-top:24px; }
-.opt-tag { font-size:11px; letter-spacing:3px; color:var(--gold); font-weight:700; text-transform:uppercase; margin-bottom:12px; }
-.opt-box h3 { font-size:18px; color:#fff; font-weight:800; margin-bottom:8px; }
-.opt-box p { font-size:14px; color:#555; line-height:1.8; }
-.price-foot { font-size:12px; color:#333; margin-top:20px; text-align:center; }
-
-/* DELIVERABLES */
-.ck-list { list-style:none; margin-top:40px; }
-.ck-list li { display:flex; align-items:flex-start; gap:14px; padding:16px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#333; }
-.ck-ico { width:24px; height:24px; background:var(--gold-dim); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--gold); font-weight:900; flex-shrink:0; margin-top:1px; }
-
-/* FAQ */
-.faq { background:var(--light); }
-.faq-list { margin-top:40px; }
-.faq-item { background:#fff; border-radius:12px; margin-bottom:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.04); transition:box-shadow .3s; }
-.faq-item:hover { box-shadow:0 4px 16px rgba(0,0,0,.08); }
-.faq-q { padding:22px 28px; font-size:15px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:16px; user-select:none; }
-.faq-q::before { content:'Q.'; color:var(--gold); font-weight:900; flex-shrink:0; }
-.faq-tgl { width:28px; height:28px; border-radius:50%; background:var(--gold-dim); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:18px; flex-shrink:0; transition:transform .3s,background .3s; }
-.faq-item.open .faq-tgl { transform:rotate(45deg); background:var(--gold); color:var(--dark); }
-.faq-a { max-height:0; overflow:hidden; transition:max-height .4s ease; }
-.faq-ai { padding:0 28px 22px; font-size:14px; color:#666; line-height:1.9; border-top:1px solid #f0f0f0; padding-top:16px; }
-.faq-item.open .faq-a { max-height:300px; }
-
-/* CTA */
-.cta-sec { background:var(--gold); padding:100px 40px; text-align:center; position:relative; overflow:hidden; }
-.cta-sec::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(-45deg,transparent,transparent 10px,rgba(0,0,0,.02) 10px,rgba(0,0,0,.02) 20px); }
-.cta-in { position:relative; z-index:1; }
-.cta-lbl { font-size:11px; letter-spacing:4px; color:rgba(0,0,0,.4); text-transform:uppercase; margin-bottom:16px; }
-.cta-sec h2 { font-size:clamp(26px,3.5vw,40px); font-weight:900; color:var(--dark); margin-bottom:12px; line-height:1.3; }
-.cta-sec p { font-size:16px; color:rgba(0,0,0,.55); margin-bottom:40px; line-height:1.8; }
-.cta-btn { display:inline-block; background:var(--dark); color:#fff; padding:20px 60px; border-radius:4px; font-size:16px; font-weight:800; text-decoration:none; transition:transform .2s,box-shadow .2s; }
-.cta-btn:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(0,0,0,.3); }
-.cta-bdgs { display:flex; justify-content:center; gap:24px; margin-top:32px; flex-wrap:wrap; }
-.cta-bdg { font-size:13px; font-weight:700; color:rgba(0,0,0,.45); display:flex; align-items:center; gap:6px; }
-.cta-bdg::before { content:'✓'; color:var(--dark); font-weight:900; }
-.cta-mail { margin-top:28px; font-size:14px; color:rgba(0,0,0,.45); }
-.cta-mail a { color:var(--dark); font-weight:700; text-decoration:none; }
-
-/* FOOTER */
-footer { background:var(--dark); color:#333; padding:40px; display:flex; align-items:center; justify-content:space-between; font-size:12px; flex-wrap:wrap; gap:16px; }
-.ft-links { display:flex; gap:24px; flex-wrap:wrap; }
-.ft-links a { color:#333; text-decoration:none; transition:color .2s; }
-.ft-links a:hover { color:var(--gold); }
-.ft-logo { color:var(--gold); font-weight:800; font-size:13px; letter-spacing:2px; }
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  nav{padding:0 20px;}
-  .hero{padding:100px 24px 80px;}
-  .hstats{flex-wrap:wrap;}
-  .hstat{flex:1 1 40%;border-bottom:1px solid rgba(255,255,255,.06);}
-  .sec{padding:60px 24px;}
-  .sns-g{grid-template-columns:1fr;}
-  .crit-g{grid-template-columns:1fr;}
-  .price-g{grid-template-columns:1fr;}
-  .case-kpis{grid-template-columns:repeat(2,1fr);}
-  .bigstats{grid-template-columns:repeat(2,1fr);}
-  .bstat{border-bottom:1px solid #1e1e1e;}
-  footer{flex-direction:column;text-align:center;}
-  .wf-steps::before{left:19px;}
-  .step-n{width:40px;height:40px;font-size:12px;}
+/* ─ NAV ─ */
+nav {
+  background: var(--black); border-bottom: 4px solid var(--yellow);
+  padding: 0 24px; display: flex; justify-content: space-between; align-items: stretch;
+  position: sticky; top: 0; z-index: 999;
 }
-@media(max-width:480px){
-  .hero h1{font-size:28px;}
-  .hstat{padding:16px 20px;}
-  .hstat-n{font-size:22px;}
+.nl { font-family: 'Bangers', cursive; font-size: 20px; letter-spacing: .1em; color: var(--yellow); display: flex; align-items: center; gap: 8px; padding: 14px 0; }
+.nl em { font-style: normal; color: var(--white); font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 700; }
+.nc { background: var(--yellow); color: var(--black); font-weight: 900; font-size: 13px; padding: 0 24px; text-decoration: none; display: flex; align-items: center; border-left: var(--bdr); transition: background .15s; }
+.nc:hover { background: #fff; }
+
+/* ─ HERO ─ */
+.hero { position: relative; background: #080000; min-height: 88vh; display: flex; align-items: center; overflow: hidden; border-bottom: 5px solid var(--yellow); }
+.hbg { position: absolute; inset: 0; background: url('./hero-bg.jpg') center/cover no-repeat; opacity: .3; }
+.hgrad { position: absolute; inset: 0; background: linear-gradient(135deg,rgba(8,0,0,.95) 0%,rgba(180,20,20,.55) 55%,rgba(8,0,0,.9) 100%); }
+.hray { position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 65% 55%, rgba(212,43,43,.1) 0deg, transparent 1.5deg, transparent 5deg); }
+.hi { position: relative; z-index: 1; padding: 100px 32px 80px; max-width: 760px; overflow: hidden; }
+.hbadge { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; padding: 6px 16px; margin-bottom: 24px; border: 2px solid var(--black); box-shadow: 3px 3px 0 var(--black); transform: rotate(-1deg); }
+h1 { font-family: 'Noto Sans JP', sans-serif; font-weight: 900; font-size: clamp(28px, 7vw, 84px); color: var(--white); line-height: 1.1; margin-bottom: 24px; word-break: break-all; overflow-wrap: break-word; text-shadow: 3px 3px 0 rgba(0,0,0,.6); max-width: 100%; }
+h1 .yl { color: var(--yellow); }
+h1 .rd { color: var(--red); }
+.hsub { background: rgba(255,255,255,.1); border-left: 4px solid var(--yellow); padding: 12px 18px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,.85); line-height: 1.75; max-width: 540px; margin-bottom: 28px; word-break: break-word; overflow-wrap: break-word; }
+.hbtn { display: inline-flex; align-items: center; gap: 10px; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 18px; padding: 16px 44px; text-decoration: none; border: 3px solid var(--black); box-shadow: 5px 5px 0 var(--black); transition: all .15s; }
+.hbtn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--black); }
+.hstats { display: flex; margin-top: 44px; border: 3px solid rgba(255,214,0,.5); width: fit-content; background: rgba(0,0,0,.5); }
+.hs { padding: 16px 28px; text-align: center; border-right: 2px solid rgba(255,214,0,.3); }
+.hs:last-child { border-right: none; }
+.hsn { font-family: 'Bangers', cursive; font-size: 38px; color: var(--yellow); line-height: 1; display: block; }
+.hsl { font-size: 10px; color: rgba(255,255,255,.45); letter-spacing: .1em; text-transform: uppercase; display: block; margin-top: 4px; }
+
+/* ─ SECTION BASE ─ */
+.sec { padding: 72px 32px; background: var(--white); border-bottom: 4px solid var(--black); position: relative; }
+.sec h2 { color: var(--black); }
+.sec .sl { color: #555; }
+.si { max-width: 960px; margin: 0 auto; }
+
+/* ─ 背景パターン ─ */
+.pain { background: var(--white); border-bottom: 4px solid var(--black); }
+.pain h2 { color: var(--black); }
+.pain .sl { color: #555; }
+
+.data { background: var(--black); border-bottom: 4px solid var(--yellow); }
+.data h2 { color: var(--white); }
+.data .sl { color: rgba(255,255,255,.55); }
+
+.service { background: var(--red); border-bottom: 4px solid var(--black); position: relative; }
+.service h2 { color: var(--white); }
+.service .sl { color: rgba(255,255,255,.75); }
+.service::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: radial-gradient(circle, rgba(255,255,255,.18) 1.5px, transparent 1.5px); background-size: 22px 22px; }
+.service .si { position: relative; z-index: 1; }
+
+.flow { background: var(--red); border-bottom: 4px solid var(--black); position: relative; }
+.flow h2 { color: var(--white); }
+.flow .sl { color: rgba(255,255,255,.75); }
+.flow::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: radial-gradient(circle, rgba(255,255,255,.18) 1.5px, transparent 1.5px); background-size: 22px 22px; }
+.flow .si { position: relative; z-index: 1; }
+
+.criteria { background: var(--red); border-bottom: 4px solid var(--black); position: relative; }
+.criteria h2 { color: var(--white); }
+.criteria .sl { color: rgba(255,255,255,.75); }
+.criteria::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: radial-gradient(circle, rgba(255,255,255,.18) 1.5px, transparent 1.5px); background-size: 22px 22px; }
+.criteria .si { position: relative; z-index: 1; }
+
+.wwd { background: var(--black); border-bottom: 4px solid var(--yellow); }
+.wwd h2 { color: var(--white); }
+.wwd .sl { color: rgba(255,255,255,.45); }
+.wwd .wi { color: var(--white); }
+
+.prc { background: var(--yellow); border-bottom: 4px solid var(--black); }
+.prc h2 { color: var(--black); }
+.prc .sl { color: rgba(0,0,0,.6); }
+
+.faq { background: var(--white); border-bottom: 4px solid var(--black); }
+.faq h2 { color: var(--black); }
+.faq .sl { color: #555; }
+
+/* ─ LABEL ─ */
+.lbl { display: inline-block; font-family: 'Bangers', cursive; font-size: 13px; letter-spacing: .15em; padding: 5px 16px; margin-bottom: 20px; border: 2px solid var(--black); box-shadow: 2px 2px 0 rgba(0,0,0,.4); transform: rotate(-1.2deg); }
+.lbl-r { background: var(--red); color: var(--white); }
+.lbl-y { background: var(--yellow); color: var(--black); }
+.lbl-b { background: var(--black); color: var(--yellow); }
+.lbl-w { background: var(--white); color: var(--black); }
+
+h2 { font-family: 'Noto Sans JP', sans-serif; font-weight: 900; font-size: clamp(26px, 5.5vw, 52px); line-height: 1.1; margin-bottom: 14px; word-break: break-all; overflow-wrap: break-word; overflow: hidden; }
+.sl { font-size: 14px; line-height: 1.75; margin-bottom: 44px; max-width: 640px; }
+
+/* ─ PAIN ─ */
+.pain-wrap { border: 3px solid var(--black); background: var(--black); box-shadow: 6px 6px 0 rgba(0,0,0,.5); overflow: hidden; }
+.pain-wrap-head { background: var(--black); padding: 12px 20px; border-bottom: 3px solid var(--yellow); }
+.pain-wrap-head span { font-family: 'Bangers', cursive; font-size: 13px; letter-spacing: .12em; color: var(--yellow); }
+.pi { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; border: none; border-bottom: 2px solid rgba(0,0,0,.12); background: var(--white); transition: background .15s; }
+.pi:last-child { border-bottom: none; }
+.pi:hover { background: #FAFAFA; }
+.pix { font-family: 'Bangers', cursive; font-size: 18px; color: var(--black); background: var(--red); width: 34px; height: 34px; min-width: 34px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid rgba(255,255,255,.3); }
+.pit { font-size: 15px; font-weight: 900; color: var(--black); line-height: 1.4; margin-bottom: 4px; }
+.pis { font-size: 13px; color: #555; line-height: 1.6; }
+
+/* ─ DATA ─ */
+.dbubble { background: var(--yellow); border: 3px solid var(--black); padding: 20px 24px; margin-bottom: 24px; box-shadow: 4px 4px 0 var(--black); }
+.dbubble p { font-weight: 900; font-size: 16px; color: var(--black); line-height: 1.65; }
+.dbubble strong { color: var(--red); font-size: 20px; }
+.dgrid { display: grid; grid-template-columns: repeat(4,1fr); border: 3px solid rgba(255,214,0,.3); }
+.di { padding: 24px 12px; text-align: center; border-right: 3px solid rgba(255,214,0,.3); }
+.di:last-child { border-right: none; }
+.din { font-family: 'Bangers', cursive; font-size: 54px; color: var(--yellow); line-height: 1; display: block; margin-bottom: 6px; text-shadow: 2px 2px 0 rgba(0,0,0,.6); }
+.dil { font-size: 13px; font-weight: 900; color: var(--white); margin-bottom: 4px; display: block; }
+.did { font-size: 11px; color: rgba(255,255,255,.5); line-height: 1.5; display: block; }
+
+/* ─ CASE STUDY ─ */
+.case-wrap { border: 3px solid var(--yellow); background: rgba(0,0,0,.4); margin-top: 32px; box-shadow: 5px 5px 0 rgba(255,214,0,.3); }
+.case-head { background: var(--yellow); border-bottom: 3px solid var(--black); padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.case-head-lbl { font-family: 'Bangers', cursive; font-size: 15px; letter-spacing: .12em; color: var(--black); }
+.case-ongoing { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 900; color: var(--black); letter-spacing: .08em; }
+.case-ongoing::before { content: ''; width: 8px; height: 8px; background: #16a34a; border-radius: 50%; animation: cpulse 2s infinite; border: 2px solid var(--black); }
+@keyframes cpulse { 0%,100%{box-shadow:0 0 0 2px rgba(22,163,74,.3)} 50%{box-shadow:0 0 0 5px rgba(22,163,74,.15)} }
+.case-body { padding: 24px 22px; }
+.case-meta { font-size: 12px; color: rgba(255,255,255,.4); margin-bottom: 20px; letter-spacing: .04em; }
+.case-kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 2px solid rgba(255,214,0,.25); margin-bottom: 24px; }
+.ck { padding: 18px 12px; text-align: center; border-right: 2px solid rgba(255,214,0,.2); }
+.ck:last-child { border-right: none; }
+.ck-n { font-family: 'Bangers', cursive; font-size: 36px; color: var(--yellow); line-height: 1; display: block; text-shadow: 1px 1px 0 rgba(0,0,0,.5); }
+.ck-l { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 4px; display: block; line-height: 1.5; }
+.case-insight { background: rgba(255,214,0,.07); border-left: 4px solid var(--yellow); padding: 14px 18px; font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.85; }
+.case-insight strong { color: var(--yellow); }
+
+/* ─ SERVICE ─ */
+.spnl { display: grid; grid-template-columns: repeat(3,1fr); border: 3px solid var(--black); background: var(--black); margin-top: 8px; }
+.sp { background: var(--white); padding: 28px 24px; border-right: 3px solid var(--black); }
+.sp:last-child { border-right: none; }
+.spn { font-family: 'Bangers', cursive; font-size: 60px; color: rgba(212,43,43,.15); line-height: 1; margin-bottom: 10px; }
+.sp h3 { font-weight: 900; font-size: 17px; color: var(--black); border-bottom: 2px solid var(--yellow); padding-bottom: 10px; margin-bottom: 12px; }
+.sp p { font-size: 13px; color: #444; line-height: 1.7; margin-bottom: 12px; }
+.stags { display: flex; flex-wrap: wrap; gap: 5px; }
+.stag { background: var(--black); color: var(--yellow); font-size: 10px; font-weight: 900; padding: 3px 9px; }
+
+/* ─ FLOW ─ */
+.fl { display: flex; flex-direction: column; gap: 0; }
+.fs { display: flex; align-items: center; gap: 16px; padding: 20px 22px; border: 2px solid rgba(255,255,255,.2); border-bottom: none; background: rgba(0,0,0,.25); }
+.fs:first-child { border-top: 2px solid rgba(255,255,255,.2); }
+.fs:hover { background: rgba(0,0,0,.35); }
+.fsn { font-family: 'Bangers', cursive; font-size: 12px; letter-spacing: .1em; color: var(--black); background: var(--yellow); border: 2px solid var(--black); padding: 4px 12px; white-space: nowrap; flex-shrink: 0; }
+.fsc h3 { font-weight: 900; font-size: 16px; color: var(--white); margin-bottom: 3px; }
+.fsc p { font-size: 12px; color: rgba(255,255,255,.6); line-height: 1.55; }
+.fsnote { margin-left: auto; font-family: 'Bangers', cursive; font-size: 12px; color: var(--black); background: var(--yellow); padding: 4px 12px; border: 2px solid var(--black); white-space: nowrap; flex-shrink: 0; }
+.fgoal { background: var(--yellow); border: 3px solid var(--black); padding: 22px; text-align: center; border-top: none; box-shadow: 0 5px 0 var(--black); }
+.fgt { font-family: 'Bangers', cursive; font-size: 52px; letter-spacing: .1em; color: var(--black); line-height: 1; }
+.fgs { font-size: 13px; font-weight: 700; color: rgba(0,0,0,.5); margin-top: 4px; }
+
+/* ─ CRITERIA ─ */
+.cl { display: flex; flex-direction: column; gap: 0; }
+.ci { background: var(--white); border: 3px solid var(--black); border-bottom: none; padding: 22px 26px; display: flex; gap: 18px; align-items: flex-start; box-shadow: 4px 4px 0 rgba(0,0,0,.4); }
+.cl .ci:last-child { border-bottom: 3px solid var(--black); }
+.ci:hover { background: #FFFFF5; }
+.cib { background: var(--black); color: var(--yellow); font-family: 'Bangers', cursive; font-size: 12px; padding: 4px 12px; white-space: nowrap; flex-shrink: 0; margin-top: 3px; letter-spacing: .1em; }
+.cic h3 { font-weight: 900; font-size: 17px; color: var(--black); margin-bottom: 6px; }
+.cic p { font-size: 13px; color: #444; line-height: 1.7; }
+
+/* ─ WHAT WE DO ─ */
+.wl { list-style: none; margin-bottom: 44px; }
+.wi { display: flex; align-items: flex-start; gap: 14px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.1); font-size: 15px; color: var(--white); line-height: 1.6; font-weight: 500; }
+.wi::before { content: '✓'; font-family: 'Bangers', cursive; font-size: 18px; color: var(--black); background: var(--yellow); width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--black); flex-shrink: 0; margin-top: 2px; }
+.af { display: flex; align-items: stretch; border: 3px solid var(--yellow); overflow: hidden; }
+.afs { flex: 1; padding: 20px 14px; text-align: center; border-right: 2px solid rgba(255,214,0,.25); background: rgba(255,255,255,.04); }
+.afs:last-of-type { border-right: none; }
+.afsn { font-family: 'Bangers', cursive; font-size: 28px; color: var(--yellow); display: block; line-height: 1; }
+.afsm { font-size: 12px; color: rgba(255,255,255,.6); margin-top: 4px; display: block; font-weight: 700; }
+.afg { background: var(--yellow); color: var(--black); font-family: 'Bangers', cursive; font-size: 24px; letter-spacing: .06em; display: flex; align-items: center; padding: 0 22px; border-left: 3px solid var(--black); flex-shrink: 0; }
+
+/* ─ PRICING ─ */
+.pcg { display: grid; grid-template-columns: 1fr 1fr; border: 3px solid var(--black); background: var(--black); }
+.pc { padding: 40px 32px; border-right: 2px solid rgba(0,0,0,.2); background: var(--white); }
+.pc:last-child { border-right: none; }
+.pc.pop { background: var(--black); border: 1px solid var(--yellow); }
+.pc .pt { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #888; margin-bottom: 8px; }
+.pc.pop .pt { color: rgba(255,255,255,.45); }
+.pc .pb { display: inline-block; font-family: 'Bangers', cursive; font-size: 13px; letter-spacing: .1em; background: var(--red); color: var(--white); padding: 3px 14px; margin-bottom: 8px; border: 2px solid var(--black); box-shadow: 2px 2px 0 var(--black); }
+.pc .pp { font-family: 'Bangers', cursive; font-size: 64px; color: var(--black); line-height: 1; margin-bottom: 4px; }
+.pc.pop .pp { color: var(--yellow); }
+.pc .pp span { font-family: 'Noto Sans JP', sans-serif; font-size: 15px; font-weight: 400; color: #888; }
+.pc.pop .pp span { color: rgba(255,255,255,.4); }
+.pc .pcnt { font-size: 14px; color: var(--red); font-weight: 900; margin-bottom: 6px; }
+.pc.pop .pcnt { color: #ffd600; }
+.pc .pn { font-size: 13px; color: #666; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid rgba(0,0,0,.1); }
+.pc.pop .pn { color: rgba(255,255,255,.45); border-bottom-color: rgba(255,255,255,.1); }
+.pclist { list-style: none; }
+.pclist li { font-size: 14px; padding: 9px 0; border-bottom: 1px solid rgba(0,0,0,.07); display: flex; gap: 9px; line-height: 1.5; font-weight: 500; color: rgba(0,0,0,.65); }
+.pc.pop .pclist li { color: rgba(255,255,255,.65); border-bottom-color: rgba(255,255,255,.08); }
+.pclist li::before { content: '—'; color: var(--red); flex-shrink: 0; }
+.pc.pop .pclist li::before { color: var(--yellow); }
+.pc .pnote { font-size: 11px; color: #aaa; margin-top: 16px; line-height: 1.7; }
+.pc.pop .pnote { color: rgba(255,255,255,.25); }
+
+/* ─ FAQ ─ */
+.fi { border: 3px solid var(--black); border-bottom: none; background: #FAFAFA; }
+.fi:last-child { border-bottom: 3px solid var(--black); }
+.fq { padding: 18px 22px; font-weight: 900; font-size: 15px; color: var(--black); display: flex; align-items: flex-start; gap: 14px; border-bottom: 2px solid var(--black); line-height: 1.4; cursor: pointer; }
+.fqi { font-family: 'Bangers', cursive; font-size: 16px; color: var(--white); background: var(--black); width: 30px; height: 30px; min-width: 30px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.fa { padding: 14px 22px 14px 66px; font-size: 14px; color: #555; line-height: 1.8; }
+
+/* ─ CTA ─ */
+.cta { background: var(--red); padding: 88px 32px; position: relative; overflow: hidden; border-bottom: 5px solid var(--black); }
+.cray { position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(0,0,0,.07) 0deg, transparent 2deg, transparent 6deg); }
+.cdots { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(0,0,0,.12) 1px, transparent 1px); background-size: 18px 18px; }
+.cin { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; text-align: center; }
+.cbubble { display: inline-block; background: var(--yellow); border: 3px solid var(--black); padding: 9px 28px; font-family: 'Bangers', cursive; font-size: 16px; letter-spacing: .12em; margin-bottom: 24px; transform: rotate(-1.5deg); box-shadow: 4px 4px 0 var(--black); }
+.cta h2 { font-weight: 900; font-size: clamp(34px, 8vw, 62px); color: var(--white); line-height: 1.05; margin-bottom: 18px; text-shadow: 3px 3px 0 rgba(0,0,0,.35); word-break: keep-all; }
+.cta h2 .yl { color: var(--yellow); }
+.ctasub { font-size: 15px; color: rgba(255,255,255,.8); margin-bottom: 36px; line-height: 1.8; font-weight: 500; }
+.pows { display: flex; gap: 10px; justify-content: center; margin-bottom: 36px; flex-wrap: wrap; }
+.pw { font-family: 'Bangers', cursive; font-size: 18px; letter-spacing: .1em; background: var(--black); color: var(--yellow); padding: 6px 16px; border: 2px solid var(--black); box-shadow: 3px 3px 0 rgba(0,0,0,.3); }
+.pw:nth-child(1) { transform: rotate(-2deg); }
+.pw:nth-child(2) { transform: rotate(1deg); }
+.pw:nth-child(3) { transform: rotate(-1.5deg); }
+.fsub { width: 100%; background: var(--black); color: var(--yellow); border: 3px solid var(--black); font-family: 'Bangers', cursive; font-size: 24px; letter-spacing: .1em; padding: 16px; cursor: pointer; box-shadow: 4px 4px 0 rgba(0,0,0,.4); transition: all .15s; text-decoration: none; display: block; text-align: center; }
+.fsub:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 rgba(0,0,0,.4); }
+
+/* ─ FOOTER ─ */
+footer { background: var(--black); border-top: 4px solid var(--yellow); padding: 28px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.flogo { font-family: 'Bangers', cursive; font-size: 18px; color: var(--yellow); letter-spacing: .1em; }
+.flinks { display: flex; gap: 24px; }
+.flinks a { font-size: 12px; color: rgba(255,255,255,.3); text-decoration: none; transition: color .15s; }
+.flinks a:hover { color: var(--yellow); }
+.fcopy { font-size: 11px; color: rgba(255,255,255,.2); }
+
+/* ─ RESPONSIVE ─ */
+@media (max-width: 768px) {
+  nav { padding: 0 16px; }
+  .sec { padding: 56px 20px; }
+  .hi { padding: 80px 20px 56px; }
+  h1 { font-size: 32px; line-height: 1.15; }
+  h2 { font-size: 28px; }
+  .sl { font-size: 14px; margin-bottom: 32px; }
+  .hstats { flex-direction: column; width: 100%; border: none; }
+  .hs { border: 2px solid rgba(255,214,0,.3); border-bottom: none; padding: 14px 20px; }
+  .hs:last-child { border-bottom: 2px solid rgba(255,214,0,.3); }
+  .dgrid { grid-template-columns: repeat(2,1fr); }
+  .di { border-right: none; border-bottom: 3px solid rgba(255,214,0,.2); }
+  .di:nth-child(odd) { border-right: 3px solid rgba(255,214,0,.2); }
+  .di:last-child { border-bottom: none; }
+  .case-kpis { grid-template-columns: repeat(2,1fr); }
+  .ck { border-right: none; border-bottom: 2px solid rgba(255,214,0,.2); }
+  .ck:nth-child(odd) { border-right: 2px solid rgba(255,214,0,.2); }
+  .ck:last-child { border-bottom: none; }
+  .spnl { grid-template-columns: 1fr; background: none; border: none; gap: 0; }
+  .sp { border: 3px solid var(--black); border-bottom: none; }
+  .sp:last-child { border-bottom: 3px solid var(--black); }
+  .pcg { grid-template-columns: 1fr; }
+  .pc { border-right: none; border-bottom: 2px solid rgba(255,214,0,.2); }
+  .pc:last-child { border-bottom: none; }
+  .fs { flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+  .fsn { order: 1; flex-shrink: 0; }
+  .fsnote { order: 2; margin-left: auto; }
+  .fsc { order: 3; flex: 0 0 100%; padding-top: 4px; }
+  .af { flex-wrap: wrap; }
+  .afg { width: 100%; justify-content: center; padding: 14px; border-left: none; border-top: 3px solid var(--black); }
+  footer { justify-content: center; text-align: center; }
+  .flinks { justify-content: center; }
+  .cta { padding: 64px 16px; }
 }
 </style>
 </head>
 <body>
 
-<div id="sp"></div>
-
-<nav id="nav">
-  <a href="#" class="nav-logo">GVA</a>
-  <a href="#contact" class="nav-cta">無料で相談する</a>
+<!-- NAV -->
+<nav>
+  <div class="nl">GVA <em>UGC口コミ施策</em></div>
+  <a href="#contact" class="nc">無料で相談する</a>
 </nav>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="particles" id="ptcl"></div>
-  <div class="hero-inner">
-    <div class="hero-lbl">GOOD VIBES AGENCY — UGC Marketing</div>
-    <h1>インフルエンサーより、<br><em>口コミが売れる。</em></h1>
-    <p class="hero-sub">「広告っぽい」と思われた瞬間、その投稿は終わる。<br>GVAは1,000名以上のリアルなSNSクリエイターネットワークで、<br>広告感ゼロの本物の口コミをワンストップで創出します。</p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-p">無料で相談する →</a>
-      <a href="#service" class="btn-s">サービスを見る</a>
+<section class="hero">
+  <div class="hbg"></div>
+  <div class="hgrad"></div>
+  <div class="hray"></div>
+  <div class="hi">
+    <div class="hbadge up">GOOD VIBES AGENCY — UGC Marketing</div>
+    <h1 class="up d1">インフルエンサーより、<br><span class="yl">口コミ</span>が<span class="rd">売れる。</span></h1>
+    <p class="hsub up d2">「広告っぽい」と思われた瞬間、その投稿は終わる。GVAは1,000名以上のリアルなSNSクリエイターネットワークで、広告感ゼロの本物の口コミをワンストップで創出します。</p>
+    <a href="#contact" class="hbtn up d3">無料で相談する →</a>
+    <div class="hstats up d4">
+      <div class="hs"><span class="hsn">1,000+</span><span class="hsl">Creator Network</span></div>
+      <div class="hs"><span class="hsn">100+</span><span class="hsl">PR Cases</span></div>
+      <div class="hs"><span class="hsn">3SNS</span><span class="hsl">IG / TikTok / X</span></div>
     </div>
   </div>
-  <div class="hstats">
-    <div class="hstat"><div class="hstat-n">1,000<sup style="font-size:14px">+</sup></div><div class="hstat-l">Creator Network</div></div>
-    <div class="hstat"><div class="hstat-n">×8</div><div class="hstat-l">Impression Multiplier</div></div>
-    <div class="hstat"><div class="hstat-n">74%</div><div class="hstat-l">UGC Impact Rate</div></div>
-    <div class="hstat"><div class="hstat-n">3</div><div class="hstat-l">SNS Platforms</div></div>
-  </div>
-</div>
+</section>
 
-<!-- MARQUEE -->
-<div class="mq">
-  <div class="mq-inner">
-    <span class="mq-item">UGC口コミ施策<span class="mq-dot"></span></span>
-    <span class="mq-item">1,000名以上のクリエイターネットワーク<span class="mq-dot"></span></span>
-    <span class="mq-item">Instagram / TikTok / X<span class="mq-dot"></span></span>
-    <span class="mq-item">ステマ規制対応<span class="mq-dot"></span></span>
-    <span class="mq-item">ワンストップ対応<span class="mq-dot"></span></span>
-    <span class="mq-item">月次媒体ミックス最適化<span class="mq-dot"></span></span>
-    <span class="mq-item">UGC口コミ施策<span class="mq-dot"></span></span>
-    <span class="mq-item">1,000名以上のクリエイターネットワーク<span class="mq-dot"></span></span>
-    <span class="mq-item">Instagram / TikTok / X<span class="mq-dot"></span></span>
-    <span class="mq-item">ステマ規制対応<span class="mq-dot"></span></span>
-    <span class="mq-item">ワンストップ対応<span class="mq-dot"></span></span>
-    <span class="mq-item">月次媒体ミックス最適化<span class="mq-dot"></span></span>
-  </div>
-</div>
-
-<!-- PROBLEM -->
-<div class="prob sec">
-  <div class="sec-inner">
-    <p class="sec-lbl rv">Problem</p>
-    <h2 class="sec-ttl rv d1">こんなお悩み、ありませんか？</h2>
-    <p class="sec-desc rv d2">インフルエンサーPRの課題が、年々大きくなっている。</p>
-    <div class="prob-grid">
-      <div class="prob-card rv d2"><div class="prob-icon">💸</div><h3>費用対効果が読めない</h3><p>フォロワーが多いほど単価は高くなる。でも「広告投稿」と見抜かれたら、どんなに有名なインフルエンサーでも購買には繋がらない。</p></div>
-      <div class="prob-card rv d3"><div class="prob-icon">⚠️</div><h3>ステマ規制が怖い</h3><p>2023年の規制以降、PR表記の管理工数が急増。ディレクションが複雑になり施策スピードが落ちている。</p></div>
-      <div class="prob-card rv d4"><div class="prob-icon">🔀</div><h3>媒体管理が追いつかない</h3><p>アフィ月はInstagram、キャンペーン月はX、認知月はTikTok——媒体横断の口コミ設計と管理が追いついていない。</p></div>
+<!-- PAIN -->
+<section class="sec pain">
+  <div class="si">
+    <div class="lbl lbl-r up">PROBLEM!</div>
+    <h2 class="up">こんな悩み、<br>ありませんか？</h2>
+    <p class="sl up">インフルエンサーPRの課題が、年々大きくなっている。</p>
+    <div class="pain-wrap">
+      <div class="pain-wrap-head"><span>✗ PROBLEMS</span></div>
+      <div class="pi up"><div class="pix">✗</div><div><div class="pit">費用対効果が読めない</div><div class="pis">フォロワーが多くても「広告投稿」と見抜かれたら購買には繋がらない。</div></div></div>
+      <div class="pi up d1"><div class="pix">✗</div><div><div class="pit">ステマ規制が怖い</div><div class="pis">2023年のステマ規制以降、PR表記の管理工数が増えてスピードが落ちている。</div></div></div>
+      <div class="pi up d2"><div class="pix">✗</div><div><div class="pit">媒体管理が追いつかない</div><div class="pis">Instagram・TikTok・X——媒体横断の口コミ設計と管理が追いついていない。</div></div></div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- DATA -->
-<div class="data sec" id="data">
-  <div class="sec-inner">
-    <p class="sec-lbl rv">Data</p>
-    <h2 class="sec-ttl rv d1">データが証明する。<br>「小さな口コミ」が最もインプレッションを生む。</h2>
-    <p class="sec-desc rv d2">GVA支援ブランドの施策データより（2026年1月 実績）</p>
-    <div class="bigstats rv d2">
-      <div class="bstat"><div class="num"><span class="cnt" data-t="340936" data-f="c">0</span></div><div class="desc">月間合計インプレッション<br>（145本の投稿・1ヶ月）</div></div>
-      <div class="bstat"><div class="num"><span class="cnt" data-t="74">0</span><span class="unit">%</span></div><div class="desc">UGCが全施策のインプレッションに占める割合</div></div>
-      <div class="bstat"><div class="num">×<span class="cnt" data-t="8">0</span></div><div class="desc">FW6,500人のクリエイターが<br>フォロワー比8倍のimpを獲得</div></div>
-      <div class="bstat"><div class="num"><span class="cnt" data-t="107">0</span></div><div class="desc">月間UGC獲得件数<br>（自然発生型口コミ）</div></div>
+<section class="sec data">
+  <div class="si">
+    <div class="lbl lbl-b up">DATA!</div>
+    <h2 class="up">「小さな口コミ」が<br>最もインプレッションを生む</h2>
+    <p class="sl up">GVA支援ブランドの実績データが証明する。（2026年1月）</p>
+    <div class="dbubble up">
+      <p>フォロワー6,500人のナノインフルエンサーが、<strong>52,000 imp</strong>を獲得。フォロワー比<strong>×8倍</strong>の拡散力。UGCが全施策インプレッションの<strong>74%</strong>を生成した。</p>
     </div>
-    <div class="bars rv">
-      <div class="bar-item">
-        <div class="bar-hd"><span class="bar-lbl">UGC口コミ投稿（ギフティング）</span><span class="bar-val">251,982 imp — 74%</span></div>
-        <div class="bar-track"><div class="bar-fill" data-w="74"></div></div>
-      </div>
-      <div class="bar-item">
-        <div class="bar-hd"><span class="bar-lbl">公式Instagram</span><span class="bar-val">79,288 imp — 23%</span></div>
-        <div class="bar-track"><div class="bar-fill" data-w="23"></div></div>
-      </div>
-      <div class="bar-item">
-        <div class="bar-hd"><span class="bar-lbl">その他施策</span><span class="bar-val">9,666 imp — 3%</span></div>
-        <div class="bar-track"><div class="bar-fill" data-w="3"></div></div>
-      </div>
+    <div class="dgrid up">
+      <div class="di"><span class="din">×8</span><span class="dil">フォロワー比インプレッション</span><span class="did">FW6,500人 → 52,000 imp達成</span></div>
+      <div class="di"><span class="din">74%</span><span class="dil">UGCのインプ構成比</span><span class="did">全施策中、UGCが圧倒的最大</span></div>
+      <div class="di"><span class="din">340K</span><span class="dil">月間合計インプレッション</span><span class="did">145本の投稿・1ヶ月実績</span></div>
+      <div class="di"><span class="din">107</span><span class="dil">月間UGC獲得件数</span><span class="did">自然発生型口コミ</span></div>
     </div>
+
     <!-- CASE STUDY -->
-    <div class="case rv">
-      <div class="case-tag">継続稼働中</div>
-      <h3>大手ブランドA社 — 月次UGC施策</h3>
-      <p class="case-meta">業種：アパレル / 規模：大手 / 稼働：複数月継続中</p>
-      <div class="case-kpis">
-        <div class="ck"><div class="ck-n">340,936</div><div class="ck-l">月間合計インプレッション</div></div>
-        <div class="ck"><div class="ck-n">107件</div><div class="ck-l">UGC獲得数 / 月</div></div>
-        <div class="ck"><div class="ck-n">52,000</div><div class="ck-l">単一クリエイター最高imp<br>（FW6,500人）</div></div>
-        <div class="ck"><div class="ck-n">40,131</div><div class="ck-l">1投稿あたり平均リーチ数</div></div>
+    <div class="case-wrap up">
+      <div class="case-head">
+        <span class="case-head-lbl">CASE STUDY — 大手ブランドA社</span>
+        <span class="case-ongoing">現在も継続稼働中</span>
       </div>
-      <div class="case-insight">
-        <p>広告配信と並走させることで「<strong>広告っぽく見えない本物の口コミ</strong>」としてCVRブーストに貢献。アフィリエイト強化月はInstagram集中・Xキャンペーン月はX集中と、<strong>媒体ミックスを月次で最適化</strong>できる点を高く評価。複数月継続採用中。</p>
+      <div class="case-body">
+        <div class="case-meta">業種：アパレル / 規模：大手 / 稼働期間：複数月継続中</div>
+        <div class="case-kpis">
+          <div class="ck"><span class="ck-n">340,936</span><span class="ck-l">月間合計インプレッション</span></div>
+          <div class="ck"><span class="ck-n">107件</span><span class="ck-l">UGC獲得数 / 月</span></div>
+          <div class="ck"><span class="ck-n">52,000</span><span class="ck-l">最高imp（FW6,500人）</span></div>
+          <div class="ck"><span class="ck-n">40,131</span><span class="ck-l">1投稿あたり平均リーチ</span></div>
+        </div>
+        <div class="case-insight">
+          広告配信と並走させることで「<strong>広告っぽく見えない本物の口コミ</strong>」としてCVRブーストに貢献。アフィリエイト強化月はInstagram集中・Xキャンペーン月はX集中と、<strong>媒体ミックスを月次で最適化</strong>できる点を高く評価。複数月継続採用中。
+        </div>
       </div>
-      <div class="ongoing">現在も継続稼働中</div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- SERVICE -->
-<div class="sec" id="service">
-  <div class="sec-inner">
-    <p class="sec-lbl rv">Service</p>
-    <h2 class="sec-ttl rv d1">GVA UGC口コミ施策とは</h2>
-    <p class="sec-desc rv d2">GVAが独自に構築した1,000名以上のSNSクリエイターリストから、ブランド親和性・リーチ力・エンゲージメントを精査してアサイン。フォロワー数ではなく「本物の届く力」で選びます。</p>
-    <div class="sns-g">
-      <div class="sns-c rv d2"><div class="sns-icon">📸</div><h3>Instagram</h3><p>ストーリーズ（リンク設置可）・フィード・リールを使い分け。導線設計とリーチ拡大に最適。</p></div>
-      <div class="sns-c rv d3"><div class="sns-icon">🐦</div><h3>X（旧Twitter）</h3><p>拡散力×キャンペーン連動に最適。話題を瞬間的に広げるスピード施策が得意。</p></div>
-      <div class="sns-c rv d4"><div class="sns-icon">🎵</div><h3>TikTok</h3><p>若年層リーチ・バイラル設計。フォロワー以上のリーチが狙え、視聴完了率でアルゴリズムに乗せる。</p></div>
-    </div>
-    <div class="adj rv">
-      <div class="adj-ttl">月ごとに媒体の内訳を柔軟に調整できます</div>
-      <div class="adj-items">
-        <div class="adj-item">アフィリエイト強化月 → Instagramに集中して導線を最大化</div>
-        <div class="adj-item">Xキャンペーン月 → Xに集中して拡散力をブースト</div>
-        <div class="adj-item">新規認知拡大月 → TikTokで若年層リーチを狙う</div>
-      </div>
+<section class="sec service">
+  <div class="si">
+    <div class="lbl lbl-b up">SERVICE!</div>
+    <h2 class="up">GVA UGC口コミ施策とは</h2>
+    <p class="sl up">1,000名以上のクリエイターネットワークで、広告感ゼロの口コミを量産する。</p>
+    <div class="spnl up">
+      <div class="sp"><div class="spn">01</div><h3>クリエイター選定</h3><p>商品・ターゲットに最適なクリエイターをAI×人力でキャスティング。エンゲージメント率・親和性・品質・コンプライアンスを4軸で審査。</p><div class="stags"><span class="stag">Instagram</span><span class="stag">TikTok</span><span class="stag">X</span></div></div>
+      <div class="sp"><div class="spn">02</div><h3>投稿設計・管理</h3><p>ステマ規制対応のディレクション、投稿原稿確認、スケジュール管理まで一括対応。PR表記を遵守しながら最大の自然感を引き出す。</p><div class="stags"><span class="stag">ステマ規制対応</span><span class="stag">原稿確認</span></div></div>
+      <div class="sp"><div class="spn">03</div><h3>効果測定・レポート</h3><p>投稿後のインプレッション・エンゲージメント・UGC二次利用を含む効果測定レポートを月次で提供。</p><div class="stags"><span class="stag">効果測定</span><span class="stag">月次レポート</span></div></div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- FLOW -->
+<section class="sec flow">
+  <div class="si">
+    <div class="lbl lbl-y up">WORKFLOW!</div>
+    <h2 class="up">依頼から納品まで5ステップ</h2>
+    <p class="sl up">GVAがワンストップで対応するから、クライアントの負担はほぼゼロ。</p>
+    <div class="fl">
+      <div class="fs up"><div class="fsn">STEP 01</div><div class="fsc"><h3>無料ヒアリング</h3><p>商品・ターゲット・予算感をオンラインで（30分）。</p></div><div class="fsnote">30分</div></div>
+      <div class="fs up d1"><div class="fsn">STEP 02</div><div class="fsc"><h3>クリエイター選定・提案</h3><p>最適な候補と施策プランを提案（3営業日以内）。</p></div><div class="fsnote">3営業日</div></div>
+      <div class="fs up d2"><div class="fsn">STEP 03</div><div class="fsc"><h3>投稿設計・クリエイター手配</h3><p>PR表記対応ディレクション・原稿確認・スケジュール管理。</p></div><div class="fsnote">全て込み</div></div>
+      <div class="fs up d3"><div class="fsn">STEP 04</div><div class="fsc"><h3>拡散・モニタリング</h3><p>投稿後のエンゲージメントをリアルタイムで追跡。</p></div><div class="fsnote">常時監視</div></div>
+      <div class="fs up d4"><div class="fsn">STEP 05</div><div class="fsc"><h3>効果測定・レポート</h3><p>月次レポートで可視化。次回施策の改善案を提案。</p></div><div class="fsnote">月次</div></div>
+    </div>
+    <div class="fgoal up"><div class="fgt">GOAL!</div><div class="fgs">口コミが購買を動かす</div></div>
+  </div>
+</section>
 
 <!-- CRITERIA -->
-<div class="prob sec">
-  <div class="sec-inner">
-    <p class="sec-lbl rv">Selection</p>
-    <h2 class="sec-ttl rv d1">クリエイター選定基準（GVA独自）</h2>
-    <p class="sec-desc rv d2">フォロワー数だけでは選ばない。実際の「届く力」と「広告感のなさ」で厳選します。</p>
-    <div class="crit-g">
-      <div class="crit-c rv d2"><span class="crit-tag">ENG RATE</span><h3>エンゲージメント率 3%以上</h3><p>フォロワー数よりも「反応率」を重視。実際に購買行動に繋がるアカウントのみ選定。</p></div>
-      <div class="crit-c rv d3"><span class="crit-tag">MATCH</span><h3>ターゲット親和性</h3><p>商品カテゴリとフォロワー属性（年代・性別・興味）のマッチング度で判断。ブランドの世界観に合う人を選ぶ。</p></div>
-      <div class="crit-c rv d4"><span class="crit-tag">QUALITY</span><h3>コンテンツ品質</h3><p>投稿のリアリティ・文章力・撮影クオリティを人の目で審査。AIスコアと組み合わせて厳選。</p></div>
-      <div class="crit-c rv d5"><span class="crit-tag">COMPLY</span><h3>コンプライアンス</h3><p>ステマ規制対応の実績があり、PR表記ガイドラインを遵守できるアカウントのみ採用。</p></div>
+<section class="sec criteria">
+  <div class="si">
+    <div class="lbl lbl-b up">SELECTION!</div>
+    <h2 class="up" style="word-break:keep-all;">GVA独自<br>クリエイター選定基準</h2>
+    <p class="sl up">数を集めるだけじゃない。「売れる口コミ」を生む人を、4基準で絞り込む。</p>
+    <div class="cl">
+      <div class="ci up"><div class="cib">ENG RATE</div><div class="cic"><h3>エンゲージメント率 3%以上</h3><p>フォロワー数より「反応率」を重視。実際に購買行動に繋がるアカウントを選定。</p></div></div>
+      <div class="ci up d1"><div class="cib">MATCH</div><div class="cic"><h3>ターゲット親和性</h3><p>商品カテゴリとフォロワー属性（年代・性別・興味）のマッチング度で判断。</p></div></div>
+      <div class="ci up d2"><div class="cib">QUALITY</div><div class="cic"><h3>コンテンツ品質</h3><p>投稿のリアリティ・文章力・撮影クオリティを人の目で審査。AIスコアと組み合わせ厳選。</p></div></div>
+      <div class="ci up d3"><div class="cib">COMPLY</div><div class="cic"><h3>コンプライアンス</h3><p>ステマ規制対応の実績があり、PR表記ガイドラインを遵守できるアカウントのみ採用。</p></div></div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- WORKFLOW -->
-<div class="wf sec">
-  <div class="sec-inner">
-    <p class="sec-lbl rv">Workflow</p>
-    <h2 class="sec-ttl rv d1">依頼から納品まで<br>GVAがワンストップで対応</h2>
-    <p class="sec-desc rv d2">クライアントの負担はほぼゼロ。5ステップで完結します。</p>
-    <div class="wf-steps">
-      <div class="wf-step rv"><div class="step-n">01</div><div class="step-c"><span class="step-bdg">30分 / オンライン</span><h3>無料ヒアリング</h3><p>商品・ターゲット・予算感をオンラインでお聞かせください。方向性をすり合わせます。</p></div></div>
-      <div class="wf-step rv d1"><div class="step-n">02</div><div class="step-c"><span class="step-bdg">3営業日以内</span><h3>クリエイター選定・提案</h3><p>最適な候補と施策プランをご提案。媒体ミックス・人数・スケジュールを確定します。</p></div></div>
-      <div class="wf-step rv d2"><div class="step-n">03</div><div class="step-c"><span class="step-bdg">全て込み</span><h3>投稿設計・クリエイター手配</h3><p>PR表記対応ディレクション・原稿確認・スケジュール管理・住所回収まで一括対応。</p></div></div>
-      <div class="wf-step rv d3"><div class="step-n">04</div><div class="step-c"><span class="step-bdg">常時監視</span><h3>拡散・モニタリング</h3><p>投稿後のエンゲージメントをリアルタイムで追跡。問題があれば即対応します。</p></div></div>
-      <div class="wf-step rv d4"><div class="step-n">05</div><div class="step-c"><span class="step-bdg">月次</span><h3>効果測定・レポート</h3><p>インプレッション・エンゲージメント・UGC二次利用を含む詳細レポートを月次で提供。次回改善案も提案。</p></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- DELIVERABLES -->
-<div class="sec">
-  <div class="sec-inner">
-    <p class="sec-lbl rv">What We Do</p>
-    <h2 class="sec-ttl rv d1">GVAが全てを担当します</h2>
-    <p class="sec-desc rv d2">問い合わせから納品まで、全てGVAが一括で対応。クライアントが動くのは商品の発送だけです。</p>
-    <ul class="ck-list rv d2">
-      <li><span class="ck-ico">✓</span>投稿オリエンテーション資料の作成</li>
-      <li><span class="ck-ico">✓</span>ブランド親和性に基づくクリエイターの選定・アサイン（1,000名超のリストから厳選）</li>
-      <li><span class="ck-ico">✓</span>住所回収・商品配送先リストの作成（商品発送は貴社対応）</li>
-      <li><span class="ck-ico">✓</span>投稿スケジュール管理・クリエイターとのやり取り</li>
-      <li><span class="ck-ico">✓</span>投稿内容のディレクション・PR表記確認・修正対応</li>
-      <li><span class="ck-ico">✓</span>エンゲージメントのリアルタイム監視</li>
-      <li><span class="ck-ico">✓</span>施策終了後の詳細レポーティング</li>
-      <li><span class="ck-ico">✓</span>UGC二次利用サポート（許諾取得・広告素材転用支援）</li>
+<!-- WHAT WE DO -->
+<section class="sec wwd">
+  <div class="si">
+    <div class="lbl lbl-y up">WHAT WE DO!</div>
+    <h2 class="up">GVAがワンストップで対応</h2>
+    <p class="sl up">クリエイター探しから効果測定まで全てGVAに任せてください。</p>
+    <ul class="wl">
+      <li class="wi up">クリエイター選定・キャスティング（1,000名以上から厳選）</li>
+      <li class="wi up d1">投稿設計・原稿ディレクション（ステマ規制対応・PR表記遵守）</li>
+      <li class="wi up d2">スケジュール・納品物管理（投稿日時・内容確認・修正対応）</li>
+      <li class="wi up d3">効果測定・レポーティング（インプレッション・ENG可視化）</li>
+      <li class="wi up d4">UGC二次利用サポート（許諾取得・広告素材転用支援）</li>
     </ul>
+    <div class="af up">
+      <div class="afs"><span class="afsn">01</span><span class="afsm">ヒアリング</span></div>
+      <div class="afs"><span class="afsn">02</span><span class="afsm">選定・提案</span></div>
+      <div class="afs"><span class="afsn">03</span><span class="afsm">投稿管理</span></div>
+      <div class="afs"><span class="afsn">04</span><span class="afsm">効果測定</span></div>
+      <div class="afg">GOAL!</div>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- PRICING -->
-<div class="pricing sec" id="pricing">
-  <div class="sec-inner">
-    <p class="sec-lbl rv">Pricing</p>
-    <h2 class="sec-ttl rv d1">料金プラン</h2>
-    <p class="sec-desc rv d2">人数で選ぶ、シンプルな2プラン。まず1ヶ月から。成果を見て継続を判断できます。</p>
-    <div class="price-g">
-      <div class="pc rv d2">
-        <p class="pc-plan">Standard</p>
-        <p class="pc-price">¥560,000<span>〜 / 月</span></p>
-        <p class="pc-cnt">クリエイター 100名アサイン</p>
-        <p class="pc-imp">想定インプレッション 約22〜34万 imp / 月</p>
-        <hr>
-        <ul class="pc-feats">
+<section class="sec prc" id="pricing">
+  <div class="si">
+    <div class="lbl lbl-b up">PRICING!</div>
+    <h2 class="up">料金プラン</h2>
+    <p class="sl up">人数で選ぶ、シンプルな2プラン。まず1ヶ月から試せる。</p>
+    <div class="pcg up">
+      <div class="pc">
+        <div class="pt">Standard</div>
+        <div class="pp">56<span>万円〜/月</span></div>
+        <div class="pcnt">クリエイター 100名アサイン</div>
+        <div class="pn">媒体を横断して口コミを量産したい方向け</div>
+        <ul class="pclist">
           <li>100名クリエイターアサイン</li>
           <li>Instagram / X / TikTok 対応</li>
           <li>媒体比率の月次調整</li>
@@ -453,16 +457,15 @@ footer { background:var(--dark); color:#333; padding:40px; display:flex; align-i
           <li>月次詳細レポート</li>
           <li>UGC二次利用サポート</li>
         </ul>
-        <a href="#contact" class="pc-cta cta-out">相談してみる</a>
-        <p class="pc-note">※単価の目安：約5,600円 / 名<br>※リール特化の場合は別途相談</p>
+        <p class="pnote">※単価の目安：約5,600円 / 名<br>※リール特化の場合は別途相談</p>
       </div>
-      <div class="pc feat rv d3">
-        <p class="pc-plan">Premium</p>
-        <p class="pc-price">¥850,000<span>〜 / 月</span></p>
-        <p class="pc-cnt">クリエイター 150名アサイン</p>
-        <p class="pc-imp">想定インプレッション 約34万 imp / 月</p>
-        <hr>
-        <ul class="pc-feats">
+      <div class="pc pop">
+        <span class="pb">POPULAR!</span>
+        <div class="pt">Premium</div>
+        <div class="pp">85<span>万円〜/月</span></div>
+        <div class="pcnt">クリエイター 150名アサイン</div>
+        <div class="pn">最大規模でインプレッションを刈り取りたい方向け</div>
+        <ul class="pclist">
           <li>150名クリエイターアサイン</li>
           <li>Instagram / X / TikTok 対応</li>
           <li>媒体比率の月次最適化（専任設計）</li>
@@ -472,95 +475,65 @@ footer { background:var(--dark); color:#333; padding:40px; display:flex; align-i
           <li>専任担当者アサイン</li>
           <li>広告配信との連動提案</li>
         </ul>
-        <a href="#contact" class="pc-cta cta-gold">無料で相談する →</a>
-        <p class="pc-note">※単価の目安：約5,600円 / 名<br>※GVA所属タレントとの組み合わせ施策も対応可</p>
+        <p class="pnote">※単価の目安：約5,600円 / 名<br>※GVA所属タレントとの組み合わせも対応可</p>
       </div>
     </div>
-    <div class="opt-box rv">
-      <p class="opt-tag">Option</p>
-      <h3>UGC素材の二次利用</h3>
-      <p>投稿素材（画像・動画）をMeta広告・Google広告・X広告・自社ECサイトへの転用が可能です。利用媒体・期間・範囲に応じてお見積もりします。</p>
+    <div style="margin-top:24px;border:3px solid var(--black);padding:24px 28px;background:var(--white);" class="up">
+      <div style="font-family:'Bangers',cursive;font-size:13px;letter-spacing:.12em;color:var(--red);margin-bottom:12px;">OPTION!</div>
+      <div style="font-weight:900;font-size:17px;color:var(--black);margin-bottom:8px;">UGC素材の二次利用</div>
+      <div style="font-size:13px;color:#555;line-height:1.8;">投稿素材（画像・動画）をMeta広告・Google広告・X広告・自社ECサイトへの転用が可能です。利用媒体・期間・範囲に応じてお見積もりします。</div>
     </div>
-    <p class="price-foot">※商品のギフティングコストは別途ご負担ください</p>
+    <div style="margin-top:12px;font-size:12px;color:rgba(0,0,0,.45);text-align:center;" class="up">※商品のギフティングコストは別途ご負担ください</div>
   </div>
-</div>
+</section>
 
 <!-- FAQ -->
-<div class="faq sec">
-  <div class="sec-inner">
-    <p class="sec-lbl rv">FAQ</p>
-    <h2 class="sec-ttl rv d1">よくあるご質問</h2>
-    <div class="faq-list rv d2">
-      <div class="faq-item"><div class="faq-q">商品を何個用意すればいいですか？<div class="faq-tgl">+</div></div><div class="faq-a"><div class="faq-ai">アサイン人数分＋予備分（5〜10%程度）をご準備ください。事前にご相談いただければ最適な数量をご案内します。</div></div></div>
-      <div class="faq-item"><div class="faq-q">どの媒体に何名アサインするか指定できますか？<div class="faq-tgl">+</div></div><div class="faq-a"><div class="faq-ai">はい。ご予算・施策目的・広告配信の状況に合わせて媒体ごとの人数を月次で調整できます。アフィリエイト月やキャンペーン月に合わせた最適化も得意です。</div></div></div>
-      <div class="faq-item"><div class="faq-q">投稿内容はどこまでチェックできますか？<div class="faq-tgl">+</div></div><div class="faq-a"><div class="faq-ai">全投稿を公開前にスクリーンショットにてご確認いただけます。修正指示にも対応しますのでご安心ください。</div></div></div>
-      <div class="faq-item"><div class="faq-q">PR表記の対応はどうなりますか？<div class="faq-tgl">+</div></div><div class="faq-a"><div class="faq-ai">2023年のステマ規制に準拠した対応をご案内します。クリエイターへのガイドライン説明・投稿確認まで全てGVAが対応します。</div></div></div>
-      <div class="faq-item"><div class="faq-q">最短どのくらいで実施できますか？<div class="faq-tgl">+</div></div><div class="faq-a"><div class="faq-ai">クリエイター選定〜初回投稿まで、最短3〜4週間を目安にお考えください。商材・規模によって変動しますので、まずはご相談ください。</div></div></div>
-      <div class="faq-item"><div class="faq-q">GVAのタレントと組み合わせることはできますか？<div class="faq-tgl">+</div></div><div class="faq-a"><div class="faq-ai">はい。GVA所属タレント（9名）との組み合わせ施策も提案できます。インフルエンサーPRとUGCの相乗効果で、認知拡大と口コミを同時に最大化します。</div></div></div>
+<section class="sec faq">
+  <div class="si">
+    <div class="lbl lbl-r up">FAQ!</div>
+    <h2 class="up">よくある質問</h2>
+    <div class="up">
+      <div class="fi"><div class="fq"><div class="fqi">Q</div>最低何ヶ月から依頼できますか？</div><div class="fa">1ヶ月からご依頼いただけます。ただし口コミ施策の効果を実感するには3ヶ月以上の継続をおすすめしています。</div></div>
+      <div class="fi"><div class="fq"><div class="fqi">Q</div>ステマ規制への対応は大丈夫ですか？</div><div class="fa">すべての投稿でPR表記を徹底しており、クリエイターへのガイドライン説明・確認まで対応します。</div></div>
+      <div class="fi"><div class="fq"><div class="fqi">Q</div>特定のSNSだけに絞れますか？</div><div class="fa">はい、Instagram・TikTok・Xの単体、または任意の組み合わせでご依頼いただけます。</div></div>
+      <div class="fi"><div class="fq"><div class="fqi">Q</div>投稿内容の確認・修正はできますか？</div><div class="fa">はい、全投稿を公開前にご確認いただけます。修正指示にも対応しますのでご安心ください。</div></div>
+      <div class="fi"><div class="fq"><div class="fqi">Q</div>GVAのタレントと組み合わせられますか？</div><div class="fa">はい、GVA所属タレント（9名）との組み合わせ施策も提案できます。インフルエンサーPRとUGCの相乗効果を最大化します。</div></div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- CTA -->
-<div class="cta-sec" id="contact">
-  <div class="cta-in">
-    <p class="cta-lbl">Free Consultation</p>
-    <h2>まずは無料で<br>作戦会議しましょう。</h2>
-    <p>「費用感だけ知りたい」でもOK。<br>30分のオンライン相談で、あなたの商品に最適な口コミ施策をご提案します。</p>
-    <a href="mailto:info@goodvibesagency.tokyo?subject=【UGC口コミ施策】無料相談希望" class="cta-btn">無料で相談する →</a>
-    <div class="cta-bdgs">
-      <span class="cta-bdg">完全無料</span>
-      <span class="cta-bdg">ノーリスク</span>
-      <span class="cta-bdg">30分で完了</span>
-      <span class="cta-bdg">翌営業日以内にご返信</span>
+<section class="cta" id="contact">
+  <div class="cray"></div>
+  <div class="cdots"></div>
+  <div class="cin">
+    <div class="cbubble up">FREE CONSULTATION!</div>
+    <h2 class="up">まずは無料で<br><span class="yl">作戦会議</span>だ!!</h2>
+    <p class="ctasub up">「費用感だけ知りたい」でもOK。30分のオンライン相談で、あなたの商品に最適な口コミ施策をご提案します。</p>
+    <div class="pows up"><div class="pw">FREE!!</div><div class="pw">NO RISK!</div><div class="pw">30MIN!</div></div>
+    <div class="up" style="text-align:center;">
+      <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.16em;text-transform:uppercase;margin-bottom:10px;">Mail</p>
+      <p style="font-size:22px;font-weight:900;color:var(--yellow);margin-bottom:28px;word-break:break-all;">info@goodvibesagency.tokyo</p>
+      <a href="mailto:info@goodvibesagency.tokyo?subject=【UGC口コミ施策】無料相談希望" class="fsub" style="max-width:380px;width:100%;display:inline-block;">無料で相談する →</a>
+      <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:16px;">※ 翌営業日以内にご返信します。</p>
     </div>
-    <p class="cta-mail">またはメールで → <a href="mailto:info@goodvibesagency.tokyo">info@goodvibesagency.tokyo</a></p>
   </div>
-</div>
+</section>
 
+<!-- FOOTER -->
 <footer>
-  <span class="ft-logo">GOOD VIBES AGENCY</span>
-  <div class="ft-links">
+  <div class="flogo">GOOD VIBES AGENCY</div>
+  <div class="flinks">
     <a href="https://goodvibesagency.tokyo/">Corporate</a>
     <a href="https://good-vibes-agency.github.io/gva-ai-ugc-factory-lp/">AI UGC Factory</a>
-    <a href="/gva-ugc-lp/privacy.html">プライバシーポリシー</a>
   </div>
-  <span>© 2026 GOOD VIBES AGENCY</span>
+  <div class="fcopy">© 2026 GOOD VIBES AGENCY</div>
 </footer>
 
 <script>
-// SCROLL PROGRESS
-const sp=document.getElementById('sp');
-window.addEventListener('scroll',()=>{sp.style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';},{passive:true});
-
-// PARTICLES
-(()=>{const c=document.getElementById('ptcl');for(let i=0;i<20;i++){const p=document.createElement('div');p.className='p';const s=Math.random()*4+1;p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;--d:${Math.random()*10+8}s;--dl:${Math.random()*10}s;`;c.appendChild(p);}})();
-
-// REVEAL
-const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
-
-// COUNTERS
-function animCnt(el){
-  const t=parseInt(el.dataset.t),f=el.dataset.f,d=1800,s=performance.now();
-  function u(now){const p=Math.min((now-s)/d,1),e=1-Math.pow(1-p,3),v=Math.floor(e*t);
-    el.textContent=f==='c'?v.toLocaleString('ja-JP'):v;
-    if(p<1)requestAnimationFrame(u);else el.textContent=f==='c'?t.toLocaleString('ja-JP'):t;}
-  requestAnimationFrame(u);}
-const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){animCnt(e.target);co.unobserve(e.target);}});},{threshold:.5});
-document.querySelectorAll('.cnt').forEach(el=>co.observe(el));
-
-// BARS
-const bo=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bar-fill').forEach(f=>{setTimeout(()=>{f.style.width=f.dataset.w+'%';},200);});bo.unobserve(e.target);}});},{threshold:.3});
-document.querySelectorAll('.bars').forEach(el=>bo.observe(el));
-
-// FAQ
-document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{const item=q.parentElement,isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');});});
-
-// NAV HIDE
-let last=0;const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{const c=window.scrollY;if(c<100)nav.style.transform='translateY(0)';else if(c>last)nav.style.transform='translateY(-100%)';else nav.style.transform='translateY(0)';last=c;},{passive:true});
-nav.style.transition='transform .3s ease';
+const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('in'); }), { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+document.querySelectorAll('.up').forEach(el => io.observe(el));
+setTimeout(() => document.querySelectorAll('.hero .up').forEach((el,i) => setTimeout(() => el.classList.add('in'), i*120)), 100);
 </script>
 </body>
 </html>
